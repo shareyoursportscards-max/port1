@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ken Griffey Jr. Card Price Guide 1990–1999</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14;
+    --bg-gradient:linear-gradient(180deg, #0a0e14 0%, #0f1520 50%, #0a0e14 100%);
+    --surface:#1c2533;
+    --surface-2:#222d3d;
+    --surface-3:#283548;
+    --border:#2a3a50;
+    --border-glow:#3d5575;
+    --gold:#f0b03a;
+    --gold-dim:#a07828;
+    --teal:#00e6b8;
+    --teal-dim:#0aa882;
+    --accent:#5b8def;
+    --text:#eaf0f6;
+    --text-dim:#8ea4ba;
+    --text-muted:#506070;
+    --raw:#a0aab8;
+    --psa8:#5eeaa0;
+    --psa9:#5cd8f0;
+    --psa10:#f5c842;
+    --card-radius:10px;
+    --glow-gold:0 0 24px rgba(240,176,58,.12), 0 0 6px rgba(240,176,58,.06);
+    --glow-teal:0 0 24px rgba(0,230,184,.1), 0 0 6px rgba(0,230,184,.05);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,230,184,.03) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(91,141,239,.03) 0%, transparent 50%),
+      var(--bg-gradient);
+    background-attachment:fixed;
+    color:var(--text);
+    font-family:'Oswald', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  .wrap{max-width:860px; margin:0 auto; padding:32px 24px 80px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      linear-gradient(135deg, rgba(0,230,184,.05) 0%, transparent 40%),
+      linear-gradient(225deg, rgba(91,141,239,.05) 0%, transparent 40%),
+      linear-gradient(135deg, #182638 0%, #1e3048 40%, #1a2a3e 100%);
+    border:1px solid var(--border-glow);
+    border-radius:14px;
+    padding:44px 36px 38px;
+    color:var(--text);
+    overflow:hidden;
+    box-shadow:var(--glow-teal), 0 8px 32px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.06);
+    margin-bottom:34px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(0,230,184,.3), rgba(91,141,239,.2), transparent);
+  }
+  .hero::after{
+    content:"24";
+    position:absolute;
+    right:24px; top:-14px;
+    font-family:'Anton', sans-serif;
+    font-size:200px;
+    background:linear-gradient(180deg, rgba(0,230,184,.06) 0%, rgba(240,176,58,.03) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    line-height:1;
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; margin-bottom:12px;
+    text-shadow:0 0 20px rgba(240,176,58,.3);
+  }
+  h1{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:clamp(42px,7vw,72px);
+    letter-spacing:.02em;
+    text-transform:uppercase;
+    margin:0 0 10px;
+    line-height:0.95;
+    color:#fff;
+    -webkit-text-stroke:2px rgba(0,230,184,.8);
+    text-shadow:0 0 20px rgba(0,230,184,.4), 0 4px 0 rgba(0,0,0,.5);
+  }
+  .hero p{
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    color:var(--text-dim);
+    margin:0;
+    font-size:15px;
+    max-width:540px;
+  }
+
+  /* ---------- YEAR STRIP ---------- */
+  .year-strip{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:26px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:16px;
+  }
+  .year-btn{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:20px;
+    background:var(--surface);
+    border:2px solid var(--border);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    position:relative;
+    transition:all .15s ease;
+    flex:1 1 0;
+    text-align:center;
+    -webkit-text-stroke:1px rgba(0,0,0,.6);
+    text-shadow:0 2px 0 rgba(0,0,0,.5);
+  }
+  .year-btn .sub{display:block; font-size:9px; letter-spacing:.08em; opacity:.5; font-weight:400; margin-top:2px; -webkit-text-stroke:0; text-shadow:none; font-family:'Oswald',sans-serif;}
+  .year-btn:hover{
+    background:var(--surface-2);
+    border-color:var(--border-glow);
+    color:var(--text);
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(0,0,0,.2);
+  }
+  .year-btn.active{
+    background:linear-gradient(135deg, var(--teal-dim), #088a60);
+    border-color:var(--teal);
+    color:#fff;
+    box-shadow:0 0 16px rgba(0,230,184,.25), 0 4px 12px rgba(0,0,0,.2);
+  }
+  .year-btn.active .sub{opacity:.85;}
+
+  /* ---------- SET PANEL ---------- */
+  .panel-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:16px; flex-wrap:wrap; gap:8px;
+  }
+  .panel-head h2{
+    font-family:'Anton', sans-serif; font-weight:400;
+    font-size:28px; margin:0; color:var(--text);
+  }
+  .panel-head .count{
+    font-family:'Source Serif 4', serif; font-style:italic; color:var(--text-dim); font-size:14px;
+  }
+
+  /* ---------- STICKY COLUMN HEADER ---------- */
+  .col-header{
+    display:grid;
+    grid-template-columns:1fr 80px 72px 72px 72px 72px;
+    gap:0;
+    padding:0 20px;
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
+    margin-bottom:8px;
+  }
+  .col-header span{
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    font-weight:700;
+    color:var(--text-dim);
+    padding:12px 0;
+    text-align:right;
+  }
+  .col-header span:first-child{text-align:left;}
+
+  /* ---------- SET SECTIONS ---------- */
+  .set-block{
+    margin-bottom:0;
+  }
+  .set-header{
+    display:flex; align-items:baseline; gap:10px;
+    padding:20px 20px 6px;
+    font-family:'Oswald', sans-serif;
+    font-weight:700; font-size:13px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--gold);
+    position:relative;
+  }
+  .set-header::before{
+    content:"";
+    position:absolute;
+    left:20px; right:20px; top:10px;
+    height:1px;
+    background:linear-gradient(90deg, var(--border), transparent);
+  }
+  .set-header .meta{
+    font-family:'Source Serif 4', serif; font-style:italic; font-size:10px;
+    color:var(--text-muted); font-weight:400;
+    text-transform:none;
+    letter-spacing:0;
+  }
+
+  /* ---------- DATA ROWS (grid, no table) ---------- */
+  .card-row{
+    display:grid;
+    grid-template-columns:1fr 80px 72px 72px 72px 72px;
+    gap:0;
+    padding:5px 20px;
+    font-family:'Oswald', sans-serif;
+    font-size:12.5px;
+    line-height:1.3;
+    border-bottom:1px solid rgba(30,42,58,.3);
+    transition:background .1s ease;
+  }
+  .card-row:hover{
+    background:rgba(0,230,184,.04);
+  }
+  .card-row:last-child{
+    border-bottom:none;
+  }
+  .card-row .card-name{
+    font-weight:500;
+    color:var(--text);
+    white-space:normal;
+    padding-right:8px;
+  }
+  .card-row .cell{
+    text-align:right;
+    white-space:nowrap;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+  }
+
+  .odds{
+    font-variant-numeric:tabular-nums;
+    font-size:11px;
+    color:var(--text-dim);
+    white-space:nowrap;
+  }
+  .odds.none{color:var(--text-muted);}
+  .price{font-variant-numeric:tabular-nums; font-weight:600; font-size:12.5px;}
+  .price.raw{color:var(--raw);}
+  .price.psa8{color:var(--psa8);}
+  .price.psa9{color:var(--psa9);}
+  .price.psa10{color:var(--psa10); text-shadow:0 0 12px rgba(245,200,66,.25);}
+  .price.na{color:var(--text-muted); font-weight:400; font-style:italic; font-size:11px;}
+  .price-wrap{position:relative; display:inline-block;}
+  .trend{position:absolute; left:-11px; top:50%; transform:translateY(-50%); font-size:8px; font-weight:400; pointer-events:none; opacity:.85;}
+  .trend.up{color:#4ade80;}
+  .trend.down{color:#f87171;}
+
+  .price-big{
+    color:var(--psa10);
+    text-shadow:0 0 16px rgba(245,200,66,.35);
+  }
+
+  .tag{
+    display:inline-block; font-size:7.5px; letter-spacing:.06em; text-transform:uppercase;
+    padding:2px 5px; border-radius:3px; margin-left:5px;
+    background:rgba(232,168,56,.1); color:var(--gold-dim); font-weight:600; vertical-align:1px;
+    border:1px solid rgba(232,168,56,.2);
+  }
+
+  /* ---------- LEGEND / FOOTNOTE ---------- */
+  .legend{
+    display:flex; gap:18px; flex-wrap:wrap;
+    font-size:12px; color:var(--text-dim);
+    margin:6px 2px 20px;
+  }
+  .legend span{display:flex; align-items:center; gap:6px;}
+  .dot{width:9px; height:9px; border-radius:50%; display:inline-block;}
+
+  .note{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--card-radius);
+    padding:20px 22px;
+    font-family:'Source Serif 4', serif;
+    font-size:13.5px;
+    color:var(--text-dim);
+    line-height:1.6;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+  }
+  .note b{color:var(--text);}
+
+  /* ---------- SCROLLBAR ---------- */
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--border-glow); border-radius:4px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--text-muted);}
+
+  /* ---------- INSIGHTS ---------- */
+  .insights-toggle{
+    font-family:'Oswald', sans-serif;
+    font-weight:600; font-size:13px;
+    letter-spacing:.04em;
+    background:var(--surface-2);
+    color:var(--gold);
+    border:1px solid var(--border);
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-bottom:14px;
+    transition:all .15s ease;
+  }
+  .insights-toggle:hover{background:var(--surface); border-color:var(--gold-dim); box-shadow:var(--glow-gold);}
+  .insights-toggle .arrow{display:inline-block; transition:transform .2s ease; margin-right:6px;}
+  .insights-toggle.open .arrow{transform:rotate(90deg);}
+  .insights-box{
+    display:none;
+    background:var(--surface);
+    border-left:3px solid var(--gold);
+    border-radius:0 var(--card-radius) var(--card-radius) 0;
+    padding:16px 20px;
+    margin-bottom:18px;
+    font-family:'Source Serif 4', serif;
+    font-size:13.5px;
+    color:var(--text-dim);
+    line-height:1.6;
+  }
+  .insights-box.open{display:block;}
+  .insights-box li{margin-bottom:6px;}
+  .insights-box b{color:var(--text);}
+  .insights-box .highlight{color:var(--teal); font-weight:600;}
+
+  /* ---------- TOP 10 ---------- */
+  .top10-toggle{
+    font-family:'Oswald', sans-serif;
+    font-weight:600; font-size:13px;
+    letter-spacing:.04em;
+    background:linear-gradient(135deg, #1e2d40, #243550);
+    color:var(--psa10);
+    border:1px solid rgba(245,200,66,.25);
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-bottom:14px;
+    transition:all .15s ease;
+    width:100%;
+    text-align:left;
+  }
+  .top10-toggle:hover{background:var(--surface); border-color:var(--gold-dim); box-shadow:var(--glow-gold);}
+  .top10-toggle .arrow{display:inline-block; transition:transform .2s ease; margin-right:6px;}
+  .top10-toggle.open .arrow{transform:rotate(90deg);}
+  .top10-box{
+    display:none;
+    background:var(--surface);
+    border-left:3px solid var(--psa10);
+    border-radius:0 var(--card-radius) var(--card-radius) 0;
+    padding:0;
+    margin-bottom:18px;
+    overflow:hidden;
+  }
+  .top10-box.open{display:block;}
+  .top10-row{
+    display:grid;
+    grid-template-columns:32px 1fr 90px 70px;
+    gap:0;
+    padding:10px 16px;
+    font-family:'Oswald', sans-serif;
+    font-size:13px;
+    border-bottom:1px solid rgba(30,42,58,.4);
+    transition:background .1s ease;
+    align-items:center;
+  }
+  .top10-row:hover{background:rgba(245,200,66,.04);}
+  .top10-row:last-child{border-bottom:none;}
+  .top10-rank{
+    font-family:'Anton', sans-serif;
+    font-size:18px;
+    color:var(--gold-dim);
+    text-align:center;
+  }
+  .top10-rank.gold{color:var(--psa10); text-shadow:0 0 12px rgba(245,200,66,.3);}
+  .top10-card{color:var(--text); font-weight:500;}
+  .top10-card .set-label{color:var(--text-dim); font-weight:400; font-size:11px; display:block;}
+  .top10-price{
+    text-align:right;
+    font-weight:700;
+    color:var(--psa10);
+    font-size:14px;
+    text-shadow:0 0 12px rgba(245,200,66,.2);
+  }
+  .top10-grade{
+    text-align:right;
+    font-size:11px;
+    color:var(--text-dim);
+  }
+
+  /* ---------- CONTROLS ---------- */
+  .controls{
+    display:flex;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  #searchInput{
+    flex:1;
+    font-family:'Oswald', sans-serif;
+    font-size:14px;
+    padding:10px 16px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    color:var(--text);
+    outline:none;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  #searchInput:focus{
+    border-color:var(--teal);
+    box-shadow:0 0 12px rgba(0,230,184,.15);
+  }
+  #searchInput::placeholder{color:var(--text-muted);}
+  #sortSelect{
+    font-family:'Oswald', sans-serif;
+    font-size:13px;
+    padding:10px 14px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    color:var(--text);
+    cursor:pointer;
+    outline:none;
+    -webkit-appearance:none;
+  }
+  #sortSelect:focus{border-color:var(--teal);}
+  #sortSelect option{background:var(--surface);}
+
+  /* ---------- HIGH VALUE ---------- */
+  .card-row.high-value{
+    background:rgba(245,200,66,.025);
+    border-left:2px solid rgba(245,200,66,.25);
+    margin-left:-2px;
+  }
+  .card-row.high-value:hover{
+    background:rgba(245,200,66,.06);
+  }
+
+  /* ---------- NO RESULTS ---------- */
+  .no-results{
+    text-align:center;
+    padding:40px 20px;
+    color:var(--text-muted);
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    font-size:15px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .footer{
+    text-align:center;
+    padding:40px 20px 20px;
+    font-family:'Source Serif 4', serif;
+    font-size:12px;
+    color:var(--text-muted);
+    border-top:1px solid var(--border);
+    margin-top:30px;
+  }
+
+  @media (max-width:640px){
+    .wrap{padding:16px 8px 60px;}
+    .hero{padding:28px 20px 24px; border-radius:10px;}
+    .panel-head h2{font-size:22px;}
+    .set-header{padding:16px 12px 4px;}
+    .year-btn{padding:8px 6px; font-size:13px;}
+    .col-header, .card-row{
+      grid-template-columns:minmax(130px,1.5fr) 60px 58px 58px 58px 58px;
+      padding:5px 10px;
+      font-size:11px;
+      min-width:480px;
+    }
+    #setList{
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Card Price Guide — Player Edition</div>
+    <h1>Ken Griffey Jr.</h1>
+    <p>Card prices &amp; pack odds, 1990–1999</p>
+  </div>
+
+  <div class="year-strip" id="yearStrip"></div>
+
+  <div class="panel-head">
+    <h2 id="panelTitle">1990</h2>
+    <div class="count" id="panelCount"></div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:var(--raw)"></span>Raw</span>
+    <span><span class="dot" style="background:var(--psa8)"></span>PSA 8</span>
+    <span><span class="dot" style="background:var(--psa9)"></span>PSA 9</span>
+    <span><span class="dot" style="background:var(--psa10); box-shadow:0 0 8px rgba(245,200,66,.4)"></span>PSA 10</span>
+  </div>
+
+  <div id="top10Area"></div>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search cards, sets, or tags..." />
+    <select id="sortSelect">
+      <option value="alpha">A → Z</option>
+      <option value="value">$ High → Low</option>
+    </select>
+  </div>
+
+  <div id="setList"></div>
+  <div id="insightsArea"></div>
+
+  <div class="note">
+    <b>About these numbers.</b> Values shown are general market <b>estimates</b> compiled from typical recent sale ranges for these issues — not a live price feed. 1990s "junk wax era" base cards were printed in massive quantities, so raw and PSA 8 copies are usually inexpensive while PSA 10 gem copies (especially on the era's notoriously hard-to-center brands like Donruss and Score) carry steep premiums due to scarcity in top grade. Before buying or selling, check current sold listings on eBay, PSA's price guide, 130point.com, or Card Ladder. <b>N/A</b> means that grade is rarely seen or not applicable for that card. <b>Pack Odds</b> are the manufacturer's stated insertion ratio (e.g. "1:24" = one per 24 packs) and are shown only where I could verify them from set checklists; a dash means base cards (no odds apply) or odds I couldn't confirm. An asterisk (*) means the ratio varies by parallel tier within that insert and the exact tier for this card is unconfirmed.
+  </div>
+
+  <div class="footer">
+    Prices updated June 2026 · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector
+  </div>
+
+</div>
+
+<script>
+/* ===========================================================
+   DATA — edit / extend freely.
+   Structure: DATA[year] = [ { set: "Set Name", subsets: [
+     { name: "Card detail", raw, psa8, psa9, psa10, tag? }
+   ]}, ... ]   prices in USD, null = N/A
+=========================================================== */
+const DATA = {
+  1990: [
+    {set:"Bowman", subsets:[
+      {name:"Base #481", raw:null, psa8:null, psa9:24, psa10:115},
+      {name:"Tiffany #481", raw:null, psa8:null, psa9:null, psa10:466}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #365", raw:null, psa8:6, psa9:20, psa10:120, tag:"condition sensitive"},
+      {name:"Diamond Kings #4", raw:null, psa8:13, psa9:40, psa10:860},
+      {name:"Best of the AL #1 (boxed set)", raw:null, psa8:null, psa9:75, psa10:null},
+      {name:"Learning Series #8", raw:null, psa8:57, psa9:96, psa10:385}
+    ]},
+    {set:"Fleer", subsets:[
+      {name:"Base #513", raw:null, psa8:11, psa9:12, psa10:75},
+      {name:"Box Bottom #C-10", raw:null, psa8:null, psa9:null, psa10:null, tag:"oddball"},
+      {name:"Baseball All-Stars #14", raw:null, psa8:null, psa9:35, psa10:null}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #245", raw:4, psa8:19, psa9:20, psa10:219, tag:"key"}
+    ]},
+    {set:"O-Pee-Chee", subsets:[
+      {name:"Base #336", raw:null, psa8:null, psa9:148, psa10:1100}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #560", raw:null, psa8:10, psa9:19, psa10:96, prev_psa10:109},
+      {name:"Rising Stars #3", raw:null, psa8:null, psa9:20, psa10:null}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #336", raw:10, psa8:11, psa9:45, psa10:1075, tag:"🔥 hot", prev_psa8:16},
+      {name:"Traded #41T", raw:null, psa8:null, psa9:null, psa10:835},
+      {name:"Tiffany #336", raw:null, psa8:null, psa9:360, psa10:null},
+      {name:"Topps Big #250", raw:null, psa8:null, psa9:40, psa10:null},
+      {name:"Toys \"R\" Us Rookies #13", raw:null, psa8:23, psa9:44, psa10:450},
+      {name:"Major League Debut #46", raw:null, psa8:20, psa9:60, psa10:260, prev_psa8:23},
+      {name:"Glossy Rookies #11", raw:null, psa8:19, psa9:null, psa10:380, odds:"1:1"},
+      {name:"All-Stars #20", raw:null, psa8:null, psa9:30, psa10:250, odds:"1:1"},
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #156", raw:null, psa8:13, psa9:20, psa10:133}
+    ]}
+  ],
+
+  1991: [
+    {set:"Bowman", subsets:[
+      {name:"Base #246", raw:2, psa8:null, psa9:null, psa10:85}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #77", raw:null, psa8:11, psa9:null, psa10:100, prev_psa8:7},
+      {name:"MVP #392", raw:null, psa8:null, psa9:18, psa10:null},
+      {name:"All-Stars #49", raw:2, psa8:13, psa9:11, psa10:80},
+      {name:"Elite #1 (/10,000)", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Fleer", subsets:[
+      {name:"Base #450", raw:null, psa8:null, psa9:30, psa10:84},
+      {name:"All-Stars #7", raw:null, psa8:null, psa9:115, psa10:null},
+      {name:"Pro-Visions #5", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #372", raw:null, psa8:null, psa9:19, psa10:95}
+    ]},
+    {set:"O-Pee-Chee", subsets:[
+      {name:"Base #790", raw:null, psa8:null, psa9:54, psa10:null},
+      {name:"Premier #56", raw:null, psa8:13, psa9:19, psa10:null, prev_psa9:12}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #2", raw:null, psa8:9, psa9:null, psa10:null},
+      {name:"All-Star #396", raw:null, psa8:34, psa9:25, psa10:124},
+      {name:"Rifleman #697", raw:null, psa8:13, psa9:15, psa10:null},
+      {name:"The Franchise #858", raw:null, psa8:null, psa9:17, psa10:null},
+      {name:"Dream Team #892", raw:1, psa8:null, psa9:22, psa10:100}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #270", raw:1, psa8:17, psa9:30, psa10:400}
+    ]},
+    {set:"Studio", subsets:[
+      {name:"Base #112", raw:6, psa8:null, psa9:null, psa10:374, prev_psa10:349}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #790", raw:null, psa8:null, psa9:18, psa10:150},
+      {name:"Tiffany #790", raw:null, psa8:130, psa9:240, psa10:1325},
+      {name:"All-Star #392", raw:null, psa8:null, psa9:null, psa10:70},
+      {name:"Tiffany All-Star #392", raw:null, psa8:null, psa9:53, psa10:null},
+      {name:"Glossy All-Stars #392", raw:null, psa8:12, psa9:null, psa10:null},
+      {name:"Desert Shield #790", raw:null, psa8:1076, psa9:1750, psa10:4150},
+      {name:"Desert Shield All-Star #392", raw:null, psa8:575, psa9:800, psa10:null},
+      {name:"Micro #790", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #336", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Gold", raw:null, psa8:10, psa9:null, psa10:null}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #555", raw:null, psa8:12, psa9:20, psa10:80},
+      {name:"Final Edition #79F", raw:null, psa8:null, psa9:null, psa10:36},
+      {name:"Final Edition #87F", raw:null, psa8:9, psa9:15, psa10:null}
+    ]}
+  ],
+
+  1992: [
+    {set:"Bowman", subsets:[
+      {name:"Base #100", raw:null, psa8:9, psa9:22, psa10:93}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #165", raw:null, psa8:null, psa9:15, psa10:45},
+      {name:"All-Star & Highlights #24", raw:null, psa8:8, psa9:null, psa10:60},
+      {name:"Gallery of Stars #GS-8", raw:null, psa8:null, psa9:27, psa10:203},
+      {name:"Elite Series #13 (/10,000)", raw:875, psa8:550, psa9:null, psa10:null}
+    ]},
+    {set:"Fleer", subsets:[
+      {name:"Base #279", raw:null, psa8:null, psa9:17, psa10:62, prev_psa9:25},
+      {name:"All-Stars #23", raw:null, psa8:null, psa9:80, psa10:null},
+      {name:"Team Leaders #15", raw:null, psa8:null, psa9:100, psa10:2350},
+      {name:"Headliners #1", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Pro-Visions #709", raw:null, psa8:24, psa9:60, psa10:335}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #392", raw:null, psa8:null, psa9:10, psa10:99},
+      {name:"Gold Edition #392", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"O-Pee-Chee", subsets:[
+      {name:"Base #50", raw:null, psa8:null, psa9:25, psa10:null}
+    ]},
+    {set:"O-Pee-Chee Premier", subsets:[
+      {name:"Base #167", raw:null, psa8:null, psa9:10, psa10:null}
+    ]},
+    {set:"Pinnacle", subsets:[
+      {name:"Base #549", raw:null, psa8:8, psa9:21, psa10:300},
+      {name:"Team 2000 #47 (/80)", raw:null, psa8:null, psa9:30, psa10:null},
+      {name:"The Idols #283 (w/ R. Henderson)", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #1", raw:null, psa8:9, psa9:null, psa10:73},
+      {name:"All-Star #436", raw:null, psa8:null, psa9:null, psa10:270},
+      {name:"90's Impact Player #28", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Superstar #1 (boxed set)", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #400", raw:null, psa8:null, psa9:null, psa10:139},
+      {name:"Skydome #70", raw:null, psa8:9, psa9:18, psa10:null},
+      {name:"Members Choice #603", raw:35, psa8:25, psa9:50, psa10:399}
+    ]},
+    {set:"Studio", subsets:[
+      {name:"Base #232", raw:null, psa8:25, psa9:60, psa10:400}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #50", raw:null, psa8:null, psa9:18, psa10:73},
+      {name:"Gold #50", raw:null, psa8:11, psa9:27, psa10:200}
+    ]},
+    {set:"Triple Play", subsets:[
+      {name:"Base #152", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #123", raw:null, psa8:null, psa9:27, psa10:70},
+      {name:"All-Star #6", raw:null, psa8:null, psa9:40, psa10:430},
+      {name:"Award Winners #22", raw:null, psa8:null, psa9:null, psa10:300, prev_psa10:226}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #424", raw:null, psa8:9, psa9:26, psa10:105, prev_psa10:109},
+      {name:"Diamond Skills #650", raw:null, psa8:14, psa9:11, psa10:45},
+      {name:"Teammates #55", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Bloodlines #85", raw:null, psa8:12, psa9:14, psa10:46},
+      {name:"All-Star Fan Fest Gold #24", raw:null, psa8:null, psa9:null, psa10:97}
+    ]}
+  ],
+
+  1993: [
+    {set:"Bowman", subsets:[
+      {name:"Base #375", raw:null, psa8:null, psa9:28, psa10:null}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #553", raw:null, psa8:null, psa9:18, psa10:119},
+      {name:"Diamond Kings #DK-1", raw:null, psa8:27, psa9:93, psa10:null},
+      {name:"Triple Play #1", raw:null, psa8:null, psa9:27, psa10:null}
+    ]},
+    {set:"Finest", subsets:[
+      {name:"Base #110", raw:null, psa8:null, psa9:221, psa10:1500, tag:"key"},
+      {name:"Refractor #110", raw:null, psa8:null, psa9:null, psa10:null, tag:"chase"}
+    ]},
+    {set:"Flair", subsets:[
+      {name:"Base #270", raw:null, psa8:null, psa9:null, psa10:204}
+    ]},
+    {set:"Fleer", subsets:[
+      {name:"Base #112", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Team Leaders #10", raw:null, psa8:6, psa9:63, psa10:null}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #319", raw:null, psa8:null, psa9:14, psa10:125}
+    ]},
+    {set:"Pinnacle", subsets:[
+      {name:"Base #110", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Home Run Club #13", raw:null, psa8:null, psa9:45, psa10:null, prev_psa9:55}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#504", raw:null, psa8:null, psa9:null, psa10:99},
+      {name:"Dream Team #5", raw:null, psa8:null, psa9:null, psa10:109},
+      {name:"Dream Team #536", raw:null, psa8:null, psa9:null, psa10:70}
+    ]},
+    {set:"Select", subsets:[
+      {name:"Base #2", raw:null, psa8:null, psa9:null, psa10:61}
+    ]},
+    {set:"SP", subsets:[
+      {name:"Base #4", raw:null, psa8:null, psa9:42, psa10:350, tag:"iconic design"},
+      {name:"Platinum Power #PP9", raw:null, psa8:25, psa9:null, psa10:3025, prev_psa8:34}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:160},
+      {name:"#707", raw:null, psa8:null, psa9:25, psa10:100},
+      {name:"Members Only #59", raw:null, psa8:null, psa9:30, psa10:401},
+      {name:"Members Choice #591", raw:null, psa8:null, psa9:25, psa10:null}
+    ]},
+    {set:"Studio", subsets:[
+      {name:"Base #214", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #179", raw:null, psa8:null, psa9:20, psa10:65},
+      {name:"All-Stars #405 (w/ Van Slyke)", raw:null, psa8:null, psa9:null, psa10:35},
+      {name:"Gold #179", raw:null, psa8:null, psa9:27, psa10:310}
+    ]},
+    {set:"Triple Play", subsets:[
+      {name:"#5", raw:null, psa8:25, psa9:null, psa10:330}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #131", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#619", raw:null, psa8:null, psa9:null, psa10:75},
+      {name:"Performers #3", raw:null, psa8:null, psa9:90, psa10:660},
+      {name:"Award Winners #16", raw:null, psa8:null, psa9:35, psa10:null}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #449", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#355", raw:null, psa8:null, psa9:20, psa10:61, prev_psa10:70},
+      {name:"Then & Now #TN6", raw:null, psa8:null, psa9:null, psa10:null}
+    ]}
+  ],
+
+  1994: [
+    {set:"Bowman", subsets:[
+      {name:"Base #283", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Bowman's Best", subsets:[
+      {name:"Base #B19", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Red #40", raw:null, psa8:null, psa9:29, psa10:210}
+    ]},
+    {set:"Collector's Choice", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #15", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Dominators #9", raw:null, psa8:null, psa9:50, psa10:null}
+    ]},
+    {set:"Finest", subsets:[
+      {name:"Base #232", raw:null, psa8:null, psa9:91, psa10:450},
+      {name:"Refractor #232", raw:null, psa8:null, psa9:3040, psa10:null, tag:"chase", prev_psa9:2300}
+    ]},
+    {set:"Flair", subsets:[
+      {name:"Base #103", raw:null, psa8:null, psa9:31, psa10:300},
+      {name:"Hot Gloves #3", raw:null, psa8:null, psa9:325, psa10:750},
+      {name:"Outfield Power #6", raw:null, psa8:null, psa9:20, psa10:null}
+    ]},
+    {set:"Fleer", subsets:[
+      {name:"Base #392", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"All-Stars #10", raw:null, psa8:null, psa9:54, psa10:null},
+      {name:"Lumber Company #5", raw:6, psa8:null, psa9:null, psa10:400}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #225", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Statistical Standouts #6", raw:1, psa8:15, psa9:28, psa10:550},
+      {name:"Power Brokers #5", raw:null, psa8:null, psa9:25, psa10:173},
+      {name:"Gold Stars #4 (/10,000)", raw:null, psa8:null, psa9:190, psa10:null},
+      {name:"Slideshow #9", raw:null, psa8:16, psa9:83, psa10:null}
+    ]},
+    {set:"Leaf Limited", subsets:[
+      {name:"Base #66", raw:null, psa8:null, psa9:36, psa10:null},
+      {name:"Gold All-Stars #11 (/10,000)", raw:null, psa8:null, psa9:225, psa10:null}
+    ]},
+    {set:"Pinnacle", subsets:[
+      {name:"Base #100", raw:null, psa8:null, psa9:40, psa10:null},
+      {name:"Museum Collection #100", raw:null, psa8:null, psa9:150, psa10:null},
+      {name:"The Naturals #3", raw:65, psa8:null, psa9:83, psa10:531},
+      {name:"Power Surge #PS23", raw:null, psa8:null, psa9:null, psa10:110}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Select", subsets:[
+      {name:"Base #150", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Crown Contenders #CC10", raw:null, psa8:null, psa9:65, psa10:null}
+    ]},
+    {set:"SP", subsets:[
+      {name:"Base #105", raw:null, psa8:null, psa9:20, psa10:200},
+      {name:"Holoview Blue FX #12", raw:null, psa8:null, psa9:100, psa10:null},
+      {name:"Western Region #WR3", raw:null, psa8:null, psa9:26, psa10:null}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #380", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#529", raw:null, psa8:null, psa9:null, psa10:120},
+      {name:"Finest #5", raw:null, psa8:null, psa9:52, psa10:null},
+      {name:"Dugout Dirt #7", raw:null, psa8:null, psa9:null, psa10:95}
+    ]},
+    {set:"Studio", subsets:[
+      {name:"Base #101", raw:null, psa8:null, psa9:24, psa10:null}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #400", raw:null, psa8:null, psa9:16, psa10:null},
+      {name:"Gold #400", raw:null, psa8:null, psa9:23, psa10:265},
+      {name:"Black Gold #8", raw:null, psa8:null, psa9:42, psa10:null}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #390", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"All-Star Team #8", raw:null, psa8:null, psa9:null, psa10:1225},
+      {name:"Home Run Kings #2", raw:null, psa8:null, psa9:659, psa10:null},
+      {name:"Award Winners #6", raw:null, psa8:null, psa9:31, psa10:null}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #320", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#224", raw:null, psa8:null, psa9:55, psa10:750},
+      {name:"Next Generation Electric Diamond #6", raw:null, psa8:null, psa9:115, psa10:null},
+      {name:"Mickey Mantle's Long Shots #MM10", raw:null, psa8:31, psa9:null, psa10:null}
+    ]}
+  ],
+
+  1995: [
+    {set:"Bowman", subsets:[
+      {name:"Base #303", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Bowman's Best", subsets:[
+      {name:"Base #R65", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Red Refractors #49", raw:null, psa8:null, psa9:571, psa10:null}
+    ]},
+    {set:"Collector's Choice", subsets:[
+      {name:"Base #190", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #325", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Press Proof #340", raw:null, psa8:null, psa9:235, psa10:null},
+      {name:"Elite Series #54 (/10,000)", raw:750, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Emotion", subsets:[
+      {name:"Base #77", raw:null, psa8:null, psa9:18, psa10:189}
+    ]},
+    {set:"Finest", subsets:[
+      {name:"Base #118", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Refractor #118", raw:null, psa8:null, psa9:1930, psa10:null, tag:"chase"}
+    ]},
+    {set:"Flair", subsets:[
+      {name:"Base #81", raw:null, psa8:null, psa9:32, psa10:269},
+      {name:"Hot Glove #3", raw:null, psa8:null, psa9:150, psa10:null},
+      {name:"Hot Numbers", raw:null, psa8:null, psa9:200, psa10:null},
+      {name:"Outfield Power #7", raw:null, psa8:null, psa9:50, psa10:null}
+    ]},
+    {set:"Fleer", subsets:[
+      {name:"Base #475", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #211", raw:null, psa8:null, psa9:22, psa10:92},
+      {name:"Statistical Standouts #2 (/5,000)", raw:null, psa8:null, psa9:280, psa10:null},
+      {name:"Slideshow #8A", raw:null, psa8:null, psa9:40, psa10:null}
+    ]},
+    {set:"Leaf Limited", subsets:[
+      {name:"Lumberjacks #4 (/5,000)", raw:null, psa8:null, psa9:110, psa10:463},
+      {name:"Bat Patrol", raw:null, psa8:null, psa9:null, psa10:165},
+      {name:"Gold #6", raw:null, psa8:null, psa9:85, psa10:null}
+    ]},
+    {set:"Pinnacle", subsets:[
+      {name:"Base #128 (Bubble Gum)", raw:null, psa8:118, psa9:258, psa10:2223, tag:"iconic photo", prev_psa9:240},
+      {name:"Museum Collection #128", raw:null, psa8:null, psa9:750, psa10:null, odds:"1:4"},
+      {name:"Artist's Proof #128", raw:null, psa8:null, psa9:170, psa10:null, odds:"1:24"},
+      {name:"Team Pinnacle", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:90"}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #437", raw:null, psa8:null, psa9:null, psa10:77},
+      {name:"#551", raw:null, psa8:null, psa9:null, psa10:60}
+    ]},
+    {set:"Select", subsets:[
+      {name:"Base #130", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Big Sticks #BS2", raw:null, psa8:null, psa9:180, psa10:null}
+    ]},
+    {set:"Select Certified", subsets:[
+      {name:"Mirror Gold #70", raw:null, psa8:null, psa9:504, psa10:null},
+      {name:"Gold Team #1", raw:null, psa8:null, psa9:415, psa10:null}
+    ]},
+    {set:"SP", subsets:[
+      {name:"Base #145", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Championship Fall Classic Die-Cut #1", raw:null, psa8:null, psa9:37, psa10:null}
+    ]},
+    {set:"SPx", subsets:[
+      {name:"Base #21 (die-cut)", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #390", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Members Only 50 #19", raw:null, psa8:null, psa9:null, psa10:281}
+    ]},
+    {set:"Studio", subsets:[
+      {name:"Base #95", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Gold #5", raw:null, psa8:null, psa9:50, psa10:142},
+      {name:"Platinum #5", raw:null, psa8:null, psa9:null, psa10:225}
+    ]},
+    {set:"Summit", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:56}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #397", raw:null, psa8:null, psa9:15, psa10:196, prev_psa9:24},
+      {name:"Opening Day #3", raw:null, psa8:null, psa9:null, psa10:65}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #93", raw:null, psa8:null, psa9:30, psa10:null},
+      {name:"All-Stars #7", raw:null, psa8:null, psa9:73, psa10:null},
+      {name:"All-Stars Gold Medallion", raw:null, psa8:null, psa9:null, psa10:900},
+      {name:"Hitting Machine #6", raw:null, psa8:null, psa9:53, psa10:null},
+      {name:"Hitting Machines Gold Medallion", raw:null, psa8:null, psa9:202, psa10:null},
+      {name:"Award Winner #6", raw:100, psa8:null, psa9:75, psa10:null}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #245", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#100", raw:null, psa8:null, psa9:300, psa10:400}
+    ]},
+    {set:"Zenith", subsets:[
+      {name:"Base #61", raw:null, psa8:null, psa9:null, psa10:70}
+    ]}
+  ],
+
+  1996: [
+    {set:"Pinnacle Aficionado", subsets:[
+      {name:"Magic Numbers #1", raw:20, psa8:35, psa9:40, psa10:90},
+      {name:"Artist's Proof #75", raw:50, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Bowman", subsets:[
+      {name:"Base #79", raw:2, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Bowman's Best", subsets:[
+      {name:"Base #28", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#71", raw:8, psa8:null, psa9:30, psa10:185},
+      {name:"Refractor #71", raw:110, psa8:178, psa9:559, psa10:null, odds:"1:12"},
+      {name:"Atomic Refractor #71", raw:null, psa8:null, psa9:1692, psa10:350, odds:"1:96"},
+      {name:"Atomic Refractor #28", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:96"},
+      {name:"Best Cuts #1", raw:10, psa8:null, psa9:null, psa10:null, odds:"1:24"},
+      {name:"Best Cuts Refractor #1", raw:125, psa8:180, psa9:433, psa10:null, odds:"1:96", tag:"🔥 hot"},
+      {name:"Best Cuts Atomic Refractor #1", raw:400, psa8:400, psa9:500, psa10:null, odds:"1:192"},
+      {name:"Mirror Image Refractor #7", raw:18, psa8:35, psa9:46, psa10:null, odds:"1:96"},
+      {name:"Mirror Image Atomic Refractor #7", raw:65, psa8:null, psa9:110, psa10:null, odds:"1:192"},
+      {name:"Preview #BBP30", raw:7, psa8:null, psa9:30, psa10:100},
+      {name:"Preview Refractor #BBP30", raw:95, psa8:100, psa9:220, psa10:null, tag:"🔥 hot", prev_psa9:210},
+      {name:"Preview Atomic Refractor #BBP30", raw:305, psa8:325, psa9:645, psa10:1250}
+    ]},
+    {set:"Circa", subsets:[
+      {name:"Base #78", raw:2, psa8:null, psa9:null, psa10:null},
+      {name:"Access #12", raw:5, psa8:null, psa9:null, psa10:null},
+      {name:"Boss #20", raw:8, psa8:null, psa9:null, psa10:null},
+      {name:"Boss #20 (/50)", raw:40, psa8:null, psa9:null, psa10:600},
+      {name:"Rave Checklist (/150)", raw:800, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Collector's Choice", subsets:[
+      {name:"Base #190", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#310", raw:null, psa8:null, psa9:14, psa10:65},
+      {name:"#310 Gold Signature", raw:50, psa8:215, psa9:null, psa10:null, odds:"1:36"},
+      {name:"#370 (Divisional Series)", raw:null, psa8:null, psa9:15, psa10:70, prev_psa10:46},
+      {name:"#415", raw:null, psa8:null, psa9:14, psa10:36},
+
+      {name:"Crash the Game #CG26", raw:8, psa8:49, psa9:38, psa10:500, odds:"1:5", tag:"🔥 hot"},
+      {name:"Crash the Game Gold", raw:12, psa8:null, psa9:115, psa10:null, odds:"1:50"},
+      {name:"Crash the Game Silver (winner)", raw:70, psa8:null, psa9:64, psa10:null},
+      {name:"A Cut Above (set of 10)", raw:5, psa8:13, psa9:16, psa10:null, odds:"1:1"},
+      {name:"You Make the Play #16", raw:4, psa8:null, psa9:28, psa10:null, odds:"1:1"},
+      {name:"You Make the Play #16 Gold Sig", raw:15, psa8:null, psa9:null, psa10:null, odds:"1:36"},
+
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #338", raw:null, psa8:null, psa9:25, psa10:90},
+      {name:"Press Proof", raw:45, psa8:null, psa9:55, psa10:null, odds:"1:12"},
+      {name:"Freeze Frame #2 (/5,000)", raw:null, psa8:null, psa9:58, psa10:null},
+      {name:"Power Alley #10 (/5,000)", raw:50, psa8:72, psa9:167, psa10:null, odds:"1:960"},
+      {name:"Round Trippers #6 (/5,000)", raw:null, psa8:null, psa9:48, psa10:176},
+      {name:"Diamond Kings (/10,000)", raw:41, psa8:null, psa9:null, psa10:null},
+      {name:"Long Ball Leaders #6 (/5,000)", raw:41, psa8:null, psa9:null, psa10:null},
+      {name:"Showdown (/10,000)", raw:null, psa8:67, psa9:null, psa10:null, odds:"1:105"},
+      {name:"Hit List #2 (/10,000)", raw:null, psa8:null, psa9:149, psa10:null, odds:"1:105"},
+      {name:"Elite #70 (/10,000)", raw:null, psa8:48, psa9:210, psa10:1385, odds:"1:75"}
+    ]},
+    {set:"E-Motion XL", subsets:[
+      {name:"D-Fense #4", raw:null, psa8:null, psa9:35, psa10:null}
+    ]},
+    {set:"Finest", subsets:[
+      {name:"Base #135", raw:null, psa8:100, psa9:135, psa10:null},
+      {name:"Refractor #135", raw:null, psa8:560, psa9:975, psa10:null, tag:"🔥 hot", odds:"1:12"},
+      {name:"Gold Intimidators #135", raw:160, psa8:124, psa9:355, psa10:null},
+      {name:"Base #230", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Refractor #230", raw:null, psa8:null, psa9:null, psa10:null, tag:"chase", odds:"1:12"},
+      {name:"#305 (Uncommon)", raw:15, psa8:15, psa9:80, psa10:null, odds:"1:4"},
+      {name:"Refractor #305", raw:250, psa8:300, psa9:550, psa10:null, tag:"🔥 hot", odds:"1:48"},
+      {name:"Sterling #24", raw:14, psa8:16, psa9:42, psa10:300},
+      {name:"Sterling Refractor #24", raw:200, psa8:250, psa9:490, psa10:null, tag:"🔥 hot"},
+      {name:"Mystery Finest Refractor #M25", raw:50, psa8:152, psa9:285, psa10:null, tag:"🔥 hot"},
+      {name:"Mystery Finest Refractor #M16", raw:45, psa8:135, psa9:null, psa10:null}
+    ]},
+    {set:"Flair", subsets:[
+      {name:"Base #160", raw:8, psa8:null, psa9:null, psa10:null},
+      {name:"Gold #160", raw:15, psa8:28, psa9:45, psa10:null},
+      {name:"Silver #160", raw:9, psa8:null, psa9:null, psa10:null},
+      {name:"Hot Gloves #4", raw:200, psa8:null, psa9:null, psa10:5555, tag:"🔥 hot"},
+      {name:"Diamond Cuts #5", raw:115, psa8:80, psa9:210, psa10:1880, tag:"🔥 hot", odds:"1:20", prev_raw:90},
+      {name:"Powerline #4", raw:7, psa8:60, psa9:70, psa10:null, odds:"1:6"},
+      {name:"RBI King", raw:38, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Fleer", subsets:[
+      {name:"Base #238", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Tiffany #238", raw:null, psa8:null, psa9:82, psa10:null, odds:"1:1"},
+      {name:"Soaring Stars", raw:null, psa8:50, psa9:null, psa10:null},
+      {name:"Zone #3", raw:55, psa8:73, psa9:439, psa10:null, tag:"🔥 hot"}
+    ]},
+    {set:"Fleer Update", subsets:[
+      {name:"Tiffany #U223", raw:null, psa8:30, psa9:57, psa10:null},
+      {name:"Diamond Tribute #3", raw:159, psa8:null, psa9:400, psa10:null},
+      {name:"Soaring Stars #4", raw:null, psa8:null, psa9:130, psa10:null}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #110", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Statistical Standouts #4 (/2,500)", raw:50, psa8:115, psa9:140, psa10:1040, odds:"1:210 Hobby"},
+      {name:"Picture Perfect #7 (/5,000)", raw:40, psa8:75, psa9:78, psa10:null, odds:"1:140"},
+      {name:"Press Proof Silver #41 (/1,000)", raw:43, psa8:null, psa9:80, psa10:null, odds:"1:10"},
+      {name:"Press Proof Bronze #41 (/2,000)", raw:null, psa8:null, psa9:null, psa10:350, odds:"1:10"},
+      {name:"Gold Press Proof (/500)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:10"},
+      {name:"Signature Series #10", raw:null, psa8:null, psa9:null, psa10:260},
+      {name:"Total Bases (/5,000)", raw:13, psa8:null, psa9:null, psa10:null, odds:"1:72 Hobby"},
+      {name:"22 Karat Gold Leaf Stars #4 (/2,500)", raw:50, psa8:50, psa9:null, psa10:null, odds:"1:190"},
+      {name:"All-Star Game MVP Contender Gold #18", raw:null, psa8:20, psa9:41, psa10:null, odds:"1:8"},
+      {name:"Hats Off #5 (/5,000)", raw:50, psa8:100, psa9:null, psa10:null, tag:"🔥 hot", odds:"1:72 Retail"},
+      {name:"Preferred Steel #52", raw:27, psa8:14, psa9:null, psa10:90},
+      {name:"Preferred Steel Gold #52", raw:42, psa8:null, psa9:null, psa10:null},
+      {name:"Preferred Stare Masters #6 (/2,500)", raw:46, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Leaf Limited", subsets:[
+      {name:"Gold #11", raw:45, psa8:null, psa9:null, psa10:null},
+      {name:"Pennant Craze #4 (/2,500)", raw:42, psa8:50, psa9:null, psa10:null},
+      {name:"Lumberjacks #1 (/5,000)", raw:42, psa8:37, psa9:72, psa10:325, tag:"🔥 hot"},
+      {name:"Lumberjacks Black (/500)", raw:500, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Metal Universe", subsets:[
+      {name:"Base #107", raw:99, psa8:60, psa9:null, psa10:null},
+      {name:"Platinum Edition #107", raw:null, psa8:130, psa9:900, psa10:null, odds:"1:1"},
+      {name:"Heavy Metal #4", raw:null, psa8:35, psa9:null, psa10:null, odds:"1:8"},
+      {name:"Mother Lode #3", raw:60, psa8:60, psa9:191, psa10:null, odds:"1:12"},
+      {name:"Titanium #3", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:24"}
+    ]},
+    {set:"Pinnacle", subsets:[
+      {name:"Base #41", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#134", raw:null, psa8:null, psa9:23, psa10:null},
+      {name:"#301.8", raw:null, psa8:null, psa9:21, psa10:null},
+      {name:"#399 Checklist", raw:null, psa8:10, psa9:18, psa10:null},
+      {name:"Starburst #41", raw:null, psa8:null, psa9:210, psa10:null, odds:"1:7"},
+      {name:"Starburst #155", raw:65, psa8:60, psa9:100, psa10:null, odds:"1:7"},
+      {name:"Starburst Artist's Proof", raw:null, psa8:100, psa9:220, psa10:650, odds:"1:47"},
+      {name:"Starburst .300 Series #185", raw:36, psa8:null, psa9:23, psa10:null},
+      {name:"Foil #255", raw:null, psa8:null, psa9:null, psa10:333},
+      {name:"Slugfest #2", raw:null, psa8:null, psa9:179, psa10:null},
+      {name:"Cal Ripken Tribute (S1)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:150"},
+      {name:"Team Pinnacle (S1)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:72"},
+      {name:"Team Pinnacle #6 (w/ R. Sanders)", raw:null, psa8:60, psa9:100, psa10:387, odds:"1:72"},
+      {name:"Skylines #1 (S2)", raw:null, psa8:1400, psa9:null, psa10:null, odds:"1:29"},
+      {name:"Project Stardom (S2)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:35 Hobby"}
+    ]},
+    {set:"Summit", subsets:[
+      {name:"Base #197", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Artist's Proof #86", raw:null, psa8:100, psa9:null, psa10:null},
+      {name:"Big Bang (/600)", raw:70, psa8:null, psa9:574, psa10:null},
+      {name:"Hitters Inc. #4 (/4,000)", raw:null, psa8:45, psa9:null, psa10:null},
+      {name:"Above and Beyond #86", raw:null, psa8:40, psa9:100, psa10:800, prev_psa10:460}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Base #282", raw:null, psa8:null, psa9:null, psa10:60},
+      {name:"Big Bats #2", raw:null, psa8:17, psa9:null, psa10:720},
+      {name:"Titanic Taters #4", raw:null, psa8:null, psa9:50, psa10:609, prev_psa10:440}
+    ]},
+    {set:"Select", subsets:[
+      {name:"Base #6", raw:null, psa8:null, psa9:51, psa10:null},
+      {name:"En Fuego #1", raw:null, psa8:308, psa9:420, psa10:null, tag:"🔥 hot"},
+      {name:"Artist's Proof #6", raw:null, psa8:null, psa9:371, psa10:null}
+    ]},
+    {set:"Select Certified", subsets:[
+      {name:"Base #47", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Artist's Proof #47", raw:null, psa8:120, psa9:null, psa10:null},
+      {name:"Red #47", raw:null, psa8:null, psa9:153, psa10:null},
+      {name:"Mirror Red (/90)", raw:null, psa8:1780, psa9:null, psa10:4290, odds:"1:100"},
+      {name:"Mirror Blue (/45)", raw:null, psa8:null, psa9:8000, psa10:null, odds:"1:200"},
+      {name:"Mirror Gold (/30)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:300"}
+    ]},
+    {set:"SP", subsets:[
+      {name:"Base #155", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"SPx", subsets:[
+      {name:"Base #55", raw:null, psa8:null, psa9:50, psa10:null},
+      {name:"Commemorative #KG1", raw:null, psa8:null, psa9:48, psa10:null},
+      {name:"Holoview #KG1", raw:null, psa8:null, psa9:null, psa10:null, tag:"die-cut"},
+      {name:"Bound for Glory #1", raw:null, psa8:null, psa9:80, psa10:null}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #105", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Extreme Winners Silver #EW8", raw:null, psa8:42, psa9:null, psa10:281},
+      {name:"Extreme Player Gold", raw:null, psa8:null, psa9:175, psa10:null},
+      {name:"Prime Cuts #PC3", raw:41, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Studio", subsets:[
+      {name:"Base #90", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Base #116", raw:null, psa8:18, psa9:37, psa10:null},
+      {name:"Stained Glass Stars #2", raw:130, psa8:250, psa9:400, psa10:null, tag:"🔥 hot"},
+      {name:"Masterstrokes #7 (/5,000)", raw:40, psa8:39, psa9:95, psa10:450},
+      {name:"Hit Parade #2 (/5,000)", raw:44, psa8:60, psa9:100, psa10:400}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #205", raw:null, psa8:null, psa9:19, psa10:null},
+      {name:"Star Power #230", raw:null, psa8:null, psa9:25, psa10:null},
+      {name:"Sweet Strokes", raw:160, psa8:null, psa9:null, psa10:null},
+      {name:"Mystery Finest #M25", raw:14, psa8:25, psa9:48, psa10:null},
+      {name:"Mystery Finest #M16", raw:14, psa8:null, psa9:25, psa10:null},
+      {name:"Classic Confrontations #CC1", raw:null, psa8:null, psa9:15, psa10:null}
+    ]},
+    {set:"Topps Chrome", subsets:[
+      {name:"Base #70", raw:26, psa8:17, psa9:40, psa10:790},
+      {name:"Refractor #70", raw:null, psa8:null, psa9:null, psa10:null, tag:"chase", odds:"1:12"},
+      {name:"Star Power #90", raw:null, psa8:20, psa9:49, psa10:465},
+      {name:"Star Power Refractor #90", raw:null, psa8:800, psa9:1580, psa10:null, tag:"chase"},
+      {name:"Wrecking Crew Refractor #WC9", raw:null, psa8:263, psa9:119, psa10:null}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #126", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Ultra Stars #579", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Gold Medallion #126", raw:80, psa8:335, psa9:null, psa10:null, tag:"🔥 hot"},
+      {name:"Ultra Stars Gold Medallion #579", raw:35, psa8:100, psa9:325, psa10:null},
+      {name:"Rawhide #4", raw:13, psa8:null, psa9:null, psa10:null},
+      {name:"Rawhide Gold Medallion #4", raw:20, psa8:85, psa9:null, psa10:null},
+      {name:"Power Plus #3", raw:15, psa8:48, psa9:130, psa10:null},
+      {name:"Power Plus Gold Medallion", raw:null, psa8:119, psa9:null, psa10:null},
+      {name:"Prime Leather #6", raw:19, psa8:null, psa9:null, psa10:null},
+      {name:"Prime Leather Gold Medallion #6", raw:40, psa8:null, psa9:null, psa10:null},
+      {name:"Respect Gold Medallion #2", raw:30, psa8:null, psa9:null, psa10:null},
+      {name:"Checklists #3 Gold Medallion", raw:null, psa8:null, psa9:50, psa10:null},
+      {name:"Diamond Producers #3", raw:13, psa8:null, psa9:null, psa10:null, odds:"1:20"},
+      {name:"Diamond Producers Gold Medallion #3", raw:63, psa8:160, psa9:null, psa10:null, odds:"1:200", tag:"🔥 hot"},
+      {name:"Call to the Hall #2", raw:13, psa8:null, psa9:null, psa10:null},
+      {name:"Call to the Hall Gold Medallion #2", raw:null, psa8:89, psa9:337, psa10:null},
+      {name:"RBI Kings #7", raw:26, psa8:null, psa9:null, psa10:null, odds:"1:5 Retail"},
+      {name:"Home Run Kings #6", raw:78, psa8:90, psa9:155, psa10:870, odds:"1:75", tag:"🔥 hot"},
+      {name:"Home Run Kings Gold Medallion", raw:null, psa8:null, psa9:700, psa10:null, odds:"1:750"},
+      {name:"Season Crowns", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:15 Hobby"},
+      {name:"Golden Prospects", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:72 Hobby"},
+      {name:"Baseball Rules!", raw:85, psa8:null, psa9:null, psa10:null},
+      {name:"22 Karat Gold Leaf (/2,500)", raw:55, psa8:null, psa9:null, psa10:null},
+      {name:"Thunder Clap #11", raw:1100, psa8:2500, psa9:null, psa10:null, odds:"1:72 Hobby", tag:"🔥 hot"},
+      {name:"Thunder Clap Gold Medallion #11", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:720 Hobby"},
+      {name:"Hitting Machines #4", raw:200, psa8:328, psa9:null, psa10:null, odds:"1:288 Hobby"},
+      {name:"Hitting Machines Gold Medallion", raw:null, psa8:1025, psa9:null, psa10:null, odds:"1:2,880 Hobby"}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #135", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"#200", raw:null, psa8:null, psa9:38, psa10:null},
+      {name:"Power Driven #PD7", raw:null, psa8:16, psa9:109, psa10:null},
+      {name:"V.J. Lovero Collection #VJ10", raw:null, psa8:null, psa9:31, psa10:null},
+      {name:"V.J. Lovero Showcase #VJ4", raw:29, psa8:null, psa9:null, psa10:null},
+      {name:"Retail Predictor #R15", raw:null, psa8:null, psa9:30, psa10:null},
+
+      {name:"Game Face #GF1", raw:null, psa8:null, psa9:17, psa10:null},
+      {name:"Amazing Greats #AG1", raw:null, psa8:70, psa9:null, psa10:null}
+    ]},
+    {set:"Zenith", subsets:[
+      {name:"Base #135", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Artist's Proof #1", raw:null, psa8:null, psa9:null, psa10:800}
+    ]}
+  ],
+
+  1997: [
+    {set:"Bowman", subsets:[
+      {name:"Base #140", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Bowman Chrome", subsets:[
+      {name:"Base #140", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Refractor #140", raw:null, psa8:null, psa9:null, psa10:null, tag:"chase"},
+      {name:"International Refractor", raw:1100, psa8:null, psa9:1600, psa10:null}
+    ]},
+    {set:"Bowman's Best", subsets:[
+      {name:"International Refractor", raw:null, psa8:null, psa9:700, psa10:null},
+      {name:"Atomic Refractor Preview #BBP2", raw:null, psa8:null, psa9:null, psa10:1100},
+      {name:"International Atomic Refractor #BBI2", raw:425, psa8:404, psa9:850, psa10:4525},
+      {name:"Mirror Image Atomic Refractor (w/ Bonds)", raw:null, psa8:null, psa9:560, psa10:null},
+      {name:"Inverted Refractor Mirror Image (w/ Bonds)", raw:null, psa8:null, psa9:585, psa10:null},
+      {name:"Best Cuts Refractor #BC6", raw:null, psa8:430, psa9:375, psa10:3383},
+      {name:"Best Cuts Atomic Refractor #BC6", raw:356, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Circa", subsets:[
+      {name:"Base #155", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Rave (/150)", raw:1395, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Collector's Choice", subsets:[
+      {name:"Base #235", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #160", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Crusade Green (/250)", raw:null, psa8:3000, psa9:null, psa10:null},
+      {name:"Preferred Precious Metals Platinum", raw:1750, psa8:null, psa9:null, psa10:null},
+      {name:"Power Alley Gold (/1,000)", raw:null, psa8:900, psa9:null, psa10:null}
+    ]},
+    {set:"Donruss Limited", subsets:[
+      {name:"Star Factor Limited Exposure (/40)", raw:1750, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Donruss Elite", subsets:[
+      {name:"Leather & Lumber (/500)", raw:null, psa8:null, psa9:475, psa10:null}
+    ]},
+    {set:"Donruss Update", subsets:[
+      {name:"Power Alley (/1,000)", raw:null, psa8:null, psa9:550, psa10:1475}
+    ]},
+    {set:"E-X 2000", subsets:[
+      {name:"Base #40", raw:null, psa8:null, psa9:null, psa10:2524, tag:"🔥 hot"},
+      {name:"Credentials #40 (/299)", raw:1050, psa8:3000, psa9:2966, psa10:null},
+      {name:"A Cut Above #2", raw:1250, psa8:3252, psa9:null, psa10:19999, tag:"🔥 hot"},
+      {name:"Hall or Nothing #2", raw:null, psa8:null, psa9:375, psa10:null}
+    ]},
+    {set:"Finest", subsets:[
+      {name:"Base #139", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Refractor #139", raw:2750, psa8:null, psa9:600, psa10:2222, tag:"🔥 hot", prev_raw:368},
+      {name:"Refractor #238", raw:null, psa8:null, psa9:533, psa10:null},
+      {name:"Gold Embossed #342", raw:null, psa8:null, psa9:517, psa10:458},
+      {name:"Gold #342 Refractor", raw:null, psa8:null, psa9:1800, psa10:null},
+      {name:"Warriors Refractor", raw:null, psa8:null, psa9:null, psa10:3396}
+    ]},
+    {set:"Flair Showcase", subsets:[
+      {name:"Row 0 #24", raw:355, psa8:450, psa9:810, psa10:null},
+      {name:"Legacy Collection Row 0 #24 (/100)", raw:null, psa8:null, psa9:10000, psa10:null},
+      {name:"Legacy Collection Row 1 #24 (/100)", raw:2400, psa8:null, psa9:null, psa10:null},
+      {name:"Legacy Collection Row 2 #24 (/100)", raw:null, psa8:null, psa9:4800, psa10:null},
+      {name:"Hot Gloves #4", raw:700, psa8:1200, psa9:1250, psa10:null, tag:"🔥 hot"},
+      {name:"Diamond Cuts #5", raw:375, psa8:360, psa9:540, psa10:1400, tag:"🔥 hot"}
+    ]},
+    {set:"Fleer", subsets:[
+      {name:"Base #112", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Tiffany #206", raw:350, psa8:null, psa9:null, psa10:1624},
+      {name:"Diamond Tributes #4", raw:436, psa8:515, psa9:800, psa10:null},
+      {name:"Goudey Greats #2", raw:null, psa8:null, psa9:495, psa10:null},
+      {name:"Zone #7", raw:null, psa8:null, psa9:798, psa10:null},
+      {name:"Bleacher Blasters #4", raw:null, psa8:null, psa9:null, psa10:1750},
+      {name:"Night and Day", raw:null, psa8:null, psa9:400, psa10:1950}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #100", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Statistical Standouts #3 (/1,000)", raw:399, psa8:null, psa9:655, psa10:1200},
+      {name:"Dress for Success (/3,500)", raw:null, psa8:null, psa9:null, psa10:420},
+      {name:"Knot-Hole Gang #2 (/5,000)", raw:null, psa8:null, psa9:null, psa10:400},
+      {name:"Fractal Matrix X-Axis Gold Die-Cut #204", raw:null, psa8:null, psa9:400, psa10:null},
+      {name:"Fractal Matrix #204", raw:null, psa8:350, psa9:null, psa10:1525},
+      {name:"Fractal Matrix Z-Axis Die-Cut (/100)", raw:null, psa8:null, psa9:360, psa10:null},
+      {name:"Get A Grip (w/ Maddux)", raw:null, psa8:null, psa9:57, psa10:null}
+    ]},
+    {set:"Metal Universe", subsets:[
+      {name:"Base #110", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Mining for Gold", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:9"},
+      {name:"Magnetic Field", raw:null, psa8:null, psa9:355, psa10:null, odds:"1:12"},
+      {name:"Titanium", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:24 Retail"},
+      {name:"Platinum Portraits", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:36"},
+      {name:"Blast Furnace", raw:null, psa8:null, psa9:null, psa10:350, odds:"1:48 Hobby"},
+      {name:"Mother Lode", raw:800, psa8:1943, psa9:null, psa10:null, odds:"1:288", prev_psa8:870},
+      {name:"Emerald Autographs", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:480 Hobby", tag:"auto"}
+    ]},
+    {set:"Pinnacle", subsets:[
+      {name:"Base #150", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Artist's Proof #193", raw:1400, psa8:null, psa9:720, psa10:null},
+      {name:"New Pinnacle Museum Collection Gold #1", raw:640, psa8:null, psa9:null, psa10:null},
+      {name:"New Pinnacle Artist's Proof #1", raw:null, psa8:null, psa9:720, psa10:null},
+      {name:"Keeping the Pace #4", raw:null, psa8:152, psa9:375, psa10:null},
+      {name:"Home/Away #4", raw:350, psa8:null, psa9:357, psa10:null},
+      {name:"X-Press Melting Pot #6 (/500)", raw:null, psa8:370, psa9:null, psa10:null},
+      {name:"Inside Diamond Edition", raw:600, psa8:588, psa9:null, psa10:null}
+    ]},
+    {set:"Pinnacle Certified", subsets:[
+      {name:"Platinum Blue #136 (/1,999)", raw:null, psa8:null, psa9:null, psa10:515},
+      {name:"Mirror Gold #136", raw:null, psa8:699, psa9:1286, psa10:null},
+      {name:"Mirror Gold #53", raw:null, psa8:461, psa9:null, psa10:null},
+      {name:"Mirror Blue #53", raw:356, psa8:null, psa9:null, psa10:null},
+      {name:"Mirror Gold Certified Team", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:1,800"}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Showcase Series Artist's Proof #156", raw:null, psa8:null, psa9:null, psa10:1500},
+      {name:"Stand & Deliver Gold #5", raw:null, psa8:null, psa9:740, psa10:null}
+    ]},
+    {set:"Select", subsets:[
+      {name:"Base #66", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"SP", subsets:[
+      {name:"Base #84", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"SPx", subsets:[
+      {name:"Die-Cut Gold #45", raw:375, psa8:null, psa9:null, psa10:null},
+      {name:"Cornerstones of the Game (w/ Bonds)", raw:null, psa8:350, psa9:null, psa10:null},
+      {name:"Grand Finale #SPX45", raw:null, psa8:14090, psa9:null, psa10:null},
+      {name:"Force Die-Cut #1 (/100) Auto", raw:null, psa8:1026, psa9:null, psa10:null, tag:"auto"},
+      {name:"Bound for Glory Supreme Signatures (/250)", raw:1349, psa8:null, psa9:null, psa10:null, tag:"auto"}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #145", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Members Only #FB5", raw:null, psa8:null, psa9:null, psa10:450},
+      {name:"Firebrand Members Only #FB5", raw:350, psa8:null, psa9:null, psa10:380},
+      {name:"Members Only Patent Leather #PL4", raw:355, psa8:null, psa9:null, psa10:875},
+      {name:"Matrix #50", raw:null, psa8:null, psa9:null, psa10:720}
+    ]},
+    {set:"Studio", subsets:[
+      {name:"Base #65", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #200", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Sweet Strokes #SS6", raw:355, psa8:130, psa9:382, psa10:1050, tag:"🔥 hot"},
+      {name:"Hobby Masters #HM1", raw:null, psa8:null, psa9:null, psa10:550},
+      {name:"Gallery of Heroes #GH4", raw:480, psa8:null, psa9:525, psa10:1375, tag:"🔥 hot"},
+      {name:"Gallery Peter Max #PM5", raw:null, psa8:null, psa9:null, psa10:625}
+    ]},
+    {set:"Topps Chrome", subsets:[
+      {name:"Base #101", raw:null, psa8:50, psa9:null, psa10:504},
+      {name:"Refractor #101", raw:1100, psa8:1200, psa9:2358, psa10:null, tag:"🔥 hot"},
+      {name:"All-Star Refractor #AS13", raw:null, psa8:720, psa9:641, psa10:null}
+    ]},
+    {set:"UD3", subsets:[
+      {name:"Superb Signatures", raw:null, psa8:null, psa9:2000, psa10:null, tag:"auto"}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #160", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Platinum Medallion #P121", raw:null, psa8:1600, psa9:2046, psa10:null, tag:"🔥 hot"},
+      {name:"Thunder Clap #8", raw:548, psa8:1500, psa9:3200, psa10:null, tag:"🔥 hot"},
+      {name:"Home Run Kings #4", raw:385, psa8:null, psa9:385, psa10:1375, tag:"🔥 hot"},
+      {name:"Diamond Producers #3", raw:null, psa8:null, psa9:400, psa10:null},
+      {name:"Baseball Rules! #2", raw:null, psa8:null, psa9:1049, psa10:null},
+      {name:"Fame Game #1", raw:null, psa8:null, psa9:null, psa10:885},
+      {name:"Starring Role #2", raw:390, psa8:null, psa9:584, psa10:1900}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #110", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Amazing Greats #AG1", raw:null, psa8:null, psa9:null, psa10:969},
+      {name:"Game Jersey #GJ1", raw:null, psa8:null, psa9:null, psa10:null, tag:"1st GU jersey card"}
+    ]}
+  ],
+
+  1998: [
+    {set:"Bowman", subsets:[
+      {name:"Base #265", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Bowman Chrome", subsets:[
+      {name:"Base #265", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Refractor #33", raw:200, psa8:null, psa9:300, psa10:null},
+      {name:"International Refractor #33", raw:300, psa8:null, psa9:500, psa10:1600},
+      {name:"Golden Anniversary #33 (/50)", raw:null, psa8:null, psa9:1828, psa10:null}
+    ]},
+    {set:"Bowman's Best", subsets:[
+      {name:"Refractor (/400)", raw:504, psa8:null, psa9:708, psa10:null},
+      {name:"Mirror Image Fusion Refractor (/100)", raw:null, psa8:null, psa9:2200, psa10:null}
+    ]},
+    {set:"Circa Thunder", subsets:[
+      {name:"Rave (/150)", raw:1576, psa8:null, psa9:null, psa10:null},
+      {name:"Rave Reviews #7", raw:null, psa8:201, psa9:553, psa10:null}
+    ]},
+    {set:"Collector's Choice", subsets:[
+      {name:"Base #200", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #100", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Crusade Green (/250)", raw:null, psa8:3000, psa9:null, psa10:null},
+      {name:"Preferred Precious Metals", raw:null, psa8:null, psa9:null, psa10:12992}
+    ]},
+    {set:"Donruss Elite", subsets:[
+      {name:"Status (/100)", raw:455, psa8:643, psa9:1524, psa10:null},
+      {name:"Craftsmen Master Crafts (/100)", raw:null, psa8:1413, psa9:1600, psa10:null},
+      {name:"Prime Numbers Die-Cut (/294)", raw:null, psa8:725, psa9:800, psa10:null},
+      {name:"Prized Collections", raw:null, psa8:null, psa9:482, psa10:475},
+      {name:"Production Line On-Base (/382)", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Studio", subsets:[
+      {name:"Gold Press Proof (/300)", raw:null, psa8:425, psa9:null, psa10:null},
+      {name:"Hit Parade (/5,000)", raw:null, psa8:null, psa9:null, psa10:400},
+      {name:"Masterstrokes (/1,000)", raw:null, psa8:null, psa9:null, psa10:311}
+    ]},
+    {set:"E-X2001", subsets:[
+      {name:"Base #10", raw:null, psa8:null, psa9:355, psa10:null},
+      {name:"Essential Credentials Future (/91)", raw:16000, psa8:null, psa9:null, psa10:null},
+      {name:"Destination Cooperstown", raw:1225, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Flair Showcase", subsets:[
+      {name:"Row 0 #1 (/250)", raw:null, psa8:950, psa9:1450, psa10:null},
+      {name:"Row 1 #1", raw:271, psa8:null, psa9:385, psa10:null},
+      {name:"Legacy Collection Row 0 (/100)", raw:1515, psa8:2025, psa9:null, psa10:null},
+      {name:"Legacy Collection Row 2 (/100)", raw:null, psa8:null, psa9:1675, psa10:null},
+      {name:"Legacy Collection Row 3 (/100)", raw:null, psa8:null, psa9:3500, psa10:null}
+    ]},
+    {set:"Finest", subsets:[
+      {name:"Base #170", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Refractor #170", raw:null, psa8:null, psa9:null, psa10:null, tag:"chase"},
+      {name:"The Man #TM1 (/500)", raw:632, psa8:811, psa9:2175, psa10:null, tag:"🔥 hot"},
+      {name:"Centurion", raw:null, psa8:null, psa9:null, psa10:640},
+      {name:"The Man Refractor (/75)", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Base #100", raw:null, psa8:16, psa9:null, psa10:null},
+      {name:"Refractor #100", raw:300, psa8:null, psa9:329, psa10:null},
+      {name:"Non-Protected Refractor", raw:null, psa8:null, psa9:null, psa10:1150},
+      {name:"Centurion (/500)", raw:null, psa8:127, psa9:null, psa10:494},
+      {name:"Power Zone", raw:null, psa8:null, psa9:null, psa10:295},
+      {name:"Mystery Finest #M7", raw:null, psa8:null, psa9:null, psa10:330},
+      {name:"Mystery Refractor #M7", raw:null, psa8:120, psa9:null, psa10:330},
+      {name:"Stadium Stars", raw:null, psa8:null, psa9:455, psa10:1000}
+    ]},
+    {set:"Fleer Tradition", subsets:[
+      {name:"Base #120", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Zone #7", raw:240, psa8:250, psa9:365, psa10:null}
+    ]},
+    {set:"Leaf", subsets:[
+      {name:"Base #100", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Rookies & Stars Longevity (/50)", raw:750, psa8:1009, psa9:null, psa10:null},
+      {name:"Fractal Materials (/250)", raw:null, psa8:null, psa9:345, psa10:524},
+      {name:"Fractal Materials Z2 Axis (/20)", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Metal Universe", subsets:[
+      {name:"Base #161", raw:null, psa8:null, psa9:null, psa10:1880},
+      {name:"Precious Metal Gems (/50)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:3,237"},
+      {name:"Universal Language", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:6"},
+      {name:"Diamond Heroes", raw:null, psa8:null, psa9:375, psa10:null, odds:"1:18"},
+      {name:"Platinum Portraits", raw:213, psa8:null, psa9:877, psa10:null},
+      {name:"Hardball Galaxy", raw:null, psa8:null, psa9:null, psa10:1175},
+      {name:"Titanium", raw:384, psa8:480, psa9:null, psa10:null, odds:"1:96"},
+      {name:"All-Galactic Team", raw:221, psa8:830, psa9:1250, psa10:null, odds:"1:192", prev_psa8:750}
+    ]},
+    {set:"Pinnacle", subsets:[
+      {name:"Base #140", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Museum Collection", raw:null, psa8:null, psa9:270, psa10:null, odds:"1:9"},
+      {name:"Artist's Proof", raw:271, psa8:304, psa9:700, psa10:null, odds:"1:39"},
+      {name:"Spellbound", raw:null, psa8:null, psa9:null, psa10:356, odds:"1:17"},
+      {name:"Epix", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:21"},
+      {name:"Press Plates (1/1)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:1,250", tag:"1/1"}
+    ]},
+    {set:"Pinnacle Certified", subsets:[
+      {name:"Epix Moment Emerald", raw:null, psa8:null, psa9:9881, psa10:null}
+    ]},
+    {set:"Pinnacle Performers", subsets:[
+      {name:"Big Bang Seasonal Outburst (/57)", raw:null, psa8:null, psa9:null, psa10:9900}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Select", subsets:[
+      {name:"Base #66", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Quasar System Mirror Gold", raw:null, psa8:null, psa9:4100, psa10:null},
+      {name:"Five Star Bonus (/50)", raw:2304, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"SP Authentic", subsets:[
+      {name:"Base #80", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Sheer Dominance Gold (/2,000)", raw:null, psa8:null, psa9:null, psa10:330},
+      {name:"Sheer Dominance Titanium (/100)", raw:null, psa8:null, psa9:979, psa10:null},
+      {name:"Chirograph (/22) On-Card Auto", raw:null, psa8:null, psa9:null, psa10:null, tag:"auto"},
+      {name:"Chirograph (auto)", raw:3500, psa8:null, psa9:null, psa10:null, tag:"auto"}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #115", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Triumvirate Luminescent", raw:449, psa8:400, psa9:null, psa10:2140},
+      {name:"Triumvirate Illuminator", raw:null, psa8:null, psa9:1300, psa10:null}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #160", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Gallery of Heroes #GH1", raw:355, psa8:null, psa9:500, psa10:1400, tag:"🔥 hot"},
+      {name:"Mystery Finest Bordered Refractor #M20", raw:null, psa8:90, psa9:380, psa10:289},
+      {name:"Inter-League Mystery Finest Refractor #ILM10", raw:null, psa8:75, psa9:null, psa10:null}
+    ]},
+    {set:"Topps Chrome", subsets:[
+      {name:"Base #321", raw:null, psa8:null, psa9:null, psa10:550},
+      {name:"Refractor #321", raw:860, psa8:null, psa9:2500, psa10:4150, tag:"🔥 hot"},
+      {name:"Milestone Refractor #MS5", raw:null, psa8:null, psa9:null, psa10:375}
+    ]},
+    {set:"Topps Gold Label", subsets:[
+      {name:"Class 1 Red (/100)", raw:null, psa8:null, psa9:900, psa10:null},
+      {name:"Class 2 Red (/50)", raw:null, psa8:null, psa9:2225, psa10:null}
+    ]},
+    {set:"Topps Stars", subsets:[
+      {name:"Gold Rainbow (/99)", raw:1425, psa8:null, psa9:null, psa10:null},
+      {name:"Luminaries Gold (/50)", raw:null, psa8:1500, psa9:null, psa10:null}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #155", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Gold Medallion", raw:202, psa8:null, psa9:950, psa10:null},
+      {name:"Thunder Clap", raw:210, psa8:null, psa9:null, psa10:null},
+      {name:"Platinum Medallion (/100)", raw:null, psa8:null, psa9:14799, psa10:null},
+      {name:"Diamond Immortals", raw:514, psa8:800, psa9:null, psa10:3500},
+      {name:"Diamond Producers", raw:275, psa8:699, psa9:null, psa10:null},
+      {name:"Power Plus", raw:null, psa8:null, psa9:300, psa10:null},
+      {name:"Pizzazz", raw:null, psa8:null, psa9:null, psa10:535},
+      {name:"Big Shots", raw:null, psa8:null, psa9:null, psa10:550},
+      {name:"Win Now", raw:null, psa8:null, psa9:null, psa10:650}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #100", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Amazing Greats Die-Cut (/250)", raw:null, psa8:null, psa9:300, psa10:1450},
+      {name:"Piece of the Action (/300)", raw:618, psa8:1626, psa9:null, psa10:null}
+    ]},
+    {set:"Zenith", subsets:[
+      {name:"Z-Team Gold", raw:null, psa8:null, psa9:null, psa10:2024},
+      {name:"Raising The Bar Gold", raw:null, psa8:null, psa9:null, psa10:610},
+      {name:"Epix Season Purple", raw:null, psa8:null, psa9:408, psa10:null},
+      {name:"Epix Season Emerald", raw:null, psa8:1057, psa9:null, psa10:null}
+    ]}
+  ],
+
+  1999: [
+    {set:"Bowman", subsets:[
+      {name:"Base #225", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Gold #52 (/99)", raw:null, psa8:null, psa9:504, psa10:null}
+    ]},
+    {set:"Bowman Chrome", subsets:[
+      {name:"Base #225", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Refractor #52", raw:409, psa8:450, psa9:650, psa10:2750},
+      {name:"Gold #52", raw:null, psa8:36, psa9:null, psa10:609},
+      {name:"International #52", raw:null, psa8:26, psa9:35, psa10:null},
+      {name:"Gold Signature", raw:null, psa8:null, psa9:110, psa10:null},
+      {name:"Lasting Impact Refractor #I20", raw:null, psa8:null, psa9:400, psa10:825},
+      {name:"Diamond Aces Refractor #DA11", raw:null, psa8:156, psa9:270, psa10:255},
+      {name:"Impact Refractor", raw:null, psa8:null, psa9:238, psa10:null}
+    ]},
+    {set:"Bowman's Best", subsets:[
+      {name:"Base #80", raw:3, psa8:null, psa9:25, psa10:65},
+      {name:"Base #86", raw:3, psa8:null, psa9:35, psa10:118},
+      {name:"Refractor (/400)", raw:null, psa8:null, psa9:1256, psa10:3389, tag:"🔥 hot"},
+      {name:"Atomic Refractor (/100)", raw:null, psa8:1875, psa9:4808, psa10:7937, tag:"🔥 hot"},
+      {name:"Mirror Image #M2 (w/ Mateo)", raw:null, psa8:33, psa9:null, psa10:null},
+      {name:"Mirror Image Refractor #M2 (w/ Mateo)", raw:40, psa8:null, psa9:null, psa10:200},
+      {name:"Mirror Image Atomic Refractor #M2 (w/ Mateo)", raw:null, psa8:null, psa9:250, psa10:757},
+      {name:"Franchise Best (/3,000)", raw:29, psa8:63, psa9:75, psa10:510, tag:"die-cut"},
+      {name:"Franchise Best Mach II (/1,000)", raw:null, psa8:93, psa9:180, psa10:590, tag:"die-cut"},
+      {name:"Franchise Best Mach III (/500)", raw:null, psa8:null, psa9:null, psa10:1862}
+    ]},
+    {set:"Donruss", subsets:[
+      {name:"Base #100", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Flair Showcase", subsets:[
+      {name:"Row 1 #3 (/1,500)", raw:120, psa8:165, psa9:310, psa10:null},
+      {name:"Row 2 #3", raw:40, psa8:35, psa9:180, psa10:1500},
+      {name:"Row 3 #3", raw:50, psa8:40, psa9:63, psa10:null},
+      {name:"Measure of Greatness #4 (/500)", raw:null, psa8:304, psa9:null, psa10:null},
+      {name:"Legacy Collection Row 1 (/99)", raw:null, psa8:null, psa9:null, psa10:6350},
+      {name:"Legacy Collection Row 2 (/99)", raw:null, psa8:null, psa9:3250, psa10:null}
+    ]},
+    {set:"Finest", subsets:[
+      {name:"Base #135", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Refractor #200", raw:null, psa8:null, psa9:null, psa10:2024},
+      {name:"Gold Refractor (/100)", raw:2806, psa8:null, psa9:null, psa10:7324},
+      {name:"Franchise Records #FR2", raw:null, psa8:null, psa9:46, psa10:null},
+      {name:"Franchise Records Refractor", raw:null, psa8:null, psa9:null, psa10:2100},
+      {name:"Peel and Reveal Sparkle", raw:null, psa8:null, psa9:null, psa10:600},
+      {name:"Milestone #M23 (/1,400)", raw:null, psa8:null, psa9:130, psa10:null}
+    ]},
+    {set:"Fleer Brilliants", subsets:[
+      {name:"Base #24", raw:null, psa8:31, psa9:null, psa10:null},
+      {name:"Blue #24B", raw:null, psa8:38, psa9:66, psa10:null},
+      {name:"Shining Stars #1", raw:null, psa8:null, psa9:65, psa10:null}
+    ]},
+    {set:"Fleer Mystique", subsets:[
+      {name:"Base #151 (/2,500)", raw:null, psa8:36, psa9:70, psa10:null}
+    ]},
+    {set:"Fleer Tradition", subsets:[
+      {name:"Base #3", raw:null, psa8:null, psa9:15, psa10:88},
+      {name:"Base #235", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Metal Universe", subsets:[
+      {name:"Base #95", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Base #273", raw:null, psa8:null, psa9:110, psa10:null},
+      {name:"Planet Metal", raw:null, psa8:256, psa9:295, psa10:4888, tag:"die-cut"},
+      {name:"Base #95", raw:null, psa8:40, psa9:null, psa10:null},
+      {name:"Base #233", raw:null, psa8:30, psa9:78, psa10:null},
+      {name:"Diamond Soul", raw:null, psa8:98, psa9:null, psa10:4338},
+      {name:"Boyz With the Wood #1BW", raw:null, psa8:103, psa9:null, psa10:null},
+      {name:"Linchpins #4", raw:null, psa8:null, psa9:2500, psa10:null}
+    ]},
+    {set:"Pinnacle", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Score", subsets:[
+      {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null}
+    ]},
+    {set:"Skybox E-X Century", subsets:[
+      {name:"Base #17", raw:30, psa8:65, psa9:100, psa10:null},
+      {name:"Favorites for Fenway #4", raw:null, psa8:85, psa9:160, psa10:null}
+    ]},
+    {set:"Skybox Molten Metal", subsets:[
+      {name:"Fusion Sterling (/500)", raw:null, psa8:1660, psa9:1515, psa10:13500, tag:"🔥 hot"},
+      {name:"Fusion #33F", raw:null, psa8:null, psa9:1450, psa10:null},
+      {name:"Base #133", raw:null, psa8:19, psa9:90, psa10:165},
+      {name:"Xplosion #133", raw:85, psa8:null, psa9:51, psa10:185, tag:"die-cut"}
+    ]},
+    {set:"Skybox Premium", subsets:[
+      {name:"Base #137", raw:null, psa8:13, psa9:null, psa10:null},
+      {name:"Base #287", raw:null, psa8:null, psa9:null, psa10:70},
+      {name:"Soul of the Game", raw:65, psa8:149, psa9:400, psa10:1900}
+    ]},
+    {set:"Skybox Thunder", subsets:[
+      {name:"Base #3", raw:null, psa8:null, psa9:null, psa10:301},
+      {name:"Dial 1 #3D", raw:500, psa8:388, psa9:570, psa10:1350},
+      {name:"Turbocharged #3", raw:50, psa8:81, psa9:128, psa10:755},
+      {name:"Hip-No-Tized #4", raw:null, psa8:70, psa9:255, psa10:null},
+      {name:"In Depth #5", raw:null, psa8:30, psa9:130, psa10:340},
+      {name:"Rant #292", raw:null, psa8:78, psa9:null, psa10:null},
+      {name:"Batterz.com #3", raw:18, psa8:null, psa9:40, psa10:null}
+    ]},
+    {set:"SP Authentic", subsets:[
+      {name:"Base #65", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"SP Authentic Sample #1", raw:null, psa8:null, psa9:null, psa10:100},
+      {name:"Reflections #R26", raw:null, psa8:null, psa9:60, psa10:null},
+      {name:"Home Run Chronicles (/70)", raw:null, psa8:243, psa9:null, psa10:null, tag:"die-cut"}
+    ]},
+    {set:"SP Signature Edition", subsets:[
+      {name:"Sample #1", raw:null, psa8:null, psa9:null, psa10:316}
+    ]},
+    {set:"SPx", subsets:[
+      {name:"Dominance #FB16", raw:null, psa8:54, psa9:null, psa10:null}
+    ]},
+    {set:"Stadium Club", subsets:[
+      {name:"Base #200", raw:null, psa8:null, psa9:null, psa10:100},
+      {name:"One of a Kind (/150)", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Triumvirate Luminous #T3B", raw:65, psa8:54, psa9:90, psa10:755},
+      {name:"Triumvirate Luminous #T13B", raw:null, psa8:62, psa9:122, psa10:null},
+      {name:"Triumvirate Luminescent #T3B", raw:null, psa8:250, psa9:235, psa10:825, odds:"1:192"},
+      {name:"Triumvirate Luminescent #T13B", raw:275, psa8:null, psa9:229, psa10:null, odds:"1:192"},
+      {name:"Triumvirate Illuminator #T3B", raw:null, psa8:null, psa9:200, psa10:638, odds:"1:384"},
+      {name:"Triumvirate Illuminator #T13B", raw:null, psa8:null, psa9:304, psa10:1075, odds:"1:384"},
+      {name:"Video Replay #VR3", raw:null, psa8:25, psa9:26, psa10:103},
+      {name:"Never Compromise #NC3", raw:null, psa8:null, psa9:34, psa10:91},
+      {name:"Stadium Club Chrome #SCC20", raw:null, psa8:null, psa9:30, psa10:null, odds:"1:24"},
+      {name:"Chrome Refractor #SCC20", raw:null, psa8:290, psa9:398, psa10:null, odds:"1:96", tag:"chase"}
+    ]},
+    {set:"Topps", subsets:[
+      {name:"Base #215", raw:null, psa8:null, psa9:null, psa10:75},
+      {name:"Lords of the Diamond #LD1", raw:46, psa8:null, psa9:null, psa10:null},
+      {name:"All-Topps Mystery Finest Refractor #M14", raw:null, psa8:null, psa9:215, psa10:null}
+    ]},
+    {set:"Topps Gallery", subsets:[
+      {name:"Base #6", raw:null, psa8:null, psa9:null, psa10:56},
+      {name:"Gallery of Heroes #GH3", raw:134, psa8:198, psa9:228, psa10:810, tag:"🔥 hot"},
+      {name:"Player's Private Issue (/250)", raw:null, psa8:null, psa9:139, psa10:null},
+      {name:"Masters #101", raw:null, psa8:18, psa9:null, psa10:null},
+      {name:"Exhibitions #E7", raw:null, psa8:null, psa9:103, psa10:null},
+      {name:"Awards Gallery #AG7", raw:null, psa8:11, psa9:31, psa10:null},
+      {name:"Galaxy #G9", raw:null, psa8:null, psa9:16, psa10:null}
+    ]},
+    {set:"Topps Chrome", subsets:[
+      {name:"Base #100", raw:null, psa8:null, psa9:68, psa10:null},
+      {name:"Refractor #100", raw:560, psa8:null, psa9:2895, psa10:null},
+      {name:"All-Etch Refractor #AE3", raw:460, psa8:260, psa9:475, psa10:2800, tag:"🔥 hot"},
+      {name:"All-Etch #AE3", raw:null, psa8:32, psa9:55, psa10:155},
+      {name:"Lords of the Diamond Refractor #LD1", raw:210, psa8:240, psa9:400, psa10:1576, tag:"die-cut", odds:"1:24"},
+      {name:"Lords of the Diamond #LD1", raw:17, psa8:35, psa9:80, psa10:null, tag:"die-cut", odds:"1:8"},
+      {name:"Base #224", raw:null, psa8:null, psa9:20, psa10:120},
+      {name:"League Leaders Refractor #224", raw:null, psa8:255, psa9:310, psa10:700},
+      {name:"Fortune 15 #FF5", raw:25, psa8:24, psa9:50, psa10:270},
+      {name:"Early Road to Hall #ER5", raw:null, psa8:6, psa9:65, psa10:265, odds:"1:12"},
+      {name:"Early Road to Hall Refractor #ER5 (/100)", raw:null, psa8:null, psa9:3279, psa10:10000, odds:"1:944"},
+      {name:"Record Numbers #RN4", raw:null, psa8:8, psa9:33, psa10:null},
+      {name:"Record Numbers Refractor #RN4", raw:null, psa8:null, psa9:625, psa10:1100},
+      {name:"Refractor #454 (w/ Sosa & Gonzalez)", raw:null, psa8:null, psa9:65, psa10:null}
+    ]},
+    {set:"Topps Stars", subsets:[
+      {name:"3 Star Foil (/99)", raw:null, psa8:null, psa9:525, psa10:null}
+    ]},
+    {set:"Topps Tek", subsets:[
+      {name:"Gold (/10)", raw:null, psa8:510, psa9:null, psa10:null}
+    ]},
+    {set:"UD Century Legends", subsets:[
+      {name:"Century Collection #51 (/100)", raw:null, psa8:761, psa9:null, psa10:null}
+    ]},
+    {set:"UD Ionix", subsets:[
+      {name:"Base #52", raw:null, psa8:null, psa9:null, psa10:63},
+      {name:"Cyber #C1", raw:null, psa8:55, psa9:40, psa10:null},
+      {name:"Hyper #H1", raw:null, psa8:null, psa9:35, psa10:null},
+      {name:"HoloGrFx #HG1", raw:null, psa8:null, psa9:null, psa10:6400},
+      {name:"Nitro #N1", raw:null, psa8:null, psa9:null, psa10:215},
+      {name:"Techno-Reciprocal (/100)", raw:null, psa8:960, psa9:2250, psa10:null}
+    ]},
+    {set:"Ultra", subsets:[
+      {name:"Base #72", raw:null, psa8:null, psa9:13, psa10:null},
+      {name:"Base #219", raw:null, psa8:null, psa9:21, psa10:54},
+      {name:"Gold Medallion #72G", raw:null, psa8:50, psa9:348, psa10:null, odds:"1:1"},
+      {name:"Gold Medallion #219G", raw:null, psa8:43, psa9:86, psa10:550, odds:"1:1"},
+      {name:"Platinum Medallion (/99)", raw:null, psa8:null, psa9:999, psa10:null},
+      {name:"Thunder Clap #10", raw:175, psa8:1009, psa9:1100, psa10:null, tag:"🔥 hot", odds:"1:36"},
+      {name:"Diamond Producers #1", raw:null, psa8:400, psa9:449, psa10:2066, tag:"die-cut", odds:"1:288"},
+      {name:"Damage Inc. #8", raw:40, psa8:106, psa9:117, psa10:228, odds:"1:72"},
+      {name:"The Book On #2", raw:null, psa8:14, psa9:null, psa10:750, odds:"1:6"},
+      {name:"RBI Kings #23RK", raw:6, psa8:22, psa9:38, psa10:null},
+      {name:"Season Crowns Gold Medallion #219G", raw:null, psa8:15, psa9:150, psa10:null, odds:"1:80"}
+    ]},
+    {set:"Upper Deck", subsets:[
+      {name:"Base #195", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Textbook Excellence #T27", raw:null, psa8:null, psa9:28, psa10:84},
+      {name:"Textbook Excellence Triple #T27 (/100)", raw:null, psa8:360, psa9:null, psa10:null},
+      {name:"Exclusives Level 1 (/100)", raw:null, psa8:66, psa9:null, psa10:null},
+      {name:"Immaculate Perception #I9", raw:null, psa8:null, psa9:66, psa10:null},
+      {name:"Immaculate Perception Triple (/25)", raw:null, psa8:1136, psa9:null, psa10:null},
+      {name:"10th Anniversary Triple #X6 (/100)", raw:null, psa8:229, psa9:null, psa10:69},
+      {name:"Wonder Years Double (/2,000)", raw:null, psa8:51, psa9:104, psa10:null},
+      {name:"View to a Thrill Double (/2,000)", raw:null, psa8:53, psa9:77, psa10:null},
+      {name:"Forte Double (/2,000)", raw:null, psa8:42, psa9:180, psa10:null},
+      {name:"Home Run Heroes #7", raw:null, psa8:null, psa9:null, psa10:80},
+      {name:"Black Diamond Single #76", raw:null, psa8:null, psa9:null, psa10:109},
+      {name:"Black Diamond Double (/1,998)", raw:null, psa8:75, psa9:93, psa10:null},
+      {name:"Black Diamond Quadruple (/56)", raw:null, psa8:null, psa9:2975, psa10:null},
+      {name:"Black Diamond Dominance (/1,500)", raw:null, psa8:null, psa9:80, psa10:null},
+      {name:"Game Jersey #KG-H", raw:null, psa8:268, psa9:760, psa10:2225}
+    ]},
+    {set:"Upper Deck Choice", subsets:[
+      {name:"Prime Choice Reserve #37 (/100)", raw:null, psa8:null, psa9:536, psa10:null},
+      {name:"Prime Choice Reserve #142 (/100)", raw:null, psa8:null, psa9:1963, psa10:null},
+      {name:"Base #37", raw:null, psa8:null, psa9:null, psa10:35},
+      {name:"Base #142", raw:null, psa8:null, psa9:null, psa10:40},
+      {name:"Cover Glory #37", raw:null, psa8:null, psa9:null, psa10:36},
+      {name:"Starquest Blue #SQ1", raw:null, psa8:null, psa9:48, psa10:null},
+      {name:"Starquest Red #SQ1", raw:null, psa8:70, psa9:143, psa10:null},
+      {name:"Home Run Heroes #N1", raw:null, psa8:null, psa9:null, psa10:165}
+    ]},
+    {set:"Ultimate Victory", subsets:[
+      {name:"Parallel #102", raw:null, psa8:48, psa9:62, psa10:null},
+      {name:"Collection #102", raw:48, psa8:null, psa9:null, psa10:null},
+      {name:"Stature #S1", raw:null, psa8:null, psa9:null, psa10:128},
+      {name:"Bleacher Reachers", raw:null, psa8:35, psa9:95, psa10:null}
+    ]},
+    {set:"Upper Deck Encore", subsets:[
+      {name:"Base #81", raw:null, psa8:null, psa9:null, psa10:118}
+    ]},
+    {set:"Upper Deck HoloGrFx", subsets:[
+      {name:"Base #53", raw:47, psa8:null, psa9:36, psa10:null},
+      {name:"AuSome #53", raw:null, psa8:null, psa9:79, psa10:null},
+      {name:"Launchers #L2", raw:35, psa8:40, psa9:42, psa10:null},
+      {name:"Starview #S2", raw:null, psa8:null, psa9:53, psa10:null},
+      {name:"Future Fame #F4", raw:null, psa8:45, psa9:null, psa10:null},
+      {name:"Sample #60", raw:null, psa8:null, psa9:null, psa10:70}
+    ]},
+    {set:"Upper Deck Ovation", subsets:[
+      {name:"Standing Ovation #1 (/500)", raw:null, psa8:143, psa9:null, psa10:null},
+      {name:"Standing Ovation #81 (/500)", raw:null, psa8:129, psa9:null, psa10:null}
+    ]},
+    {set:"Upper Deck Challengers for 70", subsets:[
+      {name:"Challengers Edition (/600)", raw:null, psa8:null, psa9:null, psa10:300},
+      {name:"Challengers Insert #C3 (/70)", raw:null, psa8:null, psa9:400, psa10:null}
+    ]},
+    {set:"Upper Deck MVP", subsets:[
+      {name:"Base #218", raw:null, psa8:null, psa9:null, psa10:39},
+      {name:"Silver Script #190", raw:null, psa8:null, psa9:37, psa10:null},
+      {name:"Gold Script #190 (/100)", raw:null, psa8:null, psa9:750, psa10:1540},
+      {name:"Dynamics #D1", raw:null, psa8:null, psa9:63, psa10:null},
+      {name:"Super Tools #T1", raw:null, psa8:40, psa9:50, psa10:null},
+      {name:"Souvenirs GU Bat", raw:null, psa8:null, psa9:200, psa10:null}
+    ]},
+    {set:"Upper Deck Retro", subsets:[
+      {name:"Distant Replay Level 2 (/100)", raw:null, psa8:null, psa9:null, psa10:475},
+      {name:"Old/New School Level 2 (/50)", raw:null, psa8:null, psa9:430, psa10:null}
+    ]}
+  ]
+};
+
+/* ===========================================================
+   INSIGHTS — market observations per year
+=========================================================== */
+const INSIGHTS = {
+  1990: [
+    "If you're buying one 1990 Griffey, make it the <b>Leaf #245</b>. PSA 9 is only $20 but PSA 10 jumps to $219. That 10x multiplier means raw copies with sharp corners are worth gambling on.",
+    "<b>Desert Shield</b> and <b>Tiffany</b> parallels are where the real money lives. Everything else from 1990 is junk wax pricing — $10-$20 graded — unless you're chasing gems.",
+    "The <b>O-Pee-Chee</b> Canadian print commands 3x over regular Topps in PSA 9. Most collectors sleep on OPC because they don't know how short the run was."
+  ],
+  1991: [
+    "<b>Desert Shield</b> is the holy grail of 1991. PSA 8 base at $1,137, All-Star PSA 9 at $1,000. Military-only distribution means these will never get cheaper.",
+    "First-year <b>Studio</b> has a cult following. PSA 10 at $349 for a set nobody was buying in '91. Low submission counts = low pops = real scarcity.",
+    "<b>Tiffany parallels</b> continue to carry massive premiums — #790 PSA 10 at $990 is nearly Desert Shield money."
+  ],
+  1992: [
+    "The <b>Donruss Elite Series</b> invented serial numbering. Raw at $875, this is the OG chase card and it still commands respect. If you find one in a collection, you found gold.",
+    "<b>Stadium Club Members Choice #603</b> at PSA 10 $399 is the sleeper of the year. Nobody thinks to look for it next to the base card.",
+    "9-to-10 multipliers are insane in '92. <b>Studio</b> goes from $60 to $400, <b>Score All-Star</b> from cheap to $270. Low pop gems are driving prices on cards people used to throw away."
+  ],
+  1993: [
+    "The <b>SP die-cut</b> changed everything. Platinum Power PSA 10 at $3,025 is the most expensive card in this guide. The design was years ahead of its time.",
+    "<b>Finest debuted</b> and immediately became impossible to gem. PSA 9 at $221 but PSA 10 at $1,500 — a 7x jump tells you how brutal the chrome coating is on corners.",
+    "This is where the insert era explodes. If you collected in '93, you remember pulling packs hoping for SP, Finest, or Ultra inserts. That excitement is priced in now."
+  ],
+  1994: [
+    "<b>Finest Refractors</b> at PSA 9 $2,300 — the technology was brand new and nobody knew how to protect them. Finding one that grades out is genuinely hard.",
+    "<b>Ultra brand</b> was Fleer's best product line. Home Run Kings, All-Star Team, Award Winners — every insert carries weight. This was peak Ultra.",
+    "The <b>Leaf ecosystem</b> is quietly deep. Statistical Standouts, Gold Stars, Slideshow, Leaf Limited — serious collectors know there's value throughout."
+  ],
+  1995: [
+    "The <b>Bubble Gum card</b> (Pinnacle #128) is THE iconic Griffey image. PSA 10 at $2,223. If you know, you know.",
+    "<b>Finest Refractor #118</b> PSA 9 at $1,930 — chrome refractors from this era are notoriously condition-sensitive. These don't come up often in high grade.",
+    "<b>Gold Medallion parallels</b> from Ultra are the move. They look almost identical to base but command 3-5x premiums. Check your Ultra cards carefully."
+  ],
+  1996: [
+    "<b>Thunder Clap</b> and <b>Hitting Machines</b> from Ultra are the monster pulls. Thunder Clap raw at $1,100, PSA 8 at $2,500. Only 20 in the set, 1:72 Hobby packs.",
+    "<b>Finest Refractor #135</b> PSA 9 approaching $1,000. The Refractor #305 and Sterling Refractor #24 are both $500+ in PSA 9. Finest dominated '96.",
+    "<b>Stained Glass Stars</b> from Studio — acetate die-cut, beautiful card. Raw copies selling for $130, PSA 9 at $400. Tons of activity on these right now.",
+    "<b>Fleer Zone</b> is a sleeper at PSA 9 $439 — holofoil insert that most people skip over. The PSA 8 to 9 jump is massive ($73 to $439).",
+    "<b>Bowman's Best</b> has a crazy parallel ladder — base ($8) to Refractor ($110) to Atomic Refractor ($1,692 PSA 9). Same card number, 200x price difference."
+  ],
+  1997: [
+    "<b>E-X 2000 A Cut Above</b> — PSA 8 sold for $3,252 at auction. One of the most desirable Griffey inserts ever made. The die-cut saw design is iconic.",
+    "<b>Ultra Platinum Medallion</b> PSA 8 at $1,600, Thunder Clap PSA 9 at $3,200. Ultra's insert game peaked in '97 — these are genuinely rare cards.",
+    "<b>Topps Chrome Refractor #101</b> raw copies selling for $1,100+. The PSA 9 hit $2,358 at auction. This is the flagship chrome card of the year.",
+    "<b>Flair Showcase</b> is stacked — Hot Gloves raw at $700, Diamond Cuts raw at $410, Legacy Collection /100 in five figures. Row 0 alone is $430+ raw.",
+    "<b>Mother Lode</b> from Metal Universe at $800+ raw with 1:288 odds. Gallery of Heroes, Fleer Zone, Diamond Tributes — everything in '97 is a $400+ card in high grade."
+  ],
+  1998: [
+    "<b>E-X2001 Essential Credentials Future</b> (/91) at $16,000 raw is the single most expensive card in this guide. Only 91 copies exist and finding one ungraded is an event.",
+    "<b>Ultra Platinum Medallion</b> (/100) PSA 9 approaching $15,000. Ultra's parallel game peaked here — the base card is worthless, the Platinum is a five-figure card.",
+    "<b>Topps Chrome Refractor #321</b> raw at $860, PSA 10 at $4,150. This is THE flagship chrome card of '98 and prices reflect it.",
+    "<b>Finest The Man</b> (/500) PSA 9 at $2,175 with heavy sales volume. One of the most actively traded high-end Griffey inserts right now.",
+    "<b>Flair Showcase Legacy Collections</b> keep climbing across all rows. Row 0 (/100) PSA 8 at $2,025, Row 3 (/100) PSA 9 at $3,500. The parallel ladder is insane."
+  ],
+  1999: [
+    "<b>Skybox Molten Metal Fusion Sterling</b> (/500) PSA 10 at $13,500 is the crown jewel of 1999. Genuinely hard to find in any grade.",
+    "<b>UD Ionix HoloGrFx</b> PSA 10 at $6,400 — one of the most iconic late-90s designs. The holographic technology was cutting-edge and these don't grade well.",
+    "<b>Topps Chrome</b> dominates '99 — All-Etch Refractor, Lords of the Diamond, Record Numbers, and the base Refractor all command $500+ in PSA 9. Chrome was king.",
+    "<b>Metal Universe</b> went all-in on sci-fi artwork. Planet Metal PSA 10 at $4,888, Diamond Soul at $4,338. These cards look like nothing else in the hobby.",
+    "<b>Bowman's Best</b> has the deepest parallel ladder — Franchise Best (/3,000) to Mach II (/1,000) to Mach III (/500) to Refractor (/400) to Atomic Refractor (/100). Five tiers, one card, $550 to $4,808."
+  ]
+};
+
+/* ===========================================================
+   RENDER
+=========================================================== */
+const years = Object.keys(DATA).map(Number).sort((a,b)=>a-b);
+let currentYear = 1996;
+let searchTerm = '';
+let sortMode = 'alpha';
+
+function fmt(v, prev){
+  if(v===null || v===undefined) return '<span class="price na">N/A</span>';
+  let arrow = '';
+  if(prev !== undefined && prev !== null && prev !== v){
+    const pct = Math.abs((v - prev) / prev);
+    if(v > prev) arrow = '<span class="trend up">▲</span>';
+    else arrow = '<span class="trend down">▼</span>';
+  }
+  if(arrow) return '<span class="price-wrap">$' + v.toLocaleString('en-US') + arrow + '</span>';
+  return '$' + v.toLocaleString('en-US');
+}
+
+function renderYearStrip(){
+  const strip = document.getElementById('yearStrip');
+  strip.innerHTML = years.map(y=>{
+    const cardCount = DATA[y].reduce((n,s)=>n+s.subsets.length, 0);
+    return `<button class="year-btn ${y===currentYear?'active':''}" data-year="${y}">
+      ${y}<span class="sub">${cardCount} cards</span>
+    </button>`;
+  }).join('');
+  strip.querySelectorAll('.year-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      currentYear = Number(btn.dataset.year);
+      renderYearStrip();
+      renderTop10();
+      renderInsights();
+      renderSets();
+    });
+  });
+}
+
+function fmtOdds(o){
+  if(!o) return '<span class="odds none">-</span>';
+  return '<span class="odds">'+o+'</span>';
+}
+
+function renderInsights(){
+  const area = document.getElementById('insightsArea');
+  const items = INSIGHTS[currentYear] || [];
+  if(!items.length){ area.innerHTML=''; return; }
+  area.innerHTML = `
+    <button class="insights-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+      <span class="arrow">▸</span> Market Insights — ${currentYear}
+    </button>
+    <div class="insights-box">
+      <ul>${items.map(i=>'<li>'+i+'</li>').join('')}</ul>
+    </div>`;
+}
+
+function renderTop10(){
+  const area = document.getElementById('top10Area');
+  const all = [];
+  DATA[currentYear].forEach(s=>{
+    s.subsets.forEach(sub=>{
+      const grades = [
+        {g:'PSA 10', v:sub.psa10},
+        {g:'PSA 9', v:sub.psa9},
+        {g:'PSA 8', v:sub.psa8},
+        {g:'Raw', v:sub.raw}
+      ];
+      const best = grades.find(x=>x.v);
+      if(best) all.push({set:s.set, name:sub.name, tag:sub.tag, price:best.v, grade:best.g});
+    });
+  });
+  all.sort((a,b)=>b.price-a.price);
+  const top = all.slice(0,10);
+  if(!top.length){ area.innerHTML=''; return; }
+  area.innerHTML = `
+    <button class="top10-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+      <span class="arrow">▸</span> Top 10 Most Valuable — ${currentYear}
+    </button>
+    <div class="top10-box">
+      ${top.map((c,i)=>`
+        <div class="top10-row">
+          <div class="top10-rank${i<3?' gold':''}">${i+1}</div>
+          <div class="top10-card">
+            ${c.name}${c.tag ? ` <span class="tag">${c.tag}</span>`:''}
+            <span class="set-label">${c.set}</span>
+          </div>
+          <div class="top10-price">$${c.price.toLocaleString('en-US')}</div>
+          <div class="top10-grade">${c.grade}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderSets(){
+  const q = searchTerm.toLowerCase().trim();
+  let sets = DATA[currentYear].map(s => {
+    if(!q) return {set:s.set, subsets:[...s.subsets]};
+    const filtered = s.subsets.filter(sub =>
+      sub.name.toLowerCase().includes(q) ||
+      s.set.toLowerCase().includes(q) ||
+      (sub.tag && sub.tag.toLowerCase().includes(q))
+    );
+    return filtered.length ? {set:s.set, subsets:filtered} : null;
+  }).filter(Boolean);
+
+  if(sortMode === 'alpha'){
+    sets.sort((a,b)=>a.set.localeCompare(b.set));
+  } else {
+    sets.forEach(s => s.subsets.sort((a,b)=>{
+      const va = a.psa10||a.psa9||a.psa8||a.raw||0;
+      const vb = b.psa10||b.psa9||b.psa8||b.raw||0;
+      return vb - va;
+    }));
+    sets.sort((a,b)=>{
+      const maxA = Math.max(...a.subsets.map(c=>c.psa10||c.psa9||c.psa8||c.raw||0));
+      const maxB = Math.max(...b.subsets.map(c=>c.psa10||c.psa9||c.psa8||c.raw||0));
+      return maxB - maxA;
+    });
+  }
+
+  const totalCards = sets.reduce((n,s)=>n+s.subsets.length, 0);
+  const allCards = DATA[currentYear].reduce((n,s)=>n+s.subsets.length, 0);
+
+  document.getElementById('panelTitle').textContent = currentYear + ' Ken Griffey Jr. Cards';
+  document.getElementById('panelCount').textContent =
+    q ? totalCards + ' of ' + allCards + ' cards'
+      : sets.length + ' sets · ' + totalCards + ' cards';
+
+  const list = document.getElementById('setList');
+
+  if(!sets.length){
+    list.innerHTML = '<div class="no-results">No cards match "' + q.replace(/</g,'&lt;') + '"</div>';
+    return;
+  }
+
+  list.innerHTML = `
+    <div class="col-header">
+      <span>Card</span><span>Odds</span><span>Raw</span><span>PSA 8</span><span>PSA 9</span><span>PSA 10</span>
+    </div>` + sets.map(s=>{
+    const rows = s.subsets.map(sub=>{
+      const peak = Math.max(sub.psa10||0, sub.psa9||0, sub.psa8||0, sub.raw||0);
+      const hv = peak >= 1000 ? ' high-value' : '';
+      return `
+      <div class="card-row${hv}">
+        <div class="card-name">${sub.name}${sub.tag ? `<span class="tag">${sub.tag}</span>`:''}</div>
+        <div class="cell">${fmtOdds(sub.odds)}</div>
+        <div class="cell"><span class="price raw">${fmt(sub.raw, sub.prev_raw)}</span></div>
+        <div class="cell"><span class="price psa8">${fmt(sub.psa8, sub.prev_psa8)}</span></div>
+        <div class="cell"><span class="price psa9">${fmt(sub.psa9, sub.prev_psa9)}</span></div>
+        <div class="cell"><span class="price psa10">${fmt(sub.psa10, sub.prev_psa10)}</span></div>
+      </div>`;
+    }).join('');
+
+    return `
+      <div class="set-block">
+        <div class="set-header">
+          <span>${s.set}</span>
+          <span class="meta">${s.subsets.length} card${s.subsets.length>1?'s':''}</span>
+        </div>
+        ${rows}
+      </div>`;
+  }).join('');
+}
+
+document.getElementById('searchInput').addEventListener('input', e=>{
+  searchTerm = e.target.value;
+  renderSets();
+});
+document.getElementById('searchInput').addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ e.target.value=''; searchTerm=''; renderSets(); }
+});
+document.getElementById('sortSelect').addEventListener('change', e=>{
+  sortMode = e.target.value;
+  renderSets();
+});
+
+renderYearStrip();
+renderTop10();
+renderInsights();
+renderSets();
+</script>
+</body>
+</html>
