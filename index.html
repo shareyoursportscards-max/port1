@@ -539,7 +539,15 @@
     .card-row:hover .card-name{background:rgba(0,230,184,.04);}
     .card-row.high-value .card-name{background:rgba(245,200,66,.025);}
     .card-row.high-value:hover .card-name{background:rgba(245,200,66,.06);}
-    .set-header{z-index:3; background:var(--bg); width:max-content;}
+    .set-block{position:relative;}
+    .set-header span:first-child{
+      position:sticky;
+      left:0;
+      z-index:3;
+      background:var(--bg);
+      display:inline-block;
+      padding-right:10px;
+    }
     #colHeader{
       overflow-x:hidden;
     }
@@ -2086,11 +2094,7 @@ renderBlog();
 renderSets();
 
 document.getElementById('setList').addEventListener('scroll', function(){
-  const sl = this.scrollLeft;
-  document.getElementById('colHeader').scrollLeft = sl;
-  this.querySelectorAll('.set-header').forEach(h=>{
-    h.style.transform = 'translateX(' + sl + 'px)';
-  });
+  document.getElementById('colHeader').scrollLeft = this.scrollLeft;
 });
 </script>
 </body>
