@@ -525,12 +525,6 @@
       font-size:11px;
       min-width:406px;
     }
-    .col-header{
-      position:sticky;
-      top:0;
-      z-index:5;
-      background:var(--bg);
-    }
     .col-header span:first-child,
     .card-row .card-name{
       position:sticky;
@@ -541,18 +535,21 @@
       padding-right:6px;
     }
     .card-row .card-name{
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+      white-space:normal;
     }
     .card-row:hover .card-name{background:rgba(0,230,184,.04);}
     .card-row.high-value .card-name{background:rgba(245,200,66,.025);}
     .card-row.high-value:hover .card-name{background:rgba(245,200,66,.06);}
     .set-header{position:sticky; left:0; z-index:2;}
+    #colHeader{
+      overflow-x:hidden;
+      min-width:406px;
+    }
     #setList{
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
     }
+    .set-header{font-size:11px;}
   }
 </style>
 </head>
@@ -589,6 +586,9 @@
     </select>
   </div>
 
+  <div class="col-header" id="colHeader">
+    <span>Card</span><span>Odds</span><span>Raw</span><span>PSA 8</span><span>PSA 9</span><span>PSA 10</span>
+  </div>
   <div id="setList"></div>
   <div id="blogArea"></div>
 
@@ -2044,10 +2044,7 @@ function renderSets(){
     return;
   }
 
-  list.innerHTML = `
-    <div class="col-header">
-      <span>Card</span><span>Odds</span><span>Raw</span><span>PSA 8</span><span>PSA 9</span><span>PSA 10</span>
-    </div>` + sets.map(s=>{
+  list.innerHTML = sets.map(s=>{
     const rows = s.subsets.map(sub=>{
       const peak = Math.max(sub.psa10||0, sub.psa9||0, sub.psa8||0, sub.raw||0);
       const hv = peak >= 1000 ? ' high-value' : '';
@@ -2089,6 +2086,10 @@ renderYearStrip();
 renderTop10();
 renderBlog();
 renderSets();
+
+document.getElementById('setList').addEventListener('scroll', function(){
+  document.getElementById('colHeader').scrollLeft = this.scrollLeft;
+});
 </script>
 </body>
 </html>
