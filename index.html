@@ -520,10 +520,9 @@
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
     .col-header, .card-row{
-      grid-template-columns:140px 50px 54px 54px 54px 54px;
+      grid-template-columns:minmax(160px,auto) 50px 54px 54px 54px 54px;
       padding:5px 0 5px 0;
       font-size:11px;
-      min-width:406px;
     }
     .col-header span:first-child,
     .card-row .card-name{
@@ -535,7 +534,7 @@
       padding-right:6px;
     }
     .card-row .card-name{
-      white-space:normal;
+      white-space:nowrap;
     }
     .card-row:hover .card-name{background:rgba(0,230,184,.04);}
     .card-row.high-value .card-name{background:rgba(245,200,66,.025);}
@@ -543,7 +542,6 @@
     .set-header{position:sticky; left:0; z-index:2;}
     #colHeader{
       overflow-x:hidden;
-      min-width:406px;
     }
     #setList{
       overflow-x:auto;
