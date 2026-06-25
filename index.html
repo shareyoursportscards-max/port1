@@ -687,6 +687,73 @@
   }
   .blog-more:hover{border-color:var(--teal); color:var(--teal);}
 
+  /* ---------- BIGGEST MOVERS ---------- */
+  .movers-section{margin-bottom:24px;}
+  .movers-title{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:18px;
+    color:var(--text);
+    margin:0 0 12px;
+    letter-spacing:.02em;
+  }
+  .movers-title span{
+    font-family:'Oswald', sans-serif;
+    font-size:11px;
+    color:var(--text-muted);
+    font-weight:400;
+    letter-spacing:.06em;
+    margin-left:10px;
+  }
+  .movers-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .mover-card{
+    background:var(--surface);
+    border-radius:var(--card-radius);
+    padding:12px 14px;
+    border-left:3px solid transparent;
+    transition:background .15s ease;
+  }
+  .mover-card:hover{background:var(--surface-2);}
+  .mover-card.up{border-left-color:#4ade80;}
+  .mover-card.down{border-left-color:#f87171;}
+  .mover-year{
+    font-family:'Oswald', sans-serif;
+    font-size:9px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin-bottom:2px;
+  }
+  .mover-name{
+    font-family:'Oswald', sans-serif;
+    font-size:12px;
+    font-weight:500;
+    color:var(--text);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .mover-price{
+    font-family:'Oswald', sans-serif;
+    font-size:13px;
+    font-weight:700;
+    margin-top:4px;
+  }
+  .mover-price.up{color:#4ade80;}
+  .mover-price.down{color:#f87171;}
+  .mover-detail{
+    font-family:'Oswald', sans-serif;
+    font-size:9px;
+    color:var(--text-muted);
+  }
+  @media (max-width:640px){
+    .movers-grid{grid-template-columns:1fr;}
+  }
+
   /* ---------- BACK TO TOP ---------- */
   .back-top{
     position:fixed;
@@ -862,17 +929,17 @@ const DATA = {
     ]},
     {set:"Donruss", subsets:[
       {name:"Base #365", raw:null, psa8:6, psa9:20, psa10:131, tag:"condition sensitive", prev_psa10:120},
-      {name:"Diamond Kings #4", raw:null, psa8:13, psa9:40, psa10:860},
+      {name:"Diamond Kings #4", raw:null, psa8:13, psa9:32, psa10:860, prev_psa9:40},
       {name:"Best of the AL #1 (boxed set)", raw:null, psa8:null, psa9:75, psa10:null},
       {name:"Learning Series #8", raw:null, psa8:57, psa9:96, psa10:385}
     ]},
     {set:"Fleer", subsets:[
-      {name:"Base #513", raw:null, psa8:11, psa9:12, psa10:75},
+      {name:"Base #513", raw:null, psa8:11, psa9:12, psa10:96, prev_psa10:75},
       {name:"Box Bottom #C-10", raw:null, psa8:null, psa9:null, psa10:null, tag:"oddball"},
       {name:"Baseball All-Stars #14", raw:null, psa8:null, psa9:35, psa10:null}
     ]},
     {set:"Leaf", subsets:[
-      {name:"Base #245", raw:4, psa8:19, psa9:30, psa10:219, tag:"key", prev_psa9:20}
+      {name:"Base #245", raw:4, psa8:13, psa9:30, psa10:219, tag:"key", prev_psa8:19, prev_psa9:20}
     ]},
     {set:"O-Pee-Chee", subsets:[
       {name:"Base #336", raw:null, psa8:null, psa9:148, psa10:1100}
@@ -886,7 +953,7 @@ const DATA = {
       {name:"Traded #41T", raw:null, psa8:null, psa9:null, psa10:835},
       {name:"Tiffany #336", raw:null, psa8:null, psa9:360, psa10:null},
       {name:"Topps Big #250", raw:null, psa8:null, psa9:40, psa10:null},
-      {name:"Toys \"R\" Us Rookies #13", raw:null, psa8:30, psa9:60, psa10:450, prev_psa8:23, prev_psa9:44},
+      {name:"Toys \"R\" Us Rookies #13", raw:null, psa8:30, psa9:60, psa10:240, prev_psa8:23, prev_psa9:44, prev_psa10:450},
       {name:"Major League Debut #46", raw:null, psa8:20, psa9:42, psa10:260, prev_psa8:23, prev_psa9:60},
       {name:"Glossy Rookies #11", raw:null, psa8:19, psa9:null, psa10:380, odds:"1:1"},
       {name:"All-Stars #20", raw:null, psa8:null, psa9:30, psa10:250, odds:"1:1"},
@@ -907,7 +974,7 @@ const DATA = {
       {name:"Elite #1 (/10,000)", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"Fleer", subsets:[
-      {name:"Base #450", raw:null, psa8:null, psa9:30, psa10:84},
+      {name:"Base #450", raw:null, psa8:null, psa9:20, psa10:80, prev_psa9:30, prev_psa10:84},
       {name:"All-Stars #7", raw:null, psa8:null, psa9:115, psa10:null},
       {name:"Pro-Visions #5", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
@@ -923,7 +990,7 @@ const DATA = {
       {name:"All-Star #396", raw:null, psa8:34, psa9:30, psa10:124, prev_psa9:25},
       {name:"Rifleman #697", raw:null, psa8:13, psa9:17, psa10:null, prev_psa9:15},
       {name:"The Franchise #858", raw:null, psa8:null, psa9:17, psa10:null},
-      {name:"Dream Team #892", raw:1, psa8:null, psa9:25, psa10:100, prev_psa9:22}
+      {name:"Dream Team #892", raw:1, psa8:null, psa9:25, psa10:97, prev_psa9:22}
     ]},
     {set:"Stadium Club", subsets:[
       {name:"Base #270", raw:1, psa8:17, psa9:30, psa10:400}
@@ -1109,8 +1176,8 @@ const DATA = {
       {name:"Refractor #232", raw:null, psa8:null, psa9:3040, psa10:null, tag:"chase", prev_psa9:2300}
     ]},
     {set:"Flair", subsets:[
-      {name:"Base #103", raw:null, psa8:null, psa9:31, psa10:300},
-      {name:"Hot Gloves #3", raw:null, psa8:300, psa9:325, psa10:750, tag:"die-cut"},
+      {name:"Base #103", raw:null, psa8:null, psa9:40, psa10:300, prev_psa9:31},
+      {name:"Hot Gloves #3", raw:null, psa8:335, psa9:325, psa10:750, tag:"die-cut", prev_psa8:300},
       {name:"Outfield Power #6", raw:null, psa8:null, psa9:20, psa10:null}
     ]},
     {set:"Fleer", subsets:[
@@ -1132,7 +1199,7 @@ const DATA = {
     {set:"Pinnacle", subsets:[
       {name:"Base #100", raw:null, psa8:null, psa9:40, psa10:null},
       {name:"Museum Collection #100", raw:null, psa8:null, psa9:150, psa10:null},
-      {name:"The Naturals #3", raw:65, psa8:null, psa9:83, psa10:531},
+      {name:"The Naturals #3", raw:65, psa8:null, psa9:80, psa10:531},
       {name:"Power Surge #PS23", raw:null, psa8:null, psa9:null, psa10:110}
     ]},
     {set:"Score", subsets:[
@@ -1192,7 +1259,7 @@ const DATA = {
       {name:"Elite Series #54 (/10,000)", raw:750, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"Emotion", subsets:[
-      {name:"Base #77", raw:null, psa8:null, psa9:18, psa10:189}
+      {name:"Base #77", raw:null, psa8:null, psa9:18, psa10:203, prev_psa10:189}
     ]},
     {set:"Finest", subsets:[
       {name:"Base #118", raw:null, psa8:null, psa9:null, psa10:null},
@@ -1215,7 +1282,7 @@ const DATA = {
     {set:"Leaf Limited", subsets:[
       {name:"Lumberjacks #4 (/5,000)", raw:null, psa8:null, psa9:110, psa10:463},
       {name:"Bat Patrol", raw:null, psa8:null, psa9:null, psa10:165},
-      {name:"Gold #6", raw:null, psa8:null, psa9:85, psa10:null}
+      {name:"Gold #6", raw:null, psa8:null, psa9:85, psa10:420}
     ]},
     {set:"Pinnacle", subsets:[
       {name:"Base #128 (Bubble Gum)", raw:null, psa8:114, psa9:240, psa10:2223, tag:"iconic photo", prev_psa8:118, prev_psa9:258},
@@ -1291,7 +1358,7 @@ const DATA = {
       {name:"Atomic Refractor #28", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:96"},
       {name:"Best Cuts #1", raw:10, psa8:null, psa9:null, psa10:null, odds:"1:24"},
       {name:"Best Cuts Refractor #1", raw:125, psa8:180, psa9:433, psa10:null, odds:"1:96", tag:"🔥 hot"},
-      {name:"Best Cuts Atomic Refractor #1", raw:400, psa8:400, psa9:500, psa10:null, odds:"1:192"},
+      {name:"Best Cuts Atomic Refractor #1", raw:400, psa8:400, psa9:1150, psa10:null, odds:"1:192", prev_psa9:500},
       {name:"Mirror Image Refractor #7", raw:18, psa8:35, psa9:46, psa10:null, odds:"1:96"},
       {name:"Mirror Image Atomic Refractor #7", raw:65, psa8:null, psa9:110, psa10:null, odds:"1:192"},
       {name:"Preview #BBP30", raw:7, psa8:null, psa9:30, psa10:100},
@@ -1333,14 +1400,12 @@ const DATA = {
       {name:"Elite #70 (/10,000)", raw:null, psa8:48, psa9:210, psa10:1385, odds:"1:75"}
     ]},
     {set:"E-Motion XL", subsets:[
-      {name:"D-Fense #4", raw:null, psa8:null, psa9:35, psa10:null}
+      {name:"D-Fense #4", raw:null, psa8:null, psa9:35, psa10:150}
     ]},
     {set:"Finest", subsets:[
       {name:"Base #135", raw:null, psa8:100, psa9:135, psa10:null},
       {name:"Refractor #135", raw:910, psa8:560, psa9:975, psa10:null, tag:"🔥 hot", odds:"1:12"},
       {name:"Gold Intimidators #135", raw:160, psa8:124, psa9:400, psa10:null, prev_psa9:355},
-      {name:"Base #230", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Refractor #230", raw:null, psa8:null, psa9:null, psa10:null, tag:"chase", odds:"1:12"},
       {name:"#305 (Uncommon)", raw:15, psa8:15, psa9:80, psa10:null, odds:"1:4"},
       {name:"Refractor #305", raw:250, psa8:300, psa9:550, psa10:null, tag:"🔥 hot", odds:"1:48"},
       {name:"Sterling #24", raw:14, psa8:16, psa9:42, psa10:300},
@@ -1388,7 +1453,7 @@ const DATA = {
       {name:"Gold #11", raw:45, psa8:null, psa9:null, psa10:null},
       {name:"Pennant Craze #4 (/2,500)", raw:42, psa8:50, psa9:null, psa10:null},
       {name:"Lumberjacks #1 (/5,000)", raw:42, psa8:37, psa9:72, psa10:325, tag:"🔥 hot"},
-      {name:"Lumberjacks Black (/500)", raw:500, psa8:null, psa9:null, psa10:null}
+      {name:"Lumberjacks Black (/500)", raw:null, psa8:null, psa9:700, psa10:null}
     ]},
     {set:"Metal Universe", subsets:[
       {name:"Base #107", raw:99, psa8:60, psa9:null, psa10:null},
@@ -1493,7 +1558,7 @@ const DATA = {
       {name:"Diamond Producers #3", raw:13, psa8:null, psa9:null, psa10:null, odds:"1:20"},
       {name:"Diamond Producers Gold Medallion #3", raw:63, psa8:160, psa9:null, psa10:null, odds:"1:200", tag:"🔥 hot"},
       {name:"Call to the Hall #2", raw:13, psa8:null, psa9:null, psa10:null},
-      {name:"Call to the Hall Gold Medallion #2", raw:null, psa8:89, psa9:285, psa10:null, prev_psa9:337},
+      {name:"Call to the Hall Gold Medallion #2", raw:null, psa8:140, psa9:285, psa10:null, prev_psa8:89, prev_psa9:337},
       {name:"RBI Kings #7", raw:26, psa8:null, psa9:null, psa10:null, odds:"1:5 Retail"},
       {name:"Home Run Kings #6", raw:78, psa8:90, psa9:155, psa10:870, odds:"1:75", tag:"🔥 hot"},
       {name:"Home Run Kings Gold Medallion", raw:null, psa8:null, psa9:700, psa10:null, odds:"1:750"},
@@ -1759,7 +1824,7 @@ const DATA = {
     ]},
     {set:"Fleer Tradition", subsets:[
       {name:"Base #120", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Zone #7", raw:240, psa8:288, psa9:365, psa10:null, prev_psa8:250}
+      {name:"Zone #7", raw:240, psa8:288, psa9:365, psa10:null}
     ]},
     {set:"Leaf", subsets:[
       {name:"Base #100", raw:null, psa8:null, psa9:null, psa10:null},
@@ -1771,7 +1836,7 @@ const DATA = {
       {name:"Base #161", raw:null, psa8:null, psa9:189, psa10:1880},
       {name:"Precious Metal Gems (/50)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:3,237"},
       {name:"Universal Language", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:6"},
-      {name:"Diamond Heroes", raw:null, psa8:null, psa9:450, psa10:null, odds:"1:18", prev_psa9:375},
+      {name:"Diamond Heroes", raw:null, psa8:null, psa9:450, psa10:null, odds:"1:18"},
       {name:"Platinum Portraits", raw:213, psa8:null, psa9:877, psa10:null},
       {name:"Hardball Galaxy", raw:null, psa8:null, psa9:200, psa10:1175},
       {name:"Titanium", raw:384, psa8:480, psa9:null, psa10:null, odds:"1:96"},
@@ -1974,11 +2039,11 @@ const DATA = {
       {name:"One of a Kind (/150)", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"Triumvirate Luminous #T3B", raw:65, psa8:54, psa9:90, psa10:755},
       {name:"Triumvirate Luminous #T13B", raw:null, psa8:91, psa9:122, psa10:null, prev_psa8:62},
-      {name:"Triumvirate Luminescent #T3B", raw:null, psa8:250, psa9:235, psa10:825, odds:"1:192"},
+      {name:"Triumvirate Luminescent #T3B", raw:null, psa8:200, psa9:235, psa10:825, odds:"1:192", prev_psa8:250},
       {name:"Triumvirate Luminescent #T13B", raw:275, psa8:null, psa9:229, psa10:null, odds:"1:192"},
       {name:"Triumvirate Illuminator #T3B", raw:null, psa8:null, psa9:200, psa10:638, odds:"1:384"},
       {name:"Triumvirate Illuminator #T13B", raw:null, psa8:null, psa9:304, psa10:1075, odds:"1:384"},
-      {name:"Video Replay #VR3", raw:null, psa8:25, psa9:26, psa10:103},
+      {name:"Video Replay #VR3", raw:null, psa8:25, psa9:33, psa10:134, prev_psa9:26, prev_psa10:103},
       {name:"Never Compromise #NC3", raw:null, psa8:null, psa9:34, psa10:91},
       {name:"Stadium Club Chrome #SCC20", raw:null, psa8:null, psa9:30, psa10:null, odds:"1:24"},
       {name:"Chrome Refractor #SCC20", raw:null, psa8:290, psa9:398, psa10:null, odds:"1:96", tag:"chase"}
@@ -2116,51 +2181,61 @@ const DATA = {
 =========================================================== */
 const BLOG = {
   1990: [
+    {date:"June 24, 2026", body:"<b>Toys R Us Rookies #13</b> PSA 10 dropped sharply from $450 to <span class='down'>$240</span> — previous data may have been stale. <b>Fleer #513</b> PSA 10 moved the other direction, climbing from $75 to <span class='up'>$96</span>. <b>Donruss Diamond Kings</b> PSA 9 softened from $40 to <span class='down'>$32</span>. The junk wax base market continues to recalibrate — old prices are being tested by fresh sales data."},
     {date:"June 23, 2026", body:"<b>Toys R Us Rookies #13</b> climbing — PSA 8 moved from $23 to <span class='up'>$30</span> and PSA 9 from $44 to <span class='up'>$60</span>. <b>Donruss #365</b> PSA 10 ticked up from $120 to <span class='up'>$131</span> at auction with 20 bids — condition-sensitive cards are rewarding patience. <b>Topps #336</b> PSA 8 rebounded from $11 to <span class='up'>$24</span> while PSA 9 softened from $45 to <span class='down'>$36</span> — buyers shifting to the more affordable grade. Added <b>Bowman Tiffany</b> PSA 9 at $150."},
     {date:"June 22, 2026", body:"<b>Leaf #245</b> PSA 9 jumped from $20 to <span class='up'>$30</span> — a 50% move on the card most collectors consider the best base Griffey of 1990. <b>Major League Debut</b> PSA 9 dropped from $60 to <span class='down'>$42</span>. Added <b>Bowman Tiffany</b> PSA 8 at $70 — first PSA 8 data point on that card."},
     {date:"June 21, 2026", body:"Junk wax base continues to soften. <b>Topps #336</b> PSA 8 dropped from $16 to <span class='down'>$11</span>, and <b>Score #560</b> PSA 10 slid from $109 to <span class='down'>$96</span>. The <b>Major League Debut</b> PSA 8 also dipped from $23 to <span class='down'>$20</span>. Meanwhile, <b>Leaf #245</b> raw copies are going for just $4 — that 10x multiplier to PSA 10 ($219) makes raw copies a gamble worth taking."}
   ],
   1991: [
+    {date:"June 24, 2026", body:"Quiet day for 1991. <b>Fleer #450</b> PSA 9 dropped from $30 to <span class='down'>$20</span> and PSA 10 dipped from $84 to <span class='down'>$80</span>. Everything else confirmed existing prices — Desert Shield holding, Score inserts steady."},
     {date:"June 23, 2026", body:"<b>Desert Shield All-Star #392</b> PSA 8 continues climbing — now at <span class='up'>$600</span>, up from $575 two days ago. Quiet strength across 1991 Score inserts: <b>All-Star</b> PSA 9 up to <span class='up'>$30</span>, <b>Dream Team</b> to <span class='up'>$25</span>, <b>Rifleman</b> to <span class='up'>$17</span>. <b>Topps #790</b> PSA 9 jumped from $18 to <span class='up'>$25</span>. The junk wax base is finding a floor and bouncing."},
     {date:"June 22, 2026", body:"<b>Desert Shield All-Star #392</b> PSA 8 ticked up from $575 to <span class='up'>$590</span>. Desert Shield cards continue to hold strong — military-only distribution means supply isn't getting any bigger."},
     {date:"June 21, 2026", body:"<b>Studio #112</b> PSA 10 climbed from $349 to <span class='up'>$374</span> at auction with 26 bids — the inaugural Studio set keeps building a cult following. <b>Donruss #77</b> PSA 8 jumped from $7 to <span class='up'>$11</span>, and <b>O-Pee-Chee Premier #56</b> PSA 9 moved from $12 to <span class='up'>$19</span>, finally correcting an old inversion where PSA 8 was priced higher than PSA 9."}
   ],
   1992: [
+    {date:"June 24, 2026", body:"Sales came in across the board but nothing moved — Topps Gold PSA 10, Upper Deck PSA 10, Leaf PSA 10, and Score All-Star PSA 10 all confirmed at existing prices. Stable market in '92."},
     {date:"June 23, 2026", body:"Split market in '92 today. <b>Upper Deck #424</b> PSA 10 nearly doubled from $105 to <span class='up'>$199</span>. <b>Leaf #392</b> PSA 10 surged from $99 to <span class='up'>$150</span> — those tough black borders make gems scarce. <b>Bowman #100</b> PSA 9 jumped from $22 to <span class='up'>$40</span>. But inserts cooled: <b>Score All-Star</b> PSA 10 dropped hard from $270 to <span class='down'>$140</span> at auction with 19 bids, and <b>Studio #232</b> PSA 9 fell from $60 to <span class='down'>$49</span>. Gem mint base climbing while mid-grade inserts give back."},
     {date:"June 22, 2026", body:"<b>Ultra #123</b> PSA 10 moved from $70 to <span class='up'>$77</span> at auction with 15 bids, while PSA 9 softened from $27 to <span class='down'>$23</span>. The gap between 9 and 10 is widening on early Ultra — gem copies are getting scarcer."},
     {date:"June 21, 2026", body:"<b>Ultra Award Winners #22</b> PSA 10 jumped from $226 to <span class='up'>$300</span> — a 33% move at auction with 19 bids. Filled in <b>Stadium Club Members Choice #603</b> PSA 9 at $50 from five separate auctions ($39-$66). <b>Fleer #279</b> PSA 9 dropped from $25 to <span class='down'>$17</span>. The Donruss Elite /10,000 in PSA 7 hit $404 at auction — that card commands respect in any grade."}
   ],
   1993: [
+    {date:"June 24, 2026", body:"Sales activity but no price changes after yesterday's Finest Refractor fireworks. Upper Deck #355 PSA 10 confirmed at $70. Prices holding."},
     {date:"June 23, 2026", body:"The one we've been waiting for. <b>1993 Finest Refractor #110</b> PSA 9 sold for <span class='up'>$13,600</span> at auction with 47 bids — the original Finest Refractor Griffey, and now the second most expensive card in the entire guide. Only the 1998 Crusade Red sits higher. This is THE card that launched the refractor era. <b>Upper Deck #355</b> PSA 10 bounced back from $61 to <span class='up'>$70</span>."},
     {date:"June 22, 2026", body:"<b>Select #2</b> PSA 10 climbed from $61 to <span class='up'>$75</span>. <b>Ultra #619</b> PSA 10 dipped from $75 to <span class='down'>$69</span> at auction. Mixed signals in '93 — some gems gaining, others giving back."},
     {date:"June 21, 2026", body:"Cooling off across the board. <b>Upper Deck #355</b> PSA 10 dropped from $70 to <span class='down'>$61</span>, <b>Pinnacle Home Run Club</b> PSA 9 fell from $55 to <span class='down'>$45</span>, and <b>SP Platinum Power</b> PSA 8 slid from $34 to <span class='down'>$25</span>. Added <b>Donruss Diamond Kings</b> PSA 8 at $27 and <b>Topps Gold #179</b> PSA 9 at $27 — solid mid-tier fills."}
   ],
   1994: [
+    {date:"June 24, 2026", body:"<b>Flair Hot Gloves #3</b> PSA 8 climbed from $300 to <span class='up'>$335</span> — this die-cut keeps getting more expensive. <b>Flair Base #103</b> PSA 9 also jumped from $31 to <span class='up'>$40</span>. The Flair brand is quietly one of the strongest in '94."},
     {date:"June 23, 2026", body:"<b>SP #105</b> PSA 10 dropped from $200 to <span class='down'>$158</span> at auction with 33 bids — strong data pulling it down. <b>Leaf Power Brokers</b> PSA 10 also softened from $173 to <span class='down'>$158</span>. Premium base cards in '94 are cooling while the chase inserts (Finest Refractor, Flair Hot Gloves) hold firm."},
     {date:"June 22, 2026", body:"Added <b>Flair Hot Gloves #3</b> PSA 8 at $300 with a die-cut tag — first PSA 8 data on one of the most beautiful die-cut inserts of the decade. The PSA 9 sits at $325 so the 8-to-9 gap is tight on this one."},
     {date:"June 21, 2026", body:"<b>Finest Refractor #232</b> PSA 9 surged from $2,300 to <span class='up'>$3,040</span> at auction with 31 bids. That's a 32% jump on one of the most iconic refractors of the decade. The technology was brand new in '94 and these cards are brutally hard to find in high grade."}
   ],
   1995: [
+    {date:"June 24, 2026", body:"<b>Emotion #77</b> PSA 10 moved from $189 to <span class='up'>$203</span> at auction with 38 bids. Added <b>Leaf Limited Gold #6</b> PSA 10 at $420 — first data on that card. Everything else confirmed — Bubble Gum holding steady at $114 PSA 8 and $250 PSA 9."},
     {date:"June 23, 2026", body:"<b>Pinnacle Bubble Gum #128</b> gave back yesterday's gains — PSA 9 settled from $258 back to <span class='down'>$240</span> with multiple sales in the $230-$250 range, and PSA 8 dipped from $118 to <span class='down'>$114</span>. The iconic card is finding its level. <b>Flair Outfield Power</b> PSA 9 held at $61, confirming yesterday's move."},
     {date:"June 22, 2026", body:"<b>Flair Outfield Power #7</b> PSA 9 moved from $50 to <span class='up'>$61</span> at auction with 13 bids. Flair inserts from '95 are quietly gaining — the Hot Glove, Hot Numbers, and Outfield Power set is underrated."},
     {date:"June 21, 2026", body:"<b>Pinnacle Bubble Gum #128</b> PSA 9 ticked up from $240 to <span class='up'>$258</span> with multiple sales in the $245-$270 range. Added PSA 8 at $118 — that's the entry point for the most iconic Griffey image ever put on cardboard. On the flip side, <b>Topps #397</b> PSA 9 dropped hard from $24 to <span class='down'>$15</span>."}
   ],
   1996: [
+    {date:"June 24, 2026", body:"<b>Bowman's Best Cuts Atomic Refractor #1</b> PSA 9 more than doubled from $500 to <span class='up'>$1,150</span>. <b>Leaf Limited Lumberjacks Black (/500)</b> landed at PSA 9 $700 — first graded data on that card. <b>Call to the Hall Gold Medallion</b> PSA 8 jumped from $89 to <span class='up'>$140</span>. <b>E-Motion XL D-Fense</b> filled in PSA 10 at $150. The 1996 insert market is running hot."},
     {date:"June 23, 2026", body:"<b>Metal Universe Platinum Edition</b> PSA 8 more than doubled from $130 to <span class='up'>$300</span> — the parallel premium on this card is real. <b>Finest Gold Intimidators</b> PSA 9 climbed from $355 to <span class='up'>$400</span>. <b>Flair Diamond Cuts</b> PSA 9 surged from $210 to <span class='up'>$300</span>. The high-end 1996 inserts are on fire right now — anything with scarcity is being chased hard."},
     {date:"June 22, 2026", body:"<b>Finest Sterling Refractor #24</b> climbing — PSA 9 moved from $490 to <span class='up'>$536</span> at auction with 38 bids, and PSA 8 jumped from $250 to <span class='up'>$370</span>. On the other side, <b>Metal Universe Mother Lode</b> PSA 9 pulled back from $191 to <span class='down'>$165</span>, and <b>Ultra Call to the Hall Gold Medallion</b> PSA 9 dropped from $337 to <span class='down'>$285</span>. <b>Mystery Finest Refractor #M25</b> PSA 8 also cooled from $152 to <span class='down'>$100</span>."},
     {date:"June 21, 2026", body:"Big movers today. <b>Summit Above & Beyond</b> PSA 10 nearly doubled from $460 to <span class='up'>$800</span>. <b>Score Titanic Taters</b> PSA 10 jumped from $440 to <span class='up'>$609</span> at auction with 29 bids. <b>Collector's Choice #370</b> PSA 10 surged from $46 to <span class='up'>$70</span>. <b>Metal Universe Mother Lode</b> PSA 9 confirmed at $191. <b>Flair Diamond Cuts</b> raw moved from $90 to <span class='up'>$115</span>."}
   ],
   1997: [
+    {date:"June 24, 2026", body:"Sales confirmed existing prices across the board. Yesterday's Blast Furnace and Power Plus moves still settling. Nothing notable today."},
     {date:"June 23, 2026", body:"<b>Metal Universe Blast Furnace</b> PSA 10 jumped from $350 to <span class='up'>$585</span> — a 67% move at 1:48 Hobby odds. Metal Universe inserts across '97 are heating up fast. <b>Ultra Power Plus</b> PSA 9 sold for $1,009 at auction (29 bids, POP 3) — a card we hadn't even been tracking. The depth of demand in '97 keeps surprising."},
     {date:"June 22, 2026", body:"<b>E-X 2000 Hall or Nothing</b> PSA 9 surged from $375 to <span class='up'>$605</span> at auction with 29 bids — a 61% jump. The die-cut design on this card is iconic and demand is clearly accelerating. <b>SPx Cornerstones of the Game</b> (w/ Bonds) PSA 8 softened from $350 to <span class='down'>$300</span>."},
     {date:"June 21, 2026", body:"Two monster moves. <b>Finest Refractor #139</b> raw exploded from $368 to <span class='up'>$2,750</span> at auction — a Silver Embossed Refractor variant that went for 7x the previous price with 17 bids. <b>Metal Universe Mother Lode</b> PSA 8 more than doubled from $870 to <span class='up'>$1,943</span> at auction with 23 bids. The 1:288 odds on Mother Lode are starting to get priced in."}
   ],
   1998: [
+    {date:"June 24, 2026", body:"Active sales but prices held — All-Galactic Team PSA 8 confirmed at $1,500 and Diamond Heroes PSA 9 at $450. The Crusade Red aftershock has settled."},
     {date:"June 23, 2026", body:"<b>Donruss Crusade Red (/25)</b> PSA 8 sold for <span class='up'>$32,433</span> at auction with 52 bids. That's now the most expensive card in this entire guide — 25 copies exist on earth. Added to the database today. <b>All-Galactic Team</b> PSA 8 surged again from $830 to <span class='up'>$1,500</span> — this card has moved from $750 to $1,500 in three days. <b>Diamond Heroes</b> PSA 9 up from $375 to <span class='up'>$450</span>. <b>Fleer Tradition Zone</b> PSA 8 up from $250 to <span class='up'>$288</span>. 1998 Metal Universe is the hottest corner of the Griffey market right now."},
     {date:"June 22, 2026", body:"<b>Metal Universe Hardball Galaxy</b> filled in PSA 9 at $200 — a sci-fi design that's becoming increasingly collectible. The rest of '98 held steady today."},
     {date:"June 21, 2026", body:"<b>Metal Universe All-Galactic Team</b> PSA 8 moved from $750 to <span class='up'>$830</span>. At 1:192 packs, this insert continues to climb. The rest of '98 held steady — <b>Donruss Elite Prime Numbers</b> had a PSA 9 sell at $335 but with only 4 bids and potential variant confusion (#1B vs die-cut), leaving the existing $800 in place for now."}
   ],
   1999: [
+    {date:"June 24, 2026", body:"<b>Video Replay #VR3</b> gaining momentum — PSA 9 up from $26 to <span class='up'>$33</span>, PSA 10 from $103 to <span class='up'>$134</span>. <b>Triumvirate Luminescent #T3B</b> PSA 8 softened from $250 to <span class='down'>$200</span>. Lots of confirmations across the board today — most prices holding from yesterday's updates."},
     {date:"June 23, 2026", body:"PSA 8 prices climbing across the board. <b>Planet Metal</b> PSA 8 moved from $256 to <span class='up'>$340</span>. <b>Lords of the Diamond Refractor</b> PSA 8 jumped from $240 to <span class='up'>$359</span>. <b>Black Diamond Single</b> PSA 10 nearly doubled from $109 to <span class='up'>$204</span>. <b>Triumvirate Luminous #T13B</b> PSA 8 up from $62 to <span class='up'>$91</span>. Added <b>Finest Team Finest Gold</b> (/250) PSA 9 at $600 and <b>Finest Double Feature Refractor</b> (w/ A-Rod) PSA 10 at $175. The PSA 8 grade is where the action is in '99 right now."},
     {date:"June 22, 2026", body:"<b>Topps Chrome All-Etch Refractor #AE3</b> PSA 8 jumped from $260 to <span class='up'>$350</span> — demand is climbing across all grades on this card. Added <b>Finest Prominent Figures Refractor</b> (/457) PSA 10 at $750 and <b>Topps Tek Gold</b> (/10) PSA 9 at $676 — a POP 1 sale with 20 bids."},
     {date:"June 21, 2026", body:"<b>Topps Chrome Early Road to Hall Refractor</b> (/100) just got its first PSA 10 sale — <span class='up'>$10,000</span> at auction with 45 bids. At 1:944 packs, this is now the second most valuable card in all of 1999. <b>Bowman's Best Atomic Refractor</b> (/100) filled in PSA 8 at $1,875 with 30 bids. Planet Metal PSA 7 hit $250 at auction with 38 bids — that card is hot in every grade."}
@@ -2222,6 +2297,43 @@ function renderBlog(){
     </div>`).join('');
   const moreBtn = entries.length > 1 ? `<button class="blog-more" onclick="this.parentNode.querySelectorAll('.blog-entry').forEach(e=>e.classList.remove('collapsed'));this.remove()">Show older updates (${entries.length-1} more)</button>` : '';
   area.innerHTML = `<div class="blog-section"><h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:22px;color:var(--text);margin:0 0 14px;">Price Updates — ${currentYear}</h2>${html}${moreBtn}</div>`;
+}
+
+function renderMovers(){
+  const area = document.getElementById('moversArea');
+  const all = [];
+  years.forEach(y=>{
+    DATA[y].forEach(s=>{
+      s.subsets.forEach(sub=>{
+        const grades = ['raw','psa8','psa9','psa10'];
+        grades.forEach(g=>{
+          const prev = sub['prev_'+g];
+          const cur = sub[g];
+          if(prev !== undefined && prev !== null && cur !== null && prev !== cur){
+            const pct = ((cur - prev) / prev) * 100;
+            const label = g==='raw'?'Raw':g.toUpperCase().replace('PSA','PSA ');
+            all.push({year:y, set:s.set, name:sub.name, grade:label, prev:prev, cur:cur, pct:pct, abs:Math.abs(pct)});
+          }
+        });
+      });
+    });
+  });
+  all.sort((a,b)=>b.abs-a.abs);
+  const top = all.slice(0,6);
+  if(!top.length){area.innerHTML='';return;}
+  area.innerHTML = `<div class="movers-section">
+    <h2 class="movers-title">Biggest Movers<span>Across all years</span></h2>
+    <div class="movers-grid">${top.map(m=>{
+      const dir = m.pct>0?'up':'down';
+      const arrow = m.pct>0?'▲':'▼';
+      const sign = m.pct>0?'+':'';
+      return `<div class="mover-card ${dir}">
+        <div class="mover-year">${m.year} · ${m.set}</div>
+        <div class="mover-name">${m.name}</div>
+        <div class="mover-price ${dir}">${arrow} $${m.prev.toLocaleString()} → $${m.cur.toLocaleString()}</div>
+        <div class="mover-detail">${m.grade} · ${sign}${Math.round(m.pct)}%</div>
+      </div>`;
+    }).join('')}</div></div>`;
 }
 
 function renderTop10(){
