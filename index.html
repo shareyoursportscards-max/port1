@@ -300,16 +300,15 @@
   }
   .odds.none{color:var(--text-muted);}
   .price{font-variant-numeric:tabular-nums; font-weight:600; font-size:12.5px;}
-  .price.raw{color:var(--raw);}
-  .price.psa8{color:var(--psa8);}
-  .price.psa9{color:var(--psa9);}
-  .price.psa10{color:var(--psa10); text-shadow:0 0 12px rgba(245,200,66,.25);}
-  .price.psa10.mega{font-size:13.5px; color:#ffd556; text-shadow:0 0 16px rgba(245,200,66,.35);}
+  .price.raw,.price.psa8,.price.psa9,.price.psa10{color:var(--text);}
   .price.na{color:var(--text-muted); font-weight:400; font-style:italic; font-size:11px;}
   .price-wrap{position:relative; display:inline-block;}
   .trend{position:absolute; left:-11px; top:50%; transform:translateY(-50%); font-size:8px; font-weight:400; pointer-events:none; opacity:.85;}
   .trend.up{color:#4ade80;}
   .trend.down{color:#f87171;}
+  .ticker-up{color:#4ade80 !important;}
+  .ticker-down{color:#f87171 !important;}
+  .mega{color:var(--gold) !important; text-shadow:0 0 16px rgba(245,200,66,.35);}
 
   .price-big{
     color:var(--psa10);
@@ -934,12 +933,12 @@ const DATA = {
       {name:"Learning Series #8", raw:null, psa8:57, psa9:96, psa10:385}
     ]},
     {set:"1990 Fleer", subsets:[
-      {name:"Base #513", raw:null, psa8:11, psa9:12, psa10:96, prev_psa10:75},
+      {name:"Base #513", raw:null, psa8:11, psa9:12, psa10:105, prev_psa10:96},
       {name:"Box Bottom #C-10", raw:null, psa8:null, psa9:null, psa10:null, tag:"oddball"},
       {name:"Baseball All-Stars #14", raw:null, psa8:null, psa9:35, psa10:null}
     ]},
     {set:"1990 Leaf", subsets:[
-      {name:"Base #245", raw:4, psa8:13, psa9:30, psa10:219, tag:"key", prev_psa8:19, prev_psa9:20}
+      {name:"Base #245", raw:4, psa8:13, psa9:30, psa10:239, tag:"key", prev_psa8:19, prev_psa9:20, prev_psa10:219}
     ]},
     {set:"1990 O-Pee-Chee", subsets:[
       {name:"Base #336", raw:null, psa8:null, psa9:148, psa10:1100}
@@ -949,7 +948,7 @@ const DATA = {
       {name:"Rising Stars #3", raw:null, psa8:null, psa9:20, psa10:null}
     ]},
     {set:"1990 Topps", subsets:[
-      {name:"Base #336", raw:10, psa8:24, psa9:36, psa10:1075, tag:"🔥 hot", prev_psa8:11, prev_psa9:45},
+      {name:"Base #336", raw:10, psa8:24, psa9:33, psa10:1075, tag:"🔥 hot", prev_psa8:11, prev_psa9:36},
       {name:"Traded #41T", raw:null, psa8:null, psa9:null, psa10:835},
       {name:"Tiffany #336", raw:null, psa8:null, psa9:360, psa10:null},
       {name:"Topps Big #250", raw:null, psa8:null, psa9:40, psa10:null},
@@ -974,7 +973,7 @@ const DATA = {
       {name:"Elite #1 (/10,000)", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1991 Fleer", subsets:[
-      {name:"Base #450", raw:null, psa8:null, psa9:20, psa10:80, prev_psa9:30, prev_psa10:84},
+      {name:"Base #450", raw:14, psa8:null, psa9:20, psa10:80, prev_psa9:30, prev_psa10:84},
       {name:"All-Stars #7", raw:null, psa8:null, psa9:115, psa10:null},
       {name:"Pro-Visions #5", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
@@ -986,8 +985,8 @@ const DATA = {
       {name:"Premier #56", raw:null, psa8:13, psa9:19, psa10:null, prev_psa9:12}
     ]},
     {set:"1991 Score", subsets:[
-      {name:"Base #2", raw:null, psa8:9, psa9:null, psa10:null},
-      {name:"All-Star #396", raw:null, psa8:34, psa9:30, psa10:124, prev_psa9:25},
+      {name:"Base #2", raw:null, psa8:9, psa9:20, psa10:null},
+      {name:"All-Star #396", raw:null, psa8:34, psa9:27, psa10:124, prev_psa9:30},
       {name:"Rifleman #697", raw:null, psa8:13, psa9:17, psa10:null, prev_psa9:15},
       {name:"The Franchise #858", raw:null, psa8:null, psa9:17, psa10:null},
       {name:"Dream Team #892", raw:1, psa8:null, psa9:25, psa10:97, prev_psa9:22}
@@ -999,12 +998,12 @@ const DATA = {
       {name:"Base #112", raw:6, psa8:null, psa9:null, psa10:374, prev_psa10:349}
     ]},
     {set:"1991 Topps", subsets:[
-      {name:"Base #790", raw:null, psa8:null, psa9:25, psa10:150, prev_psa9:18},
+      {name:"Base #790", raw:null, psa8:null, psa9:18, psa10:150, prev_psa9:25},
       {name:"Tiffany #790", raw:null, psa8:130, psa9:240, psa10:1325},
       {name:"All-Star #392", raw:null, psa8:null, psa9:null, psa10:70},
       {name:"Tiffany All-Star #392", raw:null, psa8:null, psa9:53, psa10:null},
       {name:"Glossy All-Stars #392", raw:null, psa8:12, psa9:null, psa10:null},
-      {name:"Desert Shield #790", raw:null, psa8:1076, psa9:1750, psa10:4150},
+      {name:"Desert Shield #790", raw:null, psa8:1076, psa9:1900, psa10:4150, prev_psa9:1750},
       {name:"Desert Shield All-Star #392", raw:null, psa8:600, psa9:800, psa10:null, prev_psa8:575},
       {name:"Micro #790", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
@@ -1015,7 +1014,7 @@ const DATA = {
     {set:"1991 Upper Deck", subsets:[
       {name:"Base #555", raw:null, psa8:12, psa9:20, psa10:81},
       {name:"Final Edition #79F", raw:null, psa8:null, psa9:null, psa10:36},
-      {name:"Final Edition #87F", raw:null, psa8:9, psa9:15, psa10:null}
+      {name:"Final Edition #87F", raw:null, psa8:9, psa9:15, psa10:50}
     ]}
   ],
 
@@ -1034,10 +1033,10 @@ const DATA = {
       {name:"All-Stars #23", raw:null, psa8:null, psa9:80, psa10:null},
       {name:"Team Leaders #15", raw:null, psa8:null, psa9:100, psa10:2350},
       {name:"Headliners #1", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Pro-Visions #709", raw:null, psa8:24, psa9:60, psa10:335}
+      {name:"Pro-Visions #709", raw:6, psa8:24, psa9:60, psa10:335}
     ]},
     {set:"1992 Leaf", subsets:[
-      {name:"Base #392", raw:null, psa8:null, psa9:10, psa10:150, prev_psa10:99},
+      {name:"Base #392", raw:null, psa8:10, psa9:10, psa10:150, prev_psa10:99},
       {name:"Gold Edition #392", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1992 O-Pee-Chee", subsets:[
@@ -1053,7 +1052,7 @@ const DATA = {
     ]},
     {set:"1992 Score", subsets:[
       {name:"Base #1", raw:null, psa8:9, psa9:null, psa10:73},
-      {name:"All-Star #436", raw:null, psa8:null, psa9:null, psa10:140, prev_psa10:270},
+      {name:"All-Star #436", raw:null, psa8:null, psa9:26, psa10:140, prev_psa10:270},
       {name:"90's Impact Player #28", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"Superstar #1 (boxed set)", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
@@ -1063,11 +1062,11 @@ const DATA = {
       {name:"Members Choice #603", raw:35, psa8:25, psa9:43, psa10:399, prev_psa9:50}
     ]},
     {set:"1992 Studio", subsets:[
-      {name:"Base #232", raw:null, psa8:25, psa9:49, psa10:400, prev_psa9:60}
+      {name:"Base #232", raw:5, psa8:25, psa9:49, psa10:400, prev_psa9:60}
     ]},
     {set:"1992 Topps", subsets:[
       {name:"Base #50", raw:null, psa8:null, psa9:18, psa10:67, prev_psa10:73},
-      {name:"Gold #50", raw:null, psa8:11, psa9:27, psa10:220, prev_psa10:200}
+      {name:"Gold #50", raw:13, psa8:11, psa9:27, psa10:220, prev_psa10:200}
     ]},
     {set:"1992 Triple Play", subsets:[
       {name:"Base #152", raw:null, psa8:null, psa9:null, psa10:null}
@@ -1079,7 +1078,7 @@ const DATA = {
     ]},
     {set:"1992 Upper Deck", subsets:[
       {name:"Base #424", raw:null, psa8:9, psa9:26, psa10:199, prev_psa10:105},
-      {name:"Diamond Skills #650", raw:null, psa8:14, psa9:11, psa10:45},
+      {name:"Diamond Skills #650", raw:null, psa8:14, psa9:10, psa10:45},
       {name:"Teammates #55", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"Bloodlines #85", raw:null, psa8:12, psa9:14, psa10:46},
       {name:"All-Star Fan Fest Gold #24", raw:null, psa8:null, psa9:null, psa10:97}
@@ -1092,15 +1091,15 @@ const DATA = {
     ]},
     {set:"1993 Donruss", subsets:[
       {name:"Base #553", raw:null, psa8:null, psa9:18, psa10:119},
-      {name:"Diamond Kings #DK-1", raw:null, psa8:27, psa9:93, psa10:null},
+      {name:"Diamond Kings #DK-1", raw:8, psa8:27, psa9:93, psa10:null},
       {name:"Triple Play #1", raw:null, psa8:null, psa9:27, psa10:null}
     ]},
     {set:"1993 Finest", subsets:[
-      {name:"Base #110", raw:null, psa8:null, psa9:221, psa10:1500, tag:"key"},
+      {name:"Base #110", raw:90, psa8:null, psa9:221, psa10:1500, tag:"key"},
       {name:"Refractor #110", raw:null, psa8:null, psa9:13600, psa10:null, tag:"chase"}
     ]},
     {set:"1993 Flair", subsets:[
-      {name:"Base #270", raw:null, psa8:null, psa9:null, psa10:204}
+      {name:"Base #270", raw:14, psa8:null, psa9:null, psa10:204}
     ]},
     {set:"1993 Fleer", subsets:[
       {name:"Base #112", raw:null, psa8:null, psa9:null, psa10:null},
@@ -1111,7 +1110,7 @@ const DATA = {
     ]},
     {set:"1993 Pinnacle", subsets:[
       {name:"Base #110", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Home Run Club #13", raw:null, psa8:null, psa9:45, psa10:null, prev_psa9:55}
+      {name:"Home Run Club #13", raw:8, psa8:null, psa9:45, psa10:null, prev_psa9:55}
     ]},
     {set:"1993 Score", subsets:[
       {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null},
@@ -1120,7 +1119,8 @@ const DATA = {
       {name:"Dream Team #536", raw:null, psa8:null, psa9:null, psa10:70}
     ]},
     {set:"1993 Select", subsets:[
-      {name:"Base #2", raw:null, psa8:null, psa9:null, psa10:75, prev_psa10:61}
+      {name:"Base #2", raw:null, psa8:null, psa9:null, psa10:75, prev_psa10:61},
+      {name:"Stars #19", raw:20, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1993 SP", subsets:[
       {name:"Base #4", raw:null, psa8:null, psa9:42, psa10:350, tag:"iconic design"},
@@ -1130,16 +1130,17 @@ const DATA = {
       {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:160},
       {name:"#707", raw:null, psa8:null, psa9:25, psa10:100},
       {name:"Members Only #59", raw:null, psa8:null, psa9:30, psa10:401},
-      {name:"Members Choice #591", raw:null, psa8:null, psa9:25, psa10:null}
+      {name:"Members Choice #591", raw:7, psa8:null, psa9:25, psa10:null}
     ]},
     {set:"1993 Studio", subsets:[
-      {name:"Base #214", raw:null, psa8:null, psa9:null, psa10:null}
+      {name:"Base #214", raw:4, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1993 Topps", subsets:[
       {name:"Base #179", raw:null, psa8:null, psa9:20, psa10:65},
       {name:"All-Stars #405 (w/ Van Slyke)", raw:null, psa8:null, psa9:null, psa10:35},
-      {name:"Gold #179", raw:null, psa8:null, psa9:27, psa10:310}
-    ]},
+      {name:"Gold #179", raw:4, psa8:null, psa9:27, psa10:310},
+      {name:"Black Gold #33", raw:3, psa8:null, psa9:35, psa10:null},
+          ]},
     {set:"1993 Triple Play", subsets:[
       {name:"#5", raw:null, psa8:25, psa9:null, psa10:330}
     ]},
@@ -1147,11 +1148,11 @@ const DATA = {
       {name:"Base #131", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"#619", raw:null, psa8:null, psa9:null, psa10:69, prev_psa10:75},
       {name:"Performers #3", raw:null, psa8:null, psa9:90, psa10:660},
-      {name:"Award Winners #16", raw:null, psa8:null, psa9:35, psa10:null}
+      {name:"Award Winners #16", raw:3, psa8:null, psa9:35, psa10:null}
     ]},
     {set:"1993 Upper Deck", subsets:[
       {name:"Base #449", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"#355", raw:null, psa8:null, psa9:20, psa10:70, prev_psa10:61},
+      {name:"#355", raw:31, psa8:null, psa9:17, psa10:70, prev_psa9:20, prev_psa10:61},
       {name:"Then & Now #TN6", raw:null, psa8:null, psa9:null, psa10:null}
     ]}
   ],
@@ -1169,15 +1170,16 @@ const DATA = {
     ]},
     {set:"1994 Donruss", subsets:[
       {name:"Base #15", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Dominators #9", raw:null, psa8:null, psa9:50, psa10:null}
+      {name:"Dominators #9", raw:null, psa8:null, psa9:50, psa10:null},
+      {name:"Elite #45", raw:null, psa8:null, psa9:125, psa10:null}
     ]},
     {set:"1994 Finest", subsets:[
-      {name:"Base #232", raw:null, psa8:null, psa9:91, psa10:450},
-      {name:"Refractor #232", raw:null, psa8:null, psa9:3040, psa10:null, tag:"chase", prev_psa9:2300}
+      {name:"Base #232", raw:16, psa8:null, psa9:91, psa10:450},
+      {name:"Refractor #232", raw:866, psa8:null, psa9:3040, psa10:null, tag:"chase", prev_psa9:2300}
     ]},
     {set:"1994 Flair", subsets:[
-      {name:"Base #103", raw:null, psa8:null, psa9:40, psa10:300, prev_psa9:31},
-      {name:"Hot Gloves #3", raw:null, psa8:335, psa9:325, psa10:750, tag:"die-cut", prev_psa8:300},
+      {name:"Base #103", raw:31, psa8:null, psa9:40, psa10:300, prev_psa9:31},
+      {name:"Hot Gloves #3", raw:198, psa8:335, psa9:325, psa10:750, tag:"die-cut", prev_psa8:300},
       {name:"Outfield Power #6", raw:null, psa8:null, psa9:20, psa10:null}
     ]},
     {set:"1994 Fleer", subsets:[
@@ -1189,7 +1191,7 @@ const DATA = {
       {name:"Base #225", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"Statistical Standouts #6", raw:1, psa8:15, psa9:28, psa10:550},
       {name:"Power Brokers #5", raw:null, psa8:null, psa9:25, psa10:158, prev_psa10:173},
-      {name:"Gold Stars #4 (/10,000)", raw:null, psa8:null, psa9:190, psa10:null},
+      {name:"Gold Stars #4 (/10,000)", raw:72, psa8:null, psa9:190, psa10:null},
       {name:"Slideshow #9", raw:null, psa8:16, psa9:83, psa10:null}
     ]},
     {set:"1994 Leaf Limited", subsets:[
@@ -1199,14 +1201,14 @@ const DATA = {
     {set:"1994 Pinnacle", subsets:[
       {name:"Base #100", raw:null, psa8:null, psa9:40, psa10:null},
       {name:"Museum Collection #100", raw:null, psa8:null, psa9:150, psa10:null},
-      {name:"The Naturals #3", raw:65, psa8:null, psa9:80, psa10:531},
+      {name:"The Naturals #3", raw:20, psa8:null, psa9:80, psa10:531},
       {name:"Power Surge #PS23", raw:null, psa8:null, psa9:null, psa10:110}
     ]},
     {set:"1994 Score", subsets:[
       {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1994 Select", subsets:[
-      {name:"Base #150", raw:null, psa8:null, psa9:null, psa10:null},
+      {name:"Base #150", raw:null, psa8:null, psa9:null, psa10:140},
       {name:"Crown Contenders #CC10", raw:null, psa8:null, psa9:65, psa10:null}
     ]},
     {set:"1994 SP", subsets:[
@@ -1217,7 +1219,7 @@ const DATA = {
     {set:"1994 Stadium Club", subsets:[
       {name:"Base #380", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"#529", raw:null, psa8:null, psa9:null, psa10:120},
-      {name:"Finest #5", raw:null, psa8:null, psa9:52, psa10:null},
+      {name:"Finest #5", raw:13, psa8:42, psa9:52, psa10:null},
       {name:"Dugout Dirt #7", raw:null, psa8:null, psa9:null, psa10:95}
     ]},
     {set:"1994 Studio", subsets:[
@@ -1231,7 +1233,7 @@ const DATA = {
     {set:"1994 Ultra", subsets:[
       {name:"Base #390", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"All-Star Team #8", raw:null, psa8:null, psa9:null, psa10:1225},
-      {name:"Home Run Kings #2", raw:null, psa8:null, psa9:659, psa10:null},
+      {name:"Home Run Kings #2", raw:14, psa8:100, psa9:659, psa10:null},
       {name:"Award Winners #6", raw:null, psa8:null, psa9:31, psa10:null}
     ]},
     {set:"1994 Upper Deck", subsets:[
@@ -1259,7 +1261,8 @@ const DATA = {
       {name:"Elite Series #54 (/10,000)", raw:750, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1995 Emotion", subsets:[
-      {name:"Base #77", raw:null, psa8:null, psa9:18, psa10:203, prev_psa10:189}
+      {name:"Base #77", raw:null, psa8:null, psa9:18, psa10:203, prev_psa10:189},
+      {name:"N-Tense #6", raw:null, psa8:49, psa9:null, psa10:null}
     ]},
     {set:"1995 Finest", subsets:[
       {name:"Base #118", raw:null, psa8:null, psa9:null, psa10:null},
@@ -1282,13 +1285,14 @@ const DATA = {
     {set:"1995 Leaf Limited", subsets:[
       {name:"Lumberjacks #4 (/5,000)", raw:null, psa8:null, psa9:110, psa10:463},
       {name:"Bat Patrol", raw:null, psa8:null, psa9:null, psa10:165},
-      {name:"Gold #6", raw:null, psa8:null, psa9:85, psa10:420}
+      {name:"Gold #6", raw:9, psa8:null, psa9:85, psa10:420}
     ]},
     {set:"1995 Pinnacle", subsets:[
-      {name:"Base #128 (Bubble Gum)", raw:null, psa8:114, psa9:240, psa10:2223, tag:"iconic photo", prev_psa8:118, prev_psa9:258},
+      {name:"Base #128 (Bubble Gum)", raw:50, psa8:109, psa9:240, psa10:2223, tag:"iconic photo", prev_psa8:114, prev_psa9:258},
       {name:"Museum Collection #128", raw:null, psa8:null, psa9:750, psa10:null, odds:"1:4"},
       {name:"Artist's Proof #128", raw:null, psa8:null, psa9:170, psa10:null, odds:"1:24"},
-      {name:"Team Pinnacle", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:90"}
+      {name:"Team Pinnacle", raw:null, psa8:255, psa9:null, psa10:null, odds:"1:90"},
+      {name:"Swing Men Artist's Proof #304", raw:75, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1995 Score", subsets:[
       {name:"Base #437", raw:null, psa8:null, psa9:null, psa10:77},
@@ -1296,11 +1300,11 @@ const DATA = {
     ]},
     {set:"1995 Select", subsets:[
       {name:"Base #130", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Big Sticks #BS2", raw:null, psa8:null, psa9:180, psa10:null}
+      {name:"Big Sticks #BS2", raw:52, psa8:null, psa9:180, psa10:null}
     ]},
     {set:"1995 Select Certified", subsets:[
       {name:"Mirror Gold #70", raw:null, psa8:null, psa9:504, psa10:null},
-      {name:"Gold Team #1", raw:null, psa8:null, psa9:415, psa10:null}
+      {name:"Gold Team #1", raw:190, psa8:null, psa9:415, psa10:null}
     ]},
     {set:"1995 SP", subsets:[
       {name:"Base #145", raw:null, psa8:null, psa9:null, psa10:null},
@@ -1315,7 +1319,7 @@ const DATA = {
     ]},
     {set:"1995 Studio", subsets:[
       {name:"Base #95", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Gold #5", raw:null, psa8:null, psa9:50, psa10:142},
+      {name:"Gold #5", raw:null, psa8:null, psa9:50, psa10:163, prev_psa10:142},
       {name:"Platinum #5", raw:null, psa8:null, psa9:null, psa10:225}
     ]},
     {set:"1995 Summit", subsets:[
@@ -1331,7 +1335,7 @@ const DATA = {
       {name:"All-Stars Gold Medallion", raw:null, psa8:null, psa9:null, psa10:900},
       {name:"Hitting Machine #6", raw:null, psa8:null, psa9:53, psa10:null},
       {name:"Hitting Machines Gold Medallion", raw:null, psa8:null, psa9:202, psa10:null},
-      {name:"Award Winner #6", raw:100, psa8:null, psa9:75, psa10:null}
+      {name:"Award Winner #6", raw:100, psa8:null, psa9:75, psa10:110}
     ]},
     {set:"1995 Upper Deck", subsets:[
       {name:"Base #245", raw:null, psa8:null, psa9:null, psa10:null},
@@ -1358,7 +1362,7 @@ const DATA = {
       {name:"Atomic Refractor #28", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:96"},
       {name:"Best Cuts #1", raw:10, psa8:null, psa9:null, psa10:null, odds:"1:24"},
       {name:"Best Cuts Refractor #1", raw:125, psa8:180, psa9:433, psa10:null, odds:"1:96", tag:"🔥 hot"},
-      {name:"Best Cuts Atomic Refractor #1", raw:400, psa8:400, psa9:1150, psa10:null, odds:"1:192", prev_psa9:500},
+      {name:"Best Cuts Atomic Refractor #1", raw:600, psa8:400, psa9:1150, psa10:null, odds:"1:192", prev_raw:400, prev_psa9:500},
       {name:"Mirror Image Refractor #7", raw:18, psa8:35, psa9:46, psa10:null, odds:"1:96"},
       {name:"Mirror Image Atomic Refractor #7", raw:65, psa8:null, psa9:110, psa10:null, odds:"1:192"},
       {name:"Preview #BBP30", raw:7, psa8:null, psa9:30, psa10:100},
@@ -1417,7 +1421,7 @@ const DATA = {
       {name:"Base #160", raw:8, psa8:null, psa9:null, psa10:null},
       {name:"Gold #160", raw:15, psa8:28, psa9:55, psa10:null, prev_psa9:45},
       {name:"Silver #160", raw:9, psa8:null, psa9:null, psa10:null},
-      {name:"Hot Gloves #4", raw:200, psa8:222, psa9:null, psa10:5555, tag:"🔥 hot"},
+      {name:"Hot Gloves #4", raw:265, psa8:222, psa9:null, psa10:5555, tag:"🔥 hot", prev_raw:200},
       {name:"Diamond Cuts #5", raw:115, psa8:80, psa9:300, psa10:1880, tag:"🔥 hot", odds:"1:20", prev_raw:90, prev_psa9:210},
       {name:"Powerline #4", raw:7, psa8:60, psa9:80, psa10:204, odds:"1:6", prev_psa9:70},
       {name:"RBI King", raw:38, psa8:null, psa9:null, psa10:null}
@@ -1457,9 +1461,9 @@ const DATA = {
     ]},
     {set:"1996 Metal Universe", subsets:[
       {name:"Base #107", raw:99, psa8:60, psa9:null, psa10:null},
-      {name:"Platinum Edition #107", raw:133, psa8:300, psa9:900, psa10:null, odds:"1:1", prev_psa8:130},
+      {name:"Platinum Edition #107", raw:120, psa8:300, psa9:900, psa10:null, odds:"1:1", prev_psa8:130},
       {name:"Heavy Metal #4", raw:null, psa8:35, psa9:null, psa10:null, odds:"1:8"},
-      {name:"Mother Lode #3", raw:95, psa8:60, psa9:165, psa10:700, odds:"1:12", prev_raw:60},
+      {name:"Mother Lode #3", raw:85, psa8:60, psa9:165, psa10:700, odds:"1:12"},
       {name:"Titanium #3", raw:null, psa8:null, psa9:120, psa10:null, odds:"1:24"}
     ]},
     {set:"1996 Pinnacle", subsets:[
@@ -1510,14 +1514,15 @@ const DATA = {
       {name:"Special FX Holoview Die-Cut #10", raw:55, psa8:null, psa9:null, psa10:500}
     ]},
     {set:"1996 SPx", subsets:[
-      {name:"Base #55", raw:null, psa8:null, psa9:50, psa10:null},
+      {name:"Base #55", raw:null, psa8:null, psa9:43, psa10:null},
       {name:"Commemorative #KG1", raw:null, psa8:null, psa9:48, psa10:null},
       {name:"Holoview #KG1", raw:null, psa8:null, psa9:null, psa10:null, tag:"die-cut"},
       {name:"Bound for Glory #1", raw:null, psa8:null, psa9:80, psa10:null}
     ]},
     {set:"1996 Stadium Club", subsets:[
       {name:"Base #105", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Extreme Winners Silver #EW8", raw:null, psa8:42, psa9:null, psa10:281},
+      {name:"Extreme Winners Silver #EW8", raw:50, psa8:42, psa9:null, psa10:281},
+      {name:"Extreme Winners Gold #EW8", raw:676, psa8:null, psa9:null, psa10:null},
       {name:"Extreme Player Gold", raw:null, psa8:null, psa9:175, psa10:null},
       {name:"Prime Cuts #PC3", raw:41, psa8:null, psa9:null, psa10:null}
     ]},
@@ -1591,11 +1596,11 @@ const DATA = {
 
   1997: [
     {set:"1997 Bowman", subsets:[
-      {name:"Base #140", raw:null, psa8:null, psa9:null, psa10:null}
+      {name:"Base #16", raw:null, psa8:null, psa9:107, psa10:262}
     ]},
     {set:"1997 Bowman Chrome", subsets:[
-      {name:"Base #140", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"Refractor #140", raw:209, psa8:311, psa9:536, psa10:null, tag:"chase"},
+      {name:"Base #12", raw:null, psa8:null, psa9:null, psa10:125},
+      {name:"Refractor #12", raw:209, psa8:311, psa9:536, psa10:null, tag:"chase"},
       {name:"International Refractor #12", raw:1100, psa8:750, psa9:1600, psa10:3000}
     ]},
     {set:"1997 Bowman's Best", subsets:[
@@ -1655,7 +1660,7 @@ const DATA = {
       {name:"Power Alley Gold (/250)", raw:null, psa8:483, psa9:null, psa10:null}
     ]},
     {set:"1997 E-X 2000", subsets:[
-      {name:"Base #40", raw:null, psa8:null, psa9:null, psa10:2524, tag:"🔥 hot"},
+      {name:"Base #40", raw:85, psa8:175, psa9:null, psa10:2524, tag:"🔥 hot"},
       {name:"Credentials #40 (/299)", raw:1050, psa8:3000, psa9:2966, psa10:null},
       {name:"A Cut Above #2", raw:1250, psa8:3252, psa9:null, psa10:19999, tag:"🔥 hot"},
       {name:"Hall or Nothing #2", raw:null, psa8:null, psa9:605, psa10:null, prev_psa9:375},
@@ -1670,12 +1675,12 @@ const DATA = {
       {name:"Warriors Refractor", raw:null, psa8:null, psa9:null, psa10:3396}
     ]},
     {set:"1997 Flair Showcase", subsets:[
-      {name:"Row 0 #24", raw:355, psa8:450, psa9:810, psa10:null},
+      {name:"Row 0 #24", raw:355, psa8:450, psa9:679, psa10:null, prev_psa9:810},
       {name:"Legacy Collection Row 0 #24 (/100)", raw:null, psa8:null, psa9:10000, psa10:null},
       {name:"Legacy Collection Row 1 #24 (/100)", raw:2400, psa8:null, psa9:null, psa10:null},
       {name:"Legacy Collection Row 2 #24 (/100)", raw:null, psa8:null, psa9:4800, psa10:null},
       {name:"Hot Gloves #4", raw:700, psa8:1200, psa9:1250, psa10:null, tag:"🔥 hot"},
-      {name:"Diamond Cuts #5", raw:375, psa8:360, psa9:540, psa10:1400, tag:"🔥 hot"}
+      {name:"Diamond Cuts #5", raw:475, psa8:360, psa9:540, psa10:1400, tag:"🔥 hot", prev_raw:375}
     ]},
     {set:"1997 Fleer", subsets:[
       {name:"Base #112", raw:null, psa8:null, psa9:null, psa10:null},
@@ -1701,10 +1706,10 @@ const DATA = {
     {set:"1997 Metal Universe", subsets:[
       {name:"Base #110", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"Mining for Gold", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:9"},
-      {name:"Magnetic Field", raw:153, psa8:95, psa9:355, psa10:515, odds:"1:12"},
-      {name:"Titanium", raw:null, psa8:88, psa9:null, psa10:null, odds:"1:24"},
+      {name:"Magnetic Field", raw:79, psa8:95, psa9:355, psa10:515, odds:"1:12"},
+      {name:"Titanium", raw:46, psa8:88, psa9:null, psa10:null, odds:"1:24"},
       {name:"Platinum Portraits", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:36"},
-      {name:"Blast Furnace", raw:90, psa8:null, psa9:125, psa10:585, odds:"1:48", prev_psa10:350},
+      {name:"Blast Furnace", raw:90, psa8:null, psa9:125, psa10:530, odds:"1:48", prev_psa10:585},
       {name:"Mother Lode", raw:925, psa8:1943, psa9:1667, psa10:null, odds:"1:288", prev_raw:800, prev_psa8:870},
       {name:"Emerald Autographs", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:480", tag:"auto"}
     ]},
@@ -1754,7 +1759,7 @@ const DATA = {
       {name:"Base #145", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"Firebrand #FB5", raw:115, psa8:null, psa9:150, psa10:250, tag:"die-cut"},
       {name:"Firebrand Members Only #FB5", raw:140, psa8:null, psa9:140, psa10:350, tag:"die-cut"},
-      {name:"Patent Leather #PL4", raw:220, psa8:150, psa9:166, psa10:null, tag:"die-cut"},
+      {name:"Patent Leather #PL4", raw:200, psa8:150, psa9:166, psa10:null, tag:"die-cut"},
       {name:"Patent Leather Members Only #PL4", raw:355, psa8:150, psa9:225, psa10:875, tag:"die-cut"},
       {name:"Pure Gold Members Only #PG15 (/750)", raw:100, psa8:null, psa9:260, psa10:null},
       {name:"Matrix #50", raw:70, psa8:52, psa9:120, psa10:720}
@@ -1769,9 +1774,9 @@ const DATA = {
     {set:"1997 Topps", subsets:[
       {name:"Base #200", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"Sweet Strokes #SS6", raw:355, psa8:130, psa9:382, psa10:1050, tag:"🔥 hot"},
-      {name:"Hobby Masters #HM1", raw:null, psa8:null, psa9:null, psa10:550},
+      {name:"Hobby Masters #HM1", raw:35, psa8:null, psa9:null, psa10:550},
       {name:"Gallery of Heroes #GH4", raw:480, psa8:null, psa9:525, psa10:1375, tag:"🔥 hot"},
-      {name:"Gallery Peter Max #PM5", raw:null, psa8:null, psa9:null, psa10:625}
+      {name:"Gallery Peter Max #PM5", raw:100, psa8:null, psa9:null, psa10:625}
     ]},
     {set:"1997 Topps Chrome", subsets:[
       {name:"Base #101", raw:null, psa8:50, psa9:null, psa10:504},
@@ -1851,7 +1856,7 @@ const DATA = {
       {name:"Masterstrokes (/1,000)", raw:null, psa8:null, psa9:null, psa10:311}
     ]},
     {set:"1998 E-X2001", subsets:[
-      {name:"Base #10", raw:null, psa8:null, psa9:355, psa10:null},
+      {name:"Base #10", raw:73, psa8:null, psa9:355, psa10:null},
       {name:"Essential Credentials Future (/91)", raw:16000, psa8:null, psa9:null, psa10:null},
       {name:"Destination Cooperstown", raw:1225, psa8:null, psa9:null, psa10:null}
     ]},
@@ -1870,7 +1875,7 @@ const DATA = {
       {name:"Base #100", raw:null, psa8:16, psa9:null, psa10:null},
       {name:"Refractor #100", raw:300, psa8:null, psa9:333, psa10:null},
       {name:"Non-Protected Refractor", raw:null, psa8:null, psa9:230, psa10:1150},
-      {name:"Centurion (/500)", raw:null, psa8:127, psa9:199, psa10:640, prev_psa10:494},
+      {name:"Centurion (/500)", raw:898, psa8:127, psa9:199, psa10:640, prev_psa10:494},
       {name:"Power Zone", raw:null, psa8:null, psa9:null, psa10:295},
       {name:"Mystery Finest #M7", raw:null, psa8:null, psa9:null, psa10:330},
       {name:"Mystery Refractor #M7", raw:null, psa8:120, psa9:null, psa10:1000, prev_psa10:330},
@@ -1890,10 +1895,10 @@ const DATA = {
       {name:"Base #161", raw:null, psa8:null, psa9:189, psa10:1880},
       {name:"Precious Metal Gems (/50)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:3,237"},
       {name:"Universal Language", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:6"},
-      {name:"Diamond Heroes", raw:null, psa8:null, psa9:450, psa10:null, odds:"1:18"},
+      {name:"Diamond Heroes", raw:null, psa8:null, psa9:465, psa10:null, odds:"1:18", prev_psa9:450},
       {name:"Platinum Portraits", raw:213, psa8:null, psa9:877, psa10:null},
       {name:"Hardball Galaxy", raw:null, psa8:null, psa9:200, psa10:1175},
-      {name:"Titanium", raw:384, psa8:480, psa9:null, psa10:null, odds:"1:96"},
+      {name:"Titanium", raw:320, psa8:480, psa9:null, psa10:null, odds:"1:96"},
       {name:"All-Galactic Team", raw:221, psa8:1500, psa9:1250, psa10:null, odds:"1:192", prev_psa8:830}
     ]},
     {set:"1998 Pinnacle", subsets:[
@@ -2059,7 +2064,7 @@ const DATA = {
       {name:"Favorites for Fenway #4", raw:null, psa8:85, psa9:160, psa10:null}
     ]},
     {set:"1999 Skybox Molten Metal", subsets:[
-      {name:"Fusion Sterling (/500)", raw:null, psa8:1660, psa9:1515, psa10:13500, tag:"🔥 hot"},
+      {name:"Fusion Sterling (/500)", raw:2250, psa8:1660, psa9:1515, psa10:13500, tag:"🔥 hot"},
       {name:"Fusion #33F", raw:null, psa8:null, psa9:1450, psa10:null},
       {name:"Base #133", raw:null, psa8:19, psa9:90, psa10:165},
       {name:"Xplosion #133", raw:85, psa8:null, psa9:51, psa10:185, tag:"die-cut"}
@@ -2067,12 +2072,12 @@ const DATA = {
     {set:"1999 Skybox Premium", subsets:[
       {name:"Base #137", raw:null, psa8:13, psa9:null, psa10:null},
       {name:"Base #287", raw:null, psa8:null, psa9:null, psa10:70},
-      {name:"Soul of the Game", raw:65, psa8:149, psa9:400, psa10:1900}
+      {name:"Soul of the Game", raw:170, psa8:149, psa9:400, psa10:1900, prev_raw:65}
     ]},
     {set:"1999 Skybox Thunder", subsets:[
       {name:"Base #3", raw:null, psa8:null, psa9:null, psa10:301},
       {name:"Dial 1 #3D", raw:500, psa8:388, psa9:570, psa10:1350},
-      {name:"Turbocharged #3", raw:50, psa8:81, psa9:128, psa10:755},
+      {name:"Turbocharged #3", raw:1524, psa8:81, psa9:128, psa10:755, prev_raw:50},
       {name:"Hip-No-Tized #4", raw:null, psa8:70, psa9:255, psa10:null},
       {name:"In Depth #5", raw:null, psa8:30, psa9:130, psa10:340},
       {name:"Rant #292", raw:null, psa8:78, psa9:null, psa10:null},
@@ -2309,14 +2314,13 @@ let sortMode = 'alpha';
 
 function fmt(v, prev){
   if(v===null || v===undefined) return '<span class="price na">N/A</span>';
-  let arrow = '';
+  const mega = v >= 1000 ? ' mega' : '';
   if(prev !== undefined && prev !== null && prev !== v){
-    const pct = Math.abs((v - prev) / prev);
-    if(v > prev) arrow = '<span class="trend up">▲</span>';
-    else arrow = '<span class="trend down">▼</span>';
+    const dir = v > prev ? 'up' : 'down';
+    const arrow = v > prev ? '▲' : '▼';
+    return '<span class="price-wrap ticker-' + dir + mega + '">$' + v.toLocaleString('en-US') + '<span class="trend ' + dir + '">' + arrow + '</span></span>';
   }
-  if(arrow) return '<span class="price-wrap">$' + v.toLocaleString('en-US') + arrow + '</span>';
-  return '$' + v.toLocaleString('en-US');
+  return '<span class="' + (mega ? 'mega' : '') + '">$' + v.toLocaleString('en-US') + '</span>';
 }
 
 function renderYearStrip(){
@@ -2482,7 +2486,7 @@ function renderSets(){
         <div class="cell"><span class="price raw">${fmt(sub.raw, sub.prev_raw)}</span></div>
         <div class="cell"><span class="price psa8">${fmt(sub.psa8, sub.prev_psa8)}</span></div>
         <div class="cell"><span class="price psa9">${fmt(sub.psa9, sub.prev_psa9)}</span></div>
-        <div class="cell"><span class="price psa10${sub.psa10>=1000?' mega':''}">${fmt(sub.psa10, sub.prev_psa10)}</span></div>
+        <div class="cell"><span class="price psa10">${fmt(sub.psa10, sub.prev_psa10)}</span></div>
       </div>`;
     }).join('');
 
