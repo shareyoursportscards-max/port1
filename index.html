@@ -522,6 +522,11 @@
     text-align:right;
   }
   .hero-coll.active{display:block;}
+  .hero.coll-active{
+    background:
+      linear-gradient(100deg, rgba(10,14,20,.97) 0%, rgba(10,14,20,.95) 45%, rgba(10,14,20,.92) 100%),
+      linear-gradient(135deg, #0a0e14 0%, #0d1520 50%, #0a0e14 100%);
+  }
   .hero-coll-value{
     font-family:'Space Grotesk', sans-serif;
     font-weight:700;
@@ -541,7 +546,7 @@
   .hero-coll-label{
     font-family:'Space Grotesk', sans-serif;
     font-weight:600;
-    font-size:9px;
+    font-size:11px;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:rgba(57,255,20,.7);
@@ -553,7 +558,7 @@
     .hero-coll{right:16px; top:auto; bottom:14px; transform:none;}
     .hero-coll-value{font-size:22px;}
     .hero-coll-meta{font-size:10px;}
-    .hero-coll-label{font-size:8px;}
+    .hero-coll-label{font-size:9px;}
   }
 
   .coll-hint{
@@ -609,8 +614,8 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:14px;
-    padding:16px 28px;
+    gap:18px;
+    padding:14px 28px;
     background:
       repeating-conic-gradient(rgba(255,255,255,.07) 0% 25%, transparent 0% 50%) 0 0 / 8px 8px,
       linear-gradient(180deg, #1c1c1c, #0e0e0e);
@@ -620,27 +625,29 @@
   .coll-bottom-label{
     font-family:'Space Grotesk', sans-serif;
     font-weight:700;
-    font-size:12px;
-    letter-spacing:.12em;
+    font-size:13px;
+    letter-spacing:.1em;
     text-transform:uppercase;
     color:rgba(57,255,20,.9);
     text-shadow:0 0 12px rgba(57,255,20,.4);
   }
   .coll-bottom-count{
-    font-family:'Oswald', sans-serif;
-    font-size:16px;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:14px;
     font-weight:500;
-    color:rgba(255,255,255,.85);
+    color:rgba(255,255,255,.5);
+    letter-spacing:.02em;
   }
   .coll-bottom-dot{
-    color:rgba(255,255,255,.2);
-    font-size:14px;
+    color:rgba(57,255,20,.3);
+    font-size:6px;
   }
   .coll-bottom-value{
     font-family:'Space Grotesk', sans-serif;
-    font-size:20px;
+    font-size:22px;
     font-weight:700;
     color:#fff;
+    letter-spacing:-.01em;
     text-shadow:0 0 20px rgba(57,255,20,.35), 0 0 6px rgba(57,255,20,.15);
   }
   .coll-bottom-clear{
@@ -1047,7 +1054,7 @@
     <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999</p>
     <div class="hero-coll" id="heroColl">
       <div>
-        <span class="hero-coll-label">Portfolio Value</span>
+        <span class="hero-coll-label">Estimated Portfolio Value</span>
         <span class="hero-coll-value" id="heroCollValue">$0</span>
       </div>
       <span class="hero-coll-meta" id="heroCollMeta">0 cards</span>
@@ -1115,7 +1122,7 @@
   <div class="coll-bottom-inner" style="position:relative;">
     <span class="coll-bottom-label">My Collection</span>
     <span class="coll-bottom-count" id="collBottomCount">0 cards</span>
-    <span class="coll-bottom-dot">·</span>
+    <span class="coll-bottom-dot">●</span>
     <span class="coll-bottom-value" id="collBottomValue">$0</span>
     <button class="coll-bottom-clear" id="collClearBtn" title="Clear collection">✕</button>
   </div>
@@ -2575,17 +2582,20 @@ function updateCollectionBar(){
   const bar = document.getElementById('collBottom');
   const hero = document.getElementById('heroColl');
   var compass = document.querySelector('.hero-compass');
+  var heroEl = document.querySelector('.hero');
   var hint = document.getElementById('collHint');
   if(count === 0){
     bar.classList.remove('visible');
     hero.classList.remove('active');
     if(compass) compass.style.display = '';
+    if(heroEl) heroEl.classList.remove('coll-active');
     if(hint) hint.classList.remove('hidden');
     return;
   }
   bar.classList.add('visible');
   hero.classList.add('active');
   if(compass) compass.style.display = 'none';
+  if(heroEl) heroEl.classList.add('coll-active');
   if(hint) hint.classList.add('hidden');
   var valStr = '$' + total.toLocaleString('en-US');
   var countStr = count + ' card' + (count !== 1 ? 's' : '');
