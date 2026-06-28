@@ -978,7 +978,7 @@
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
     .col-header, .card-row{
-      grid-template-columns:minmax(220px,auto) 56px 66px 66px 66px 66px 16px;
+      grid-template-columns:minmax(170px,auto) 56px 62px 62px 62px 62px 16px;
       padding:5px 0 5px 0;
       font-size:12px;
     }
@@ -988,18 +988,19 @@
       position:sticky;
       left:0;
       z-index:2;
-      background:var(--bg);
+      background:#0a0e14;
       padding-left:12px;
       padding-right:8px;
+      box-shadow:4px 0 8px rgba(0,0,0,.5);
     }
     .card-row .card-name{
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
-    .card-row:hover .card-name{background:rgba(0,230,184,.04);}
-    .card-row.high-value .card-name{background:rgba(245,200,66,.025);}
-    .card-row.high-value:hover .card-name{background:rgba(245,200,66,.06);}
+    .card-row:hover .card-name{background:#0c1118;}
+    .card-row.high-value .card-name{background:#0d0f12;}
+    .card-row.high-value:hover .card-name{background:#0f1215;}
     .set-block{position:relative;}
     .set-header span:first-child{
       position:sticky;
