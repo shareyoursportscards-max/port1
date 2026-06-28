@@ -2584,19 +2584,17 @@ function updateCollectionBar(){
   var compass = document.querySelector('.hero-compass');
   var heroEl = document.querySelector('.hero');
   var hint = document.getElementById('collHint');
-  if(count === 0){
-    bar.classList.remove('visible');
-    hero.classList.remove('active');
+  bar.classList.add('visible');
+  hero.classList.add('active');
+  if(count > 0){
+    if(compass) compass.style.display = 'none';
+    if(heroEl) heroEl.classList.add('coll-active');
+    if(hint) hint.classList.add('hidden');
+  } else {
     if(compass) compass.style.display = '';
     if(heroEl) heroEl.classList.remove('coll-active');
     if(hint) hint.classList.remove('hidden');
-    return;
   }
-  bar.classList.add('visible');
-  hero.classList.add('active');
-  if(compass) compass.style.display = 'none';
-  if(heroEl) heroEl.classList.add('coll-active');
-  if(hint) hint.classList.add('hidden');
   var valStr = '$' + total.toLocaleString('en-US');
   var countStr = count + ' card' + (count !== 1 ? 's' : '');
   document.getElementById('collBottomCount').textContent = countStr;
