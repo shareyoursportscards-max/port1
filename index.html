@@ -583,6 +583,7 @@
     border-radius:4px;
     padding:3px 4px;
     transition:box-shadow .18s ease, background .18s ease;
+    touch-action:manipulation;
   }
   .cell.coll-cell:hover{
     box-shadow:inset 0 0 0 1.5px rgba(57,255,20,.25);
@@ -977,7 +978,7 @@
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
     .col-header, .card-row{
-      grid-template-columns:minmax(180px,auto) 56px 62px 62px 62px 62px 16px;
+      grid-template-columns:minmax(220px,auto) 56px 66px 66px 66px 66px 16px;
       padding:5px 0 5px 0;
       font-size:12px;
     }
@@ -1053,7 +1054,7 @@
     <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999</p>
     <div class="hero-coll" id="heroColl">
       <div>
-        <span class="hero-coll-label">Estimated Portfolio Value</span>
+        <span class="hero-coll-label">Portfolio Value</span>
         <span class="hero-coll-value" id="heroCollValue">$0</span>
       </div>
       <span class="hero-coll-meta" id="heroCollMeta">0 cards</span>
@@ -2816,7 +2817,16 @@ document.getElementById('sortSelect').addEventListener('change', e=>{
   renderSets();
 });
 
+var collTouchY = 0, collWasScroll = false;
+document.getElementById('setList').addEventListener('touchstart', function(e){
+  collTouchY = e.touches[0].clientY;
+  collWasScroll = false;
+}, {passive:true});
+document.getElementById('setList').addEventListener('touchmove', function(e){
+  if(Math.abs(e.touches[0].clientY - collTouchY) > 8) collWasScroll = true;
+}, {passive:true});
 document.getElementById('setList').addEventListener('click', function(e){
+  if(collWasScroll) return;
   const cell = e.target.closest('.coll-cell');
   if(!cell) return;
   const key = cell.dataset.ckey;
