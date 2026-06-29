@@ -521,30 +521,46 @@
   .pwa-banner{
     display:none;
     align-items:center;
-    justify-content:center;
-    gap:8px;
-    padding:10px 16px;
-    background:linear-gradient(90deg, #0d1520, #111d2e);
-    border-bottom:1px solid rgba(57,255,20,.2);
-    font-family:'Inter', sans-serif;
-    font-size:12px;
-    color:rgba(255,255,255,.7);
-    text-align:center;
+    gap:12px;
+    padding:12px 16px;
+    margin:0 auto;
+    background:#f2f2f7;
+    border-radius:0 0 14px 14px;
+    font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    font-size:13px;
+    color:#1c1c1e;
     position:relative;
+    max-width:860px;
+    box-shadow:0 2px 12px rgba(0,0,0,.15);
   }
   .pwa-banner.show{display:flex;}
-  .pwa-banner b{color:rgba(57,255,20,.8); font-weight:600;}
+  .pwa-banner-icon{
+    width:36px; height:36px;
+    border-radius:8px;
+    background:#0a0e14;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    font-size:18px;
+    font-weight:700;
+    color:#f0b03a;
+    font-family:'Space Grotesk', sans-serif;
+  }
+  .pwa-banner-text{flex:1; line-height:1.35;}
+  .pwa-banner-text b{font-weight:600; color:#007aff;}
+  .pwa-banner-title{font-weight:600; font-size:13px; margin-bottom:1px;}
+  .pwa-banner-sub{font-size:12px; color:#8e8e93;}
   .pwa-banner-close{
-    position:absolute;
-    right:12px;
     background:none;
     border:none;
-    color:rgba(255,255,255,.3);
-    font-size:18px;
+    color:#8e8e93;
+    font-size:20px;
     cursor:pointer;
-    padding:0 4px;
+    padding:0 2px;
+    flex-shrink:0;
   }
-  .pwa-banner-close:hover{color:rgba(255,255,255,.6);}
+  .pwa-banner-close:hover{color:#1c1c1e;}
 
   /* ---------- HERO COLLECTION ---------- */
   .hero-coll{
@@ -1058,7 +1074,11 @@
 </head>
 <body>
 <div class="pwa-banner" id="pwaBanner">
-  Tap <b>Share</b> then <b>Add to Home Screen</b> for the app experience
+  <div class="pwa-banner-icon">G</div>
+  <div class="pwa-banner-text">
+    <div class="pwa-banner-title">Add Price Guide to Home Screen</div>
+    <div class="pwa-banner-sub">Tap <b>Share</b> then <b>Add to Home Screen</b></div>
+  </div>
   <button class="pwa-banner-close" id="pwaBannerClose">✕</button>
 </div>
 <div class="ember-container" id="embers"></div>
