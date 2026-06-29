@@ -12,6 +12,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ken Griffey Jr. Card Price Guide 1990–1999</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0e14'/%3E%3Crect x='1' y='1' width='30' height='30' rx='5' fill='none' stroke='%23f0b03a' stroke-width='.75' opacity='.4'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='20' fill='%23f0b03a'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Griffey">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -510,6 +516,35 @@
   .set-block.visible .set-header::before{
     animation:goldLine .6s ease-out both;
   }
+
+  /* ---------- PWA INSTALL BANNER ---------- */
+  .pwa-banner{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:10px 16px;
+    background:linear-gradient(90deg, #0d1520, #111d2e);
+    border-bottom:1px solid rgba(57,255,20,.2);
+    font-family:'Inter', sans-serif;
+    font-size:12px;
+    color:rgba(255,255,255,.7);
+    text-align:center;
+    position:relative;
+  }
+  .pwa-banner.show{display:flex;}
+  .pwa-banner b{color:rgba(57,255,20,.8); font-weight:600;}
+  .pwa-banner-close{
+    position:absolute;
+    right:12px;
+    background:none;
+    border:none;
+    color:rgba(255,255,255,.3);
+    font-size:18px;
+    cursor:pointer;
+    padding:0 4px;
+  }
+  .pwa-banner-close:hover{color:rgba(255,255,255,.6);}
 
   /* ---------- HERO COLLECTION ---------- */
   .hero-coll{
@@ -1022,6 +1057,10 @@
 </style>
 </head>
 <body>
+<div class="pwa-banner" id="pwaBanner">
+  Tap <b>Share</b> then <b>Add to Home Screen</b> for the app experience
+  <button class="pwa-banner-close" id="pwaBannerClose">✕</button>
+</div>
 <div class="ember-container" id="embers"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="wrap">
@@ -2908,6 +2947,23 @@ function observeSetBlocks(){
   document.querySelectorAll('.set-block').forEach(b=>revealObserver.observe(b));
   document.querySelectorAll('.blog-section, .note').forEach(b=>revealObserver.observe(b));
 }
+
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/sw.js');
+}
+
+(function(){
+  var isIos = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+  var isStandalone = window.navigator.standalone === true;
+  var dismissed = localStorage.getItem('pwa_dismissed');
+  if(isIos && !isStandalone && !dismissed){
+    document.getElementById('pwaBanner').classList.add('show');
+  }
+  document.getElementById('pwaBannerClose').addEventListener('click', function(){
+    document.getElementById('pwaBanner').classList.remove('show');
+    localStorage.setItem('pwa_dismissed', '1');
+  });
+})();
 </script>
 </body>
 </html>
