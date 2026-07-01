@@ -321,6 +321,13 @@
     background:rgba(232,168,56,.1); color:var(--gold-dim); font-weight:600; vertical-align:1px;
     border:1px solid rgba(232,168,56,.2);
   }
+  .top10-badge{
+    display:inline-block; font-size:7px; letter-spacing:.08em; text-transform:uppercase;
+    padding:2px 5px; border-radius:3px; margin-left:5px;
+    background:rgba(240,176,58,.08); color:rgba(240,176,58,.55); font-weight:600; vertical-align:1px;
+    border:1px solid rgba(240,176,58,.18);
+    font-family:'Oswald', sans-serif;
+  }
 
   /* ---------- LEGEND / FOOTNOTE ---------- */
   .legend{
@@ -2771,8 +2778,21 @@ function renderTop10(){
     </div>`;
 }
 
+function getTop10Keys(){
+  const all = [];
+  DATA[currentYear].forEach(s=>{
+    s.subsets.forEach(sub=>{
+      const best = [sub.psa10, sub.psa9, sub.psa8, sub.raw].find(v=>v);
+      if(best) all.push({key: s.set+'||'+sub.name, val: best});
+    });
+  });
+  all.sort((a,b)=>b.val-a.val);
+  return new Set(all.slice(0,10).map(x=>x.key));
+}
+
 function renderSets(){
   const q = searchTerm.toLowerCase().trim();
+  const top10 = getTop10Keys();
   let sets = DATA[currentYear].map(s => {
     if(!q) return {set:s.set, subsets:[...s.subsets]};
     const filtered = s.subsets.filter(sub =>
@@ -2819,7 +2839,7 @@ function renderSets(){
       const hv = peak >= 1000 ? ' high-value' : '';
       return `
       <div class="card-row${hv}">
-        <div class="card-name">${sub.name}${sub.tag ? `<span class="tag">${sub.tag}</span>`:''}</div>
+        <div class="card-name">${sub.name}${sub.tag ? `<span class="tag">${sub.tag}</span>`:''}${top10.has(s.set+'||'+sub.name) ? `<span class="top10-badge">Top 10</span>`:''}</div>
         <div class="cell">${fmtOdds(sub.odds)}</div>
         ${fmtCell('raw', sub.raw, sub.prev_raw, currentYear, s.set, sub.name)}
         ${fmtCell('psa8', sub.psa8, sub.prev_psa8, currentYear, s.set, sub.name)}
