@@ -137,6 +137,96 @@
     margin:0 2px;
   }
 
+  /* ---------- MY COLLECTION TAB ---------- */
+  .mycoll-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:11px 18px;
+    margin-bottom:10px;
+    background:
+      repeating-conic-gradient(rgba(255,255,255,.05) 0% 25%, transparent 0% 50%) 0 0 / 8px 8px,
+      linear-gradient(180deg, #1c1c1c, #0e0e0e);
+    border:1px solid rgba(57,255,20,.2);
+    border-radius:8px;
+    cursor:pointer;
+    transition:border-color .15s ease;
+  }
+  .mycoll-bar:hover{border-color:rgba(57,255,20,.45);}
+  .mycoll-bar.active{border-color:rgba(57,255,20,.5); box-shadow:0 0 12px rgba(57,255,20,.08);}
+  .mycoll-bar-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .mycoll-bar-icon{
+    font-size:14px;
+    color:rgba(57,255,20,.7);
+  }
+  .mycoll-bar-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:rgba(57,255,20,.8);
+  }
+  .mycoll-bar-count{
+    font-family:'Oswald', sans-serif;
+    font-size:12px;
+    color:rgba(255,255,255,.4);
+    letter-spacing:.04em;
+  }
+  .mycoll-bar-total{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:#fff;
+    text-shadow:0 0 12px rgba(57,255,20,.2);
+  }
+
+  /* My Collection view */
+  .mycoll-view{
+    display:none;
+    margin-bottom:18px;
+  }
+  .mycoll-view.active{display:block;}
+  .mycoll-year-group{margin-bottom:16px;}
+  .mycoll-year-header{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:rgba(57,255,20,.6);
+    padding:6px 0 6px;
+    border-bottom:1px solid rgba(57,255,20,.1);
+    margin-bottom:6px;
+    display:flex;
+    justify-content:space-between;
+  }
+  .mycoll-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:6px 0;
+    border-bottom:1px solid rgba(255,255,255,.04);
+    font-family:'Oswald', sans-serif;
+    font-size:13px;
+  }
+  .mycoll-item-name{color:var(--text); flex:1;}
+  .mycoll-item-grade{color:var(--text-muted); font-size:11px; margin:0 12px;}
+  .mycoll-item-price{color:var(--gold); font-weight:600; white-space:nowrap;}
+  .mycoll-empty{
+    text-align:center;
+    padding:30px 20px;
+    color:var(--text-muted);
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    font-size:14px;
+  }
+
   /* ---------- YEAR STRIP ---------- */
   .year-strip{
     display:flex;
@@ -1128,6 +1218,16 @@
       <span class="hero-coll-meta" id="heroCollMeta">0 cards</span>
     </div>
   </div>
+
+  <div class="mycoll-bar" id="myCollBar">
+    <div class="mycoll-bar-left">
+      <span class="mycoll-bar-icon">▣</span>
+      <span class="mycoll-bar-label">My Collection</span>
+      <span class="mycoll-bar-count" id="myCollBarCount">0 cards</span>
+    </div>
+    <span class="mycoll-bar-total" id="myCollBarTotal">$0</span>
+  </div>
+  <div class="mycoll-view" id="myCollView"></div>
 
   <div class="year-strip" id="yearStrip"></div>
 
@@ -2618,8 +2718,74 @@ function getCollectionValue(){
   return {total, count};
 }
 
+function renderMyCollView(){
+  const view = document.getElementById('myCollView');
+  const keys = Object.keys(collection);
+  if(!keys.length){
+    view.innerHTML = '<div class="mycoll-empty">No cards selected yet — tap any price to start building your collection.</div>';
+    return;
+  }
+  const byYear = {};
+  let grandTotal = 0;
+  keys.forEach(k=>{
+    const parts = k.split('|');
+    if(parts.length !== 4) return;
+    const [yr, setName, cardName, grade] = parts;
+    const yearData = DATA[Number(yr)];
+    if(!yearData) return;
+    for(const s of yearData){
+      if(s.set !== setName) continue;
+      for(const sub of s.subsets){
+        if(sub.name !== cardName) continue;
+        const val = sub[grade];
+        if(val !== null && val !== undefined){
+          grandTotal += val;
+          const label = grade==='raw'?'Raw':grade.toUpperCase().replace('PSA','PSA ');
+          if(!byYear[yr]) byYear[yr] = [];
+          byYear[yr].push({name:cardName, set:setName, grade:label, val});
+        }
+        break;
+      }
+      break;
+    }
+  });
+  const sortedYears = Object.keys(byYear).sort((a,b)=>Number(a)-Number(b));
+  view.innerHTML = sortedYears.map(yr=>{
+    const cards = byYear[yr];
+    const yearTotal = cards.reduce((n,c)=>n+c.val, 0);
+    return `<div class="mycoll-year-group">
+      <div class="mycoll-year-header">
+        <span>${yr}</span>
+        <span>$${yearTotal.toLocaleString('en-US')}</span>
+      </div>
+      ${cards.map(c=>`
+        <div class="mycoll-item">
+          <span class="mycoll-item-name">${c.name}</span>
+          <span class="mycoll-item-grade">${c.grade}</span>
+          <span class="mycoll-item-price">$${c.val.toLocaleString('en-US')}</span>
+        </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+let myCollOpen = false;
+function toggleMyCollView(){
+  myCollOpen = !myCollOpen;
+  document.getElementById('myCollBar').classList.toggle('active', myCollOpen);
+  document.getElementById('myCollView').classList.toggle('active', myCollOpen);
+  document.getElementById('yearStrip').style.display = myCollOpen ? 'none' : '';
+  const ph = document.querySelector('.panel-head'); if(ph) ph.style.display = myCollOpen ? 'none' : '';
+  document.getElementById('top10Area').style.display = myCollOpen ? 'none' : '';
+  document.getElementById('controls').style.display = myCollOpen ? 'none' : '';
+  document.getElementById('colHeader').style.display = myCollOpen ? 'none' : '';
+  document.getElementById('collHint').style.display = myCollOpen ? 'none' : '';
+  document.getElementById('setList').style.display = myCollOpen ? 'none' : '';
+  document.getElementById('blogArea').style.display = myCollOpen ? 'none' : '';
+  if(myCollOpen) renderMyCollView();
+}
+
 function updateCollectionBar(){
-  const {total, count, picks} = getCollectionValue();
+  const {total, count} = getCollectionValue();
   const bar = document.getElementById('collBottom');
   const hero = document.getElementById('heroColl');
   var compass = document.querySelector('.hero-compass');
@@ -2642,6 +2808,9 @@ function updateCollectionBar(){
   document.getElementById('collBottomValue').textContent = valStr;
   document.getElementById('heroCollValue').textContent = valStr;
   document.getElementById('heroCollMeta').textContent = countStr;
+  document.getElementById('myCollBarCount').textContent = countStr;
+  document.getElementById('myCollBarTotal').textContent = valStr;
+  if(myCollOpen) renderMyCollView();
 }
 
 function fmtCell(grade, val, prev, year, set, name){
@@ -2895,6 +3064,8 @@ document.getElementById('setList').addEventListener('click', function(e){
   updateCollectionBar();
   renderYearStrip();
 });
+
+document.getElementById('myCollBar').addEventListener('click', toggleMyCollView);
 
 document.getElementById('collClearBtn').addEventListener('click', function(){
   if(!Object.keys(collection).length) return;
