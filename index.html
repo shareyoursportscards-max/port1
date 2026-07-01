@@ -63,12 +63,10 @@
   /* ---------- HERO ---------- */
   .hero{
     position:relative;
-    background:
-      linear-gradient(100deg, rgba(10,14,20,.97) 0%, rgba(10,14,20,.88) 45%, rgba(10,14,20,.55) 70%, rgba(10,14,20,.35) 100%),
-      linear-gradient(135deg, #0a0e14 0%, #0d1520 50%, #0a0e14 100%);
-    border:1px solid rgba(255,255,255,.06);
+    background:linear-gradient(135deg, #f5c842 0%, #e09010 30%, #7a4a00 60%, #1a0c00 80%, #0a0e14 100%);
+    border:1px solid rgba(240,176,58,.2);
     border-radius:16px;
-    padding:28px 42px 24px;
+    padding:12px 36px 10px;
     color:var(--text);
     overflow:hidden;
     box-shadow:0 12px 40px rgba(0,0,0,.4);
@@ -106,12 +104,15 @@
     position:relative; z-index:3;
     font-family:'Space Grotesk', sans-serif;
     font-weight:700;
-    font-size:clamp(32px,5.5vw,48px);
+    font-size:clamp(18px,3.5vw,28px);
     letter-spacing:-.02em;
     text-transform:none;
     margin:0 0 10px;
     line-height:1;
     color:#fff;
+    -webkit-text-stroke:2px #1a4fd8;
+    paint-order:stroke fill;
+    text-shadow:0 0 20px rgba(26,79,216,.4), 2px 2px 0 rgba(10,40,160,.6);
   }
   .hero-sub{
     position:relative; z-index:3;
@@ -143,88 +144,96 @@
     align-items:center;
     justify-content:space-between;
     gap:12px;
-    padding:11px 18px;
-    margin-bottom:10px;
+    padding:18px 24px;
+    margin-bottom:20px;
     background:
       repeating-conic-gradient(rgba(255,255,255,.05) 0% 25%, transparent 0% 50%) 0 0 / 8px 8px,
       linear-gradient(180deg, #1c1c1c, #0e0e0e);
-    border:1px solid rgba(57,255,20,.2);
+    border:1.5px solid rgba(255,106,0,.45);
     border-radius:8px;
     cursor:pointer;
-    transition:border-color .15s ease;
+    transition:all .15s ease;
+    box-shadow:0 0 16px rgba(255,106,0,.15), inset 0 1px 0 rgba(255,140,0,.06);
   }
-  .mycoll-bar:hover{border-color:rgba(57,255,20,.45);}
-  .mycoll-bar.active{border-color:rgba(57,255,20,.5); box-shadow:0 0 12px rgba(57,255,20,.08);}
-  .mycoll-bar-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
+  .mycoll-bar:hover{border-color:rgba(255,106,0,.7); box-shadow:0 0 24px rgba(255,106,0,.22);}
+  .mycoll-bar.active{
+    border-color:rgba(255,106,0,.75);
+    box-shadow:0 0 28px rgba(255,106,0,.25), 0 0 6px rgba(255,106,0,.12);
   }
-  .mycoll-bar-icon{
-    font-size:14px;
-    color:rgba(57,255,20,.7);
-  }
+  .mycoll-bar-left{display:flex; align-items:center; gap:10px;}
+  .mycoll-bar-icon{font-size:14px; color:rgba(255,106,0,.8);}
   .mycoll-bar-label{
     font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:12px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:rgba(57,255,20,.8);
+    font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase;
+    color:rgba(255,130,0,.9);
+    text-shadow:0 0 10px rgba(255,106,0,.3);
   }
-  .mycoll-bar-count{
-    font-family:'Oswald', sans-serif;
-    font-size:12px;
-    color:rgba(255,255,255,.4);
-    letter-spacing:.04em;
-  }
+  .mycoll-bar-count{font-family:'Oswald', sans-serif; font-size:14px; color:rgba(255,255,255,.4); letter-spacing:.04em;}
   .mycoll-bar-total{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:14px;
-    color:#fff;
-    text-shadow:0 0 12px rgba(57,255,20,.2);
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px;
+    color:#fff; text-shadow:0 0 16px rgba(255,106,0,.4);
   }
 
   /* My Collection view */
-  .mycoll-view{
-    display:none;
-    margin-bottom:18px;
+  .mycoll-view{display:none; margin-bottom:18px;}
+  .mycoll-view.active{
+    display:block;
+    background:linear-gradient(135deg, rgba(255,80,0,.07) 0%, rgba(255,140,0,.04) 50%, rgba(180,50,0,.06) 100%);
+    border:1px solid rgba(255,106,0,.2);
+    border-radius:10px;
+    padding:16px 20px;
+    box-shadow:inset 0 1px 0 rgba(255,130,0,.08), 0 4px 20px rgba(255,80,0,.06);
   }
-  .mycoll-view.active{display:block;}
-  .mycoll-year-group{margin-bottom:16px;}
+  .mycoll-year-group{margin-bottom:28px;}
   .mycoll-year-header{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:11px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:rgba(57,255,20,.6);
-    padding:6px 0 6px;
-    border-bottom:1px solid rgba(57,255,20,.1);
-    margin-bottom:6px;
-    display:flex;
-    justify-content:space-between;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px;
+    letter-spacing:.1em; text-transform:uppercase;
+    color:rgba(255,130,0,.9);
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,106,0,.25);
+    margin-bottom:4px;
+    display:flex; justify-content:space-between;
   }
-  .mycoll-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:6px 0;
-    border-bottom:1px solid rgba(255,255,255,.04);
+  .mycoll-col-labels{
+    display:grid;
+    grid-template-columns:1fr 50px 70px 60px 80px;
+    gap:12px;
+    padding:6px 0 8px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    margin-bottom:4px;
     font-family:'Oswald', sans-serif;
-    font-size:13px;
+    font-size:10px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.25);
   }
-  .mycoll-item-name{color:var(--text); flex:1;}
-  .mycoll-item-grade{color:var(--text-muted); font-size:11px; margin:0 12px;}
-  .mycoll-item-price{color:var(--gold); font-weight:600; white-space:nowrap;}
+  .mycoll-col-labels span{cursor:pointer; user-select:none; transition:color .15s ease;}
+  .mycoll-col-labels span:hover{color:rgba(255,255,255,.55);}
+  .mycoll-col-labels span.sort-active{color:rgba(255,130,0,.9);}
+  .mycoll-col-labels span:not(:first-child){text-align:center;}
+  .mycoll-col-labels span:last-child{text-align:right; padding-right:4px;}
+  .mycoll-year-group{margin-bottom:0;}
+  .mycoll-item-year{color:rgba(255,255,255,.4); font-size:12px; text-align:center; white-space:nowrap;}
+  .mycoll-item{
+    display:grid;
+    grid-template-columns:1fr 50px 70px 60px 80px;
+    gap:12px;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    font-family:'Oswald', sans-serif; font-size:13px;
+  }
+  .mycoll-item:last-child{border-bottom:none;}
+  .mycoll-item-info{display:flex; flex-direction:column; gap:3px;}
+  .mycoll-item-name{color:var(--text); font-weight:500; font-size:13px; line-height:1.2;}
+  .mycoll-item-set{color:rgba(255,255,255,.3); font-size:10px; letter-spacing:.03em;}
+  .mycoll-item-odds{color:rgba(255,130,0,.55); font-size:11px; text-align:center; white-space:nowrap;}
+  .mycoll-item-grade{color:rgba(255,255,255,.5); font-size:12px; text-align:center; white-space:nowrap;}
+  .mycoll-item-price{color:var(--gold); font-weight:600; font-size:13px; white-space:nowrap; text-align:right; padding-right:4px;}
   .mycoll-empty{
-    text-align:center;
-    padding:30px 20px;
-    color:var(--text-muted);
-    font-family:'Source Serif 4', serif;
-    font-style:italic;
-    font-size:14px;
+    text-align:center; padding:30px 20px;
+    color:rgba(255,255,255,.3);
+    font-family:'Source Serif 4', serif; font-style:italic; font-size:14px;
   }
 
   /* ---------- YEAR STRIP ---------- */
@@ -1119,7 +1128,7 @@
 
   @media (max-width:640px){
     .wrap{padding:16px 8px 60px;}
-    .hero{padding:20px 18px 16px; border-radius:12px;}
+    .hero{padding:12px 16px 10px; border-radius:12px;}
     .hero-compass{width:120px; height:120px; right:15px; opacity:.7;}
     .panel-head h2{font-size:22px;}
     .set-header{padding:16px 12px 4px; font-size:11px;}
@@ -1210,13 +1219,6 @@
     </svg>
     <h1>Ken Griffey Jr.</h1>
     <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999</p>
-    <div class="hero-coll" id="heroColl">
-      <div>
-        <span class="hero-coll-label">Portfolio Value</span>
-        <span class="hero-coll-value" id="heroCollValue">$0</span>
-      </div>
-      <span class="hero-coll-meta" id="heroCollMeta">0 cards</span>
-    </div>
   </div>
 
   <div class="mycoll-bar" id="myCollBar">
@@ -1231,12 +1233,6 @@
 
   <div class="year-strip" id="yearStrip"></div>
 
-  <div class="panel-head">
-    <h2 id="panelTitle">1990</h2>
-    <div class="count" id="panelCount"></div>
-  </div>
-
-  <div id="top10Area"></div>
 
   <div class="controls">
     <input type="text" id="searchInput" placeholder="Search cards, sets, or tags..." />
@@ -1245,6 +1241,8 @@
       <option value="value">$ High → Low</option>
     </select>
   </div>
+
+  <div id="top10Area"></div>
 
   <div class="col-header" id="colHeader">
     <span>Card</span><span>Odds</span><span>Raw</span><span>PSA 8</span><span>PSA 9</span><span>PSA 10</span>
@@ -2718,6 +2716,8 @@ function getCollectionValue(){
   return {total, count};
 }
 
+var myCollSort = {col:'yr', dir:1};
+
 function renderMyCollView(){
   const view = document.getElementById('myCollView');
   const keys = Object.keys(collection);
@@ -2741,31 +2741,48 @@ function renderMyCollView(){
         if(val !== null && val !== undefined){
           grandTotal += val;
           const label = grade==='raw'?'Raw':grade.toUpperCase().replace('PSA','PSA ');
+          const odds = sub.odds || null;
           if(!byYear[yr]) byYear[yr] = [];
-          byYear[yr].push({name:cardName, set:setName, grade:label, val});
+          byYear[yr].push({name:cardName, set:setName, grade:label, val, odds});
         }
         break;
       }
       break;
     }
   });
-  const sortedYears = Object.keys(byYear).sort((a,b)=>Number(a)-Number(b));
-  view.innerHTML = sortedYears.map(yr=>{
-    const cards = byYear[yr];
-    const yearTotal = cards.reduce((n,c)=>n+c.val, 0);
-    return `<div class="mycoll-year-group">
-      <div class="mycoll-year-header">
-        <span>${yr}</span>
-        <span>$${yearTotal.toLocaleString('en-US')}</span>
-      </div>
-      ${cards.map(c=>`
-        <div class="mycoll-item">
+  const allCards = Object.keys(byYear).flatMap(yr => byYear[yr].map(c=>({...c, yr})));
+  const oddsNum = o => o ? Number(o.split(':')[1]||999) : 999;
+  const gradeOrder = {'Raw':0,'PSA 8':1,'PSA 9':2,'PSA 10':3};
+  allCards.sort((a,b)=>{
+    let v = 0;
+    if(myCollSort.col==='name') v = a.name.localeCompare(b.name);
+    else if(myCollSort.col==='yr') v = Number(a.yr)-Number(b.yr);
+    else if(myCollSort.col==='odds') v = oddsNum(a.odds)-oddsNum(b.odds);
+    else if(myCollSort.col==='grade') v = (gradeOrder[a.grade]||0)-(gradeOrder[b.grade]||0);
+    else if(myCollSort.col==='val') v = a.val-b.val;
+    return v * myCollSort.dir;
+  });
+  const arrow = col => myCollSort.col===col ? (myCollSort.dir===1?' ▲':' ▼') : '';
+  const act = col => myCollSort.col===col ? ' sort-active' : '';
+  view.innerHTML = `
+    <div class="mycoll-col-labels">
+      <span class="${act('name')}" data-col="name">Card${arrow('name')}</span>
+      <span class="${act('yr')}" data-col="yr">Year${arrow('yr')}</span>
+      <span class="${act('odds')}" data-col="odds">Odds${arrow('odds')}</span>
+      <span class="${act('grade')}" data-col="grade">Grade${arrow('grade')}</span>
+      <span class="${act('val')}" data-col="val">Value${arrow('val')}</span>
+    </div>
+    ${allCards.map(c=>`
+      <div class="mycoll-item">
+        <div class="mycoll-item-info">
           <span class="mycoll-item-name">${c.name}</span>
-          <span class="mycoll-item-grade">${c.grade}</span>
-          <span class="mycoll-item-price">$${c.val.toLocaleString('en-US')}</span>
-        </div>`).join('')}
-    </div>`;
-  }).join('');
+          <span class="mycoll-item-set">${c.set}</span>
+        </div>
+        <span class="mycoll-item-year">${c.yr}</span>
+        <span class="mycoll-item-odds">${c.odds ? c.odds : '—'}</span>
+        <span class="mycoll-item-grade">${c.grade}</span>
+        <span class="mycoll-item-price">$${c.val.toLocaleString('en-US')}</span>
+      </div>`).join('')}`;
 }
 
 let myCollOpen = false;
@@ -2774,25 +2791,20 @@ function toggleMyCollView(){
   document.getElementById('myCollBar').classList.toggle('active', myCollOpen);
   document.getElementById('myCollView').classList.toggle('active', myCollOpen);
   document.getElementById('yearStrip').style.display = myCollOpen ? 'none' : '';
-  const ph = document.querySelector('.panel-head'); if(ph) ph.style.display = myCollOpen ? 'none' : '';
-  document.getElementById('top10Area').style.display = myCollOpen ? 'none' : '';
-  document.getElementById('controls').style.display = myCollOpen ? 'none' : '';
-  document.getElementById('colHeader').style.display = myCollOpen ? 'none' : '';
-  document.getElementById('collHint').style.display = myCollOpen ? 'none' : '';
-  document.getElementById('setList').style.display = myCollOpen ? 'none' : '';
-  document.getElementById('blogArea').style.display = myCollOpen ? 'none' : '';
+  ['top10Area','colHeader','collHint','setList','blogArea'].forEach(id=>{
+    var el = document.getElementById(id); if(el) el.style.display = myCollOpen ? 'none' : '';
+  });
+  var ctrl = document.querySelector('.controls'); if(ctrl) ctrl.style.display = myCollOpen ? 'none' : '';
   if(myCollOpen) renderMyCollView();
 }
 
 function updateCollectionBar(){
   const {total, count} = getCollectionValue();
   const bar = document.getElementById('collBottom');
-  const hero = document.getElementById('heroColl');
   var compass = document.querySelector('.hero-compass');
   var heroEl = document.querySelector('.hero');
   var hint = document.getElementById('collHint');
   bar.classList.add('visible');
-  hero.classList.add('active');
   if(count > 0){
     if(compass) compass.style.display = 'none';
     if(heroEl) heroEl.classList.add('coll-active');
@@ -2806,8 +2818,6 @@ function updateCollectionBar(){
   var countStr = count + ' card' + (count !== 1 ? 's' : '');
   document.getElementById('collBottomCount').textContent = countStr;
   document.getElementById('collBottomValue').textContent = valStr;
-  document.getElementById('heroCollValue').textContent = valStr;
-  document.getElementById('heroCollMeta').textContent = countStr;
   document.getElementById('myCollBarCount').textContent = countStr;
   document.getElementById('myCollBarTotal').textContent = valStr;
   if(myCollOpen) renderMyCollView();
@@ -2989,11 +2999,6 @@ function renderSets(){
   const totalCards = sets.reduce((n,s)=>n+s.subsets.length, 0);
   const allCards = DATA[currentYear].reduce((n,s)=>n+s.subsets.length, 0);
 
-  document.getElementById('panelTitle').textContent = currentYear + ' Ken Griffey Jr. Cards';
-  document.getElementById('panelCount').textContent =
-    q ? totalCards + ' of ' + allCards + ' cards'
-      : sets.length + ' sets · ' + totalCards + ' cards';
-
   const list = document.getElementById('setList');
 
   if(!sets.length){
@@ -3066,6 +3071,13 @@ document.getElementById('setList').addEventListener('click', function(e){
 });
 
 document.getElementById('myCollBar').addEventListener('click', toggleMyCollView);
+document.getElementById('myCollView').addEventListener('click', function(e){
+  const col = e.target.dataset.col;
+  if(!col) return;
+  if(myCollSort.col === col) myCollSort.dir *= -1;
+  else { myCollSort.col = col; myCollSort.dir = col==='val' ? -1 : 1; }
+  renderMyCollView();
+});
 
 document.getElementById('collClearBtn').addEventListener('click', function(){
   if(!Object.keys(collection).length) return;
