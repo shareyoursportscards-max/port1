@@ -58,7 +58,7 @@ function cardTable(subs, withOdds) {
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
-  ).join('') + '<a href="/blog/">Market Reports</a></nav>';
+  ).join('') + '<a href="/most-valuable/">Most Valuable</a><a href="/blog/">Market Reports</a></nav>';
 }
 
 function page(o) {
@@ -255,6 +255,61 @@ write('blog', page({
   body: blogBody
 }));
 sitemapUrls.push(SITE + '/blog/');
+
+/* ---------- most valuable top 25 ---------- */
+const GRADES = [['psa10', 'PSA 10'], ['psa9', 'PSA 9'], ['psa8', 'PSA 8'], ['raw', 'Raw']];
+const ranked = [];
+let totalCards = 0;
+for (const y of years) {
+  const usedSlugs = {};
+  for (const s of DATA[y]) {
+    let sl = slug(s.set.replace(/^\d{4}\s+/, ''));
+    if (usedSlugs[sl]) sl += '-' + (++usedSlugs[sl]); else usedSlugs[sl] = 1;
+    for (const sub of s.subsets) {
+      totalCards++;
+      let best = null;
+      for (const [g, label] of GRADES) {
+        if (sub[g] != null && (!best || sub[g] > best.value)) best = { value: sub[g], grade: label };
+      }
+      if (best) ranked.push({ y, set: s.set, sl, name: sub.name, grade: best.grade, value: best.value });
+    }
+  }
+}
+ranked.sort((a, b) => b.value - a.value);
+const top25 = ranked.slice(0, 25);
+
+let mvBody = yearNav(null) +
+  '<h1>Most Valuable Ken Griffey Jr. Cards of the 90s</h1>' +
+  '<p class="sub">The 25 most valuable Ken Griffey Jr. cards from 1990–1999, ranked by the highest price actually paid on eBay — not asking prices, real sold listings. Out of ' +
+  totalCards.toLocaleString('en-US') + ' Griffey cards tracked in this guide, these are the kings. Updated daily as new sales come in.</p>' +
+  '<table><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
+top25.forEach((c, i) => {
+  mvBody += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
+    '<td class="cname"><a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' — ' + esc(c.name) + '</a></td>' +
+    '<td class="odds"><a href="/' + c.y + '/" style="color:var(--dim);text-decoration:none">' + c.y + '</a></td>' +
+    '<td class="odds">' + c.grade + '</td>' +
+    '<td class="psa10">' + money(c.value) + '</td></tr>';
+});
+mvBody += '</tbody></table>' +
+  '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card.</p>';
+
+write('most-valuable', page({
+  title: 'Most Valuable Ken Griffey Jr. Cards of the 90s | Top 25 Ranked',
+  desc: 'The 25 most valuable Ken Griffey Jr. cards from 1990-1999, ranked by real eBay sold prices. Topping the list: ' +
+    top25[0].set + ' ' + top25[0].name + ' at ' + money(top25[0].value) + '. Updated daily.',
+  url: SITE + '/most-valuable/',
+  jsonld: {
+    '@context': 'https://schema.org', '@type': 'ItemList',
+    name: 'Most Valuable Ken Griffey Jr. Cards of the 90s',
+    itemListElement: top25.map((c, i) => ({
+      '@type': 'ListItem', position: i + 1,
+      name: c.set + ' ' + c.name + ' ' + c.grade + ' — ' + money(c.value),
+      url: SITE + '/' + c.y + '/' + c.sl + '/'
+    }))
+  },
+  body: mvBody
+}));
+sitemapUrls.push(SITE + '/most-valuable/');
 
 /* ---------- sitemap + robots ---------- */
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
