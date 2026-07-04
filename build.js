@@ -280,7 +280,7 @@ const top25 = ranked.slice(0, 25);
 
 let mvBody = yearNav(null) +
   '<h1>Most Valuable Ken Griffey Jr. Cards of the 90s</h1>' +
-  '<p class="sub">The 25 most valuable Ken Griffey Jr. cards from 1990–1999, ranked by the highest price actually paid on eBay — not asking prices, real sold listings. Out of ' +
+  '<p class="sub">The 25 most valuable Ken Griffey Jr. cards from 1990–1999, ranked by the highest price actually paid on eBay since this guide began tracking sales in April 2026 — not asking prices, real sold listings. Out of ' +
   totalCards.toLocaleString('en-US') + ' Griffey cards tracked in this guide, these are the kings. Updated daily as new sales come in.</p>' +
   '<table><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
 top25.forEach((c, i) => {
