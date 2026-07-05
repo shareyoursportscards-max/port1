@@ -76,6 +76,8 @@ function page(o) {
     '<meta property="og:url" content="' + o.url + '">\n' +
     '<meta property="og:image" content="' + SITE + '/hero-card.jpg">\n' +
     '<meta name="twitter:card" content="summary_large_image">\n' +
+    '<link rel="icon" type="image/svg+xml" href="/favicon.svg">\n' +
+    '<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">\n' +
     (o.jsonld ? '<script type="application/ld+json">' + JSON.stringify(o.jsonld) + '</script>\n' : '') +
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
     '<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">\n' +

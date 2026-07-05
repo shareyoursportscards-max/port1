@@ -33,7 +33,8 @@
   "description": "Daily-updated Ken Griffey Jr. baseball card price guide for 1990–1999 based on real eBay sold prices."
 }
 </script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0e14'/%3E%3Crect x='1' y='1' width='30' height='30' rx='5' fill='none' stroke='%23f0b03a' stroke-width='.75' opacity='.4'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='20' fill='%23f0b03a'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
 <link rel="manifest" href="manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -632,50 +633,79 @@
     animation:goldLine .6s ease-out both;
   }
 
-  /* ---------- PWA INSTALL BANNER ---------- */
+  /* ---------- PWA INSTALL BANNER (glass) ---------- */
   .pwa-banner{
-    display:none;
+    position:fixed;
+    left:12px; right:12px;
+    bottom:calc(76px + env(safe-area-inset-bottom, 0px));
+    z-index:70;
+    display:flex;
     align-items:center;
-    gap:12px;
-    padding:12px 16px;
+    gap:13px;
+    padding:12px 12px 12px 12px;
+    max-width:440px;
     margin:0 auto;
-    background:#f2f2f7;
-    border-radius:0 0 14px 14px;
+    background:rgba(24,30,42,.68);
+    -webkit-backdrop-filter:blur(26px) saturate(1.8);
+    backdrop-filter:blur(26px) saturate(1.8);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:22px;
+    box-shadow:0 18px 50px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.09);
     font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-    font-size:13px;
-    color:#1c1c1e;
-    position:relative;
-    max-width:860px;
-    box-shadow:0 2px 12px rgba(0,0,0,.15);
+    color:#fff;
+    opacity:0;
+    transform:translateY(18px) scale(.97);
+    pointer-events:none;
+    transition:opacity .5s cubic-bezier(.32,.72,.28,1), transform .5s cubic-bezier(.32,.72,.28,1);
   }
-  .pwa-banner.show{display:flex;}
+  .pwa-banner.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
   .pwa-banner-icon{
-    width:36px; height:36px;
-    border-radius:8px;
-    background:#0a0e14;
+    width:46px; height:46px;
+    border-radius:11px;
+    flex-shrink:0;
+    box-shadow:0 4px 12px rgba(0,0,0,.45), 0 0 0 .5px rgba(255,255,255,.15);
+  }
+  .pwa-banner-text{flex:1; line-height:1.35; min-width:0;}
+  .pwa-banner-title{
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:-.01em;
+    margin-bottom:2px;
+    color:#fff;
+  }
+  .pwa-banner-sub{
+    font-size:12px;
+    color:rgba(255,255,255,.55);
+    letter-spacing:-.005em;
+  }
+  .pwa-banner-sub .share-glyph{
+    display:inline-block;
+    vertical-align:-2px;
+    width:13px; height:15px;
+    margin:0 1px;
+  }
+  .pwa-banner-sub b{font-weight:600; color:#6cb2ff;}
+  .pwa-banner-close{
+    background:rgba(255,255,255,.1);
+    border:none;
+    width:26px; height:26px;
+    border-radius:50%;
+    color:rgba(255,255,255,.65);
+    font-size:12px;
+    line-height:1;
+    cursor:pointer;
+    padding:0;
+    flex-shrink:0;
     display:flex;
     align-items:center;
     justify-content:center;
-    flex-shrink:0;
-    font-size:18px;
-    font-weight:700;
-    color:#f0b03a;
-    font-family:'Space Grotesk', sans-serif;
+    transition:background .15s ease;
   }
-  .pwa-banner-text{flex:1; line-height:1.35;}
-  .pwa-banner-text b{font-weight:600; color:#007aff;}
-  .pwa-banner-title{font-weight:600; font-size:13px; margin-bottom:1px;}
-  .pwa-banner-sub{font-size:12px; color:#8e8e93;}
-  .pwa-banner-close{
-    background:none;
-    border:none;
-    color:#8e8e93;
-    font-size:20px;
-    cursor:pointer;
-    padding:0 2px;
-    flex-shrink:0;
-  }
-  .pwa-banner-close:hover{color:#1c1c1e;}
+  .pwa-banner-close:hover{background:rgba(255,255,255,.18); color:#fff;}
 
   .coll-hint{
     font-family:'Inter', sans-serif;
@@ -1090,6 +1120,7 @@
   @media (max-width:640px){
     .wrap{padding:16px 8px 60px;}
     .hero{padding:22px 18px 18px; border-radius:12px;}
+    .hero-sub{font-size:13px;}
     .hero-stats{gap:4px 16px; font-size:12px;}
     .panel-head h2{font-size:22px;}
     .set-header{padding:16px 12px 4px; font-size:11px;}
@@ -1149,10 +1180,10 @@
 </head>
 <body>
 <div class="pwa-banner" id="pwaBanner">
-  <div class="pwa-banner-icon">G</div>
+  <img class="pwa-banner-icon" src="icon-192.png" alt="Griffey Card Prices app icon">
   <div class="pwa-banner-text">
-    <div class="pwa-banner-title">Add Price Guide to Home Screen</div>
-    <div class="pwa-banner-sub">Tap <b>Share</b> then <b>Add to Home Screen</b></div>
+    <div class="pwa-banner-title">Griffey Card Prices</div>
+    <div class="pwa-banner-sub">Tap <svg class="share-glyph" viewBox="0 0 13 16" xmlns="http://www.w3.org/2000/svg" fill="#6cb2ff"><path d="M6.5 0l3.2 3.2-.7.7L7 1.9V10h-1V1.9L4 3.9l-.7-.7L6.5 0z"/><path d="M1 5h3v1H2v9h9V6H9V5h3v11H1V5z"/></svg> then <b>Add to Home Screen</b></div>
   </div>
   <button class="pwa-banner-close" id="pwaBannerClose">✕</button>
 </div>
@@ -3130,7 +3161,9 @@ if('serviceWorker' in navigator){
   var isStandalone = window.navigator.standalone === true;
   var dismissed = localStorage.getItem('pwa_dismissed');
   if(isIos && !isStandalone && !dismissed){
-    document.getElementById('pwaBanner').classList.add('show');
+    setTimeout(function(){
+      document.getElementById('pwaBanner').classList.add('show');
+    }, 1400);
   }
   document.getElementById('pwaBannerClose').addEventListener('click', function(){
     document.getElementById('pwaBanner').classList.remove('show');
