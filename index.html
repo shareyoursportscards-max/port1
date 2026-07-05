@@ -72,7 +72,6 @@
   body{
     background:var(--bg);
     background-image:var(--bg-gradient);
-    background-attachment:fixed;
     color:var(--text);
     font-family:'Oswald', sans-serif;
     -webkit-font-smoothing:antialiased;
@@ -84,34 +83,16 @@
   /* ---------- HERO ---------- */
   .hero{
     position:relative;
-    background:linear-gradient(135deg, rgba(240,176,58,.55) 0%, rgba(180,110,10,.3) 35%, rgba(10,14,20,.9) 70%, #0a0e14 100%);
-    border:1px solid rgba(240,176,58,.2);
+    background:
+      radial-gradient(ellipse 90% 140% at 12% -30%, rgba(240,176,58,.14) 0%, transparent 55%),
+      linear-gradient(160deg, #111826 0%, #0c1119 55%, #0a0e14 100%);
+    border:1px solid rgba(240,176,58,.16);
     border-radius:16px;
-    padding:12px 36px 10px;
+    padding:30px 36px 26px;
     color:var(--text);
     overflow:hidden;
     box-shadow:0 12px 40px rgba(0,0,0,.4);
     margin-bottom:34px;
-  }
-  .hero-grid{
-    position:absolute; inset:0; pointer-events:none; border-radius:16px; overflow:hidden;
-  }
-  .hero-grid::before{
-    content:"";
-    position:absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size:44px 44px;
-    mask-image:radial-gradient(ellipse 80% 70% at 30% 50%, black 0%, transparent 70%);
-    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 30% 50%, black 0%, transparent 70%);
-  }
-  .hero-grid::after{
-    content:"";
-    position:absolute; inset:0;
-    background:radial-gradient(ellipse 70% 60% at 25% 40%, rgba(59,111,212,.2) 0%, transparent 65%),
-               radial-gradient(ellipse 50% 50% at 50% 0%, rgba(91,141,239,.15) 0%, transparent 60%),
-               radial-gradient(ellipse 30% 40% at 70% 50%, rgba(0,230,184,.06) 0%, transparent 50%);
   }
   .hero::before{
     content:"";
@@ -125,34 +106,42 @@
     position:relative; z-index:3;
     font-family:'Space Grotesk', sans-serif;
     font-weight:700;
-    font-size:clamp(18px,3.5vw,28px);
-    letter-spacing:-.02em;
-    text-transform:none;
-    margin:0 0 10px;
-    line-height:1;
+    font-size:clamp(24px,4.5vw,38px);
+    letter-spacing:.025em;
+    text-transform:uppercase;
+    margin:0 0 6px;
+    line-height:1.05;
     color:#fff;
-    -webkit-text-stroke:2px #1a4fd8;
-    paint-order:stroke fill;
-    text-shadow:0 0 20px rgba(26,79,216,.4), 2px 2px 0 rgba(10,40,160,.6);
   }
   .hero-sub{
     position:relative; z-index:3;
     font-family:'Inter', sans-serif;
     font-weight:400;
-    font-size:16px;
-    color:rgba(147,180,255,.7);
+    font-size:15px;
+    color:var(--text-dim);
     margin:0;
-    letter-spacing:.03em;
+    letter-spacing:.04em;
   }
-  .hero-compass{
-    position:absolute;
-    right:30px; top:50%;
-    transform:translateY(-50%);
-    width:180px; height:180px;
-    color:rgba(91,141,239,.12);
-    pointer-events:none;
-    z-index:2;
-    filter:drop-shadow(0 0 30px rgba(91,141,239,.08));
+  .hero-rule{
+    position:relative; z-index:3;
+    width:64px; height:2px;
+    margin:18px 0 14px;
+    background:linear-gradient(90deg, var(--gold) 0%, rgba(240,176,58,0) 100%);
+    border-radius:1px;
+  }
+  .hero-stats{
+    position:relative; z-index:3;
+    display:flex; flex-wrap:wrap;
+    gap:6px 26px;
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    color:var(--text-dim);
+    letter-spacing:.02em;
+  }
+  .hero-stats b{
+    color:var(--text);
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
   }
   .hero-divider{
     color:rgba(255,255,255,.2);
@@ -688,55 +677,6 @@
   }
   .pwa-banner-close:hover{color:#1c1c1e;}
 
-  /* ---------- HERO COLLECTION ---------- */
-  .hero-coll{
-    position:absolute;
-    right:32px; top:50%;
-    transform:translateY(-50%);
-    z-index:4;
-    display:none;
-    text-align:right;
-  }
-  .hero-coll.active{display:block;}
-  .hero.coll-active{
-    background:
-      linear-gradient(100deg, rgba(10,14,20,.97) 0%, rgba(10,14,20,.95) 45%, rgba(10,14,20,.92) 100%),
-      linear-gradient(135deg, #0a0e14 0%, #0d1520 50%, #0a0e14 100%);
-  }
-  .hero-coll-value{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:clamp(24px,4vw,36px);
-    color:#fff;
-    letter-spacing:-.02em;
-    line-height:1;
-    text-shadow:0 0 30px rgba(57,255,20,.25), 0 2px 0 rgba(0,0,0,.5);
-  }
-  .hero-coll-meta{
-    font-family:'Oswald', sans-serif;
-    font-size:12px;
-    color:rgba(255,255,255,.4);
-    letter-spacing:.04em;
-    margin-top:4px;
-  }
-  .hero-coll-label{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600;
-    font-size:11px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:rgba(57,255,20,.7);
-    text-shadow:0 0 10px rgba(57,255,20,.3);
-    display:block;
-    margin-bottom:4px;
-  }
-  @media (max-width:640px){
-    .hero-coll{right:16px; top:auto; bottom:14px; transform:none;}
-    .hero-coll-value{font-size:22px;}
-    .hero-coll-meta{font-size:10px;}
-    .hero-coll-label{font-size:9px;}
-  }
-
   .coll-hint{
     font-family:'Inter', sans-serif;
     font-size:12px;
@@ -921,7 +861,7 @@
 
 
   h1{transition:filter .4s ease;}
-  .hero:hover h1{filter:drop-shadow(0 4px 24px rgba(91,141,239,.4));}
+  .hero:hover h1{filter:drop-shadow(0 4px 24px rgba(240,176,58,.25));}
 
   .set-header span:first-child{transition:letter-spacing .3s ease, color .3s ease;}
   .set-block:hover .set-header span:first-child{letter-spacing:.15em; color:rgba(210,155,70,1);}
@@ -1149,8 +1089,8 @@
 
   @media (max-width:640px){
     .wrap{padding:16px 8px 60px;}
-    .hero{padding:12px 16px 10px; border-radius:12px;}
-    .hero-compass{width:120px; height:120px; right:15px; opacity:.7;}
+    .hero{padding:22px 18px 18px; border-radius:12px;}
+    .hero-stats{gap:4px 16px; font-size:12px;}
     .panel-head h2{font-size:22px;}
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
@@ -1193,8 +1133,21 @@
     #setList{
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
+      overscroll-behavior-x:contain;
     }
     .set-header{font-size:11px;}
+
+    /* Mobile perf: no scroll-triggered reveal animations, skip offscreen rendering */
+    .set-block, .blog-section, .note{
+      opacity:1;
+      transform:none;
+      transition:none;
+    }
+    .set-block{
+      content-visibility:auto;
+      contain-intrinsic-size:auto 480px;
+    }
+    .ember-container, .cursor-glow{display:none;}
   }
 </style>
 </head>
@@ -1212,34 +1165,14 @@
 <div class="wrap">
 
   <div class="hero">
-    <div class="hero-grid"></div>
-    <svg class="hero-compass" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(100,100)">
-        <!-- outer compass points -->
-        <polygon points="0,-95 8,-30 0,-25 -8,-30" fill="currentColor"/>
-        <polygon points="0,95 8,30 0,25 -8,30" fill="currentColor"/>
-        <polygon points="-95,0 -30,8 -25,0 -30,-8" fill="currentColor"/>
-        <polygon points="95,0 30,8 25,0 30,-8" fill="currentColor"/>
-        <!-- inner star -->
-        <polygon points="0,-55 12,-12 55,0 12,12 0,55 -12,12 -55,0 -12,-12" fill="none" stroke="currentColor" stroke-width="1.5"/>
-        <!-- center ring -->
-        <circle cx="0" cy="0" r="16" fill="none" stroke="currentColor" stroke-width="1.5"/>
-        <!-- S -->
-        <text x="0" y="6" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="18" fill="currentColor">S</text>
-        <!-- compass ticks -->
-        <line x1="0" y1="-70" x2="0" y2="-62" stroke="currentColor" stroke-width="1"/>
-        <line x1="0" y1="70" x2="0" y2="62" stroke="currentColor" stroke-width="1"/>
-        <line x1="-70" y1="0" x2="-62" y2="0" stroke="currentColor" stroke-width="1"/>
-        <line x1="70" y1="0" x2="62" y2="0" stroke="currentColor" stroke-width="1"/>
-        <!-- diagonal ticks -->
-        <line x1="46" y1="-46" x2="42" y2="-42" stroke="currentColor" stroke-width=".8"/>
-        <line x1="-46" y1="-46" x2="-42" y2="-42" stroke="currentColor" stroke-width=".8"/>
-        <line x1="46" y1="46" x2="42" y2="42" stroke="currentColor" stroke-width=".8"/>
-        <line x1="-46" y1="46" x2="-42" y2="42" stroke="currentColor" stroke-width=".8"/>
-      </g>
-    </svg>
     <h1>Ken Griffey Jr.</h1>
-    <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999</p>
+    <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999 <span class="hero-divider">·</span> Real eBay Sold Data</p>
+    <div class="hero-rule"></div>
+    <div class="hero-stats">
+      <span><b id="statPrices">—</b> tracked prices</span>
+      <span><b id="statSets">—</b> sets</span>
+      <span>Updated <b id="statUpdated">July 2026</b></span>
+    </div>
   </div>
 
   <div class="mycoll-bar" id="myCollBar">
@@ -2829,17 +2762,11 @@ function toggleMyCollView(){
 function updateCollectionBar(){
   const {total, count} = getCollectionValue();
   const bar = document.getElementById('collBottom');
-  var compass = document.querySelector('.hero-compass');
-  var heroEl = document.querySelector('.hero');
   var hint = document.getElementById('collHint');
   bar.classList.add('visible');
   if(count > 0){
-    if(compass) compass.style.display = 'none';
-    if(heroEl) heroEl.classList.add('coll-active');
     if(hint) hint.classList.add('hidden');
   } else {
-    if(compass) compass.style.display = '';
-    if(heroEl) heroEl.classList.remove('coll-active');
     if(hint) hint.classList.remove('hidden');
   }
   var valStr = '$' + total.toLocaleString('en-US');
@@ -3122,6 +3049,31 @@ renderBlog();
 renderSets();
 updateCollectionBar();
 
+(function renderHeroStats(){
+  var prices = 0, sets = 0;
+  Object.keys(DATA).forEach(function(y){
+    DATA[y].forEach(function(s){
+      sets++;
+      s.subsets.forEach(function(c){
+        ['raw','psa8','psa9','psa10'].forEach(function(g){ if(c[g] != null) prices++; });
+      });
+    });
+  });
+  var newest = null;
+  Object.keys(BLOG).forEach(function(y){
+    (BLOG[y]||[]).forEach(function(e){
+      var d = new Date(e.date);
+      if(!isNaN(d) && (!newest || d > newest)) newest = d;
+    });
+  });
+  document.getElementById('statPrices').textContent = prices.toLocaleString('en-US');
+  document.getElementById('statSets').textContent = sets.toLocaleString('en-US');
+  if(newest){
+    document.getElementById('statUpdated').textContent =
+      newest.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+  }
+})();
+
 document.getElementById('setList').addEventListener('scroll', function(){
   document.getElementById('colHeader').scrollLeft = this.scrollLeft;
 });
@@ -3154,8 +3106,10 @@ function spawnEmber(){
   emberBox.appendChild(el);
   el.addEventListener('animationend', ()=>el.remove());
 }
-setInterval(spawnEmber, 2500);
-spawnEmber();
+if(window.matchMedia('(hover:hover) and (min-width:641px)').matches){
+  setInterval(spawnEmber, 2500);
+  spawnEmber();
+}
 
 const revealObserver = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
