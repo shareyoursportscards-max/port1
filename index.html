@@ -1137,15 +1137,11 @@
     }
     .set-header{font-size:11px;}
 
-    /* Mobile perf: no scroll-triggered reveal animations, skip offscreen rendering */
+    /* Mobile perf: no scroll-triggered reveal animations */
     .set-block, .blog-section, .note{
       opacity:1;
       transform:none;
       transition:none;
-    }
-    .set-block{
-      content-visibility:auto;
-      contain-intrinsic-size:auto 480px;
     }
     .ember-container, .cursor-glow{display:none;}
   }
