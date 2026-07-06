@@ -901,6 +901,41 @@
 
   .insights-toggle,.blog-more{transition:all .2s ease, letter-spacing .3s ease;}
 
+  /* ---------- SET SHARE ---------- */
+  .set-share{
+    background:none;
+    border:none;
+    padding:2px 5px;
+    margin-left:7px;
+    cursor:pointer;
+    color:rgba(240,176,58,.35);
+    vertical-align:middle;
+    display:inline-block;
+    transition:color .15s ease, transform .15s ease;
+  }
+  .set-share:hover{color:var(--gold); transform:scale(1.15);}
+  .set-share svg{width:14px; height:14px; display:block;}
+  .share-toast{
+    position:fixed;
+    left:50%; bottom:92px;
+    transform:translateX(-50%) translateY(12px);
+    background:rgba(24,30,42,.92);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(240,176,58,.45);
+    border-radius:999px;
+    padding:10px 22px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:13px;
+    color:var(--text);
+    opacity:0;
+    pointer-events:none;
+    z-index:80;
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .share-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
   /* ---------- CONTROLS ---------- */
   .controls{
     display:flex;
@@ -1189,6 +1224,7 @@
 </div>
 <div class="ember-container" id="embers"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
+<div class="share-toast" id="shareToast">Link copied</div>
 <div class="wrap">
 
   <div class="hero">
@@ -3004,10 +3040,11 @@ function renderSets(){
       </div>`;
     }).join('');
 
+    const shareUrl = 'https://griffeycardprices.com/' + currentYear + '/' + (SET_SLUG[currentYear] && SET_SLUG[currentYear][s.set] || '') + '/';
     return `
       <div class="set-block">
         <div class="set-header">
-          <span>${s.set}</span>
+          <span>${s.set}<button class="set-share" data-surl="${shareUrl}" title="Share this set" aria-label="Share this set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></span>
           <span class="meta">${s.subsets.length} card${s.subsets.length>1?'s':''}</span>
         </div>
         ${rows}
@@ -3015,6 +3052,45 @@ function renderSets(){
   }).join('');
   requestAnimationFrame(observeSetBlocks);
 }
+
+const SET_SLUG = {};
+(function(){
+  const slugify = s => s.toLowerCase().replace(/'/g,'').replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  Object.keys(DATA).forEach(function(y){
+    SET_SLUG[y] = {};
+    const used = {};
+    DATA[y].forEach(function(s){
+      let sl = slugify(s.set.replace(/^\d{4}\s+/,''));
+      if(used[sl]) sl += '-' + (++used[sl]); else used[sl] = 1;
+      SET_SLUG[y][s.set] = sl;
+    });
+  });
+})();
+
+function showShareToast(msg){
+  const t = document.getElementById('shareToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showShareToast._tm);
+  showShareToast._tm = setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+
+document.getElementById('setList').addEventListener('click', function(e){
+  const btn = e.target.closest('.set-share');
+  if(!btn) return;
+  e.stopPropagation();
+  const url = btn.dataset.surl;
+  if(navigator.share){
+    navigator.share({title: 'Ken Griffey Jr. Card Prices', url: url}).catch(function(){});
+  } else if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(
+      function(){ showShareToast('Link copied'); },
+      function(){ showShareToast(url); }
+    );
+  } else {
+    window.prompt('Copy this link:', url);
+  }
+});
 
 document.getElementById('searchInput').addEventListener('input', e=>{
   searchTerm = e.target.value;
