@@ -41,7 +41,7 @@
 <meta name="apple-mobile-web-app-title" content="Price Guide">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=Anton&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0a0e14;
@@ -3104,22 +3104,24 @@ function collRoundRect(ctx, x, y, w, h, r){
 }
 
 function collSeam(ctx, cx, cy, r, a0, a1){
-  ctx.strokeStyle = 'rgba(255,255,255,.05)';
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = 'rgba(255,255,255,.10)';
+  ctx.lineWidth = 2.5;
   ctx.beginPath(); ctx.arc(cx, cy, r, a0, a1); ctx.stroke();
-  ctx.strokeStyle = 'rgba(224,102,88,.15)';
-  ctx.lineWidth = 3;
-  const step = 26 / r;
+  ctx.strokeStyle = 'rgba(226,98,84,.34)';
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+  const step = 30 / r;
   let flip = 1;
   for(let t = a0; t <= a1; t += step){
     const x = cx + Math.cos(t) * r, y = cy + Math.sin(t) * r;
     const ang = t + Math.PI / 2 + flip * 0.55;
     ctx.beginPath();
-    ctx.moveTo(x - Math.cos(ang) * 11, y - Math.sin(ang) * 11);
-    ctx.lineTo(x + Math.cos(ang) * 11, y + Math.sin(ang) * 11);
+    ctx.moveTo(x - Math.cos(ang) * 14, y - Math.sin(ang) * 14);
+    ctx.lineTo(x + Math.cos(ang) * 14, y + Math.sin(ang) * 14);
     ctx.stroke();
     flip = -flip;
   }
+  ctx.lineCap = 'butt';
 }
 function collMiniBall(ctx, x, y, r){
   ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -3151,8 +3153,13 @@ function drawCollectionCard(cards, count, total){
   collSeam(ctx, W + 260, -140, 640, 1.95, 3.15);
   collSeam(ctx, -260, H + 140, 640, -1.15, -0.15);
 
+  let titleSize = 82;
+  ctx.font = titleSize + 'px Anton';
+  while(ctx.measureText('MY GRIFFEY COLLECTION').width > W - 132 && titleSize > 40){
+    titleSize -= 2;
+    ctx.font = titleSize + 'px Anton';
+  }
   ctx.fillStyle = '#fff';
-  ctx.font = '82px Anton';
   ctx.fillText('MY GRIFFEY ', 66, 136);
   const myW = ctx.measureText('MY GRIFFEY ').width;
   ctx.fillStyle = collGoldGrad(ctx, 66 + myW, 0, 66 + myW + 520, 0);
