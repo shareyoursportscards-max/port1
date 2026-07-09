@@ -939,12 +939,16 @@
     font-weight:700; font-size:18px;
     letter-spacing:.05em; text-transform:uppercase;
     padding:21px 32px;
-    border:none;
+    border:2px solid rgba(240,176,58,.85);
     border-radius:14px;
     background:linear-gradient(135deg, #8bf7bd 0%, #5eeaa0 45%, #2fbf7a 100%);
     color:#07150e;
     overflow:hidden;
-    box-shadow:0 8px 28px rgba(94,234,160,.35), inset 0 1px 0 rgba(255,255,255,.4);
+    box-shadow:
+      0 3px 0 rgba(170,115,25,.9),
+      0 10px 28px rgba(94,234,160,.35),
+      0 0 16px rgba(240,176,58,.25),
+      inset 0 1px 0 rgba(255,255,255,.4);
     transition:transform .15s ease, box-shadow .15s ease;
   }
   .hero-dc::after{
@@ -961,12 +965,20 @@
   }
   .hero-dc:hover{
     transform:translateY(-50%) scale(1.05);
-    box-shadow:0 10px 36px rgba(94,234,160,.5), inset 0 1px 0 rgba(255,255,255,.4);
+    box-shadow:
+      0 3px 0 rgba(170,115,25,.9),
+      0 12px 36px rgba(94,234,160,.5),
+      0 0 20px rgba(240,176,58,.35),
+      inset 0 1px 0 rgba(255,255,255,.4);
   }
   .hero-dc.active{
     background:linear-gradient(135deg, #2fbf7a 0%, #27a86a 100%);
     color:#07150e;
-    box-shadow:0 4px 16px rgba(94,234,160,.25);
+    transform:translateY(calc(-50% + 2px));
+    box-shadow:
+      0 1px 0 rgba(170,115,25,.9),
+      0 4px 16px rgba(94,234,160,.25),
+      inset 0 1px 0 rgba(255,255,255,.25);
   }
   .dc-bag{
     font-size:26px;
