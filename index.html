@@ -3103,6 +3103,33 @@ function collRoundRect(ctx, x, y, w, h, r){
   ctx.closePath();
 }
 
+function collSeam(ctx, cx, cy, r, a0, a1){
+  ctx.strokeStyle = 'rgba(255,255,255,.05)';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(cx, cy, r, a0, a1); ctx.stroke();
+  ctx.strokeStyle = 'rgba(224,102,88,.15)';
+  ctx.lineWidth = 3;
+  const step = 26 / r;
+  let flip = 1;
+  for(let t = a0; t <= a1; t += step){
+    const x = cx + Math.cos(t) * r, y = cy + Math.sin(t) * r;
+    const ang = t + Math.PI / 2 + flip * 0.55;
+    ctx.beginPath();
+    ctx.moveTo(x - Math.cos(ang) * 11, y - Math.sin(ang) * 11);
+    ctx.lineTo(x + Math.cos(ang) * 11, y + Math.sin(ang) * 11);
+    ctx.stroke();
+    flip = -flip;
+  }
+}
+function collMiniBall(ctx, x, y, r){
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(234,240,246,.92)'; ctx.fill();
+  ctx.strokeStyle = 'rgba(10,14,20,.4)'; ctx.lineWidth = 1; ctx.stroke();
+  ctx.strokeStyle = 'rgba(200,70,60,.85)'; ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.arc(x - r * 1.35, y, r * 1.15, -0.62, 0.62); ctx.stroke();
+  ctx.beginPath(); ctx.arc(x + r * 1.35, y, r * 1.15, Math.PI - 0.62, Math.PI + 0.62); ctx.stroke();
+}
+
 function drawCollectionCard(cards, count, total){
   const W = 1080, H = 1350;
   const cv = document.createElement('canvas');
@@ -3121,27 +3148,31 @@ function drawCollectionCard(cards, count, total){
   ctx.strokeStyle = 'rgba(255,255,255,.024)'; ctx.lineWidth = 1;
   for(let x = 0; x <= W; x += 60){ ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
   for(let y = 0; y <= H; y += 60){ ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+  collSeam(ctx, W + 260, -140, 640, 1.95, 3.15);
+  collSeam(ctx, -260, H + 140, 640, -1.15, -0.15);
 
   ctx.fillStyle = '#fff';
-  ctx.font = '86px Anton';
-  ctx.fillText('MY GRIFFEY', 66, 150);
-  ctx.fillStyle = collGoldGrad(ctx, 66, 0, 700, 0);
-  ctx.fillText('COLLECTION', 66, 246);
+  ctx.font = '82px Anton';
+  ctx.fillText('MY GRIFFEY ', 66, 136);
+  const myW = ctx.measureText('MY GRIFFEY ').width;
+  ctx.fillStyle = collGoldGrad(ctx, 66 + myW, 0, 66 + myW + 520, 0);
+  ctx.fillText('COLLECTION', 66 + myW, 136);
 
-  ctx.font = '700 38px "Space Grotesk"';
+  ctx.font = '700 36px "Space Grotesk"';
   const totStr = '$' + total.toLocaleString('en-US');
   const tw = ctx.measureText(totStr).width;
-  collRoundRect(ctx, 66, 288, tw + 62, 64, 32);
-  ctx.fillStyle = collGoldGrad(ctx, 66, 288, 66 + tw + 62, 352);
+  collRoundRect(ctx, 66, 174, tw + 58, 60, 30);
+  ctx.fillStyle = collGoldGrad(ctx, 66, 174, 66 + tw + 58, 234);
   ctx.fill();
   ctx.fillStyle = '#0a0e14';
-  ctx.fillText(totStr, 97, 333);
+  ctx.fillText(totStr, 95, 216);
+  collMiniBall(ctx, 66 + tw + 58 + 42, 206, 12);
   ctx.font = '21px Oswald';
   ctx.fillStyle = 'rgba(142,164,186,.9)';
-  ctx.fillText(count + (count === 1 ? ' CARD' : ' CARDS') + ' · REAL EBAY SOLD PRICES', 66 + tw + 84, 328);
+  ctx.fillText(count + (count === 1 ? ' CARD' : ' CARDS'), 66 + tw + 58 + 68, 213);
 
-  const shown = cards.slice(0, 8);
-  const rowH = 92, gap = 12, startY = 396;
+  const shown = cards.slice(0, 10);
+  const rowH = 82, gap = 10, startY = 268;
   const gradeColors = {'PSA 10':'#f5c842', 'PSA 9':'#5cd8f0', 'PSA 8':'#5eeaa0', 'Raw':'#a0aab8'};
   shown.forEach(function(c, i){
     const y = startY + i * (rowH + gap);
@@ -3149,35 +3180,35 @@ function drawCollectionCard(cards, count, total){
     ctx.fillStyle = 'rgba(30,40,56,.78)'; ctx.fill();
     ctx.strokeStyle = '#2a3a50'; ctx.lineWidth = 1.5; ctx.stroke();
 
-    ctx.font = '44px Anton';
-    ctx.fillStyle = collGoldGrad(ctx, 0, y + 14, 0, y + rowH - 8);
+    ctx.font = '38px Anton';
+    ctx.fillStyle = collGoldGrad(ctx, 0, y + 12, 0, y + rowH - 6);
     ctx.textAlign = 'center';
-    ctx.fillText(String(i + 1), 112, y + 62);
+    ctx.fillText(String(i + 1), 112, y + 54);
 
-    ctx.font = '700 36px "Space Grotesk"';
+    ctx.font = '700 33px "Space Grotesk"';
     ctx.fillStyle = '#f5c842';
     ctx.textAlign = 'right';
     const vStr = '$' + c.val.toLocaleString('en-US');
-    ctx.shadowColor = 'rgba(245,200,66,.45)'; ctx.shadowBlur = 18;
-    ctx.fillText(vStr, W - 100, y + 60);
+    ctx.shadowColor = 'rgba(245,200,66,.45)'; ctx.shadowBlur = 16;
+    ctx.fillText(vStr, W - 100, y + 52);
     ctx.shadowBlur = 0;
     const vw = ctx.measureText(vStr).width;
     ctx.textAlign = 'left';
 
     const nameMax = (W - 100 - vw - 26) - 158;
-    ctx.font = '700 29px "Space Grotesk"';
+    ctx.font = '700 26px "Space Grotesk"';
     ctx.fillStyle = '#fff';
     let nm = c.name;
     while(ctx.measureText(nm).width > nameMax && nm.length > 4) nm = nm.slice(0, -2);
     if(nm !== c.name) nm = nm.replace(/\s+$/, '') + '…';
-    ctx.fillText(nm, 158, y + 42);
+    ctx.fillText(nm, 158, y + 35);
 
-    ctx.font = '20px Oswald';
+    ctx.font = '19px Oswald';
     ctx.fillStyle = '#8ea4ba';
     const setStr = c.set + ' · ';
-    ctx.fillText(setStr, 158, y + 74);
+    ctx.fillText(setStr, 158, y + 65);
     ctx.fillStyle = gradeColors[c.grade] || '#8ea4ba';
-    ctx.fillText(c.grade, 158 + ctx.measureText(setStr).width, y + 74);
+    ctx.fillText(c.grade, 158 + ctx.measureText(setStr).width, y + 65);
   });
 
   ctx.strokeStyle = 'rgba(240,176,58,.3)'; ctx.lineWidth = 1;
