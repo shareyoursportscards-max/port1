@@ -58,7 +58,7 @@ function cardTable(subs, withOdds) {
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
-  ).join('') + '<a href="/most-valuable/">Most Valuable</a><a href="/blog/">Market Reports</a></nav>';
+  ).join('') + '<a href="/most-valuable/">Most Valuable</a><a href="/blog/">Market Reports</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a></nav>';
 }
 
 function page(o) {
@@ -312,6 +312,90 @@ write('most-valuable', page({
   body: mvBody
 }));
 sitemapUrls.push(SITE + '/most-valuable/');
+
+/* ---------- "how much is a griffey card worth" ---------- */
+const over1k = ranked.filter(c => c.value >= 1000).length;
+const over10k = ranked.filter(c => c.value >= 10000).length;
+const under100 = ranked.filter(c => c.value < 100).length;
+const kingCard = top25[0];
+const gum = DATA['1995'].find(s => s.set === '1995 Pinnacle').subsets.find(c => c.name.indexOf('Bubble Gum') > -1 && c.name.indexOf('Base') > -1);
+
+let worthBody = yearNav(null) +
+  '<h1>How Much Is a Ken Griffey Jr. Card Worth?</h1>' +
+  '<p class="sub">Anywhere from a few dollars to ' + money(kingCard.value) + '. Most 1990s Griffey cards sell for under $100, ' +
+  'but rare inserts and serial-numbered parallels regularly sell for four and five figures. This guide tracks ' +
+  totalCards.toLocaleString('en-US') + ' Griffey cards from 1990&ndash;1999 using real completed eBay sales &mdash; not asking prices &mdash; updated daily.</p>' +
+
+  '<h2>The quick answer</h2>' +
+  '<p class="sub">Of the ' + totalCards.toLocaleString('en-US') + ' cards in this guide, ' + under100 +
+  ' have a top recorded sale under $100, ' + over1k + ' have sold for $1,000 or more, and ' + over10k +
+  ' have topped $10,000. The highest price on record here is the <a href="/' + kingCard.y + '/' + kingCard.sl + '/" style="color:var(--gold)">' +
+  esc(kingCard.set) + ' ' + esc(kingCard.name) + '</a> at <b style="color:var(--psa10)">' + money(kingCard.value) + '</b> in ' + kingCard.grade + '.</p>' +
+  '<ul class="plain" style="columns:1">' +
+  '<li>Base cards, raw: <b style="color:var(--text)">$2&ndash;$25</b></li>' +
+  '<li>Graded base cards and common inserts: <b style="color:var(--text)">$25&ndash;$100</b></li>' +
+  '<li>Major inserts, refractors, gold parallels: <b style="color:var(--text)">$100&ndash;$1,000</b></li>' +
+  '<li>Serial-numbered parallels and gem-mint chase cards: <b style="color:var(--text)">$1,000&ndash;' + money(kingCard.value) + '</b></li>' +
+  '</ul>' +
+
+  '<h2>What makes a Griffey card valuable</h2>' +
+  '<p class="sub"><b>Scarcity.</b> The 1990s insert era produced cards numbered to 500, 100, even 25 copies, and inserts with pack odds as long as 1:944. ' +
+  'Print run and pull rate drive the top of the market &mdash; the record-holder above is one of just 25 copies.</p>' +
+  '<p class="sub"><b>Grade.</b> The same card can be worth 30x more in PSA 10 than raw. The famous 1995 Pinnacle Bubble Gum card, the most frequently traded Griffey in this guide:</p>' +
+  '<table><thead><tr><th>Grade</th><th>Latest sale</th></tr></thead><tbody>' +
+  '<tr><td class="cname">Raw (ungraded)</td><td class="raw">' + money(gum.raw) + '</td></tr>' +
+  '<tr><td class="cname">PSA 8</td><td class="psa8">' + money(gum.psa8) + '</td></tr>' +
+  '<tr><td class="cname">PSA 9</td><td class="psa9">' + money(gum.psa9) + '</td></tr>' +
+  '<tr><td class="cname">PSA 10</td><td class="psa10">' + money(gum.psa10) + '</td></tr>' +
+  '</tbody></table>' +
+  '<p class="sub"><b>The card itself.</b> Base cards were printed by the million in the junk wax era. The money is in inserts, refractors, and parallels &mdash; ' +
+  'Finest Refractors, Metal Universe, Flair die-cuts, Donruss Crusade, and the other chase sets of the decade.</p>' +
+
+  '<h2>What about the rookie card?</h2>' +
+  '<p class="sub">Griffey’s rookie is the 1989 Upper Deck #1 &mdash; the most famous baseball card of its generation. This guide covers 1990&ndash;1999, ' +
+  'the insert era that followed, where the scarce cards are far rarer than the rookie (which was heavily printed). The same rules apply to the rookie as to everything here: ' +
+  'grade and centering decide the price, and completed eBay sales &mdash; not listing prices &mdash; tell you what it’s actually worth.</p>' +
+
+  '<h2>The 10 most valuable Griffey cards of the 90s</h2>' +
+  '<table><thead><tr><th>#</th><th>Card</th><th>Grade</th><th>Sale</th></tr></thead><tbody>' +
+  top25.slice(0, 10).map((c, i) =>
+    '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
+    '<td class="cname"><a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' &mdash; ' + esc(c.name) + '</a></td>' +
+    '<td class="odds">' + c.grade + '</td>' +
+    '<td class="psa10">' + money(c.value) + '</td></tr>').join('') +
+  '</tbody></table>' +
+  '<p class="sub"><a href="/most-valuable/" style="color:var(--gold)">See the full Top 25 &rsaquo;</a></p>' +
+
+  '<h2>How this guide works</h2>' +
+  '<p class="sub">Every price on this site comes from a real completed eBay sale &mdash; auctions and Buy It Now both count, because someone actually paid that amount. ' +
+  'Prices are updated daily as new sales close, tracked since April 2026. Grading columns cover raw, PSA 8, PSA 9 and PSA 10. ' +
+  'Built and maintained by a Griffey collector. Browse any year above for every card’s current value, or check the <a href="/blog/" style="color:var(--gold)">daily market reports</a> to see what moved.</p>';
+
+write('how-much-are-griffey-cards-worth', page({
+  title: 'How Much Is a Ken Griffey Jr. Card Worth? | Real Sold Prices',
+  desc: 'Ken Griffey Jr. cards sell for a few dollars to ' + money(kingCard.value) + '. Real eBay sold prices for ' +
+    totalCards.toLocaleString('en-US') + ' Griffey cards from 1990-1999 - raw and PSA graded, updated daily.',
+  url: SITE + '/how-much-are-griffey-cards-worth/',
+  jsonld: {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question', name: 'How much is a Ken Griffey Jr. card worth?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Anywhere from a few dollars to ' + money(kingCard.value) + '. Most 1990s Griffey base cards sell for under $100, while rare inserts, refractors and serial-numbered parallels sell for $1,000 to over $30,000 based on real eBay sold prices.' }
+      },
+      {
+        '@type': 'Question', name: 'What is the most valuable Ken Griffey Jr. card?',
+        acceptedAnswer: { '@type': 'Answer', text: 'The most expensive 1990s Griffey sale tracked in this guide is the ' + kingCard.set + ' ' + kingCard.name + ' at ' + money(kingCard.value) + ' in ' + kingCard.grade + ' - one of only 25 copies.' }
+      },
+      {
+        '@type': 'Question', name: 'Are Ken Griffey Jr. cards worth grading?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Often yes. The gap between raw and PSA 10 can be 10-30x on 1990s Griffey cards. For example, the 1995 Pinnacle Bubble Gum card sells for around ' + money(gum.raw) + ' raw but ' + money(gum.psa10) + ' in PSA 10.' }
+      }
+    ]
+  },
+  body: worthBody
+}));
+sitemapUrls.push(SITE + '/how-much-are-griffey-cards-worth/');
 
 /* ---------- sitemap + robots ---------- */
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
