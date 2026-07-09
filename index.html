@@ -246,6 +246,20 @@
     color:rgba(255,255,255,.3);
     font-family:'Source Serif 4', serif; font-style:italic; font-size:14px;
   }
+  .mycoll-share{
+    display:inline-flex; align-items:center; gap:8px;
+    margin:2px 0 14px;
+    background:rgba(255,106,0,.12);
+    border:1px solid rgba(255,106,0,.5);
+    color:rgba(255,140,0,.95);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:12px; letter-spacing:.07em; text-transform:uppercase;
+    padding:9px 16px; border-radius:8px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .mycoll-share:hover{background:rgba(255,106,0,.22); box-shadow:0 0 16px rgba(255,106,0,.2);}
+  .mycoll-share svg{width:14px; height:14px; display:block;}
 
   /* ---------- YEAR STRIP ---------- */
   .year-strip{
@@ -2796,6 +2810,7 @@ function renderMyCollView(){
   const arrow = col => myCollSort.col===col ? (myCollSort.dir===1?' ▲':' ▼') : '';
   const act = col => myCollSort.col===col ? ' sort-active' : '';
   view.innerHTML = `
+    <button class="mycoll-share" id="myCollShareBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>Share My Collection</button>
     <div class="mycoll-col-labels">
       <span class="${act('name')}" data-col="name">Card${arrow('name')}</span>
       <span class="${act('yr')}" data-col="yr">Year${arrow('yr')}</span>
@@ -3073,6 +3088,161 @@ const SET_SLUG = {};
   });
 })();
 
+function collGoldGrad(ctx, x0, y0, x1, y1){
+  const g = ctx.createLinearGradient(x0, y0, x1, y1);
+  g.addColorStop(0, '#ffdf8e'); g.addColorStop(.5, '#f0b03a'); g.addColorStop(1, '#c98d22');
+  return g;
+}
+function collRoundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+function drawCollectionCard(cards, count, total){
+  const W = 1080, H = 1350;
+  const cv = document.createElement('canvas');
+  cv.width = W; cv.height = H;
+  const ctx = cv.getContext('2d');
+
+  let bg = ctx.createLinearGradient(0, 0, W * .4, H);
+  bg.addColorStop(0, '#131b29'); bg.addColorStop(.55, '#0c1119'); bg.addColorStop(1, '#0a0e14');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  let g1 = ctx.createRadialGradient(160, -80, 0, 160, -80, 720);
+  g1.addColorStop(0, 'rgba(240,176,58,.16)'); g1.addColorStop(1, 'rgba(240,176,58,0)');
+  ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H);
+  let g2 = ctx.createRadialGradient(W + 60, H + 80, 0, W + 60, H + 80, 620);
+  g2.addColorStop(0, 'rgba(240,176,58,.10)'); g2.addColorStop(1, 'rgba(240,176,58,0)');
+  ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = 'rgba(255,255,255,.024)'; ctx.lineWidth = 1;
+  for(let x = 0; x <= W; x += 60){ ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for(let y = 0; y <= H; y += 60){ ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+  ctx.fillStyle = '#fff';
+  ctx.font = '86px Anton';
+  ctx.fillText('MY GRIFFEY', 66, 150);
+  ctx.fillStyle = collGoldGrad(ctx, 66, 0, 700, 0);
+  ctx.fillText('COLLECTION', 66, 246);
+
+  ctx.font = '700 38px "Space Grotesk"';
+  const totStr = '$' + total.toLocaleString('en-US');
+  const tw = ctx.measureText(totStr).width;
+  collRoundRect(ctx, 66, 288, tw + 62, 64, 32);
+  ctx.fillStyle = collGoldGrad(ctx, 66, 288, 66 + tw + 62, 352);
+  ctx.fill();
+  ctx.fillStyle = '#0a0e14';
+  ctx.fillText(totStr, 97, 333);
+  ctx.font = '21px Oswald';
+  ctx.fillStyle = 'rgba(142,164,186,.9)';
+  ctx.fillText(count + (count === 1 ? ' CARD' : ' CARDS') + ' · REAL EBAY SOLD PRICES', 66 + tw + 84, 328);
+
+  const shown = cards.slice(0, 8);
+  const rowH = 92, gap = 12, startY = 396;
+  const gradeColors = {'PSA 10':'#f5c842', 'PSA 9':'#5cd8f0', 'PSA 8':'#5eeaa0', 'Raw':'#a0aab8'};
+  shown.forEach(function(c, i){
+    const y = startY + i * (rowH + gap);
+    collRoundRect(ctx, 66, y, W - 132, rowH, 16);
+    ctx.fillStyle = 'rgba(30,40,56,.78)'; ctx.fill();
+    ctx.strokeStyle = '#2a3a50'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    ctx.font = '44px Anton';
+    ctx.fillStyle = collGoldGrad(ctx, 0, y + 14, 0, y + rowH - 8);
+    ctx.textAlign = 'center';
+    ctx.fillText(String(i + 1), 112, y + 62);
+
+    ctx.font = '700 36px "Space Grotesk"';
+    ctx.fillStyle = '#f5c842';
+    ctx.textAlign = 'right';
+    const vStr = '$' + c.val.toLocaleString('en-US');
+    ctx.shadowColor = 'rgba(245,200,66,.45)'; ctx.shadowBlur = 18;
+    ctx.fillText(vStr, W - 100, y + 60);
+    ctx.shadowBlur = 0;
+    const vw = ctx.measureText(vStr).width;
+    ctx.textAlign = 'left';
+
+    const nameMax = (W - 100 - vw - 26) - 158;
+    ctx.font = '700 29px "Space Grotesk"';
+    ctx.fillStyle = '#fff';
+    let nm = c.name;
+    while(ctx.measureText(nm).width > nameMax && nm.length > 4) nm = nm.slice(0, -2);
+    if(nm !== c.name) nm = nm.replace(/\s+$/, '') + '…';
+    ctx.fillText(nm, 158, y + 42);
+
+    ctx.font = '20px Oswald';
+    ctx.fillStyle = '#8ea4ba';
+    const setStr = c.set + ' · ';
+    ctx.fillText(setStr, 158, y + 74);
+    ctx.fillStyle = gradeColors[c.grade] || '#8ea4ba';
+    ctx.fillText(c.grade, 158 + ctx.measureText(setStr).width, y + 74);
+  });
+
+  ctx.strokeStyle = 'rgba(240,176,58,.3)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(66, 1218); ctx.lineTo(W - 66, 1218); ctx.stroke();
+  ctx.textAlign = 'center';
+  ctx.font = '20px Oswald';
+  ctx.fillStyle = '#8ea4ba';
+  const extra = count > shown.length ? '+ ' + (count - shown.length) + ' MORE CARDS · ' : '';
+  ctx.fillText(extra + 'TRACK YOUR GRIFFEYS FREE · UPDATED DAILY', W / 2, 1260);
+  ctx.font = '700 46px "Space Grotesk"';
+  ctx.fillStyle = collGoldGrad(ctx, W / 2 - 300, 0, W / 2 + 300, 0);
+  ctx.fillText('griffeycardprices.com', W / 2, 1318);
+  ctx.textAlign = 'left';
+  return cv;
+}
+
+function shareCollection(){
+  const vals = getCollectionValue();
+  if(!vals.count){ showShareToast('Add cards to your collection first'); return; }
+  const cards = [];
+  Object.keys(collection).forEach(function(k){
+    const parts = k.split('|');
+    if(parts.length !== 4) return;
+    const yearData = DATA[Number(parts[0])];
+    if(!yearData) return;
+    for(const s of yearData){
+      if(s.set !== parts[1]) continue;
+      for(const sub of s.subsets){
+        if(sub.name !== parts[2]) continue;
+        const val = sub[parts[3]];
+        if(val !== null && val !== undefined){
+          const label = parts[3] === 'raw' ? 'Raw' : parts[3].toUpperCase().replace('PSA', 'PSA ');
+          cards.push({name: sub.name, set: s.set, grade: label, val: val});
+        }
+        break;
+      }
+      break;
+    }
+  });
+  cards.sort(function(a, b){ return b.val - a.val; });
+  const fontsReady = (document.fonts && document.fonts.load)
+    ? Promise.all([
+        document.fonts.load('86px Anton'),
+        document.fonts.load('700 36px "Space Grotesk"'),
+        document.fonts.load('20px Oswald')
+      ]).catch(function(){})
+    : Promise.resolve();
+  fontsReady.then(function(){
+    const cv = drawCollectionCard(cards, vals.count, vals.total);
+    cv.toBlob(function(blob){
+      if(!blob){ showShareToast('Could not create image'); return; }
+      const file = new File([blob], 'my-griffey-collection.png', {type: 'image/png'});
+      if(navigator.canShare && navigator.canShare({files: [file]})){
+        navigator.share({files: [file], title: 'My Griffey Collection'}).catch(function(){});
+      } else {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'my-griffey-collection.png';
+        document.body.appendChild(a); a.click(); a.remove();
+        showShareToast('Image saved');
+      }
+    }, 'image/png');
+  });
+}
+
 function showShareToast(msg){
   const t = document.getElementById('shareToast');
   t.textContent = msg;
@@ -3137,6 +3307,7 @@ document.getElementById('setList').addEventListener('click', function(e){
 
 document.getElementById('myCollBar').addEventListener('click', toggleMyCollView);
 document.getElementById('myCollView').addEventListener('click', function(e){
+  if(e.target.closest('#myCollShareBtn')){ shareCollection(); return; }
   const col = e.target.dataset.col;
   if(!col) return;
   if(myCollSort.col === col) myCollSort.dir *= -1;
