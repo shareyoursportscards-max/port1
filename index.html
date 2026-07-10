@@ -917,7 +917,7 @@
 
   /* ---------- HERO CARDS ---------- */
   .wrap{position:relative;}
-  .wrap > .hero{z-index:1; margin-top:70px;}
+  .wrap > .hero{z-index:1;}
   .hero-cards{
     position:absolute; right:340px; top:50%;
     transform:translateY(-50%);
@@ -956,36 +956,34 @@
     88%, 100%{left:115%;}
   }
   .hero:hover .hcw2{transform:rotate(0deg) translateY(-6px) scale(1.04);}
-  /* slabs propped above the hero panel — each with its own motion */
+  /* intro: side slabs pop up over the hero, hang, then launch off screen like home run balls */
   .hbcw{
-    position:absolute; z-index:0;
+    position:absolute; z-index:5;
     display:inline-block; line-height:0;
+    pointer-events:none;
+    opacity:0;
   }
-  .hbcw1{top:6px; left:60px; transform:rotate(-10deg); animation:hbcSkid 1s cubic-bezier(.22,.9,.26,1) 1.05s both;}
-  .hbcw2{top:14px; right:80px; transform:rotate(12deg); transform-origin:bottom center; animation:hbcFlip 1.1s cubic-bezier(.34,1.4,.44,1) 1.35s both;}
+  .hbcw1{top:-26px; left:20%; animation:hbcHomer1 2.7s linear 1s both;}
+  .hbcw2{top:-20px; right:20%; animation:hbcHomer2 2.7s linear 1.5s both;}
   .hbc{
     display:block; border-radius:7px;
-    box-shadow:0 8px 22px rgba(0,0,0,.5);
+    box-shadow:0 10px 26px rgba(0,0,0,.55);
   }
-  .hbcw1 .hbc{height:112px; animation:hbcSway 9s ease-in-out 2.4s infinite alternate;}
-  .hbcw2 .hbc{height:104px; animation:hbcBob 6.5s ease-in-out 3s infinite alternate;}
-  @keyframes hbcSkid{
-    from{transform:translateX(-150px) rotate(-26deg); opacity:0;}
-    50%{opacity:1;}
-    to{transform:translateX(0) rotate(-10deg); opacity:1;}
+  .hbcw1 .hbc{height:128px;}
+  .hbcw2 .hbc{height:118px;}
+  @keyframes hbcHomer1{
+    0%{transform:translateY(120px) rotate(-24deg) scale(.5); opacity:0; animation-timing-function:cubic-bezier(.2,.9,.3,1);}
+    18%{transform:translateY(0) rotate(-8deg) scale(1); opacity:1; animation-timing-function:ease-in-out;}
+    58%{transform:translateY(-10px) rotate(-4deg) scale(1.03); opacity:1; animation-timing-function:cubic-bezier(.6,-.1,.9,.4);}
+    92%{opacity:1;}
+    100%{transform:translate(-150px,-940px) rotate(-640deg) scale(.5); opacity:0;}
   }
-  @keyframes hbcFlip{
-    from{transform:perspective(700px) rotateX(88deg) rotate(12deg); opacity:0;}
-    35%{opacity:1;}
-    to{transform:perspective(700px) rotateX(0deg) rotate(12deg); opacity:1;}
-  }
-  @keyframes hbcSway{
-    from{transform:rotate(-2deg);}
-    to{transform:rotate(2.2deg);}
-  }
-  @keyframes hbcBob{
-    from{transform:translateY(0);}
-    to{transform:translateY(-7px);}
+  @keyframes hbcHomer2{
+    0%{transform:translateY(120px) rotate(22deg) scale(.5); opacity:0; animation-timing-function:cubic-bezier(.2,.9,.3,1);}
+    18%{transform:translateY(0) rotate(9deg) scale(1); opacity:1; animation-timing-function:ease-in-out;}
+    58%{transform:translateY(-12px) rotate(5deg) scale(1.03); opacity:1; animation-timing-function:cubic-bezier(.6,-.1,.9,.4);}
+    92%{opacity:1;}
+    100%{transform:translate(150px,-940px) rotate(680deg) scale(.5); opacity:0;}
   }
   @media (max-width:899px){ .hero-cards{display:none;} }
 
@@ -1412,10 +1410,10 @@
       margin:18px 0 2px;
     }
     .hcw2 .hc{height:132px;}
-    .hbcw1{left:14px; top:8px;}
-    .hbcw2{right:14px; top:16px;}
-    .hbcw1 .hbc{height:80px;}
-    .hbcw2 .hbc{height:74px;}
+    .hbcw1{left:8%; top:-12px;}
+    .hbcw2{right:8%; top:-8px;}
+    .hbcw1 .hbc{height:88px;}
+    .hbcw2 .hbc{height:80px;}
     .panel-head h2{font-size:22px;}
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
