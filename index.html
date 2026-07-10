@@ -917,23 +917,61 @@
 
   /* ---------- HERO CARD FAN ---------- */
   .hero-cards{
-    position:absolute; right:330px; top:50%;
+    position:absolute; right:320px; top:50%;
     transform:translateY(-50%);
-    width:236px; height:130px;
+    width:300px; height:158px;
     z-index:2; pointer-events:none;
   }
-  .hc{
+  .hcw{
     position:absolute; bottom:0;
-    border-radius:7px;
-    box-shadow:0 10px 26px rgba(0,0,0,.55), 0 0 16px rgba(240,176,58,.1);
+    display:inline-block; line-height:0;
+    transition:transform .5s cubic-bezier(.22,.9,.26,1);
+    will-change:transform;
   }
-  .hc1{left:6px; height:100px; transform:rotate(-10deg); opacity:.9; animation:hcFloat 7s ease-in-out -2s infinite alternate;}
-  .hc2{left:50%; margin-left:-38px; height:124px; z-index:2; animation:hcFloat 5.5s ease-in-out infinite alternate;}
-  .hc3{right:6px; height:100px; transform:rotate(10deg); opacity:.9; animation:hcFloat 8s ease-in-out -4s infinite alternate;}
+  .hcw1{left:10px; bottom:8px; transform:rotate(-12deg); animation:hcDeal1 .9s cubic-bezier(.22,.9,.26,1) .25s both;}
+  .hcw2{left:50%; margin-left:-47px; z-index:2; overflow:hidden; border-radius:8px; animation:hcDeal2 1s cubic-bezier(.22,.9,.26,1) .7s both;}
+  .hcw3{right:10px; bottom:8px; transform:rotate(12deg); animation:hcDeal3 .9s cubic-bezier(.22,.9,.26,1) .45s both;}
+  .hc{
+    display:block;
+    border-radius:8px;
+    box-shadow:0 12px 30px rgba(0,0,0,.6), 0 0 18px rgba(240,176,58,.1);
+  }
+  .hcw1 .hc, .hcw3 .hc{height:118px; animation:hcFloat 7s ease-in-out -2s infinite alternate;}
+  .hcw3 .hc{animation-duration:8.5s; animation-delay:-4.5s;}
+  .hcw2 .hc{height:152px;}
+  .hc-shine{
+    position:absolute; top:-10%; bottom:-10%; left:-60%; width:55%;
+    pointer-events:none;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.3), transparent);
+    transform:skewX(-18deg);
+    animation:hcShine 5.5s ease-in-out 2s infinite;
+  }
+  @keyframes hcDeal1{
+    from{transform:translate(50px,160px) rotate(-32deg); opacity:0;}
+    45%{opacity:1;}
+    to{transform:rotate(-12deg); opacity:1;}
+  }
+  @keyframes hcDeal2{
+    from{transform:translateY(180px) rotate(9deg); opacity:0;}
+    45%{opacity:1;}
+    to{transform:none; opacity:1;}
+  }
+  @keyframes hcDeal3{
+    from{transform:translate(-50px,160px) rotate(32deg); opacity:0;}
+    45%{opacity:1;}
+    to{transform:rotate(12deg); opacity:1;}
+  }
   @keyframes hcFloat{
-    from{translate:0 0;}
-    to{translate:0 -7px;}
+    from{transform:translateY(0);}
+    to{transform:translateY(-9px);}
   }
+  @keyframes hcShine{
+    0%, 58%{left:-60%;}
+    88%, 100%{left:115%;}
+  }
+  .hero:hover .hcw1{transform:rotate(-17deg) translate(-16px,-5px);}
+  .hero:hover .hcw2{transform:translateY(-8px) scale(1.05);}
+  .hero:hover .hcw3{transform:rotate(17deg) translate(16px,-5px);}
   @media (max-width:1099px){ .hero-cards{display:none;} }
 
   /* ---------- DEAL CHECKER ---------- */
@@ -1359,10 +1397,12 @@
       justify-content:center; align-items:flex-end;
       margin:18px 0 2px;
     }
-    .hc{position:static;}
-    .hc1{transform:rotate(-10deg) translate(12px,-2px);}
-    .hc2{height:118px; margin-left:0;}
-    .hc3{transform:rotate(10deg) translate(-12px,-2px);}
+    .hcw{position:static;}
+    .hcw1{transform:rotate(-11deg) translate(14px,-2px);}
+    .hcw2{margin-left:0;}
+    .hcw3{transform:rotate(11deg) translate(-14px,-2px);}
+    .hcw2 .hc{height:132px;}
+    .hcw1 .hc, .hcw3 .hc{height:102px;}
     .panel-head h2{font-size:22px;}
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
@@ -1443,9 +1483,9 @@
       <span>Updated <b id="statUpdated">July 2026</b></span>
     </div>
     <div class="hero-cards" aria-hidden="true">
-      <img class="hc hc1" src="img/hero-mirrorblue.jpg" alt="">
-      <img class="hc hc2" src="img/hero-refractor.jpg" alt="">
-      <img class="hc hc3" src="img/hero-hotgloves.jpg" alt="">
+      <span class="hcw hcw1"><img class="hc" src="img/hero-mirrorblue.jpg" alt=""></span>
+      <span class="hcw hcw2"><img class="hc" src="img/hero-refractor.jpg" alt=""><i class="hc-shine"></i></span>
+      <span class="hcw hcw3"><img class="hc" src="img/hero-hotgloves.jpg" alt=""></span>
     </div>
     <button class="dc-btn hero-dc" id="dcBtn"><span class="dc-bag">💰</span> Check Comps</button>
   </div>
