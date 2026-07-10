@@ -80,7 +80,7 @@ function page(o) {
     '<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">\n' +
     (o.jsonld ? '<script type="application/ld+json">' + JSON.stringify(o.jsonld) + '</script>\n' : '') +
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
-    '<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">\n' +
+    '<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">\n' +
     '<style>' + CSS + '</style>\n</head>\n<body>\n<div class="wrap">\n' +
     '<a class="home" href="/">◂ Griffey Card Prices — interactive guide</a>\n' +
     o.body +
@@ -90,14 +90,14 @@ function page(o) {
 }
 
 const CSS = `
-:root{--bg:#0a0e14;--surface:#1c2533;--border:#2a3a50;--gold:#f0b03a;--text:#eaf0f6;--dim:#8ea4ba;
---raw:#a0aab8;--psa8:#5eeaa0;--psa9:#5cd8f0;--psa10:#f5c842;}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);background-image:linear-gradient(180deg,#0a0e14 0%,#0f1520 50%,#0a0e14 100%);
-color:var(--text);font-family:'Oswald',sans-serif;-webkit-font-smoothing:antialiased}
+:root{--bg:#06090f;--surface:#0f1622;--border:#1d2c40;--gold:#2fe6c7;--text:#edf3f9;--dim:#8fa6bd;
+--raw:#9fb0c2;--psa8:#5eeaa0;--psa9:#5cd8f0;--psa10:#f0c75b;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);background-image:linear-gradient(180deg,#06090f 0%,#0a1019 50%,#06090f 100%);
+color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding:18px 14px 40px}
 .home{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;letter-spacing:.5px;margin-bottom:14px}
-h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(19px,4vw,27px);color:var(--gold);margin:4px 0 6px}
-h2{font-family:'Space Grotesk',sans-serif;font-size:17px;color:var(--text);margin:26px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
+h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(19px,4vw,27px);color:var(--gold);margin:4px 0 6px}
+h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px;color:var(--text);margin:26px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
 h2 a{color:var(--text);text-decoration:none}h2 a:hover{color:var(--gold)}
 .sub{color:var(--dim);font-size:13.5px;line-height:1.55;margin:0 0 14px}
 .yearnav{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 6px}
@@ -116,8 +116,8 @@ td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.p
 .report .up{font-size:inherit}.report .down{font-size:inherit}
 ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
-.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);color:rgba(170,115,55,.6);font-size:11.5px;line-height:1.8;text-align:center}
-.foot a{color:rgba(170,115,55,.75);text-decoration:none}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
+.foot a{color:rgba(107,160,150,.8);text-decoration:none}
 @media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 4px}}
 `;
 
