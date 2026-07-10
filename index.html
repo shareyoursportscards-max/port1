@@ -936,54 +936,55 @@
     transform:translateY(-50%);
     z-index:4;
     font-family:'Space Grotesk', sans-serif;
-    font-weight:700; font-size:18px;
-    letter-spacing:.05em; text-transform:uppercase;
-    padding:21px 32px;
-    border:2px solid rgba(240,176,58,.85);
+    font-weight:700; font-size:17px;
+    letter-spacing:.07em; text-transform:uppercase;
+    padding:20px 30px;
+    border:1.5px solid rgba(94,234,160,.6);
     border-radius:14px;
-    background:linear-gradient(135deg, #8bf7bd 0%, #5eeaa0 45%, #2fbf7a 100%);
-    color:#07150e;
+    background:
+      radial-gradient(ellipse 120% 140% at 20% -30%, rgba(94,234,160,.16) 0%, transparent 55%),
+      linear-gradient(160deg, #123023 0%, #0a1d13 60%, #07150e 100%);
+    color:#5eeaa0;
     overflow:hidden;
     box-shadow:
-      0 3px 0 rgba(170,115,25,.9),
-      0 10px 28px rgba(94,234,160,.35),
-      0 0 16px rgba(240,176,58,.25),
-      inset 0 1px 0 rgba(255,255,255,.4);
-    transition:transform .15s ease, box-shadow .15s ease;
+      0 8px 24px rgba(0,0,0,.45),
+      0 0 18px rgba(94,234,160,.15),
+      inset 0 1px 0 rgba(94,234,160,.25);
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
   }
   .hero-dc::after{
     content:"";
     position:absolute; top:-40%; bottom:-40%;
     left:-80px; width:46px;
-    background:linear-gradient(105deg, transparent, rgba(255,255,255,.6), transparent);
+    background:linear-gradient(105deg, transparent, rgba(94,234,160,.22), transparent);
     transform:skewX(-20deg);
-    animation:dcShine 3.6s ease-in-out infinite;
+    animation:dcShine 5s ease-in-out infinite;
   }
   @keyframes dcShine{
-    0%, 55%{left:-80px;}
-    85%, 100%{left:calc(100% + 40px);}
+    0%, 62%{left:-80px;}
+    88%, 100%{left:calc(100% + 40px);}
   }
   .hero-dc:hover{
-    transform:translateY(-50%) scale(1.05);
+    transform:translateY(-50%) scale(1.03);
+    border-color:rgba(94,234,160,.95);
     box-shadow:
-      0 3px 0 rgba(170,115,25,.9),
-      0 12px 36px rgba(94,234,160,.5),
-      0 0 20px rgba(240,176,58,.35),
-      inset 0 1px 0 rgba(255,255,255,.4);
+      0 10px 30px rgba(0,0,0,.5),
+      0 0 26px rgba(94,234,160,.35),
+      inset 0 1px 0 rgba(94,234,160,.35);
   }
   .hero-dc.active{
-    background:linear-gradient(135deg, #2fbf7a 0%, #27a86a 100%);
+    background:linear-gradient(160deg, #5eeaa0 0%, #2fbf7a 100%);
     color:#07150e;
-    transform:translateY(calc(-50% + 2px));
+    border-color:rgba(94,234,160,1);
+    transform:translateY(calc(-50% + 1px));
     box-shadow:
-      0 1px 0 rgba(170,115,25,.9),
-      0 4px 16px rgba(94,234,160,.25),
-      inset 0 1px 0 rgba(255,255,255,.25);
+      0 4px 16px rgba(94,234,160,.3),
+      inset 0 1px 0 rgba(255,255,255,.35);
   }
   .dc-bag{
-    font-size:26px;
-    vertical-align:-3px;
-    margin-right:2px;
+    font-size:20px;
+    vertical-align:-2px;
+    margin-right:4px;
     display:inline-block;
   }
   .dc-panel{
