@@ -33,6 +33,39 @@ const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: '
 const isoToday = new Date().toISOString().slice(0, 10);
 const years = Object.keys(DATA).map(Number).sort((a, b) => a - b);
 
+/* ---------- price history logger ----------
+   Appends to price-history.json: { "year|set|card": { grade: [[iso-date, value], ...] } }
+   Change-only: a point is recorded when a value first appears or differs from the
+   last logged value. Re-running on the same day revises today's point in place. */
+const HIST_FILE = path.join(ROOT, 'price-history.json');
+(function logPriceHistory() {
+  let hist = {};
+  try { hist = JSON.parse(fs.readFileSync(HIST_FILE, 'utf8')); } catch (e) { /* first run */ }
+  let added = 0, revised = 0;
+  for (const year of Object.keys(DATA)) {
+    for (const set of DATA[year]) {
+      for (const sub of set.subsets) {
+        const key = year + '|' + set.set + '|' + sub.name;
+        for (const g of ['raw', 'psa8', 'psa9', 'psa10']) {
+          const val = sub[g];
+          if (val == null) continue;
+          const series = (hist[key] = hist[key] || {});
+          const arr = (series[g] = series[g] || []);
+          const last = arr[arr.length - 1];
+          if (last && last[0] === isoToday) {
+            if (last[1] !== val) { last[1] = val; revised++; }
+          } else if (!last || last[1] !== val) {
+            arr.push([isoToday, val]);
+            added++;
+          }
+        }
+      }
+    }
+  }
+  fs.writeFileSync(HIST_FILE, JSON.stringify(hist));
+  console.log('Price history: +' + added + ' new points' + (revised ? ', ' + revised + ' revised today' : '') + ' -> price-history.json');
+})();
+
 function arrow(sub, g) {
   const prev = sub['prev_' + g], cur = sub[g];
   if (prev == null || cur == null || prev === cur) return '';
