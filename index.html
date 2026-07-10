@@ -915,30 +915,30 @@
 
   .insights-toggle,.blog-more{transition:all .2s ease, letter-spacing .3s ease;}
 
-  /* ---------- HERO CARD FAN ---------- */
+  /* ---------- HERO CARDS ---------- */
+  .wrap{position:relative;}
+  .wrap > .hero{z-index:1;}
   .hero-cards{
-    position:absolute; right:320px; top:50%;
+    position:absolute; right:340px; top:50%;
     transform:translateY(-50%);
-    width:300px; height:158px;
-    z-index:2; pointer-events:none;
+    z-index:2; pointer-events:none; line-height:0;
   }
   .hcw{
-    position:absolute; bottom:0;
-    display:inline-block; line-height:0;
+    display:inline-block; line-height:0; position:relative;
     transition:transform .5s cubic-bezier(.22,.9,.26,1);
     will-change:transform;
   }
-  .hcw1{left:10px; bottom:8px; transform:rotate(-12deg); animation:hcDeal1 .9s cubic-bezier(.22,.9,.26,1) .25s both;}
-  .hcw2{left:50%; margin-left:-47px; z-index:2; overflow:hidden; border-radius:8px; animation:hcDeal2 1s cubic-bezier(.22,.9,.26,1) .7s both;}
-  .hcw3{right:10px; bottom:8px; transform:rotate(12deg); animation:hcDeal3 .9s cubic-bezier(.22,.9,.26,1) .45s both;}
+  .hcw2{
+    overflow:hidden; border-radius:8px;
+    transform:rotate(4deg);
+    animation:hcDeal2 1s cubic-bezier(.22,.9,.26,1) .35s both;
+  }
   .hc{
     display:block;
     border-radius:8px;
     box-shadow:0 12px 30px rgba(0,0,0,.6), 0 0 18px rgba(240,176,58,.1);
   }
-  .hcw1 .hc, .hcw3 .hc{height:118px; animation:hcFloat 7s ease-in-out -2s infinite alternate;}
-  .hcw3 .hc{animation-duration:8.5s; animation-delay:-4.5s;}
-  .hcw2 .hc{height:152px;}
+  .hcw2 .hc{height:148px;}
   .hc-shine{
     position:absolute; top:-10%; bottom:-10%; left:-60%; width:55%;
     pointer-events:none;
@@ -946,33 +946,35 @@
     transform:skewX(-18deg);
     animation:hcShine 5.5s ease-in-out 2s infinite;
   }
-  @keyframes hcDeal1{
-    from{transform:translate(50px,160px) rotate(-32deg); opacity:0;}
-    45%{opacity:1;}
-    to{transform:rotate(-12deg); opacity:1;}
-  }
   @keyframes hcDeal2{
-    from{transform:translateY(180px) rotate(9deg); opacity:0;}
+    from{transform:translateY(170px) rotate(14deg); opacity:0;}
     45%{opacity:1;}
-    to{transform:none; opacity:1;}
-  }
-  @keyframes hcDeal3{
-    from{transform:translate(-50px,160px) rotate(32deg); opacity:0;}
-    45%{opacity:1;}
-    to{transform:rotate(12deg); opacity:1;}
-  }
-  @keyframes hcFloat{
-    from{transform:translateY(0);}
-    to{transform:translateY(-9px);}
+    to{transform:rotate(4deg); opacity:1;}
   }
   @keyframes hcShine{
     0%, 58%{left:-60%;}
     88%, 100%{left:115%;}
   }
-  .hero:hover .hcw1{transform:rotate(-17deg) translate(-16px,-5px);}
-  .hero:hover .hcw2{transform:translateY(-8px) scale(1.05);}
-  .hero:hover .hcw3{transform:rotate(17deg) translate(16px,-5px);}
-  @media (max-width:1099px){ .hero-cards{display:none;} }
+  .hero:hover .hcw2{transform:rotate(0deg) translateY(-6px) scale(1.04);}
+  /* slabs tucked behind the hero panel, peeking over the top corners */
+  .hbc{
+    position:absolute; z-index:0;
+    border-radius:7px;
+    box-shadow:0 8px 22px rgba(0,0,0,.5);
+  }
+  .hbc1{top:-30px; right:150px; height:110px; transform:rotate(15deg); animation:hbcRise1 .9s cubic-bezier(.22,.9,.26,1) 1.15s both;}
+  .hbc2{top:-24px; left:150px; height:96px; transform:rotate(-13deg); animation:hbcRise2 .9s cubic-bezier(.22,.9,.26,1) 1.3s both;}
+  @keyframes hbcRise1{
+    from{transform:translateY(70px) rotate(24deg); opacity:0;}
+    40%{opacity:1;}
+    to{transform:translateY(0) rotate(15deg); opacity:1;}
+  }
+  @keyframes hbcRise2{
+    from{transform:translateY(70px) rotate(-22deg); opacity:0;}
+    40%{opacity:1;}
+    to{transform:translateY(0) rotate(-13deg); opacity:1;}
+  }
+  @media (max-width:899px){ .hero-cards{display:none;} }
 
   /* ---------- DEAL CHECKER ---------- */
   .dc-btn{
@@ -1393,16 +1395,12 @@
     .hero-dc:hover{transform:none;}
     .hero-cards{
       display:flex; position:static; transform:none;
-      width:auto; height:auto;
-      justify-content:center; align-items:flex-end;
+      justify-content:center;
       margin:18px 0 2px;
     }
-    .hcw{position:static;}
-    .hcw1{transform:rotate(-11deg) translate(14px,-2px);}
-    .hcw2{margin-left:0;}
-    .hcw3{transform:rotate(11deg) translate(-14px,-2px);}
     .hcw2 .hc{height:132px;}
-    .hcw1 .hc, .hcw3 .hc{height:102px;}
+    .hbc1{right:22px; top:-20px; height:76px;}
+    .hbc2{left:22px; top:-16px; height:66px;}
     .panel-head h2{font-size:22px;}
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
@@ -1473,6 +1471,10 @@
 <div class="share-toast" id="shareToast">Link copied</div>
 <div class="wrap">
 
+  <div class="hero-bg-cards" aria-hidden="true">
+    <img class="hbc hbc1" src="img/hero-mirrorblue.jpg" alt="">
+    <img class="hbc hbc2" src="img/hero-hotgloves.jpg" alt="">
+  </div>
   <div class="hero">
     <h1>Ken Griffey Jr.</h1>
     <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999 <span class="hero-divider">·</span> Real eBay Sold Data</p>
@@ -1483,9 +1485,7 @@
       <span>Updated <b id="statUpdated">July 2026</b></span>
     </div>
     <div class="hero-cards" aria-hidden="true">
-      <span class="hcw hcw1"><img class="hc" src="img/hero-mirrorblue.jpg" alt=""></span>
       <span class="hcw hcw2"><img class="hc" src="img/hero-refractor.jpg" alt=""><i class="hc-shine"></i></span>
-      <span class="hcw hcw3"><img class="hc" src="img/hero-hotgloves.jpg" alt=""></span>
     </div>
     <button class="dc-btn hero-dc" id="dcBtn"><span class="dc-bag">💰</span> Check Comps</button>
   </div>
