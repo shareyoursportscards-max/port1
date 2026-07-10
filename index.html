@@ -915,6 +915,27 @@
 
   .insights-toggle,.blog-more{transition:all .2s ease, letter-spacing .3s ease;}
 
+  /* ---------- HERO CARD FAN ---------- */
+  .hero-cards{
+    position:absolute; right:330px; top:50%;
+    transform:translateY(-50%);
+    width:236px; height:130px;
+    z-index:2; pointer-events:none;
+  }
+  .hc{
+    position:absolute; bottom:0;
+    border-radius:7px;
+    box-shadow:0 10px 26px rgba(0,0,0,.55), 0 0 16px rgba(240,176,58,.1);
+  }
+  .hc1{left:6px; height:100px; transform:rotate(-10deg); opacity:.9; animation:hcFloat 7s ease-in-out -2s infinite alternate;}
+  .hc2{left:50%; margin-left:-38px; height:124px; z-index:2; animation:hcFloat 5.5s ease-in-out infinite alternate;}
+  .hc3{right:6px; height:100px; transform:rotate(10deg); opacity:.9; animation:hcFloat 8s ease-in-out -4s infinite alternate;}
+  @keyframes hcFloat{
+    from{translate:0 0;}
+    to{translate:0 -7px;}
+  }
+  @media (max-width:1099px){ .hero-cards{display:none;} }
+
   /* ---------- DEAL CHECKER ---------- */
   .dc-btn{
     font-family:'Space Grotesk', sans-serif;
@@ -1332,6 +1353,16 @@
       text-align:center;
     }
     .hero-dc:hover{transform:none;}
+    .hero-cards{
+      display:flex; position:static; transform:none;
+      width:auto; height:auto;
+      justify-content:center; align-items:flex-end;
+      margin:18px 0 2px;
+    }
+    .hc{position:static;}
+    .hc1{transform:rotate(-10deg) translate(12px,-2px);}
+    .hc2{height:118px; margin-left:0;}
+    .hc3{transform:rotate(10deg) translate(-12px,-2px);}
     .panel-head h2{font-size:22px;}
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
@@ -1410,6 +1441,11 @@
       <span><b id="statPrices">—</b> tracked prices</span>
       <span><b id="statSets">—</b> sets</span>
       <span>Updated <b id="statUpdated">July 2026</b></span>
+    </div>
+    <div class="hero-cards" aria-hidden="true">
+      <img class="hc hc1" src="img/hero-mirrorblue.jpg" alt="">
+      <img class="hc hc2" src="img/hero-refractor.jpg" alt="">
+      <img class="hc hc3" src="img/hero-hotgloves.jpg" alt="">
     </div>
     <button class="dc-btn hero-dc" id="dcBtn"><span class="dc-bag">💰</span> Check Comps</button>
   </div>
