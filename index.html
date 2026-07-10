@@ -89,11 +89,11 @@
       linear-gradient(160deg, #111826 0%, #0c1119 55%, #0a0e14 100%);
     border:1px solid rgba(240,176,58,.16);
     border-radius:16px;
-    padding:30px 36px 26px;
+    padding:20px 36px 16px;
     color:var(--text);
     overflow:hidden;
     box-shadow:0 12px 40px rgba(0,0,0,.4);
-    margin-bottom:34px;
+    margin-bottom:24px;
   }
   .hero::before{
     content:"";
@@ -126,7 +126,7 @@
   .hero-rule{
     position:relative; z-index:3;
     width:64px; height:2px;
-    margin:18px 0 14px;
+    margin:12px 0 10px;
     background:linear-gradient(90deg, var(--gold) 0%, rgba(240,176,58,0) 100%);
     border-radius:1px;
   }
@@ -919,73 +919,35 @@
   .wrap{position:relative;}
   .wrap > .hero{z-index:1;}
   .hero-cards{
-    position:absolute; right:340px; top:50%;
-    transform:translateY(-50%);
-    z-index:2; pointer-events:none; line-height:0;
-  }
-  .hcw{
-    display:inline-block; line-height:0; position:relative;
-    transition:transform .5s cubic-bezier(.22,.9,.26,1);
-    will-change:transform;
+    position:absolute; right:-26px; top:50%;
+    transform:translateY(-50%) rotate(8deg);
+    z-index:1; pointer-events:none; line-height:0;
   }
   .hcw2{
+    display:inline-block; line-height:0; position:relative;
     overflow:hidden; border-radius:8px;
-    transform:rotate(4deg);
-    animation:hcDeal2 1s cubic-bezier(.22,.9,.26,1) .35s both;
+    animation:hcEmerge 1.4s cubic-bezier(.22,.9,.26,1) .3s both;
   }
   .hc{
     display:block;
+    height:230px;
     border-radius:8px;
-    box-shadow:0 12px 30px rgba(0,0,0,.6), 0 0 18px rgba(240,176,58,.1);
   }
-  .hcw2 .hc{height:148px;}
   .hc-shine{
     position:absolute; top:-10%; bottom:-10%; left:-60%; width:55%;
     pointer-events:none;
-    background:linear-gradient(100deg, transparent, rgba(255,255,255,.3), transparent);
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.22), transparent);
     transform:skewX(-18deg);
-    animation:hcShine 5.5s ease-in-out 2s infinite;
+    animation:hcShine 7s ease-in-out 2.2s infinite;
   }
-  @keyframes hcDeal2{
-    from{transform:translateY(170px) rotate(14deg); opacity:0;}
-    45%{opacity:1;}
-    to{transform:rotate(4deg); opacity:1;}
+  @keyframes hcEmerge{
+    from{opacity:0; transform:translateX(70px);}
+    to{opacity:.42; transform:translateX(0);}
   }
   @keyframes hcShine{
-    0%, 58%{left:-60%;}
-    88%, 100%{left:115%;}
+    0%, 64%{left:-60%;}
+    90%, 100%{left:115%;}
   }
-  .hero:hover .hcw2{transform:rotate(0deg) translateY(-6px) scale(1.04);}
-  /* intro: side slabs pop up over the hero, hang, then launch off screen like home run balls */
-  .hbcw{
-    position:absolute; z-index:5;
-    display:inline-block; line-height:0;
-    pointer-events:none;
-    opacity:0;
-  }
-  .hbcw1{top:-26px; left:20%; animation:hbcHomer1 2.7s linear 1s both;}
-  .hbcw2{top:-20px; right:20%; animation:hbcHomer2 2.7s linear 1.5s both;}
-  .hbc{
-    display:block; border-radius:7px;
-    box-shadow:0 10px 26px rgba(0,0,0,.55);
-  }
-  .hbcw1 .hbc{height:128px;}
-  .hbcw2 .hbc{height:118px;}
-  @keyframes hbcHomer1{
-    0%{transform:translateY(120px) rotate(-24deg) scale(.5); opacity:0; animation-timing-function:cubic-bezier(.2,.9,.3,1);}
-    18%{transform:translateY(0) rotate(-8deg) scale(1); opacity:1; animation-timing-function:ease-in-out;}
-    58%{transform:translateY(-10px) rotate(-4deg) scale(1.03); opacity:1; animation-timing-function:cubic-bezier(.6,-.1,.9,.4);}
-    92%{opacity:1;}
-    100%{transform:translate(-150px,-940px) rotate(-640deg) scale(.5); opacity:0;}
-  }
-  @keyframes hbcHomer2{
-    0%{transform:translateY(120px) rotate(22deg) scale(.5); opacity:0; animation-timing-function:cubic-bezier(.2,.9,.3,1);}
-    18%{transform:translateY(0) rotate(9deg) scale(1); opacity:1; animation-timing-function:ease-in-out;}
-    58%{transform:translateY(-12px) rotate(5deg) scale(1.03); opacity:1; animation-timing-function:cubic-bezier(.6,-.1,.9,.4);}
-    92%{opacity:1;}
-    100%{transform:translate(150px,-940px) rotate(680deg) scale(.5); opacity:0;}
-  }
-  @media (max-width:899px){ .hero-cards{display:none;} }
 
   /* ---------- DEAL CHECKER ---------- */
   .dc-btn{
@@ -1392,7 +1354,7 @@
 
   @media (max-width:640px){
     .wrap{padding:16px 8px 60px;}
-    .hero{padding:22px 18px 18px; border-radius:12px;}
+    .hero{padding:16px 16px 14px; border-radius:12px;}
     .hero-sub{font-size:13px;}
     .hero-stats{gap:4px 16px; font-size:12px;}
     .hero-dc{
@@ -1404,16 +1366,8 @@
       text-align:center;
     }
     .hero-dc:hover{transform:none;}
-    .hero-cards{
-      display:flex; position:static; transform:none;
-      justify-content:center;
-      margin:18px 0 2px;
-    }
-    .hcw2 .hc{height:132px;}
-    .hbcw1{left:8%; top:-12px;}
-    .hbcw2{right:8%; top:-8px;}
-    .hbcw1 .hbc{height:88px;}
-    .hbcw2 .hbc{height:80px;}
+    .hero-cards{right:-22px;}
+    .hc{height:170px;}
     .panel-head h2{font-size:22px;}
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
@@ -1484,10 +1438,6 @@
 <div class="share-toast" id="shareToast">Link copied</div>
 <div class="wrap">
 
-  <div class="hero-bg-cards" aria-hidden="true">
-    <span class="hbcw hbcw1"><img class="hbc" src="img/hero-mirrorblue.jpg" alt=""></span>
-    <span class="hbcw hbcw2"><img class="hbc" src="img/hero-hotgloves.jpg" alt=""></span>
-  </div>
   <div class="hero">
     <h1>Ken Griffey Jr.</h1>
     <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999</p>
