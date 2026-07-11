@@ -164,7 +164,7 @@ td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.p
 .cardfig img{width:170px;height:auto;border-radius:8px;border:1px solid var(--border);display:block;background:#fff}
 .cardfig figcaption{color:var(--dim);font-size:11.5px;margin-top:5px;text-align:center}
 td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
-img.setbanner{width:100%;height:auto;border-radius:10px;border:1px solid var(--border);margin:2px 0 12px;display:block}
+img.ogthumb{width:300px;max-width:60%;height:auto;border-radius:8px;border:1px solid var(--border);margin:28px 0 0;display:block;opacity:.9}
 .report{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 15px;margin:10px 0;font-size:13.5px;line-height:1.65;color:var(--dim)}
 .report b{color:var(--text)}.report .rdate{color:var(--gold);font-size:12px;letter-spacing:.6px;display:block;margin-bottom:5px}
 .report .up{font-size:inherit}.report .down{font-size:inherit}
@@ -198,8 +198,7 @@ for (const y of years) {
   let body = yearNav(y) +
     '<h1>' + y + ' Ken Griffey Jr. Cards — Values &amp; Price Guide</h1>' +
     '<p class="sub">Current market values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y +
-    ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>' +
-    '<img class="setbanner" src="/img/og/' + y + '.jpg" alt="' + y + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630">';
+    ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
 
   for (const s of sets) {
     let sl = slug(s.set.replace(/^\d{4}\s+/, ''));
@@ -207,7 +206,7 @@ for (const y of years) {
     const rel = y + '/' + sl;
     const withOdds = s.subsets.some(x => x.odds);
 
-    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + imageStrip(y, s.set, s.subsets) + cardTable(s.subsets, withOdds);
+    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + cardTable(s.subsets, withOdds);
 
     /* set page */
     const top = s.subsets.reduce((m, x) => Math.max(m, x.psa10 || 0, x.psa9 || 0, x.raw || 0, x.psa8 || 0), 0);
@@ -217,9 +216,9 @@ for (const y of years) {
       '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings: ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked' +
       (top ? ', topping out at ' + money(top) : '') + '. Updated daily.</p>' +
-      '<img class="setbanner" src="/img/og/' + y + '-' + sl + '.jpg" alt="' + esc(s.set) + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630">' +
-      imageStrip(y, s.set, s.subsets) +
       cardTable(s.subsets, withOdds) +
+      imageStrip(y, s.set, s.subsets) +
+      '<img class="ogthumb" src="/img/og/' + y + '-' + sl + '.jpg" alt="' + esc(s.set) + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">' +
       '<h2>More ' + y + ' Griffey Sets</h2><ul class="plain">' +
       sets.filter(o => o !== s).map(o => '<li><a href="/' + y + '/' + slug(o.set.replace(/^\d{4}\s+/, '')) + '/">' + esc(o.set) + '</a></li>').join('') +
       '</ul>';
@@ -250,6 +249,7 @@ for (const y of years) {
       body += '<div class="report"><span class="rdate">' + esc(r.date) + '</span>' + r.body + '</div>';
     }
   }
+  body += '<img class="ogthumb" src="/img/og/' + y + '.jpg" alt="' + y + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">';
 
   write(String(y), page({
     title: y + ' Ken Griffey Jr. Cards — Values & Price Guide',
