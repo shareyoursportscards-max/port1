@@ -223,10 +223,10 @@ for (const y of years) {
       (top ? ', topping out at ' + money(top) : '') + '. Updated daily.</p>' +
       cardTable(s.subsets, withOdds) +
       imageStrip(y, s.set, s.subsets) +
-      '<img class="ogthumb" src="/img/og/' + y + '-' + sl + '.jpg" alt="' + esc(s.set) + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">' +
       '<h2>More ' + y + ' Griffey Sets</h2><ul class="plain">' +
       sets.filter(o => o !== s).map(o => '<li><a href="/' + y + '/' + slug(o.set.replace(/^\d{4}\s+/, '')) + '/">' + esc(o.set) + '</a></li>').join('') +
-      '</ul>';
+      '</ul>' +
+      '<img class="ogthumb" src="/img/og/' + y + '-' + sl + '.jpg" alt="' + esc(s.set) + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">';
     write(rel, page({
       title: esc(s.set) + ' Ken Griffey Jr. Card Values | Raw & PSA Prices',
       desc: s.set + ' Ken Griffey Jr. card values — ' + names + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
