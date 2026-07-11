@@ -164,6 +164,7 @@ td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.p
 .cardfig img{width:170px;height:auto;border-radius:8px;border:1px solid var(--border);display:block;background:#fff}
 .cardfig figcaption{color:var(--dim);font-size:11.5px;margin-top:5px;text-align:center}
 td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
+img.setbanner{width:100%;height:auto;border-radius:10px;border:1px solid var(--border);margin:2px 0 12px;display:block}
 .report{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 15px;margin:10px 0;font-size:13.5px;line-height:1.65;color:var(--dim)}
 .report b{color:var(--text)}.report .rdate{color:var(--gold);font-size:12px;letter-spacing:.6px;display:block;margin-bottom:5px}
 .report .up{font-size:inherit}.report .down{font-size:inherit}
@@ -197,7 +198,8 @@ for (const y of years) {
   let body = yearNav(y) +
     '<h1>' + y + ' Ken Griffey Jr. Cards — Values &amp; Price Guide</h1>' +
     '<p class="sub">Current market values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y +
-    ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
+    ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>' +
+    '<img class="setbanner" src="/img/og/' + y + '.jpg" alt="' + y + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630">';
 
   for (const s of sets) {
     let sl = slug(s.set.replace(/^\d{4}\s+/, ''));
@@ -215,17 +217,17 @@ for (const y of years) {
       '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings: ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked' +
       (top ? ', topping out at ' + money(top) : '') + '. Updated daily.</p>' +
+      '<img class="setbanner" src="/img/og/' + y + '-' + sl + '.jpg" alt="' + esc(s.set) + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630">' +
       imageStrip(y, s.set, s.subsets) +
       cardTable(s.subsets, withOdds) +
       '<h2>More ' + y + ' Griffey Sets</h2><ul class="plain">' +
       sets.filter(o => o !== s).map(o => '<li><a href="/' + y + '/' + slug(o.set.replace(/^\d{4}\s+/, '')) + '/">' + esc(o.set) + '</a></li>').join('') +
       '</ul>';
-    const setImg = s.subsets.map(x => CARDIMG[y + '|' + s.set + '|' + x.name]).find(Boolean);
     write(rel, page({
       title: esc(s.set) + ' Ken Griffey Jr. Card Values | Raw & PSA Prices',
       desc: s.set + ' Ken Griffey Jr. card values — ' + names + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
       url: SITE + '/' + rel + '/',
-      ogimg: setImg ? SITE + '/img/cards/' + setImg.file : null,
+      ogimg: SITE + '/img/og/' + y + '-' + sl + '.jpg',
       jsonld: {
         '@context': 'https://schema.org', '@type': 'BreadcrumbList',
         itemListElement: [
@@ -254,6 +256,7 @@ for (const y of years) {
     desc: 'Current values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
       ' sets — raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sales, updated daily.',
     url: SITE + '/' + y + '/',
+    ogimg: SITE + '/img/og/' + y + '.jpg',
     jsonld: {
       '@context': 'https://schema.org', '@type': 'BreadcrumbList',
       itemListElement: [
@@ -291,6 +294,7 @@ for (const iso of days) {
     title: 'Griffey Card Market Report — ' + nice,
     desc: 'Ken Griffey Jr. card price movement for ' + nice + ' — real eBay sales across ' + entries.map(e => e.y).join(', ') + '.',
     url: SITE + '/blog/' + iso + '/',
+    ogimg: SITE + '/img/og/market-reports.jpg',
     body
   }));
   sitemapUrls.push(SITE + '/blog/' + iso + '/');
@@ -310,6 +314,7 @@ write('blog', page({
   title: 'Griffey Card Market Reports | Daily Price Movement',
   desc: 'Daily Ken Griffey Jr. card market reports — which cards moved, by how much, and why, based on real eBay sold data.',
   url: SITE + '/blog/',
+  ogimg: SITE + '/img/og/market-reports.jpg',
   body: blogBody
 }));
 sitemapUrls.push(SITE + '/blog/');
@@ -357,6 +362,7 @@ write('most-valuable', page({
   desc: 'The 25 most valuable Ken Griffey Jr. cards from 1990-1999, ranked by real eBay sold prices. Topping the list: ' +
     top25[0].set + ' ' + top25[0].name + ' at ' + money(top25[0].value) + '. Updated daily.',
   url: SITE + '/most-valuable/',
+  ogimg: SITE + '/img/og/most-valuable.jpg',
   jsonld: {
     '@context': 'https://schema.org', '@type': 'ItemList',
     name: 'Most Valuable Ken Griffey Jr. Cards of the 90s',
@@ -433,6 +439,7 @@ write('how-much-are-griffey-cards-worth', page({
   desc: 'Ken Griffey Jr. cards sell for a few dollars to ' + money(kingCard.value) + '. Real eBay sold prices for ' +
     totalCards.toLocaleString('en-US') + ' Griffey cards from 1990-1999 - raw and PSA graded, updated daily.',
   url: SITE + '/how-much-are-griffey-cards-worth/',
+  ogimg: SITE + '/img/og/card-values.jpg',
   jsonld: {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: [
