@@ -81,7 +81,9 @@ function priceCell(sub, g) {
 }
 
 function cardTable(subs, withOdds) {
-  let h = '<table><thead><tr><th>Card</th>' + (withOdds ? '<th>Odds</th>' : '') +
+  let h = '<table><colgroup><col>' + (withOdds ? '<col class="codds">' : '') +
+    '<col class="cp"><col class="cp"><col class="cp"><col class="cp"></colgroup>' +
+    '<thead><tr><th>Card</th>' + (withOdds ? '<th>Odds</th>' : '') +
     '<th>Raw</th><th>PSA 8</th><th>PSA 9</th><th>PSA 10</th></tr></thead><tbody>';
   for (const sub of subs) {
     h += '<tr><td class="cname">' + esc(sub.name) +
@@ -152,7 +154,9 @@ h2 a{color:var(--text);text-decoration:none}h2 a:hover{color:var(--gold)}
 .yearnav a,.yearnav span{padding:4px 9px;border:1px solid var(--border);border-radius:6px;font-size:12.5px;color:var(--dim);text-decoration:none}
 .yearnav .on{color:var(--gold);border-color:var(--gold)}
 .yearnav a:hover{color:var(--text)}
-table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 4px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 4px;table-layout:fixed}
+col.codds{width:64px}col.cp{width:96px}
+td{overflow-wrap:break-word}
 th{text-align:left;color:var(--dim);font-weight:500;font-size:11px;letter-spacing:.8px;text-transform:uppercase;padding:5px 7px;border-bottom:1px solid var(--border)}
 td{padding:6px 7px;border-bottom:1px solid rgba(42,58,80,.45)}
 td.cname{color:var(--text)}td.odds{color:var(--dim);font-size:12px}
@@ -172,7 +176,7 @@ ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
-@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 4px}}
+@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 4px}col.codds{width:42px}col.cp{width:64px}}
 `;
 
 /* ---------- clean previous output ---------- */
@@ -194,6 +198,7 @@ for (const y of years) {
   const sets = DATA[y];
   const cardCount = sets.reduce((n, s) => n + s.subsets.length, 0);
   const usedSlugs = {};
+  const yearOdds = sets.some(s => s.subsets.some(x => x.odds));
 
   let body = yearNav(y) +
     '<h1>' + y + ' Ken Griffey Jr. Cards — Values &amp; Price Guide</h1>' +
@@ -206,7 +211,7 @@ for (const y of years) {
     const rel = y + '/' + sl;
     const withOdds = s.subsets.some(x => x.odds);
 
-    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + cardTable(s.subsets, withOdds);
+    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + cardTable(s.subsets, yearOdds);
 
     /* set page */
     const top = s.subsets.reduce((m, x) => Math.max(m, x.psa10 || 0, x.psa9 || 0, x.raw || 0, x.psa8 || 0), 0);
