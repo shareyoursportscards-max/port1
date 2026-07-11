@@ -25,6 +25,10 @@ const ctx = vm.createContext({});
 vm.runInContext(src.slice(start, end) + ';this.DATA=DATA;this.BLOG=BLOG;', ctx);
 const DATA = ctx.DATA, BLOG = ctx.BLOG;
 
+/* ---------- card images (card-images.json: "year|set|card" -> {file,w,h,alt}) ---------- */
+let CARDIMG = {};
+try { CARDIMG = JSON.parse(fs.readFileSync(path.join(ROOT, 'card-images.json'), 'utf8')); } catch (e) { /* no images yet */ }
+
 /* ---------- helpers ---------- */
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const money = n => n == null ? '—' : '$' + Number(n).toLocaleString('en-US');
@@ -88,6 +92,16 @@ function cardTable(subs, withOdds) {
   return h + '</tbody></table>';
 }
 
+function imageStrip(y, setName, subs) {
+  const figs = [];
+  for (const sub of subs) {
+    const im = CARDIMG[y + '|' + setName + '|' + sub.name];
+    if (im) figs.push('<figure class="cardfig"><img src="/img/cards/' + im.file + '" alt="' + esc(im.alt) +
+      '" width="' + im.w + '" height="' + im.h + '" loading="lazy"><figcaption>' + esc(sub.name) + '</figcaption></figure>');
+  }
+  return figs.length ? '<div class="cardfigs">' + figs.join('') + '</div>' : '';
+}
+
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
@@ -99,6 +113,7 @@ function page(o) {
     '<script async src="https://www.googletagmanager.com/gtag/js?id=' + GA + '"></script>\n' +
     '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'' + GA + '\');</script>\n' +
     '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+    '<meta name="robots" content="max-image-preview:large">\n' +
     '<title>' + esc(o.title) + '</title>\n' +
     '<meta name="description" content="' + esc(o.desc) + '">\n' +
     '<link rel="canonical" href="' + o.url + '">\n' +
@@ -107,7 +122,7 @@ function page(o) {
     '<meta property="og:title" content="' + esc(o.title) + '">\n' +
     '<meta property="og:description" content="' + esc(o.desc) + '">\n' +
     '<meta property="og:url" content="' + o.url + '">\n' +
-    '<meta property="og:image" content="' + SITE + '/hero-card.jpg">\n' +
+    '<meta property="og:image" content="' + (o.ogimg || SITE + '/hero-card.jpg') + '">\n' +
     '<meta name="twitter:card" content="summary_large_image">\n' +
     '<link rel="icon" type="image/svg+xml" href="/favicon.svg">\n' +
     '<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">\n' +
@@ -144,6 +159,11 @@ td.cname{color:var(--text)}td.odds{color:var(--dim);font-size:12px}
 td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.psa10{color:var(--psa10)}
 .tag{font-size:10px;color:var(--dim);border:1px solid var(--border);border-radius:4px;padding:1px 5px;margin-left:5px;white-space:nowrap}
 .up{color:#5eeaa0;font-size:10px}.down{color:#ff6b6b;font-size:10px}
+.cardfigs{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 6px}
+.cardfig{margin:0}
+.cardfig img{width:170px;height:auto;border-radius:8px;border:1px solid var(--border);display:block;background:#fff}
+.cardfig figcaption{color:var(--dim);font-size:11.5px;margin-top:5px;text-align:center}
+td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
 .report{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 15px;margin:10px 0;font-size:13.5px;line-height:1.65;color:var(--dim)}
 .report b{color:var(--text)}.report .rdate{color:var(--gold);font-size:12px;letter-spacing:.6px;display:block;margin-bottom:5px}
 .report .up{font-size:inherit}.report .down{font-size:inherit}
@@ -185,7 +205,7 @@ for (const y of years) {
     const rel = y + '/' + sl;
     const withOdds = s.subsets.some(x => x.odds);
 
-    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + cardTable(s.subsets, withOdds);
+    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + imageStrip(y, s.set, s.subsets) + cardTable(s.subsets, withOdds);
 
     /* set page */
     const top = s.subsets.reduce((m, x) => Math.max(m, x.psa10 || 0, x.psa9 || 0, x.raw || 0, x.psa8 || 0), 0);
@@ -195,14 +215,17 @@ for (const y of years) {
       '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings: ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked' +
       (top ? ', topping out at ' + money(top) : '') + '. Updated daily.</p>' +
+      imageStrip(y, s.set, s.subsets) +
       cardTable(s.subsets, withOdds) +
       '<h2>More ' + y + ' Griffey Sets</h2><ul class="plain">' +
       sets.filter(o => o !== s).map(o => '<li><a href="/' + y + '/' + slug(o.set.replace(/^\d{4}\s+/, '')) + '/">' + esc(o.set) + '</a></li>').join('') +
       '</ul>';
+    const setImg = s.subsets.map(x => CARDIMG[y + '|' + s.set + '|' + x.name]).find(Boolean);
     write(rel, page({
       title: esc(s.set) + ' Ken Griffey Jr. Card Values | Raw & PSA Prices',
       desc: s.set + ' Ken Griffey Jr. card values — ' + names + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
       url: SITE + '/' + rel + '/',
+      ogimg: setImg ? SITE + '/img/cards/' + setImg.file : null,
       jsonld: {
         '@context': 'https://schema.org', '@type': 'BreadcrumbList',
         itemListElement: [
@@ -306,7 +329,7 @@ for (const y of years) {
       for (const [g, label] of GRADES) {
         if (sub[g] != null && (!best || sub[g] > best.value)) best = { value: sub[g], grade: label };
       }
-      if (best) ranked.push({ y, set: s.set, sl, name: sub.name, grade: best.grade, value: best.value });
+      if (best) ranked.push({ y, set: s.set, sl, name: sub.name, grade: best.grade, value: best.value, img: CARDIMG[y + '|' + s.set + '|' + sub.name] });
     }
   }
 }
@@ -320,7 +343,8 @@ let mvBody = yearNav(null) +
   '<table><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
 top25.forEach((c, i) => {
   mvBody += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
-    '<td class="cname"><a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' — ' + esc(c.name) + '</a></td>' +
+    '<td class="cname">' + (c.img ? '<img class="thumb" src="/img/cards/' + c.img.file + '" alt="' + esc(c.img.alt) + '" width="38" height="' + Math.round(38 * c.img.h / c.img.w) + '" loading="lazy">' : '') +
+    '<a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' — ' + esc(c.name) + '</a></td>' +
     '<td class="odds"><a href="/' + c.y + '/" style="color:var(--dim);text-decoration:none">' + c.y + '</a></td>' +
     '<td class="odds">' + c.grade + '</td>' +
     '<td class="psa10">' + money(c.value) + '</td></tr>';
@@ -336,11 +360,11 @@ write('most-valuable', page({
   jsonld: {
     '@context': 'https://schema.org', '@type': 'ItemList',
     name: 'Most Valuable Ken Griffey Jr. Cards of the 90s',
-    itemListElement: top25.map((c, i) => ({
+    itemListElement: top25.map((c, i) => Object.assign({
       '@type': 'ListItem', position: i + 1,
       name: c.set + ' ' + c.name + ' ' + c.grade + ' — ' + money(c.value),
       url: SITE + '/' + c.y + '/' + c.sl + '/'
-    }))
+    }, c.img ? { image: SITE + '/img/cards/' + c.img.file } : {}))
   },
   body: mvBody
 }));
