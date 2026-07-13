@@ -350,7 +350,7 @@ let mvBody = yearNav(null) +
   '<h1>Most Valuable Ken Griffey Jr. Cards of the 90s</h1>' +
   '<p class="sub">The 25 most valuable Ken Griffey Jr. cards from 1990–1999, ranked by the highest price actually paid on eBay since this guide began tracking sales in April 2026 — not asking prices, real sold listings. Out of ' +
   totalCards.toLocaleString('en-US') + ' Griffey cards tracked in this guide, these are the kings. Updated daily as new sales come in.</p>' +
-  '<table><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
+  '<table><colgroup><col style="width:5%"><col><col style="width:10%"><col style="width:13%"><col style="width:17%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
 top25.forEach((c, i) => {
   mvBody += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
     '<td class="cname">' + (c.img ? '<img class="thumb" src="/img/cards/' + c.img.file + '" alt="' + esc(c.img.alt) + '" width="38" height="' + Math.round(38 * c.img.h / c.img.w) + '" loading="lazy">' : '') +
@@ -425,7 +425,7 @@ let worthBody = yearNav(null) +
   'grade and centering decide the price, and completed eBay sales &mdash; not listing prices &mdash; tell you what it’s actually worth.</p>' +
 
   '<h2>The 10 most valuable Griffey cards of the 90s</h2>' +
-  '<table><thead><tr><th>#</th><th>Card</th><th>Grade</th><th>Sale</th></tr></thead><tbody>' +
+  '<table><colgroup><col style="width:5%"><col><col style="width:13%"><col style="width:17%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Grade</th><th>Sale</th></tr></thead><tbody>' +
   top25.slice(0, 10).map((c, i) =>
     '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
     '<td class="cname"><a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' &mdash; ' + esc(c.name) + '</a></td>' +
