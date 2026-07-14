@@ -173,7 +173,7 @@ td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.p
 .up{color:#5eeaa0;font-size:10px}.down{color:#ff6b6b;font-size:10px}
 .cardfigs{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 6px;align-items:flex-end}
 .cardfig{margin:0;width:170px}
-.cardfig img{width:100%;height:auto;border-radius:8px;border:1px solid var(--border);display:block;background:#fff}
+.cardfig img{display:block;margin:0 auto;width:auto;max-width:100%;height:auto;max-height:230px;border-radius:8px;border:1px solid var(--border);background:#fff}
 .cardfig figcaption{color:var(--dim);font-size:11.5px;line-height:1.3;margin-top:5px;text-align:center;height:30px;overflow:hidden}
 .mvfigs .cardfig figcaption{height:45px}
 td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
