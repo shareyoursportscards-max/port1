@@ -171,10 +171,11 @@ td.cname{color:var(--text)}td.odds{color:var(--dim);font-size:12px}
 td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.psa10{color:var(--psa10)}
 .tag{font-size:10px;color:var(--dim);border:1px solid var(--border);border-radius:4px;padding:1px 5px;margin-left:5px;white-space:nowrap}
 .up{color:#5eeaa0;font-size:10px}.down{color:#ff6b6b;font-size:10px}
-.cardfigs{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 6px;align-items:flex-end}
-.cardfig{margin:0;width:170px}
-.cardfig img{display:block;margin:0 auto;width:auto;max-width:100%;height:auto;max-height:230px;border-radius:8px;border:1px solid var(--border);background:#fff}
-.cardfig figcaption{color:var(--dim);font-size:11.5px;line-height:1.3;margin-top:5px;text-align:center;height:30px;overflow:hidden}
+.cardfigs{display:flex;flex-wrap:wrap;gap:16px;margin:14px 0 6px;justify-content:center;align-items:stretch}
+.cardfig{margin:0;width:158px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 12px 10px;display:flex;flex-direction:column;align-items:center;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.cardfig:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 10px 28px rgba(0,0,0,.45)}
+.cardfig img{display:block;width:auto;max-width:100%;height:auto;max-height:210px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.5);background:#fff}
+.cardfig figcaption{color:var(--dim);font-size:11.5px;line-height:1.3;margin-top:10px;text-align:center;height:30px;overflow:hidden}
 .mvfigs .cardfig figcaption{height:45px}
 td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
 img.ogthumb{width:300px;max-width:60%;height:auto;border-radius:8px;border:1px solid var(--border);margin:28px 0 0;display:block;opacity:.9}
@@ -185,7 +186,7 @@ ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
-@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 7px)}}
+@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 8px)}}
 `;
 
 /* ---------- clean previous output ---------- */
