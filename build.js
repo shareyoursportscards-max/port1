@@ -144,7 +144,10 @@ function page(o) {
     o.body +
     '\n<div class="foot">Prices updated ' + today + ' from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
     '<a href="/">griffeycardprices.com</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
-    '</div>\n</body></html>';
+    '</div>\n' +
+    '<div class="lb" id="cardLb"><img alt=""></div>\n' +
+    '<script>(function(){var lb=document.getElementById("cardLb"),li=lb.firstElementChild;document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.closest&&t.closest(".cardfig")){li.src=t.src;li.alt=t.alt;lb.classList.add("open");}else if(lb.classList.contains("open")){lb.classList.remove("open");}});document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.classList.remove("open");});})();</script>\n' +
+    '</body></html>';
 }
 
 const CSS = `
@@ -177,6 +180,10 @@ td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.p
 .cardfig img{display:block;width:auto;max-width:100%;height:auto;max-height:210px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.5);background:#fff}
 .cardfig figcaption{color:var(--dim);font-size:11.5px;line-height:1.3;margin-top:10px;text-align:center;height:30px;overflow:hidden}
 .mvfigs .cardfig figcaption{height:45px}
+.cardfig img{cursor:zoom-in}
+.lb{position:fixed;inset:0;background:rgba(4,7,12,.92);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;cursor:zoom-out}
+.lb.open{display:flex}
+.lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,.7);border:1px solid var(--border)}
 td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
 img.ogthumb{width:300px;max-width:60%;height:auto;border-radius:8px;border:1px solid var(--border);margin:28px 0 0;display:block;opacity:.9}
 .report{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 15px;margin:10px 0;font-size:13.5px;line-height:1.65;color:var(--dim)}
