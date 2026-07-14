@@ -172,8 +172,8 @@ td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.p
 .tag{font-size:10px;color:var(--dim);border:1px solid var(--border);border-radius:4px;padding:1px 5px;margin-left:5px;white-space:nowrap}
 .up{color:#5eeaa0;font-size:10px}.down{color:#ff6b6b;font-size:10px}
 .cardfigs{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 6px;align-items:flex-end}
-.cardfig{margin:0}
-.cardfig img{width:170px;height:auto;border-radius:8px;border:1px solid var(--border);display:block;background:#fff}
+.cardfig{margin:0;width:170px}
+.cardfig img{width:100%;height:auto;border-radius:8px;border:1px solid var(--border);display:block;background:#fff}
 .cardfig figcaption{color:var(--dim);font-size:11.5px;line-height:1.3;margin-top:5px;text-align:center;height:30px;overflow:hidden}
 .mvfigs .cardfig figcaption{height:45px}
 td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
@@ -185,7 +185,7 @@ ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
-@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}}
+@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 7px)}}
 `;
 
 /* ---------- clean previous output ---------- */
