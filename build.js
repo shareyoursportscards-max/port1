@@ -42,7 +42,7 @@ const years = Object.keys(DATA).map(Number).sort((a, b) => a - b);
    Change-only: a point is recorded when a value first appears or differs from the
    last logged value. Re-running on the same day revises today's point in place. */
 const HIST_FILE = path.join(ROOT, 'price-history.json');
-(function logPriceHistory() {
+const HIST = (function logPriceHistory() {
   let hist = {};
   try { hist = JSON.parse(fs.readFileSync(HIST_FILE, 'utf8')); } catch (e) { /* first run */ }
   let added = 0, revised = 0;
@@ -68,7 +68,15 @@ const HIST_FILE = path.join(ROOT, 'price-history.json');
   }
   fs.writeFileSync(HIST_FILE, JSON.stringify(hist));
   console.log('Price history: +' + added + ' new points' + (revised ? ', ' + revised + ' revised today' : '') + ' -> price-history.json');
+  return hist;
 })();
+
+/* format an ISO date (YYYY-MM-DD) as "Jul 13, 2026" */
+function fmtSaleDate(iso) {
+  const m = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const p = iso.split('-');
+  return m[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0];
+}
 
 function arrow(sub, g) {
   const prev = sub['prev_' + g], cur = sub[g];
@@ -337,9 +345,9 @@ for (const y of years) {
       totalCards++;
       let best = null;
       for (const [g, label] of GRADES) {
-        if (sub[g] != null && (!best || sub[g] > best.value)) best = { value: sub[g], grade: label };
+        if (sub[g] != null && (!best || sub[g] > best.value)) best = { value: sub[g], grade: label, gkey: g };
       }
-      if (best) ranked.push({ y, set: s.set, sl, name: sub.name, grade: best.grade, value: best.value, img: CARDIMG[y + '|' + s.set + '|' + sub.name] });
+      if (best) ranked.push({ y, set: s.set, sl, name: sub.name, grade: best.grade, gkey: best.gkey, value: best.value, img: CARDIMG[y + '|' + s.set + '|' + sub.name] });
     }
   }
 }
@@ -353,14 +361,17 @@ let mvBody = yearNav(null) +
   '<table><colgroup><col style="width:5%"><col><col style="width:10%"><col style="width:13%"><col style="width:17%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
 top25.forEach((c, i) => {
   mvBody += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
-    '<td class="cname">' + (c.img ? '<img class="thumb" src="/img/cards/' + c.img.file + '" alt="' + esc(c.img.alt) + '" width="38" height="' + Math.round(38 * c.img.h / c.img.w) + '" loading="lazy">' : '') +
-    '<a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' — ' + esc(c.name) + '</a></td>' +
+    '<td class="cname"><a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' — ' + esc(c.name) + '</a></td>' +
     '<td class="odds"><a href="/' + c.y + '/" style="color:var(--dim);text-decoration:none">' + c.y + '</a></td>' +
     '<td class="odds">' + c.grade + '</td>' +
     '<td class="psa10">' + money(c.value) + '</td></tr>';
 });
 mvBody += '</tbody></table>' +
   '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card.</p>';
+const mvFigs = top25.map((c, i) => c.img ?
+  '<figure class="cardfig"><img src="/img/cards/' + c.img.file + '" alt="' + esc(c.img.alt) +
+  '" width="' + c.img.w + '" height="' + c.img.h + '" loading="lazy"><figcaption>#' + (i + 1) + ' — ' + esc(c.set) + ' ' + esc(c.name) + '</figcaption></figure>' : '').join('');
+if (mvFigs) mvBody += '<h2>Card Images</h2><div class="cardfigs">' + mvFigs + '</div>';
 
 write('most-valuable', page({
   title: 'Most Valuable Ken Griffey Jr. Cards of the 90s | Top 25 Ranked',
