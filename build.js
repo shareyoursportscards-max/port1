@@ -196,12 +196,12 @@ ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font
 @media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 8px)}}
 `;
 
-/* ---------- clean previous output ---------- */
-for (const d of [...years.map(String), 'blog']) {
-  fs.rmSync(path.join(ROOT, d), { recursive: true, force: true });
-}
-
+/* Pages are overwritten in place (no delete/recreate churn — the repo lives in
+   a OneDrive-synced folder and mass deletions pile up in its confirmation queue).
+   Stale dirs that are no longer generated are pruned at the end of the build. */
+const written = new Set();
 function write(rel, html) {
+  written.add(rel);
   const dir = path.join(ROOT, rel);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), html);
@@ -493,6 +493,20 @@ fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
   '\n</urlset>\n');
 fs.writeFileSync(path.join(ROOT, 'robots.txt'),
   'User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n');
+
+/* ---------- prune stale pages no longer generated ---------- */
+let pruned = 0;
+for (const top of [...years.map(String), 'blog']) {
+  const dir = path.join(ROOT, top);
+  if (!fs.existsSync(dir)) continue;
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.isDirectory() && !written.has(top + '/' + e.name)) {
+      fs.rmSync(path.join(dir, e.name), { recursive: true, force: true });
+      console.log('Pruned stale page: ' + top + '/' + e.name);
+      pruned++;
+    }
+  }
+}
 
 console.log('Generated: ' + years.length + ' year pages, ' + setPages + ' set pages, ' +
   days.length + ' market report pages + blog index, sitemap.xml (' + sitemapUrls.length + ' URLs), robots.txt');
