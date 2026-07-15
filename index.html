@@ -1573,7 +1573,7 @@
     <span class="mv-bar-left">
       <span class="mv-bar-icon">🏆</span>
       <span class="mv-bar-label">Most Valuable</span>
-      <span class="mv-bar-sub" id="mvBarSub">the 25 kings of the 90s</span>
+      <span class="mv-bar-sub" id="mvBarSub">Ranking Top 25 Griffey Sales (since we started tracking)</span>
     </span>
     <span class="mv-bar-go">Top 25 <span class="chev">▸</span></span>
   </a>
@@ -3815,15 +3815,6 @@ updateCollectionBar();
 
 let CARDIMG = {};
 fetch('/card-images.json').then(r=>r.json()).then(m=>{ CARDIMG = m; renderTop10Gallery(); }).catch(()=>{});
-
-(function(){
-  var top = 0;
-  years.forEach(function(y){ DATA[y].forEach(function(s){ s.subsets.forEach(function(sub){
-    [sub.psa10, sub.psa9, sub.psa8, sub.raw].forEach(function(v){ if(v && v > top) top = v; });
-  });});});
-  var el = document.getElementById('mvBarSub');
-  if(el && top) el.textContent = 'the 25 kings of the 90s — #1 sold for $' + top.toLocaleString('en-US');
-})();
 
 (function(){
   var lb = document.getElementById('cardLb'), li = lb.firstElementChild;
