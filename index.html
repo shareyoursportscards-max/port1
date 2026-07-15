@@ -1488,39 +1488,19 @@
   .lb{position:fixed;inset:0;background:rgba(4,7,12,.92);display:none;align-items:center;justify-content:center;z-index:99999;padding:20px;cursor:zoom-out;}
   .lb.open{display:flex;}
   .lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,.7);border:1px solid var(--border);}
-  .mv-bar{
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:13px 24px; margin-bottom:20px;
-    background:
-      radial-gradient(ellipse 70% 120% at 8% -20%, rgba(240,199,91,.13) 0%, transparent 55%),
-      linear-gradient(160deg, rgba(28,24,12,.85), rgba(14,12,7,.92));
-    border:1px solid rgba(240,199,91,.38); border-radius:14px;
-    cursor:pointer; text-decoration:none;
-    transition:all .15s ease;
-    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
-    box-shadow:0 0 18px rgba(240,199,91,.10), inset 0 1px 0 rgba(240,199,91,.08);
+  .hero-mv{color:var(--psa10); text-decoration:none; white-space:nowrap;}
+  .hero-mv b{color:var(--psa10);}
+  .hero-mv .chev{display:inline-block; transition:transform .15s ease;}
+  .hero-mv:hover .chev{transform:translateX(3px);}
+  .top10-all{
+    display:block; padding:11px 16px; text-align:center; text-decoration:none;
+    font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:12.5px;
+    letter-spacing:.05em; text-transform:uppercase;
+    color:var(--psa10); border-top:1px solid var(--border);
   }
-  .mv-bar:hover{
-    border-color:rgba(240,199,91,.7);
-    box-shadow:0 0 26px rgba(240,199,91,.22), inset 0 1px 0 rgba(240,199,91,.14);
-    transform:translateY(-1px);
-  }
-  .mv-bar-left{display:flex; align-items:center; gap:10px; min-width:0;}
-  .mv-bar-icon{font-size:15px;}
-  .mv-bar-label{
-    font-family:'Chakra Petch', sans-serif;
-    font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase;
-    color:rgba(240,199,91,.92); text-shadow:0 0 10px rgba(240,199,91,.3);
-    white-space:nowrap;
-  }
-  .mv-bar-sub{color:var(--text-dim); font-size:12.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-  .mv-bar-go{
-    font-family:'Chakra Petch', sans-serif; font-weight:700; font-size:14px;
-    letter-spacing:.05em; color:rgba(240,199,91,.92); white-space:nowrap;
-  }
-  .mv-bar-go .chev{display:inline-block; transition:transform .15s ease;}
-  .mv-bar:hover .mv-bar-go .chev{transform:translateX(3px);}
-  @media (max-width:640px){ .mv-bar{padding:12px 16px;} .mv-bar-sub{display:none;} }
+  .top10-all:hover{background:rgba(245,200,66,.05);}
+  .top10-all .chev{display:inline-block; transition:transform .15s ease;}
+  .top10-all:hover .chev{transform:translateX(3px);}
 </style>
 </head>
 <body>
@@ -1545,6 +1525,7 @@
       <span><b id="statPrices">—</b> tracked prices</span>
       <span><b id="statSets">—</b> sets</span>
       <span>Updated <b id="statUpdated">July 2026</b></span>
+      <span><a class="hero-mv" href="/most-valuable/">Top sale <b id="statTopSale">—</b> <span class="chev">▸</span></a></span>
     </div>
     <div class="hero-cards" aria-hidden="true">
       <span class="hcw hcw2"><img class="hc" src="img/hero-refractor.jpg" alt=""><i class="hc-shine"></i></span>
@@ -1568,15 +1549,6 @@
     <span class="mycoll-bar-total" id="myCollBarTotal">$0</span>
   </div>
   <div class="mycoll-view" id="myCollView"></div>
-
-  <a class="mv-bar" id="mvBar" href="/most-valuable/">
-    <span class="mv-bar-left">
-      <span class="mv-bar-icon">🏆</span>
-      <span class="mv-bar-label">Most Valuable</span>
-      <span class="mv-bar-sub" id="mvBarSub">Ranking Top 25 Griffey Sales (since we started tracking)</span>
-    </span>
-    <span class="mv-bar-go">Top 25 <span class="chev">▸</span></span>
-  </a>
 
   <div class="year-strip" id="yearStrip"></div>
 
@@ -3177,7 +3149,7 @@ function toggleMyCollView(){
   document.getElementById('myCollBar').classList.toggle('active', myCollOpen);
   document.getElementById('myCollView').classList.toggle('active', myCollOpen);
   document.getElementById('yearStrip').style.display = myCollOpen ? 'none' : '';
-  ['top10Area','colHeader','collHint','setList','blogArea','top10Gallery','mvBar','dealPanel'].forEach(id=>{
+  ['top10Area','colHeader','collHint','setList','blogArea','top10Gallery','dealPanel'].forEach(id=>{
     var el = document.getElementById(id); if(el) el.style.display = myCollOpen ? 'none' : '';
   });
   var ctrl = document.querySelector('.controls'); if(ctrl) ctrl.style.display = myCollOpen ? 'none' : '';
@@ -3352,6 +3324,7 @@ function renderTop10(){
           <div class="top10-price">$${c.price.toLocaleString('en-US')}</div>
           <div class="top10-grade">${c.grade}</div>
         </div>`).join('')}
+      <a class="top10-all" href="/most-valuable/">Full Top 25 — all years <span class="chev">▸</span></a>
     </div>`;
 }
 
@@ -3859,6 +3832,14 @@ fetch('/card-images.json').then(r=>r.json()).then(m=>{ CARDIMG = m; renderTop10G
   }
   countUp(document.getElementById('statPrices'), prices);
   countUp(document.getElementById('statSets'), sets);
+  var topSale = 0;
+  Object.keys(DATA).forEach(function(y){
+    DATA[y].forEach(function(s){ s.subsets.forEach(function(c){
+      ['raw','psa8','psa9','psa10'].forEach(function(g){ if(c[g] && c[g] > topSale) topSale = c[g]; });
+    });});
+  });
+  var ts = document.getElementById('statTopSale');
+  if(ts && topSale) ts.textContent = '$' + topSale.toLocaleString('en-US');
   if(newest){
     document.getElementById('statUpdated').textContent =
       newest.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
