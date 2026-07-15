@@ -1013,15 +1013,19 @@
   }
   .dc-btn:hover{background:rgba(240,176,58,.22); box-shadow:0 0 14px rgba(240,176,58,.2);}
   .dc-btn.active{background:var(--gold); color:#0a0e14;}
-  .hero-dc{
+  .hero-btns{
     position:absolute;
     right:36px; top:50%;
     transform:translateY(-50%);
     z-index:4;
+    display:flex; flex-direction:column; gap:10px; align-items:stretch;
+  }
+  .hero-dc{
+    position:relative;
     font-family:'Chakra Petch', sans-serif;
-    font-weight:700; font-size:17px;
+    font-weight:700; font-size:16px;
     letter-spacing:.07em; text-transform:uppercase;
-    padding:20px 30px;
+    padding:14px 28px;
     border:1.5px solid rgba(94,234,160,.6);
     border-radius:14px;
     background:
@@ -1048,7 +1052,7 @@
     88%, 100%{left:calc(100% + 40px);}
   }
   .hero-dc:hover{
-    transform:translateY(-50%) scale(1.03);
+    transform:scale(1.03);
     border-color:rgba(94,234,160,.95);
     box-shadow:
       0 10px 30px rgba(0,0,0,.5),
@@ -1059,11 +1063,48 @@
     background:linear-gradient(160deg, #5eeaa0 0%, #2fbf7a 100%);
     color:#07150e;
     border-color:rgba(94,234,160,1);
-    transform:translateY(calc(-50% + 1px));
+    transform:translateY(1px);
     box-shadow:
       0 4px 16px rgba(94,234,160,.3),
       inset 0 1px 0 rgba(255,255,255,.35);
   }
+  .hero-mv25{
+    position:relative; display:block; text-align:center; text-decoration:none;
+    font-family:'Chakra Petch', sans-serif;
+    font-weight:700; font-size:14px;
+    letter-spacing:.07em; text-transform:uppercase;
+    padding:12px 24px;
+    border:1.5px solid rgba(240,199,91,.6);
+    border-radius:14px;
+    background:
+      radial-gradient(ellipse 120% 140% at 20% -30%, rgba(240,199,91,.16) 0%, transparent 55%),
+      linear-gradient(160deg, #302510 0%, #1e1708 60%, #150f05 100%);
+    color:#f0c75b;
+    overflow:hidden;
+    box-shadow:
+      0 8px 24px rgba(0,0,0,.45),
+      0 0 18px rgba(240,199,91,.15),
+      inset 0 1px 0 rgba(240,199,91,.25);
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .hero-mv25::after{
+    content:"";
+    position:absolute; top:-40%; bottom:-40%;
+    left:-80px; width:46px;
+    background:linear-gradient(105deg, transparent, rgba(240,199,91,.22), transparent);
+    transform:skewX(-20deg);
+    animation:dcShine 5s ease-in-out infinite;
+    animation-delay:2.5s;
+  }
+  .hero-mv25:hover{
+    transform:scale(1.03);
+    border-color:rgba(240,199,91,.95);
+    box-shadow:
+      0 10px 30px rgba(0,0,0,.5),
+      0 0 26px rgba(240,199,91,.35),
+      inset 0 1px 0 rgba(240,199,91,.35);
+  }
+  .mv-cup{font-size:17px; vertical-align:-2px; margin-right:4px; display:inline-block;}
   .dc-bag{
     font-size:20px;
     vertical-align:-2px;
@@ -1411,15 +1452,17 @@
     .hero{padding:16px 16px 14px; border-radius:12px;}
     .hero-sub{font-size:13px;}
     .hero-stats{gap:4px 16px; font-size:12px;}
-    .hero-dc{
+    .hero-btns{
       position:static;
       transform:none;
-      display:block;
       width:100%;
       margin-top:16px;
-      text-align:center;
+      gap:8px;
     }
+    .hero-dc{width:100%; text-align:center; padding:12px 20px;}
     .hero-dc:hover{transform:none;}
+    .hero-mv25{padding:11px 20px;}
+    .hero-mv25:hover{transform:none;}
     .hero-cards{right:-22px;}
     .hc{height:170px;}
     .panel-head h2{font-size:22px;}
@@ -1488,10 +1531,6 @@
   .lb{position:fixed;inset:0;background:rgba(4,7,12,.92);display:none;align-items:center;justify-content:center;z-index:99999;padding:20px;cursor:zoom-out;}
   .lb.open{display:flex;}
   .lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,.7);border:1px solid var(--border);}
-  .hero-mv{color:var(--psa10); text-decoration:none; white-space:nowrap;}
-  .hero-mv b{color:var(--psa10);}
-  .hero-mv .chev{display:inline-block; transition:transform .15s ease;}
-  .hero-mv:hover .chev{transform:translateX(3px);}
   .top10-all{
     display:block; padding:11px 16px; text-align:center; text-decoration:none;
     font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:12.5px;
@@ -1525,12 +1564,14 @@
       <span><b id="statPrices">—</b> tracked prices</span>
       <span><b id="statSets">—</b> sets</span>
       <span>Updated <b id="statUpdated">July 2026</b></span>
-      <span><a class="hero-mv" href="/most-valuable/">Top sale <b id="statTopSale">—</b> <span class="chev">▸</span></a></span>
     </div>
     <div class="hero-cards" aria-hidden="true">
       <span class="hcw hcw2"><img class="hc" src="img/hero-refractor.jpg" alt=""><i class="hc-shine"></i></span>
     </div>
-    <button class="dc-btn hero-dc" id="dcBtn"><span class="dc-bag">💰</span> Check Comps</button>
+    <div class="hero-btns">
+      <button class="dc-btn hero-dc" id="dcBtn"><span class="dc-bag">💰</span> Check Comps</button>
+      <a class="hero-mv25" href="/most-valuable/"><span class="mv-cup">🏆</span> Top 25 Sales</a>
+    </div>
   </div>
 
   <div class="dc-panel" id="dealPanel">
@@ -3832,14 +3873,6 @@ fetch('/card-images.json').then(r=>r.json()).then(m=>{ CARDIMG = m; renderTop10G
   }
   countUp(document.getElementById('statPrices'), prices);
   countUp(document.getElementById('statSets'), sets);
-  var topSale = 0;
-  Object.keys(DATA).forEach(function(y){
-    DATA[y].forEach(function(s){ s.subsets.forEach(function(c){
-      ['raw','psa8','psa9','psa10'].forEach(function(g){ if(c[g] && c[g] > topSale) topSale = c[g]; });
-    });});
-  });
-  var ts = document.getElementById('statTopSale');
-  if(ts && topSale) ts.textContent = '$' + topSale.toLocaleString('en-US');
   if(newest){
     document.getElementById('statUpdated').textContent =
       newest.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
