@@ -1488,6 +1488,39 @@
   .lb{position:fixed;inset:0;background:rgba(4,7,12,.92);display:none;align-items:center;justify-content:center;z-index:99999;padding:20px;cursor:zoom-out;}
   .lb.open{display:flex;}
   .lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,.7);border:1px solid var(--border);}
+  .mv-bar{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:13px 24px; margin-bottom:20px;
+    background:
+      radial-gradient(ellipse 70% 120% at 8% -20%, rgba(240,199,91,.13) 0%, transparent 55%),
+      linear-gradient(160deg, rgba(28,24,12,.85), rgba(14,12,7,.92));
+    border:1px solid rgba(240,199,91,.38); border-radius:14px;
+    cursor:pointer; text-decoration:none;
+    transition:all .15s ease;
+    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+    box-shadow:0 0 18px rgba(240,199,91,.10), inset 0 1px 0 rgba(240,199,91,.08);
+  }
+  .mv-bar:hover{
+    border-color:rgba(240,199,91,.7);
+    box-shadow:0 0 26px rgba(240,199,91,.22), inset 0 1px 0 rgba(240,199,91,.14);
+    transform:translateY(-1px);
+  }
+  .mv-bar-left{display:flex; align-items:center; gap:10px; min-width:0;}
+  .mv-bar-icon{font-size:15px;}
+  .mv-bar-label{
+    font-family:'Chakra Petch', sans-serif;
+    font-weight:700; font-size:15px; letter-spacing:.06em; text-transform:uppercase;
+    color:rgba(240,199,91,.92); text-shadow:0 0 10px rgba(240,199,91,.3);
+    white-space:nowrap;
+  }
+  .mv-bar-sub{color:var(--text-dim); font-size:12.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .mv-bar-go{
+    font-family:'Chakra Petch', sans-serif; font-weight:700; font-size:14px;
+    letter-spacing:.05em; color:rgba(240,199,91,.92); white-space:nowrap;
+  }
+  .mv-bar-go .chev{display:inline-block; transition:transform .15s ease;}
+  .mv-bar:hover .mv-bar-go .chev{transform:translateX(3px);}
+  @media (max-width:640px){ .mv-bar{padding:12px 16px;} .mv-bar-sub{display:none;} }
 </style>
 </head>
 <body>
@@ -1535,6 +1568,15 @@
     <span class="mycoll-bar-total" id="myCollBarTotal">$0</span>
   </div>
   <div class="mycoll-view" id="myCollView"></div>
+
+  <a class="mv-bar" id="mvBar" href="/most-valuable/">
+    <span class="mv-bar-left">
+      <span class="mv-bar-icon">🏆</span>
+      <span class="mv-bar-label">Most Valuable</span>
+      <span class="mv-bar-sub" id="mvBarSub">the 25 kings of the 90s</span>
+    </span>
+    <span class="mv-bar-go">Top 25 <span class="chev">▸</span></span>
+  </a>
 
   <div class="year-strip" id="yearStrip"></div>
 
@@ -3135,7 +3177,7 @@ function toggleMyCollView(){
   document.getElementById('myCollBar').classList.toggle('active', myCollOpen);
   document.getElementById('myCollView').classList.toggle('active', myCollOpen);
   document.getElementById('yearStrip').style.display = myCollOpen ? 'none' : '';
-  ['top10Area','colHeader','collHint','setList','blogArea','top10Gallery','dealPanel'].forEach(id=>{
+  ['top10Area','colHeader','collHint','setList','blogArea','top10Gallery','mvBar','dealPanel'].forEach(id=>{
     var el = document.getElementById(id); if(el) el.style.display = myCollOpen ? 'none' : '';
   });
   var ctrl = document.querySelector('.controls'); if(ctrl) ctrl.style.display = myCollOpen ? 'none' : '';
@@ -3773,6 +3815,15 @@ updateCollectionBar();
 
 let CARDIMG = {};
 fetch('/card-images.json').then(r=>r.json()).then(m=>{ CARDIMG = m; renderTop10Gallery(); }).catch(()=>{});
+
+(function(){
+  var top = 0;
+  years.forEach(function(y){ DATA[y].forEach(function(s){ s.subsets.forEach(function(sub){
+    [sub.psa10, sub.psa9, sub.psa8, sub.raw].forEach(function(v){ if(v && v > top) top = v; });
+  });});});
+  var el = document.getElementById('mvBarSub');
+  if(el && top) el.textContent = 'the 25 kings of the 90s — #1 sold for $' + top.toLocaleString('en-US');
+})();
 
 (function(){
   var lb = document.getElementById('cardLb'), li = lb.firstElementChild;
