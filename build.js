@@ -132,11 +132,15 @@ function page(o) {
     '<meta property="og:title" content="' + esc(o.title) + '">\n' +
     '<meta property="og:description" content="' + esc(o.desc) + '">\n' +
     '<meta property="og:url" content="' + o.url + '">\n' +
-    '<meta property="og:image" content="' + (o.ogimg || SITE + '/hero-card.jpg') + '">\n' +
+    '<meta property="og:image" content="' + (o.cardimg || o.ogimg || SITE + '/hero-card.jpg') + '">\n' +
     '<meta name="twitter:card" content="summary_large_image">\n' +
     '<link rel="icon" type="image/svg+xml" href="/favicon.svg">\n' +
     '<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">\n' +
     (o.jsonld ? '<script type="application/ld+json">' + JSON.stringify(o.jsonld) + '</script>\n' : '') +
+    (o.cardimg ? '<script type="application/ld+json">' + JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'WebPage', url: o.url,
+      primaryImageOfPage: { '@type': 'ImageObject', contentUrl: o.cardimg }
+    }) + '</script>\n' : '') +
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
     '<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">\n' +
     '<style>' + CSS + '</style>\n</head>\n<body>\n<div class="wrap">\n' +
@@ -244,10 +248,16 @@ for (const y of years) {
       sets.filter(o => o !== s).map(o => '<li><a href="/' + y + '/' + slug(o.set.replace(/^\d{4}\s+/, '')) + '/">' + esc(o.set) + '</a></li>').join('') +
       '</ul>' +
       '<img class="ogthumb" src="/img/og/' + y + '-' + sl + '.jpg" alt="' + esc(s.set) + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">';
+    let setCardImg = null;
+    for (const sub of s.subsets) {
+      const im = CARDIMG[y + '|' + s.set + '|' + sub.name];
+      if (im) { setCardImg = SITE + '/img/cards/' + im.file; break; }
+    }
     write(rel, page({
       title: esc(s.set) + ' Ken Griffey Jr. Card Values | Raw & PSA Prices',
       desc: s.set + ' Ken Griffey Jr. card values — ' + names + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
       url: SITE + '/' + rel + '/',
+      cardimg: setCardImg,
       ogimg: SITE + '/img/og/' + y + '-' + sl + '.jpg',
       jsonld: {
         '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -273,11 +283,21 @@ for (const y of years) {
   }
   body += '<img class="ogthumb" src="/img/og/' + y + '.jpg" alt="' + y + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">';
 
+  let yearCardImg = null, yearBest = 0;
+  for (const s of sets) {
+    for (const sub of s.subsets) {
+      const im = CARDIMG[y + '|' + s.set + '|' + sub.name];
+      if (!im) continue;
+      const v = Math.max(sub.psa10 || 0, sub.psa9 || 0, sub.psa8 || 0, sub.raw || 0);
+      if (v > yearBest) { yearBest = v; yearCardImg = SITE + '/img/cards/' + im.file; }
+    }
+  }
   write(String(y), page({
     title: y + ' Ken Griffey Jr. Cards — Values & Price Guide',
     desc: 'Current values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
       ' sets — raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sales, updated daily.',
     url: SITE + '/' + y + '/',
+    cardimg: yearCardImg,
     ogimg: SITE + '/img/og/' + y + '.jpg',
     jsonld: {
       '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -382,11 +402,13 @@ const mvFigs = top25.map((c, i) => c.img ?
   '" width="' + c.img.w + '" height="' + c.img.h + '" loading="lazy"><figcaption>#' + (i + 1) + ' — ' + esc(c.set) + ' ' + esc(c.name) + '</figcaption></figure>' : '').join('');
 if (mvFigs) mvBody += '<h2>Card Images</h2><div class="cardfigs mvfigs">' + mvFigs + '</div>';
 
+const mvCard = top25.find(c => c.img);
 write('most-valuable', page({
   title: 'Most Valuable Ken Griffey Jr. Cards of the 90s | Top 25 Ranked',
   desc: 'The 25 most valuable Ken Griffey Jr. cards from 1990-1999, ranked by real eBay sold prices. Topping the list: ' +
     top25[0].set + ' ' + top25[0].name + ' at ' + money(top25[0].value) + '. Updated daily.',
   url: SITE + '/most-valuable/',
+  cardimg: mvCard ? SITE + '/img/cards/' + mvCard.img.file : null,
   ogimg: SITE + '/img/og/most-valuable.jpg',
   jsonld: {
     '@context': 'https://schema.org', '@type': 'ItemList',
