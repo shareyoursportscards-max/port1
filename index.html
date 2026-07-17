@@ -493,10 +493,14 @@
   }
   .top10-badge{
     display:inline-block; font-size:7.5px; letter-spacing:.06em; text-transform:uppercase;
-    padding:2px 5px; border-radius:3px; margin:0 6px 0 0;
-    background:rgba(232,168,56,.1); color:var(--gold-dim); font-weight:600; vertical-align:1px;
+    padding:2px 5px; border-radius:3px; margin-left:6px;
+    background:rgba(232,168,56,.1); color:var(--gold-dim); font-weight:600;
     border:1px solid rgba(232,168,56,.2);
+    flex:none;
   }
+  .card-row .card-name{display:flex; align-items:center; min-width:0;}
+  .card-name .cn-t{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0;}
+  .card-name .tag{flex:none;}
   .card-name.has-photo{cursor:pointer;}
   .card-name.has-photo .cn-t{border-bottom:1px dotted rgba(94,234,160,.55);}
   .card-name.has-photo:hover .cn-t{border-bottom-color:var(--teal); color:var(--teal);}
@@ -3440,7 +3444,7 @@ function renderSets(){
       const hv = peak >= 1000 ? ' high-value' : '';
       return `
       <div class="card-row${hv}">
-        <div class="card-name${CARDIMG[currentYear+'|'+s.set+'|'+sub.name] ? ' has-photo' : ''}"${CARDIMG[currentYear+'|'+s.set+'|'+sub.name] ? ` data-imgkey="${escAttr(currentYear+'|'+s.set+'|'+sub.name)}"` : ''}>${top10.has(s.set+'||'+sub.name) ? `<span class="top10-badge">Top 10</span>`:''}<span class="cn-t">${sub.name}</span>${sub.tag ? `<span class="tag">${sub.tag}</span>`:''}</div>
+        <div class="card-name${CARDIMG[currentYear+'|'+s.set+'|'+sub.name] ? ' has-photo' : ''}"${CARDIMG[currentYear+'|'+s.set+'|'+sub.name] ? ` data-imgkey="${escAttr(currentYear+'|'+s.set+'|'+sub.name)}"` : ''}><span class="cn-t">${sub.name}</span>${sub.tag ? `<span class="tag">${sub.tag}</span>`:''}${top10.has(s.set+'||'+sub.name) ? `<span class="top10-badge">Top 10</span>`:''}</div>
         <div class="cell">${fmtOdds(sub.odds)}</div>
         ${fmtCell('raw', sub.raw, sub.prev_raw, currentYear, s.set, sub.name)}
         ${fmtCell('psa8', sub.psa8, sub.prev_psa8, currentYear, s.set, sub.name)}
