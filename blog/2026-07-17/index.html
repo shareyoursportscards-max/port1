@@ -29,9 +29,11 @@ color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:an
 .home{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;letter-spacing:.5px;margin-bottom:14px;padding:7px 14px;border:1px solid var(--border);border-radius:8px;transition:border-color .15s ease}
 .home:hover{border-color:var(--gold)}
 .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.scrollx .mtable{min-width:640px}
+.scrollx .mtable{min-width:644px}
 .mtable td{white-space:nowrap}
 .mtable td.cname{white-space:normal}
+.mtable th:nth-child(1),.mtable td:nth-child(1){position:sticky;left:0;background:var(--bg);z-index:2}
+.mtable th:nth-child(2),.mtable td:nth-child(2){position:sticky;left:32px;background:var(--bg);z-index:2;border-right:1px solid var(--border)}
 .bottomnav{margin-top:36px;border-top:1px solid var(--border);padding-top:14px}
 .bn-label{color:var(--dim);font-size:11px;letter-spacing:.8px;text-transform:uppercase}
 h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(19px,4vw,27px);color:var(--gold);margin:4px 0 6px}
