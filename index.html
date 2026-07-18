@@ -181,6 +181,12 @@
   }
 
   /* My Collection view */
+  .mycoll-back{
+    display:block; background:none; border:none; cursor:pointer;
+    font-family:'Inter Tight', sans-serif; font-size:13px; letter-spacing:.03em;
+    color:rgba(255,160,80,.75); padding:0 0 12px; text-align:left;
+  }
+  .mycoll-back:hover{color:#ffbe70;}
   .mycoll-view{display:none; margin-bottom:18px;}
   .mycoll-view.active{
     display:block;
@@ -1578,8 +1584,6 @@
     <div id="dcPick"></div>
   </div>
 
-  <div class="mycoll-view" id="myCollView"></div>
-
   <div class="year-strip" id="yearStrip"></div>
 
   <nav class="site-nav" id="siteNav">
@@ -1589,6 +1593,8 @@
     <a class="site-nav-btn" href="/blog/"><span class="nv-full">Market Reports</span><span class="nv-short">Reports</span></a>
     <a class="site-nav-btn site-nav-coll" href="#" id="navColl"><span class="nv-full">My Collection</span><span class="nv-short">My Cards</span></a>
   </nav>
+
+  <div class="mycoll-view" id="myCollView"></div>
 
 
   <div class="controls">
@@ -3117,7 +3123,8 @@ function renderMyCollView(){
   const view = document.getElementById('myCollView');
   const keys = Object.keys(collection);
   if(!keys.length){
-    view.innerHTML = '<div class="mycoll-empty">No cards selected yet — tap any price to start building your collection.</div>';
+    view.innerHTML = '<button class="mycoll-back" id="myCollBackBtn">◂ Back to the price guide</button>' +
+      '<div class="mycoll-empty">No cards selected yet — tap any price to start building your collection.</div>';
     return;
   }
   const byYear = {};
@@ -3160,6 +3167,7 @@ function renderMyCollView(){
   const arrow = col => myCollSort.col===col ? (myCollSort.dir===1?' ▲':' ▼') : '';
   const act = col => myCollSort.col===col ? ' sort-active' : '';
   view.innerHTML = `
+    <button class="mycoll-back" id="myCollBackBtn">◂ Back to the price guide</button>
     <button class="mycoll-share" id="myCollShareBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>Share My Collection</button>
     <div class="mycoll-col-labels">
       <span class="${act('name')}" data-col="name">Card${arrow('name')}</span>
@@ -3813,6 +3821,7 @@ document.getElementById('collBottom').addEventListener('click', function(e){
   if(myCollOpen) window.scrollTo({top:0, behavior:'smooth'});
 });
 document.getElementById('myCollView').addEventListener('click', function(e){
+  if(e.target.closest('#myCollBackBtn')){ toggleMyCollView(); return; }
   if(e.target.closest('#myCollShareBtn')){ shareCollection(); return; }
   const col = e.target.dataset.col;
   if(!col) return;
