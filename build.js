@@ -146,6 +146,7 @@ function page(o) {
     '<style>' + CSS + '</style>\n</head>\n<body>\n<div class="wrap">\n' +
     '<a class="home" href="/">◂ Griffey Card Prices — interactive guide</a>\n' +
     o.body +
+    '\n<div class="bottomnav"><div class="bn-label">Browse the guide</div>' + yearNav(o.navYear || null) + '</div>' +
     '\n<div class="foot">Prices updated ' + today + ' from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
     '<a href="/">griffeycardprices.com</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
     '</div>\n' +
@@ -160,7 +161,10 @@ const CSS = `
 *{box-sizing:border-box}body{margin:0;background:var(--bg);background-image:linear-gradient(180deg,#06090f 0%,#0a1019 50%,#06090f 100%);
 color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding:18px 14px 40px}
-.home{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;letter-spacing:.5px;margin-bottom:14px}
+.home{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;letter-spacing:.5px;margin-bottom:14px;padding:7px 14px;border:1px solid var(--border);border-radius:8px;transition:border-color .15s ease}
+.home:hover{border-color:var(--gold)}
+.bottomnav{margin-top:36px;border-top:1px solid var(--border);padding-top:14px}
+.bn-label{color:var(--dim);font-size:11px;letter-spacing:.8px;text-transform:uppercase}
 h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(19px,4vw,27px);color:var(--gold);margin:4px 0 6px}
 h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px;color:var(--text);margin:26px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
 h2 a{color:var(--text);text-decoration:none}h2 a:hover{color:var(--gold)}
@@ -221,8 +225,7 @@ for (const y of years) {
   const usedSlugs = {};
   const yearOdds = sets.some(s => s.subsets.some(x => x.odds));
 
-  let body = yearNav(y) +
-    '<h1>' + y + ' Ken Griffey Jr. Cards — Values &amp; Price Guide</h1>' +
+  let body = '<h1>' + y + ' Ken Griffey Jr. Cards — Values &amp; Price Guide</h1>' +
     '<p class="sub">Current market values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y +
     ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
 
@@ -237,8 +240,7 @@ for (const y of years) {
     /* set page */
     const top = s.subsets.reduce((m, x) => Math.max(m, x.psa10 || 0, x.psa9 || 0, x.raw || 0, x.psa8 || 0), 0);
     const names = s.subsets.slice(0, 3).map(x => x.name).join(', ');
-    const setBody = yearNav(y) +
-      '<h1>' + esc(s.set) + ' Ken Griffey Jr. — Card Values</h1>' +
+    const setBody = '<h1>' + esc(s.set) + ' Ken Griffey Jr. — Card Values</h1>' +
       '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings: ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked' +
       (top ? ', topping out at ' + money(top) : '') + '. Updated daily.</p>' +
@@ -254,6 +256,7 @@ for (const y of years) {
       if (im) { setCardImg = SITE + '/img/cards/' + im.file; break; }
     }
     write(rel, page({
+      navYear: y,
       title: esc(s.set) + ' Ken Griffey Jr. Card Values | Raw & PSA Prices',
       desc: s.set + ' Ken Griffey Jr. card values — ' + names + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
       url: SITE + '/' + rel + '/',
@@ -293,6 +296,7 @@ for (const y of years) {
     }
   }
   write(String(y), page({
+    navYear: y,
     title: y + ' Ken Griffey Jr. Cards — Values & Price Guide',
     desc: 'Current values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
       ' sets — raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sales, updated daily.',
@@ -324,8 +328,7 @@ const days = Object.keys(byDate).sort().reverse();
 for (const iso of days) {
   const entries = byDate[iso].sort((a, b) => a.y - b.y);
   const nice = entries[0].date;
-  let body = yearNav(null) +
-    '<h1>Griffey Card Market Report — ' + esc(nice) + '</h1>' +
+  let body = '<h1>Griffey Card Market Report — ' + esc(nice) + '</h1>' +
     '<p class="sub">What moved in the Ken Griffey Jr. card market on ' + esc(nice) +
     ', based on real eBay sold listings across ' + entries.length + (entries.length === 1 ? ' year.' : ' years.') + ' Price moves are sale to sale, not averages.</p>';
   for (const e of entries) {
@@ -343,8 +346,7 @@ for (const iso of days) {
 }
 
 /* ---------- blog index ---------- */
-let blogBody = yearNav(null) +
-  '<h1>Griffey Card Market Reports</h1>' +
+let blogBody = '<h1>Griffey Card Market Reports</h1>' +
   '<p class="sub">Daily notes on what actually moved in the Ken Griffey Jr. card market — every report backed by real eBay sold listings. Price moves are sale to sale, not averages.</p><ul class="plain" style="columns:1">';
 for (const iso of days) {
   const entries = byDate[iso];
@@ -383,8 +385,7 @@ for (const y of years) {
 ranked.sort((a, b) => b.value - a.value);
 const top25 = ranked.slice(0, 25);
 
-let mvBody = yearNav(null) +
-  '<h1>Most Valuable Ken Griffey Jr. Cards of the 90s</h1>' +
+let mvBody = '<h1>Most Valuable Ken Griffey Jr. Cards of the 90s</h1>' +
   '<p class="sub">The 25 most valuable Ken Griffey Jr. cards from 1990–1999, ranked by the highest price actually paid on eBay since this guide began tracking sales in April 2026 — not asking prices, real sold listings. Out of ' +
   totalCards.toLocaleString('en-US') + ' Griffey cards tracked in this guide, these are the kings. Updated daily as new sales come in.</p>' +
   '<table><colgroup><col style="width:5%"><col><col style="width:10%"><col style="width:13%"><col style="width:17%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
@@ -477,8 +478,7 @@ function moverTable(rows) {
   return h + '</tbody></table>';
 }
 
-let bmBody = yearNav(null) +
-  '<h1>Biggest Ken Griffey Jr. Card Price Movers</h1>' +
+let bmBody = '<h1>Biggest Ken Griffey Jr. Card Price Movers</h1>' +
   '<p class="sub">The largest Ken Griffey Jr. card price moves of the last ' + MOVER_WINDOW_DAYS +
   ' days, ranked by percentage change. Every move is sale to sale from real eBay sold listings — not averages. Updated with every price update.</p>';
 if (gainers.length) bmBody += '<h2>Biggest Gainers</h2>' + moverTable(gainers);
@@ -503,7 +503,7 @@ const under100 = ranked.filter(c => c.value < 100).length;
 const kingCard = top25[0];
 const gum = DATA['1995'].find(s => s.set === '1995 Pinnacle').subsets.find(c => c.name.indexOf('Bubble Gum') > -1 && c.name.indexOf('Base') > -1);
 
-let worthBody = yearNav(null) +
+let worthBody =
   '<h1>How Much Is a Ken Griffey Jr. Card Worth?</h1>' +
   '<p class="sub">Anywhere from a few dollars to ' + money(kingCard.value) + '. Most 1990s Griffey cards sell for under $100, ' +
   'but rare inserts and serial-numbered parallels regularly sell for four and five figures. This guide tracks ' +
