@@ -115,7 +115,7 @@ function imageStrip(y, setName, subs) {
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
-  ).join('') + '<a href="/most-valuable/">Most Valuable</a><a href="/blog/">Market Reports</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a></nav>';
+  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/blog/">Market Reports</a></nav>';
 }
 
 function page(o) {
@@ -422,6 +422,78 @@ write('most-valuable', page({
   body: mvBody
 }));
 sitemapUrls.push(SITE + '/most-valuable/');
+
+/* ---------- biggest movers (last 14 days, from price history) ---------- */
+const MOVER_WINDOW_DAYS = 14;
+const moverCutoff = new Date(Date.now() - MOVER_WINDOW_DAYS * 864e5).toISOString().slice(0, 10);
+const slugMap = {};
+const validCards = new Set();
+for (const y of years) {
+  const usedSlugs = {};
+  for (const s of DATA[y]) {
+    let sl = slug(s.set.replace(/^\d{4}\s+/, ''));
+    if (usedSlugs[sl]) sl += '-' + (++usedSlugs[sl]); else usedSlugs[sl] = 1;
+    slugMap[y + '|' + s.set] = sl;
+    for (const sub of s.subsets) validCards.add(y + '|' + s.set + '|' + sub.name);
+  }
+}
+const GRADE_LABEL = { raw: 'Raw', psa8: 'PSA 8', psa9: 'PSA 9', psa10: 'PSA 10' };
+const movers = [];
+for (const key of Object.keys(HIST)) {
+  if (!validCards.has(key)) continue;
+  const [my, mset, mname] = key.split('|');
+  for (const g of Object.keys(HIST[key])) {
+    const arr = HIST[key][g];
+    if (arr.length < 2) continue;
+    const [dLast, vLast] = arr[arr.length - 1];
+    const vPrev = arr[arr.length - 2][1];
+    if (dLast < moverCutoff || vPrev == null || vLast == null || vLast === vPrev) continue;
+    if (Math.max(vPrev, vLast) < 25 || Math.abs(vLast - vPrev) < 5) continue;
+    movers.push({
+      y: my, set: mset, name: mname, sl: slugMap[my + '|' + mset],
+      grade: GRADE_LABEL[g] || g, from: vPrev, to: vLast,
+      pct: Math.round((vLast - vPrev) / vPrev * 100)
+    });
+  }
+}
+const gainers = movers.filter(m => m.pct > 0).sort((a, b) => b.pct - a.pct).slice(0, 15);
+const decliners = movers.filter(m => m.pct < 0).sort((a, b) => a.pct - b.pct).slice(0, 15);
+
+function moverTable(rows) {
+  let h = '<table><colgroup><col style="width:5%"><col><col style="width:9%"><col style="width:11%"><col style="width:13%"><col style="width:13%"><col style="width:12%"></colgroup>' +
+    '<thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>From</th><th>To</th><th>Change</th></tr></thead><tbody>';
+  rows.forEach((m, i) => {
+    const cls = m.pct > 0 ? 'up' : 'down';
+    const sign = m.pct > 0 ? '+' : '';
+    h += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
+      '<td class="cname"><a href="/' + m.y + '/' + m.sl + '/" style="color:var(--text);text-decoration:none">' + esc(m.set) + ' — ' + esc(m.name) + '</a></td>' +
+      '<td class="odds"><a href="/' + m.y + '/" style="color:var(--dim);text-decoration:none">' + m.y + '</a></td>' +
+      '<td class="odds">' + m.grade + '</td>' +
+      '<td class="raw">' + money(m.from) + '</td>' +
+      '<td class="raw">' + money(m.to) + '</td>' +
+      '<td><span class="' + cls + '" style="font-size:13px;font-weight:600">' + sign + m.pct + '%</span></td></tr>';
+  });
+  return h + '</tbody></table>';
+}
+
+let bmBody = yearNav(null) +
+  '<h1>Biggest Ken Griffey Jr. Card Price Movers</h1>' +
+  '<p class="sub">The largest Ken Griffey Jr. card price moves of the last ' + MOVER_WINDOW_DAYS +
+  ' days, ranked by percentage change. Every move is sale to sale from real eBay sold listings — not averages. Updated with every price update.</p>';
+if (gainers.length) bmBody += '<h2>Biggest Gainers</h2>' + moverTable(gainers);
+if (decliners.length) bmBody += '<h2>Biggest Decliners</h2>' + moverTable(decliners);
+if (!gainers.length && !decliners.length) bmBody += '<p class="sub">No major moves in the last ' + MOVER_WINDOW_DAYS + ' days — check back after the next price update.</p>';
+bmBody += '<p class="sub" style="margin-top:16px">Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card, or see the <a href="/most-valuable/" style="color:var(--gold)">Top 25 sales</a>.</p>';
+
+write('biggest-movers', page({
+  title: 'Biggest Ken Griffey Jr. Card Price Movers | Last ' + MOVER_WINDOW_DAYS + ' Days',
+  desc: 'The biggest Ken Griffey Jr. card price moves of the last ' + MOVER_WINDOW_DAYS + ' days from real eBay sales' +
+    (gainers.length ? ' — ' + gainers[0].set + ' ' + gainers[0].name + ' ' + gainers[0].grade + ' up ' + gainers[0].pct + '%' : '') + '. Updated daily.',
+  url: SITE + '/biggest-movers/',
+  ogimg: SITE + '/img/og/market-reports.jpg',
+  body: bmBody
+}));
+sitemapUrls.push(SITE + '/biggest-movers/');
 
 /* ---------- "how much is a griffey card worth" ---------- */
 const over1k = ranked.filter(c => c.value >= 1000).length;
