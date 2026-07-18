@@ -327,7 +327,7 @@ for (const iso of days) {
   let body = yearNav(null) +
     '<h1>Griffey Card Market Report — ' + esc(nice) + '</h1>' +
     '<p class="sub">What moved in the Ken Griffey Jr. card market on ' + esc(nice) +
-    ', based on real eBay sold listings across ' + entries.length + (entries.length === 1 ? ' year.' : ' years.') + '</p>';
+    ', based on real eBay sold listings across ' + entries.length + (entries.length === 1 ? ' year.' : ' years.') + ' Price moves are sale to sale, not averages.</p>';
   for (const e of entries) {
     body += '<h2><a href="/' + e.y + '/">' + e.y + '</a></h2><div class="report">' + e.body + '</div>';
   }
@@ -345,7 +345,7 @@ for (const iso of days) {
 /* ---------- blog index ---------- */
 let blogBody = yearNav(null) +
   '<h1>Griffey Card Market Reports</h1>' +
-  '<p class="sub">Daily notes on what actually moved in the Ken Griffey Jr. card market — every report backed by real eBay sold listings.</p><ul class="plain" style="columns:1">';
+  '<p class="sub">Daily notes on what actually moved in the Ken Griffey Jr. card market — every report backed by real eBay sold listings. Price moves are sale to sale, not averages.</p><ul class="plain" style="columns:1">';
 for (const iso of days) {
   const entries = byDate[iso];
   blogBody += '<li><a href="/blog/' + iso + '/">' + esc(entries[0].date) + '</a> <span style="color:var(--dim);font-size:12px">— ' +
