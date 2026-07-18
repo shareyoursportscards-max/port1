@@ -443,6 +443,7 @@ for (const key of Object.keys(HIST)) {
   if (!validCards.has(key)) continue;
   const [my, mset, mname] = key.split('|');
   for (const g of Object.keys(HIST[key])) {
+    if (g === 'raw') continue;
     const arr = HIST[key][g];
     if (arr.length < 2) continue;
     const [dLast, vLast] = arr[arr.length - 1];
