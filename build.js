@@ -163,6 +163,10 @@ color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:an
 .wrap{max-width:860px;margin:0 auto;padding:18px 14px 40px}
 .home{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;letter-spacing:.5px;margin-bottom:14px;padding:7px 14px;border:1px solid var(--border);border-radius:8px;transition:border-color .15s ease}
 .home:hover{border-color:var(--gold)}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scrollx .mtable{min-width:640px}
+.mtable td{white-space:nowrap}
+.mtable td.cname{white-space:normal}
 .bottomnav{margin-top:36px;border-top:1px solid var(--border);padding-top:14px}
 .bn-label{color:var(--dim);font-size:11px;letter-spacing:.8px;text-transform:uppercase}
 h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(19px,4vw,27px);color:var(--gold);margin:4px 0 6px}
@@ -462,7 +466,7 @@ const gainers = movers.filter(m => m.pct > 0).sort((a, b) => b.pct - a.pct).slic
 const decliners = movers.filter(m => m.pct < 0).sort((a, b) => a.pct - b.pct).slice(0, 15);
 
 function moverTable(rows) {
-  let h = '<table><colgroup><col style="width:5%"><col><col style="width:9%"><col style="width:11%"><col style="width:13%"><col style="width:13%"><col style="width:12%"></colgroup>' +
+  let h = '<div class="scrollx"><table class="mtable"><colgroup><col style="width:5%"><col><col style="width:9%"><col style="width:11%"><col style="width:13%"><col style="width:13%"><col style="width:12%"></colgroup>' +
     '<thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>From</th><th>To</th><th>Change</th></tr></thead><tbody>';
   rows.forEach((m, i) => {
     const cls = m.pct > 0 ? 'up' : 'down';
@@ -475,7 +479,7 @@ function moverTable(rows) {
       '<td class="raw">' + money(m.to) + '</td>' +
       '<td><span class="' + cls + '" style="font-size:13px;font-weight:600">' + sign + m.pct + '%</span></td></tr>';
   });
-  return h + '</tbody></table>';
+  return h + '</tbody></table></div>';
 }
 
 let bmBody = '<h1>Biggest Ken Griffey Jr. Card Price Movers</h1>' +
