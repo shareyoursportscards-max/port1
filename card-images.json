@@ -100,9 +100,9 @@
     "alt": "1996 Bowman's Best Mirror Image Atomic Refractor Ken Griffey Jr. card #7 in PSA slab"
   },
   "1996|1996 Ultra|Thunder Clap #11": {
-    "file": "1996-ultra-thunder-clap-griffey-raw.jpg",
-    "w": 327, "h": 450,
-    "alt": "1996 Ultra Thunder Clap Ken Griffey Jr. insert card #11"
+    "file": "1996-ultra-thunder-clap-griffey-psa7.jpg",
+    "w": 376, "h": 650,
+    "alt": "1996 Ultra Thunder Clap Ken Griffey Jr. insert card #11 in PSA 7 slab"
   },
   "1996|1996 Studio|Press Proof Silver #116 (/1,000)": {
     "file": "1996-studio-press-proof-silver-griffey-psa10.jpg",
@@ -403,5 +403,65 @@
     "file": "1995-finest-refractor-118-griffey-psa8.jpg",
     "w": 390, "h": 642,
     "alt": "1995 Finest Refractor Ken Griffey Jr. card #118 in PSA 8 slab"
+  },
+  "1997|1997 SPx|Die-Cut Gold #45": {
+    "file": "1997-spx-die-cut-gold-45-griffey-raw.jpg",
+    "w": 407, "h": 296,
+    "alt": "1997 SPx Die-Cut Gold Ken Griffey Jr. die-cut card #45"
+  },
+  "1990|1990 Bowman|Tiffany #481": {
+    "file": "1990-bowman-tiffany-481-griffey-psa10.jpg",
+    "w": 377, "h": 645,
+    "alt": "1990 Bowman Tiffany Ken Griffey Jr. card #481 in PSA 10 slab"
+  },
+  "1990|1990 Topps|Tiffany #336": {
+    "file": "1990-topps-tiffany-336-griffey-psa9.jpg",
+    "w": 376, "h": 627,
+    "alt": "1990 Topps Tiffany Ken Griffey Jr. card #336 in PSA 9 slab"
+  },
+  "1990|1990 Donruss|Learning Series #8": {
+    "file": "1990-donruss-learning-series-8-griffey-psa8.jpg",
+    "w": 380, "h": 652,
+    "alt": "1990 Donruss Learning Series Ken Griffey Jr. card #8 in PSA 8 slab"
+  },
+  "1990|1990 Topps|Major League Debut #46": {
+    "file": "1990-topps-major-league-debut-46-griffey-psa10.jpg",
+    "w": 361, "h": 627,
+    "alt": "1990 Topps 1989 Major League Debut Ken Griffey Jr. card #46 in PSA 10 slab"
+  },
+  "1990|1990 Topps|All-Stars #20": {
+    "file": "1990-topps-all-stars-20-griffey-psa10.jpg",
+    "w": 320, "h": 542,
+    "alt": "1990 Topps All-Star Glossy Set of 60 Ken Griffey Jr. card #20 in PSA 10 slab"
+  },
+  "1990|1990 Fleer|Baseball All-Stars #14": {
+    "file": "1990-fleer-baseball-all-stars-14-griffey-psa10.jpg",
+    "w": 366, "h": 627,
+    "alt": "1990 Fleer Baseball All-Stars Ken Griffey Jr. card #14 in PSA 10 slab"
+  },
+  "1990|1990 Upper Deck|Base #156": {
+    "file": "1990-upper-deck-156-griffey-psa10.jpg",
+    "w": 345, "h": 592,
+    "alt": "1990 Upper Deck Ken Griffey Jr. card #156 in PSA 10 slab"
+  },
+  "1990|1990 Donruss|Base #365": {
+    "file": "1990-donruss-365-griffey-psa10.jpg",
+    "w": 385, "h": 652,
+    "alt": "1990 Donruss Ken Griffey Jr. card #365 in PSA 10 slab"
+  },
+  "1990|1990 Score|Base #560": {
+    "file": "1990-score-560-griffey-psa10.jpg",
+    "w": 311, "h": 542,
+    "alt": "1990 Score Ken Griffey Jr. card #560 in PSA 10 slab"
+  },
+  "1990|1990 Bowman|Base #481": {
+    "file": "1990-bowman-481-griffey-psa10.jpg",
+    "w": 377, "h": 652,
+    "alt": "1990 Bowman Ken Griffey Jr. card #481 in PSA 10 slab"
+  },
+  "1990|1990 Score|Rising Stars #3": {
+    "file": "1990-score-rising-stars-3-griffey-psa10.jpg",
+    "w": 377, "h": 651,
+    "alt": "1990 Score Rising Stars Ken Griffey Jr. card #3 in PSA 10 slab"
   }
 }
