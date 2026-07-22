@@ -100,9 +100,29 @@
     "alt": "1996 Bowman's Best Mirror Image Atomic Refractor Ken Griffey Jr. card #7 in PSA slab"
   },
   "1996|1996 Ultra|Thunder Clap #11": {
-    "file": "1996-ultra-thunder-clap-griffey-psa7.jpg",
-    "w": 376, "h": 650,
-    "alt": "1996 Ultra Thunder Clap Ken Griffey Jr. insert card #11 in PSA 7 slab"
+    "file": "1996-ultra-thunder-clap-griffey-raw.jpg",
+    "w": 305, "h": 435,
+    "alt": "1996 Ultra Thunder Clap Ken Griffey Jr. base insert card #11"
+  },
+  "1996|1996 Ultra|Thunder Clap Gold Medallion #11": {
+    "file": "1996-ultra-thunder-clap-gold-medallion-griffey-raw.jpg",
+    "w": 312, "h": 445,
+    "alt": "1996 Ultra Thunder Clap Gold Medallion Ken Griffey Jr. parallel insert card #11"
+  },
+  "1996|1996 Ultra|Hitting Machines Gold Medallion": {
+    "file": "1996-ultra-hitting-machines-gold-medallion-griffey-raw.jpg",
+    "w": 457, "h": 650,
+    "alt": "1996 Ultra Hitting Machines Gold Medallion Ken Griffey Jr. die-cut insert card #4"
+  },
+  "1996|1996 Score|Titanic Taters #4": {
+    "file": "1996-score-titanic-taters-griffey-raw.jpg",
+    "w": 436, "h": 612,
+    "alt": "1996 Score Titanic Taters Ken Griffey Jr. insert card #4"
+  },
+  "1996|1996 Metal Universe|Platinum Edition #107": {
+    "file": "1996-metal-universe-platinum-107-griffey-raw.jpg",
+    "w": 300, "h": 430,
+    "alt": "1996 Metal Universe Platinum Edition Ken Griffey Jr. card #107"
   },
   "1996|1996 Studio|Press Proof Silver #116 (/1,000)": {
     "file": "1996-studio-press-proof-silver-griffey-psa10.jpg",
