@@ -2753,7 +2753,7 @@ const DATA = {
       {name:"Mirror Image #M2 (w/ Mateo)", raw:null, psa8:33, psa9:null, psa10:null, odds:"1:24"},
       {name:"Mirror Image Refractor #M2 (w/ Mateo)", raw:40, psa8:null, psa9:null, psa10:200, odds:"1:96"},
       {name:"Mirror Image Atomic Refractor #M2 (w/ Mateo)", raw:811, psa8:null, psa9:300, psa10:764, odds:"1:192", prev_psa10:757, prev_psa9:250},
-      {name:"Franchise Best (/3,000)", raw:29, psa8:63, psa9:120, psa10:510, tag:"die-cut", odds:"1:41", prev_psa9:75},
+      {name:"Franchise Best Mach I (/3,000)", raw:65, psa8:63, psa9:120, psa10:510, tag:"die-cut", odds:"1:41", prev_raw:29, prev_psa9:75},
       {name:"Franchise Best Mach II (/1,000)", raw:null, psa8:93, psa9:180, psa10:600, tag:"die-cut", odds:"1:124", prev_psa10:590},
       {name:"Franchise Best Mach III (/500)", raw:400, psa8:null, psa9:1000, psa10:1862, odds:"1:248"}
     ]},
@@ -2761,8 +2761,8 @@ const DATA = {
       {name:"Base #100", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1999 Flair Showcase", subsets:[
-      {name:"Row 1 #3 (/1,500)", raw:200, psa8:165, psa9:310, psa10:null, prev_raw:120},
-      {name:"Row 2 #3", raw:59, psa8:35, psa9:180, psa10:1500, prev_raw:40},
+      {name:"Row 1 #3 (/1,500)", raw:275, psa8:165, psa9:310, psa10:null, prev_raw:200},
+      {name:"Row 2 #3", raw:50, psa8:190, psa9:180, psa10:1500, prev_raw:59, prev_psa8:35},
       {name:"Row 3 #3", raw:20, psa8:40, psa9:90, psa10:null, prev_raw:50, prev_psa9:63},
       {name:"Measure of Greatness #4 (/500)", raw:400, psa8:490, psa9:400, psa10:null, prev_psa8:304},
       {name:"Legacy Collection Row 1 (/99)", raw:null, psa8:null, psa9:null, psa10:6350},
@@ -2780,12 +2780,16 @@ const DATA = {
       {name:"Peel and Reveal Hyperplaid", raw:275, psa8:null, psa9:null, psa10:null},
       {name:"Prominent Figures Refractor #PF44 (/457)", raw:128, psa8:null, psa9:270, psa10:750, prev_psa9:136},
       {name:"Team Finest Gold #TF12 (/250)", raw:500, psa8:null, psa9:600, psa10:null},
+      {name:"Team Finest Pink #TF12 (/500)", raw:299.99, psa8:null, psa9:null, psa10:null},
+      {name:"Team Finest #TF12 (/1,500)", raw:75, psa8:null, psa9:null, psa10:null},
+      {name:"Milestones #M4 (/3,000)", raw:50, psa8:null, psa9:154.19, psa10:null},
+      {name:"Milestones RBI Refractor #23 (/1,400)", raw:130, psa8:null, psa9:null, psa10:null},
       {name:"Double Feature Refractor (w/ A-Rod)", raw:null, psa8:null, psa9:null, psa10:175}
     ]},
     {set:"1999 Fleer Brilliants", subsets:[
       {name:"Base #24", raw:null, psa8:31, psa9:null, psa10:null},
       {name:"Blue #24B", raw:null, psa8:38, psa9:66, psa10:800, odds:"1:3"},
-      {name:"Shining Stars #1", raw:40, psa8:null, psa9:65, psa10:null, odds:"1:20", prev_raw:38}
+      {name:"Shining Stars #1", raw:78.50, psa8:null, psa9:65, psa10:null, odds:"1:20", prev_raw:40}
     ]},
     {set:"1999 Fleer Mystique", subsets:[
       {name:"Base #151 (/2,500)", raw:49, psa8:36, psa9:70, psa10:null}
@@ -2804,12 +2808,12 @@ const DATA = {
       {name:"Linchpins #4", raw:2374, psa8:5338, psa9:2500, psa10:null}
     ]},
     {set:"1999 Skybox E-X Century", subsets:[
-      {name:"Base #17", raw:57, psa8:99, psa9:225, psa10:null, prev_raw:55, prev_psa8:65, prev_psa9:100},
+      {name:"Base #17", raw:57.18, psa8:99, psa9:225, psa10:null, prev_raw:57, prev_psa8:65, prev_psa9:100},
       {name:"Favorites for Fenway #4", raw:150, psa8:85, psa9:160, psa10:null}
     ]},
     {set:"1999 Skybox Molten Metal", subsets:[
       {name:"Fusion Sterling (/500)", raw:2250, psa8:1660, psa9:1515, psa10:13500},
-      {name:"Fusion #33F", raw:1400, psa8:null, psa9:4000, psa10:null, odds:"1:12", prev_psa9:3200},
+      {name:"Fusion #33F", raw:1400, psa8:2419.99, psa9:4000, psa10:null, odds:"1:12", prev_psa9:3200},
       {name:"Base #133", raw:null, psa8:19, psa9:90, psa10:165},
       {name:"Xplosion #133", raw:70, psa8:null, psa9:242, psa10:522, tag:"die-cut", odds:"1:2", prev_psa9:51, prev_raw:350}
     ]},
@@ -2821,11 +2825,14 @@ const DATA = {
     {set:"1999 Skybox Thunder", subsets:[
       {name:"Base #3", raw:null, psa8:null, psa9:null, psa10:301},
       {name:"Dial 1 #3D", raw:500, psa8:388, psa9:570, psa10:2700, odds:"1:300", prev_psa10:1350},
-      {name:"Turbocharged #3", raw:185, psa8:81, psa9:128, psa10:755, odds:"1:72", prev_raw:123},
+      {name:"Turbocharged #3", raw:155, psa8:81, psa9:128, psa10:755, odds:"1:72", prev_raw:185},
       {name:"Hip-No-Tized #4", raw:144, psa8:185, psa9:255, psa10:null, odds:"1:36", prev_psa8:70},
       {name:"In Depth #5", raw:null, psa8:30, psa9:130, psa10:550, odds:"1:24", prev_psa10:340},
       {name:"Rant #292", raw:null, psa8:78, psa9:null, psa10:null, odds:"1:2"},
       {name:"Batterz.com #3", raw:18, psa8:null, psa9:40, psa10:null, odds:"1:18"}
+    ]},
+    {set:"1999 SP Top Prospects", subsets:[
+      {name:"Game Used Bat #G-Jr", raw:49.99, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1999 SP Authentic", subsets:[
       {name:"Base #65", raw:null, psa8:null, psa9:null, psa10:null},
@@ -2848,6 +2855,7 @@ const DATA = {
       {name:"Triumvirate Luminescent #T13B", raw:275, psa8:null, psa9:229, psa10:null, odds:"1:192"},
       {name:"Triumvirate Illuminator #T3B", raw:null, psa8:null, psa9:200, psa10:638, odds:"1:384"},
       {name:"Triumvirate Illuminator #T13B", raw:352, psa8:null, psa9:304, psa10:1075, odds:"1:384"},
+      {name:"Bleacher Reachers Refractor #BR1", raw:null, psa8:null, psa9:null, psa10:379.49},
       {name:"Video Replay #VR3", raw:null, psa8:25, psa9:33, psa10:127, odds:"1:12", prev_psa10:134},
       {name:"Never Compromise #NC3", raw:null, psa8:null, psa9:34, psa10:91, odds:"1:12"},
       {name:"Stadium Club Chrome #SCC20", raw:30, psa8:null, psa9:30, psa10:null, odds:"1:24"},
@@ -2856,7 +2864,8 @@ const DATA = {
     {set:"1999 Topps", subsets:[
       {name:"Base #215", raw:null, psa8:null, psa9:null, psa10:75},
       {name:"Lords of the Diamond #LD1", raw:70, psa8:null, psa9:97, psa10:null, prev_raw:21},
-      {name:"All-Topps Mystery Finest Refractor #M14", raw:135, psa8:null, psa9:215, psa10:null, prev_raw:175}
+      {name:"All-Topps Mystery Finest Refractor #M14", raw:135, psa8:null, psa9:215, psa10:null, prev_raw:175},
+      {name:"Power Brokers Die-Cut Refractor #PB3", raw:179.99, psa8:null, psa9:null, psa10:null, tag:"die-cut"}
     ]},
     {set:"1999 Topps Gallery", subsets:[
       {name:"Base #6", raw:null, psa8:null, psa9:null, psa10:56},
@@ -2871,7 +2880,7 @@ const DATA = {
       {name:"Base #100", raw:null, psa8:null, psa9:68, psa10:null},
       {name:"Refractor #100", raw:560, psa8:null, psa9:2895, psa10:null},
       {name:"All-Etch Refractor #AE3", raw:545, psa8:350, psa9:800, psa10:3875, odds:"1:24", prev_psa9:475},
-      {name:"All-Etch #AE3", raw:46, psa8:32, psa9:95, psa10:155, odds:"1:6", prev_raw:61, prev_psa9:55},
+      {name:"All-Etch #AE3", raw:46, psa8:32, psa9:95, psa10:499.99, odds:"1:6", prev_raw:61, prev_psa9:55, prev_psa10:155},
       {name:"Lords of the Diamond Refractor #LD1", raw:307, psa8:450, psa9:600, psa10:1576, tag:"die-cut", odds:"1:24", prev_raw:350, prev_psa8:330, prev_psa9:400},
       {name:"Lords of the Diamond #LD1", raw:38, psa8:35, psa9:80, psa10:null, tag:"die-cut", odds:"1:8", prev_raw:103},
       {name:"Base #224", raw:null, psa8:null, psa9:20, psa10:120},
@@ -2880,11 +2889,12 @@ const DATA = {
       {name:"Early Road to Hall #ER5", raw:null, psa8:6, psa9:65, psa10:270, odds:"1:12", prev_psa10:265},
       {name:"Early Road to Hall Refractor #ER5 (/100)", raw:null, psa8:null, psa9:3279, psa10:10000, odds:"1:944"},
       {name:"Record Numbers #RN4", raw:10, psa8:8, psa9:33, psa10:null, odds:"1:36"},
-      {name:"Record Numbers Refractor #RN4", raw:null, psa8:null, psa9:625, psa10:1100, odds:"1:144"},
+      {name:"Record Numbers Refractor #RN4", raw:481.49, psa8:null, psa9:625, psa10:1100, odds:"1:144"},
       {name:"Refractor #454 (w/ Sosa & Gonzalez)", raw:null, psa8:115, psa9:65, psa10:null}
     ]},
     {set:"1999 Topps Stars", subsets:[
-      {name:"3 Star Foil (/99)", raw:null, psa8:null, psa9:525, psa10:null}
+      {name:"3 Star Foil (/99)", raw:null, psa8:null, psa9:525, psa10:null},
+      {name:"Stars 'N Steel Gold #26", raw:125, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1999 Topps Tek", subsets:[
       {name:"Gold (/10)", raw:null, psa8:510, psa9:676, psa10:null}
@@ -2911,7 +2921,7 @@ const DATA = {
       {name:"Damage Inc. #8", raw:55, psa8:106, psa9:117, psa10:228, odds:"1:72", prev_raw:40},
       {name:"The Book On #2", raw:null, psa8:14, psa9:null, psa10:750, odds:"1:6"},
       {name:"RBI Kings #23RK", raw:6, psa8:22, psa9:38, psa10:null},
-      {name:"Season Crowns Gold Medallion #219G", raw:null, psa8:15, psa9:150, psa10:null, odds:"1:80"}
+      {name:"Season Crowns Gold Medallion #219G", raw:56.37, psa8:15, psa9:150, psa10:null, odds:"1:80"}
     ]},
     {set:"1999 Upper Deck", subsets:[
       {name:"Base #195", raw:null, psa8:null, psa9:null, psa10:null},
@@ -2965,10 +2975,12 @@ const DATA = {
     ]},
     {set:"1999 Upper Deck Challengers for 70", subsets:[
       {name:"Challengers Edition (/600)", raw:null, psa8:null, psa9:null, psa10:300},
-      {name:"Challengers Insert #C3 (/70)", raw:null, psa8:null, psa9:400, psa10:null}
+      {name:"Challengers Insert #C3 (/70)", raw:null, psa8:null, psa9:400, psa10:null},
+      {name:"Base #3", raw:null, psa8:null, psa9:null, psa10:89}
     ]},
     {set:"1999 Upper Deck MVP", subsets:[
       {name:"Base #218", raw:null, psa8:null, psa9:null, psa10:39},
+      {name:"Base #190", raw:null, psa8:null, psa9:null, psa10:58.77},
       {name:"Silver Script #190", raw:null, psa8:null, psa9:37, psa10:null, odds:"1:2"},
       {name:"Gold Script #190 (/100)", raw:null, psa8:null, psa9:750, psa10:1540},
       {name:"Dynamics #D1", raw:null, psa8:null, psa9:63, psa10:null, odds:"1:28"},
@@ -3111,6 +3123,7 @@ const BLOG = {
     {date:"June 21, 2026", body:"<b>Metal Universe All-Galactic Team</b> PSA 8 moved from $750 to <span class='up'>$830</span>. At 1:192 packs, this insert continues to climb. The rest of '98 held steady — <b>Donruss Elite Prime Numbers</b> had a PSA 9 sell at $335 but with only 4 bids and potential variant confusion (#1B vs die-cut), leaving the existing $800 in place for now."}
   ],
   1999: [
+    {date:"July 26, 2026", body:"The <b>Flair Showcase Row 2 (Passion)</b> PSA 8 rocketed from $35 to <span class='up'>$190</span> (up 443%). The <b>Topps Chrome All-Etch #AE3</b> PSA 10 also jumped hard, from $155 to <span class='up'>$499.99</span>, and the <b>Fleer Brilliants Shining Stars</b> raw price climbed from $40 to <span class='up'>$78.50</span> on a cluster of sales. <b>Bowman's Best Franchise Best Mach I</b> raw rose from $29 to <span class='up'>$65</span>, while <b>Skybox Thunder Turbocharged</b> raw eased from $185 to <span class='down'>$155</span>."},
     {date:"July 25, 2026", body:"A freshly-graded <b>Metal Universe Linchpins #4</b> PSA 8 brought a stunning <span class='up'>$5,338</span> on 37 bids &mdash; oddly above the card's own PSA 9 price, likely a hype-driven auction rather than a new baseline. <b>Metal Universe Diamond Soul</b> jumped hard on both fronts: raw from $590 to <span class='up'>$675</span> and PSA 8 from $98 to <span class='up'>$850</span> (Pop 34). <b>Skybox Premium Soul of the Game</b> PSA 9 pushed from $1,500 to <span class='up'>$1,999</span>, and <b>Finest Prominent Figures Refractor #PF44</b> PSA 9 nearly doubled from $136 to <span class='up'>$270</span>. <b>Upper Deck Ovation Standing Ovation #1</b> PSA 8 more than doubled from $143 to <span class='up'>$332</span> in a 28-bid auction. <b>Skybox Thunder Turbocharged #3</b> raw climbed from $123 to <span class='up'>$185</span>, <b>UD Choice Starquest Red</b> PSA 8 from $70 to <span class='up'>$130</span>, and <b>Ultra Gold Medallion #72G</b> raw from $22 to <span class='up'>$58</span>. One correction: <b>Skybox Molten Metal Xplosion #133</b> raw dropped from $350 to <span class='down'>$70</span> &mdash; the old raw price looks to have been stale relative to its own PSA 9 ($242)."},
     {date:"July 22, 2026", body:"The <b>Skybox Molten Metal Fusion #33F</b> PSA 9 climbed from $3,200 to <span class='up'>$4,000</span> on multiple sales, and the <b>Skybox Premium Soul of the Game</b> PSA 9 from $1,100 to <span class='up'>$1,500</span>. The <b>Stadium Club Chrome Refractor #SCC20</b> PSA 9 jumped from $398 to <span class='up'>$749</span> and the <b>Topps Chrome Lords of the Diamond Refractor #LD1</b> PSA 9 from $400 to <span class='up'>$600</span>. Raw prices firmed too &mdash; <b>Metal Universe Planet Metal</b> from $265 to <span class='up'>$333</span> and <b>Skybox Thunder Turbocharged #3</b> from $100 to <span class='up'>$123</span>."},
     {date:"July 19, 2026", body:"Graded inserts led 1999. The <b>Molten Metal Xplosion #133</b> PSA 9 jumped from $51 to <span class='up'>$242</span> (up 375%) in a 31-bid auction, and the <b>Topps Chrome All-Etch Refractor #AE3</b> PSA 9 climbed from $475 to <span class='up'>$800</span> (up 68%). The <b>Bowman Chrome Refractor #52</b> PSA 9 rose from $650 to <span class='up'>$799</span> with 28 bids, and the <b>Upper Deck Game Jersey #KG-H</b> PSA 9 from $760 to <span class='up'>$886</span> in a 24-bid auction. The <b>Topps Chrome Lords of the Diamond Refractor #LD1</b> PSA 8 moved from $330 to <span class='up'>$450</span>, with raw copies from $338 to <span class='up'>$350</span>. Raw prices firmed on the scarce inserts: <b>Metal Universe Diamond Soul</b> from $431 to <span class='up'>$590</span> (up 37%), <b>Skybox Premium Soul of the Game</b> from $300 to <span class='up'>$366</span> in a 21-bid auction, and <b>Topps Gallery Gallery of Heroes #GH3</b> from $175 to <span class='up'>$220</span>. A <b>Bowman Chrome Diamond Aces Refractor #DA11</b> raw sold for $216 after a 34-bid auction, a <b>Skybox Thunder Hip-No-Tized #4</b> raw for $144, and the <b>Bowman's Best Franchise Best Mach III /500</b> sold at $400 raw and $1,000 in PSA 9. Cooling: <b>Ultra Thunder Clap #10</b> raw from $325 to <span class='down'>$260</span> and <b>Stadium Club Video Replay #VR3</b> PSA 10 from $134 to <span class='down'>$127</span>."},
