@@ -257,9 +257,13 @@ for (const y of years) {
       '</ul>' +
       '<img class="ogthumb" src="/img/og/' + y + '-' + sl + '.jpg" alt="' + esc(s.set) + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">';
     let setCardImg = null;
+    const setPageImages = [];
     for (const sub of s.subsets) {
       const im = CARDIMG[y + '|' + s.set + '|' + sub.name];
-      if (im) { setCardImg = SITE + '/img/cards/' + im.file; break; }
+      if (im) {
+        if (!setCardImg) setCardImg = SITE + '/img/cards/' + im.file;
+        setPageImages.push(SITE + '/img/cards/' + im.file);
+      }
     }
     write(rel, page({
       navYear: y,
@@ -278,7 +282,7 @@ for (const y of years) {
       },
       body: setBody
     }));
-    sitemapUrls.push(SITE + '/' + rel + '/');
+    sitemapUrls.push(setPageImages.length ? { loc: SITE + '/' + rel + '/', images: setPageImages } : SITE + '/' + rel + '/');
     setPages++;
   }
 
@@ -589,8 +593,12 @@ sitemapUrls.push(SITE + '/how-much-are-griffey-cards-worth/');
 
 /* ---------- sitemap + robots ---------- */
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
-  '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  sitemapUrls.map(u => '  <url><loc>' + u + '</loc><lastmod>' + isoToday + '</lastmod></url>').join('\n') +
+  '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' +
+  sitemapUrls.map(u => {
+    if (typeof u === 'string') return '  <url><loc>' + u + '</loc><lastmod>' + isoToday + '</lastmod></url>';
+    const imgTags = u.images.map(src => '<image:image><image:loc>' + src + '</image:loc></image:image>').join('');
+    return '  <url><loc>' + u.loc + '</loc><lastmod>' + isoToday + '</lastmod>' + imgTags + '</url>';
+  }).join('\n') +
   '\n</urlset>\n');
 fs.writeFileSync(path.join(ROOT, 'robots.txt'),
   'User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n');
