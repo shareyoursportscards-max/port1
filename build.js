@@ -40,7 +40,14 @@ const years = Object.keys(DATA).map(Number).sort((a, b) => a - b);
 /* ---------- price history logger ----------
    Appends to price-history.json: { "year|set|card": { grade: [[iso-date, value], ...] } }
    Change-only: a point is recorded when a value first appears or differs from the
-   last logged value. Re-running on the same day revises today's point in place. */
+   last logged value.
+   Date source: each subset MAY carry an optional "{grade}_date" field (e.g. raw_date,
+   psa9_date) holding the REAL eBay sale date as "YYYY-MM-DD" for that price, taken from
+   the listing itself when the price was entered. When present, THAT date is used instead
+   of today's date — this is what lets price-history (and anything checking it before a
+   date-specific claim, like a social post) reflect when a card actually sold, not just
+   when the guide happened to be updated. Cards without a _date field fall back to today's
+   date, same as before this existed — this is additive, no backfill required. */
 const HIST_FILE = path.join(ROOT, 'price-history.json');
 const HIST = (function logPriceHistory() {
   let hist = {};
@@ -53,13 +60,14 @@ const HIST = (function logPriceHistory() {
         for (const g of ['raw', 'psa8', 'psa9', 'psa10']) {
           const val = sub[g];
           if (val == null) continue;
+          const saleDate = sub[g + '_date'] || isoToday;
           const series = (hist[key] = hist[key] || {});
           const arr = (series[g] = series[g] || []);
           const last = arr[arr.length - 1];
-          if (last && last[0] === isoToday) {
+          if (last && last[0] === saleDate) {
             if (last[1] !== val) { last[1] = val; revised++; }
           } else if (!last || last[1] !== val) {
-            arr.push([isoToday, val]);
+            arr.push([saleDate, val]);
             added++;
           }
         }
