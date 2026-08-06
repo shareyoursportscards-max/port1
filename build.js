@@ -207,7 +207,6 @@ td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.p
 .lb.open{display:flex}
 .lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,.7);border:1px solid var(--border)}
 td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
-img.ogthumb{width:300px;max-width:60%;height:auto;border-radius:8px;border:1px solid var(--border);margin:28px 0 0;display:block;opacity:.9}
 .report{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 15px;margin:10px 0;font-size:13.5px;line-height:1.65;color:var(--dim)}
 .report b{color:var(--text)}.report .rdate{color:var(--gold);font-size:12px;letter-spacing:.6px;display:block;margin-bottom:5px}
 .report .up{font-size:inherit}.report .down{font-size:inherit}
@@ -262,8 +261,7 @@ for (const y of years) {
       imageStrip(y, s.set, s.subsets) +
       '<h2>More ' + y + ' Griffey Sets</h2><ul class="plain">' +
       sets.filter(o => o !== s).map(o => '<li><a href="/' + y + '/' + slug(o.set.replace(/^\d{4}\s+/, '')) + '/">' + esc(o.set) + '</a></li>').join('') +
-      '</ul>' +
-      '<img class="ogthumb" src="/img/og/' + y + '-' + sl + '.jpg" alt="' + esc(s.set) + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">';
+      '</ul>';
     let setCardImg = null;
     const setPageImages = [];
     for (const sub of s.subsets) {
@@ -302,7 +300,6 @@ for (const y of years) {
       body += '<div class="report"><span class="rdate">' + esc(r.date) + '</span>' + r.body + '</div>';
     }
   }
-  body += '<img class="ogthumb" src="/img/og/' + y + '.jpg" alt="' + y + ' Ken Griffey Jr. top card values — price guide" width="1200" height="630" loading="lazy">';
 
   let yearCardImg = null, yearBest = 0;
   for (const s of sets) {
