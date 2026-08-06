@@ -156,7 +156,7 @@ function page(o) {
     o.body +
     '\n<div class="bottomnav"><div class="bn-label">Browse the guide</div>' + yearNav(o.navYear || null) + '</div>' +
     '\n<div class="foot">Prices updated ' + today + ' from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
-    '<a href="/">griffeycardprices.com</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
+    '<a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
     '</div>\n' +
     '<div class="lb" id="cardLb"><img alt=""></div>\n' +
     '<script>(function(){var lb=document.getElementById("cardLb"),li=lb.firstElementChild;document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.closest&&t.closest(".cardfig")){li.src=t.src;li.alt=t.alt;lb.classList.add("open");}else if(lb.classList.contains("open")){lb.classList.remove("open");}});document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.classList.remove("open");});})();</script>\n' +
@@ -513,6 +513,30 @@ write('biggest-movers', page({
   body: bmBody
 }));
 sitemapUrls.push(SITE + '/biggest-movers/');
+
+/* ---------- HTML site map (real crawlable page linking to every year/set page,
+   to help Google discover deep pages faster than via XML sitemap alone) ---------- */
+let smBody = '<h1>Site Map</h1>' +
+  '<p class="sub">Every year and set of Ken Griffey Jr. cards tracked in this guide, linked directly below.</p>';
+for (const y of years) {
+  smBody += '<h2><a href="/' + y + '/">' + y + ' Ken Griffey Jr. Cards</a></h2><ul class="plain">' +
+    DATA[y].map(s => '<li><a href="/' + y + '/' + slugMap[y + '|' + s.set] + '/">' + esc(s.set) + '</a></li>').join('') +
+    '</ul>';
+}
+smBody += '<h2>More</h2><ul class="plain">' +
+  '<li><a href="/most-valuable/">Most Valuable Cards (Top 25)</a></li>' +
+  '<li><a href="/biggest-movers/">Biggest Movers</a></li>' +
+  '<li><a href="/how-much-are-griffey-cards-worth/">How Much Is a Griffey Card Worth?</a></li>' +
+  '<li><a href="/blog/">Market Reports</a></li>' +
+  '</ul>';
+write('site-map', page({
+  title: 'Site Map | Griffey Card Prices',
+  desc: 'Every year and set of Ken Griffey Jr. cards tracked on this site, with direct links to each price guide page.',
+  url: SITE + '/site-map/',
+  ogimg: SITE + '/hero-card.jpg',
+  body: smBody
+}));
+sitemapUrls.push(SITE + '/site-map/');
 
 /* ---------- "how much is a griffey card worth" ---------- */
 const over1k = ranked.filter(c => c.value >= 1000).length;
