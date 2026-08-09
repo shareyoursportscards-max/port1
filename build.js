@@ -646,5 +646,13 @@ for (const top of [...years.map(String), 'blog']) {
   }
 }
 
+/* ---------- keep homepage's IMAGE_COUNT in sync with card-images.json ---------- */
+const imageCount = Object.keys(CARDIMG).length;
+const newSrc = src.replace(/const IMAGE_COUNT = \d+;/, 'const IMAGE_COUNT = ' + imageCount + ';');
+if (newSrc !== src) {
+  fs.writeFileSync(path.join(ROOT, 'index.html'), newSrc);
+  console.log('Homepage IMAGE_COUNT updated -> ' + imageCount);
+}
+
 console.log('Generated: ' + years.length + ' year pages, ' + setPages + ' set pages, ' +
   days.length + ' market report pages + blog index, sitemap.xml (' + sitemapUrls.length + ' URLs), robots.txt');
