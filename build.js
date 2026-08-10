@@ -111,8 +111,12 @@ function priceCell(sub, g) {
    parentheticals are dropped (print runs like "(/1,999)" and qualifiers like
    "(w/ Mateo)" return zero eBay results), and the filler word "Base" is removed
    while real card numbers and suffixes (#72G, #1DH) are kept. */
-const EBAY_AFFIL = '';                              // e.g. '&campid=1234567890&customid=griffey'
-const EBAY_FILTER = '&_sacat=0&LH_Sold=1&LH_Complete=1';   // sold + completed = real comps
+const EBAY_AFFIL = '';        // e.g. '&campid=1234567890&customid=griffey'
+/* ACTIVE listings, not sold. Two reasons: you cannot earn an affiliate
+   commission on an item that already sold, and the guide itself is already the
+   sold-price source — the thing it can't answer is "can I buy one right now?"
+   To go back to sold comps: '&_sacat=0&LH_Sold=1&LH_Complete=1'. */
+const EBAY_FILTER = '&_sacat=0';
 
 function ebayQuery(setName, cardName) {
   const n = String(cardName)
