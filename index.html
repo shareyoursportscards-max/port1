@@ -401,7 +401,7 @@
   /* ---------- STICKY COLUMN HEADER ---------- */
   .col-header{
     display:grid;
-    grid-template-columns:1fr 80px 72px 72px 72px 72px 44px;
+    grid-template-columns:1fr 80px 72px 72px 72px 72px 72px;
     gap:0;
     padding:0 20px;
     position:sticky;
@@ -426,8 +426,10 @@
   }
   .set-link{color:inherit; text-decoration:none; border-bottom:1px solid transparent;}
   .set-link:hover{color:var(--accent); border-bottom-color:var(--accent);}
-  .ebh{text-align:center; opacity:.75;}
-  .cell.ebc{display:flex; align-items:center; justify-content:center;}
+  .ebh{opacity:.75;}
+  /* right-aligned like the price cells, in a same-width column, so the gap from
+     PSA 10 matches the gaps between the price columns */
+  .cell.ebc{display:flex; align-items:center; justify-content:flex-end;}
   .ebl{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px;
        border-radius:6px; color:var(--dim); border:1px solid var(--border); text-decoration:none;
        transition:color .15s ease, border-color .15s ease;}
@@ -459,7 +461,7 @@
   /* ---------- DATA ROWS (grid, no table) ---------- */
   .card-row{
     display:grid;
-    grid-template-columns:1fr 80px 72px 72px 72px 72px 44px;
+    grid-template-columns:1fr 80px 72px 72px 72px 72px 72px;
     gap:0;
     padding:4px 20px;
     font-family:'Inter Tight', sans-serif;
@@ -1481,7 +1483,7 @@
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
     .col-header, .card-row{
-      grid-template-columns:minmax(170px,auto) 56px 62px 62px 62px 62px 38px;
+      grid-template-columns:minmax(170px,auto) 56px 62px 62px 62px 62px 62px;
       padding:5px 0 5px 0;
       font-size:12px;
     }
