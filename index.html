@@ -401,7 +401,7 @@
   /* ---------- STICKY COLUMN HEADER ---------- */
   .col-header{
     display:grid;
-    grid-template-columns:1fr 80px 72px 72px 72px 72px;
+    grid-template-columns:1fr 80px 72px 72px 72px 72px 44px;
     gap:0;
     padding:0 20px;
     position:sticky;
@@ -424,6 +424,14 @@
   .set-block{
     margin-bottom:0;
   }
+  .set-link{color:inherit; text-decoration:none; border-bottom:1px solid transparent;}
+  .set-link:hover{color:var(--accent); border-bottom-color:var(--accent);}
+  .ebh{text-align:center; opacity:.75;}
+  .cell.ebc{display:flex; align-items:center; justify-content:center;}
+  .ebl{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px;
+       border-radius:6px; color:var(--dim); border:1px solid var(--border); text-decoration:none;
+       transition:color .15s ease, border-color .15s ease;}
+  .ebl:hover{color:var(--gold); border-color:var(--gold);}
   .set-header{
     display:flex; align-items:baseline; gap:10px;
     padding:20px 20px 6px;
@@ -451,7 +459,7 @@
   /* ---------- DATA ROWS (grid, no table) ---------- */
   .card-row{
     display:grid;
-    grid-template-columns:1fr 80px 72px 72px 72px 72px;
+    grid-template-columns:1fr 80px 72px 72px 72px 72px 44px;
     gap:0;
     padding:4px 20px;
     font-family:'Inter Tight', sans-serif;
@@ -1473,7 +1481,7 @@
     .set-header{padding:16px 12px 4px; font-size:11px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
     .col-header, .card-row{
-      grid-template-columns:minmax(170px,auto) 56px 62px 62px 62px 62px 16px;
+      grid-template-columns:minmax(170px,auto) 56px 62px 62px 62px 62px 38px;
       padding:5px 0 5px 0;
       font-size:12px;
     }
@@ -1609,7 +1617,7 @@
   <div id="top10Area"></div>
 
   <div class="col-header" id="colHeader">
-    <span>Card</span><span>Odds</span><span>Raw</span><span>PSA 8</span><span>PSA 9</span><span>PSA 10</span>
+    <span>Card</span><span>Odds</span><span>Raw</span><span>PSA 8</span><span>PSA 9</span><span>PSA 10</span><span class="ebh">eBay</span>
   </div>
   <div class="coll-hint" id="collHint">Tap any price to build your portfolio</div>
   <div id="setList"></div>
@@ -3472,6 +3480,21 @@ function getTop10Keys(){
   return new Set(all.slice(0,10).map(x=>x.key));
 }
 
+/* eBay search link for a card. Mirrors ebayQuery() in build.js — if you change
+   the normalising rules in one place, change them in the other. Active listings
+   (not sold): the guide already IS the sold-price source, and a sold item can't
+   earn an affiliate commission once EPN is hooked up. */
+function ebayUrl(setName, cardName){
+  var n = String(cardName)
+    .replace(/\([^)]*\)/g,' ')
+    .replace(/\bBase\b/gi,' ')
+    .replace(/'/g,'')
+    .replace(/"/g,' ')
+    .replace(/\s+/g,' ').trim();
+  var q = (setName + ' Ken Griffey Jr ' + n).replace(/\s+/g,' ').trim();
+  return 'https://www.ebay.com/sch/i.html?_nkw=' + encodeURIComponent(q) + '&_sacat=0';
+}
+
 function renderSets(){
   const q = searchTerm.toLowerCase().trim();
   const top10 = getTop10Keys();
@@ -3522,6 +3545,7 @@ function renderSets(){
         ${fmtCell('psa8', sub.psa8, sub.prev_psa8, currentYear, s.set, sub.name)}
         ${fmtCell('psa9', sub.psa9, sub.prev_psa9, currentYear, s.set, sub.name)}
         ${fmtCell('psa10', sub.psa10, sub.prev_psa10, currentYear, s.set, sub.name)}
+        <div class="cell ebc"><a class="ebl" href="${ebayUrl(s.set, sub.name)}" target="_blank" rel="sponsored noopener" title="See this card on eBay" aria-label="Search eBay for ${escAttr(s.set + ' ' + sub.name)}"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><line x1="15.4" y1="15.4" x2="21" y2="21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></a></div>
       </div>`;
     }).join('');
 
@@ -3529,7 +3553,7 @@ function renderSets(){
     return `
       <div class="set-block">
         <div class="set-header">
-          <span>${s.set}<button class="set-share" data-surl="${shareUrl}" title="Share this set" aria-label="Share this set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></span>
+          <span><a class="set-link" href="${shareUrl}">${s.set}</a><button class="set-share" data-surl="${shareUrl}" title="Share this set" aria-label="Share this set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></span>
           <span class="meta">${s.subsets.length} card${s.subsets.length>1?'s':''}</span>
         </div>
         ${rows}
