@@ -160,7 +160,7 @@ function page(o) {
     '<a class="home" href="/">◂ Griffey Card Prices — interactive guide</a>\n' +
     o.body +
     '\n<div class="bottomnav"><div class="bn-label">Browse the guide</div>' + yearNav(o.navYear || null) + '</div>' +
-    '\n<div class="foot">Prices updated ' + today + ' from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
+    '\n<div class="foot">Prices updated __PAGEDATE__ from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
     '<a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
     '</div>\n' +
     '<div class="lb" id="cardLb"><img alt=""></div>\n' +
@@ -227,12 +227,46 @@ ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font
 /* Pages are overwritten in place (no delete/recreate churn — the repo lives in
    a OneDrive-synced folder and mass deletions pile up in its confirmation queue).
    Stale dirs that are no longer generated are pruned at the end of the build. */
+/* ---------- per-page "genuinely changed" dates ----------
+   Previously every page's sitemap <lastmod> and footer date were stamped with the
+   BUILD date, so all 244 URLs claimed to change every single day. Google ignores
+   lastmod once it decides the values are unreliable, which threw away the only
+   signal we have for "this page really is new, come re-crawl it."
+
+   Now each page's HTML is hashed with a __PAGEDATE__ placeholder still in it (so
+   the hash doesn't depend on the date we're about to stamp). The hash is compared
+   against page-dates.json; the stored date is reused when nothing changed, and
+   only bumped to today when the content actually differs. That date then drives
+   BOTH the sitemap lastmod and the human-readable footer, so they always agree. */
+const crypto = require('crypto');
+const DATES_FILE = path.join(ROOT, 'page-dates.json');
+let pageDates = {};
+try { pageDates = JSON.parse(fs.readFileSync(DATES_FILE, 'utf8')); } catch (e) { /* first run */ }
+const urlDate = {};          // full URL -> iso date, for the sitemap
+let changedPages = 0;
+const humanDate = iso => {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-US',
+    { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+};
+
 const written = new Set();
 function write(rel, html) {
   written.add(rel);
+  const hash = crypto.createHash('sha1').update(html).digest('hex');
+  const prev = pageDates[rel];
+  let date;
+  if (prev && prev.hash === hash) {
+    date = prev.date;                    // content identical -> keep the real date
+  } else {
+    date = isoToday;                     // genuinely new or changed
+    changedPages++;
+  }
+  pageDates[rel] = { hash, date };
+  urlDate[SITE + '/' + rel + '/'] = date;
   const dir = path.join(ROOT, rel);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'index.html'), html);
+  fs.writeFileSync(path.join(dir, 'index.html'), html.split('__PAGEDATE__').join(humanDate(date)));
 }
 
 const sitemapUrls = [SITE + '/'];
@@ -627,15 +661,30 @@ write('how-much-are-griffey-cards-worth', page({
 }));
 sitemapUrls.push(SITE + '/how-much-are-griffey-cards-worth/');
 
-/* ---------- sitemap + robots ---------- */
+/* ---------- sitemap + robots ----------
+   The homepage is the source index.html rather than a generated page, so hash it
+   here (with the IMAGE_COUNT substitution already applied, which is what will be
+   on disk) so its lastmod moves only when the guide's own content moves. */
+{
+  const finalSrc = src.replace(/const IMAGE_COUNT = \d+;/, 'const IMAGE_COUNT = ' + Object.keys(CARDIMG).length + ';');
+  const h = crypto.createHash('sha1').update(finalSrc).digest('hex');
+  const prev = pageDates['(home)'];
+  const d = prev && prev.hash === h ? prev.date : isoToday;
+  if (!prev || prev.hash !== h) changedPages++;
+  pageDates['(home)'] = { hash: h, date: d };
+  urlDate[SITE + '/'] = d;
+}
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' +
   sitemapUrls.map(u => {
-    if (typeof u === 'string') return '  <url><loc>' + u + '</loc><lastmod>' + isoToday + '</lastmod></url>';
-    const imgTags = u.images.map(src => '<image:image><image:loc>' + src + '</image:loc></image:image>').join('');
-    return '  <url><loc>' + u.loc + '</loc><lastmod>' + isoToday + '</lastmod>' + imgTags + '</url>';
+    const loc = typeof u === 'string' ? u : u.loc;
+    const lm = urlDate[loc] || isoToday;
+    const imgTags = typeof u === 'string' ? '' :
+      u.images.map(s => '<image:image><image:loc>' + s + '</image:loc></image:image>').join('');
+    return '  <url><loc>' + loc + '</loc><lastmod>' + lm + '</lastmod>' + imgTags + '</url>';
   }).join('\n') +
   '\n</urlset>\n');
+fs.writeFileSync(DATES_FILE, JSON.stringify(pageDates, null, 0));
 fs.writeFileSync(path.join(ROOT, 'robots.txt'),
   'User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n');
 
@@ -663,3 +712,5 @@ if (newSrc !== src) {
 
 console.log('Generated: ' + years.length + ' year pages, ' + setPages + ' set pages, ' +
   days.length + ' market report pages + blog index, sitemap.xml (' + sitemapUrls.length + ' URLs), robots.txt');
+console.log('Content-dated pages: ' + changedPages + ' changed today, ' +
+  (Object.keys(pageDates).length - changedPages) + ' unchanged (kept their real lastmod)');
