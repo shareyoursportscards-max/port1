@@ -101,16 +101,51 @@ function priceCell(sub, g) {
   return '<td class="' + g + '">' + arrow(sub, g) + money(sub[g]) + '</td>';
 }
 
-function cardTable(subs, withOdds) {
+/* ---------- eBay search links ----------
+   EPN affiliate tracking is NOT live yet. When the account is approved, put the
+   campaign id in EBAY_AFFIL below and every link on the site picks it up on the
+   next build — nothing else changes. Links carry rel="sponsored" from day one so
+   they stay compliant the moment they do become affiliate links.
+
+   Card names in DATA are internal shorthand, so the query is normalised first:
+   parentheticals are dropped (print runs like "(/1,999)" and qualifiers like
+   "(w/ Mateo)" return zero eBay results), and the filler word "Base" is removed
+   while real card numbers and suffixes (#72G, #1DH) are kept. */
+const EBAY_AFFIL = '';                              // e.g. '&campid=1234567890&customid=griffey'
+const EBAY_FILTER = '&_sacat=0&LH_Sold=1&LH_Complete=1';   // sold + completed = real comps
+
+function ebayQuery(setName, cardName) {
+  const n = String(cardName)
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(/\bBase\b/gi, ' ')
+    .replace(/'/g, '')                // "Artist's Proof" -> "Artists Proof", not "Artist s Proof"
+    .replace(/"/g, ' ')               // eBay reads double quotes as an exact-phrase operator
+    .replace(/\s+/g, ' ').trim();
+  return (setName + ' Ken Griffey Jr ' + n).replace(/\s+/g, ' ').trim();
+}
+function ebayCell(setName, cardName) {
+  const q = ebayQuery(setName, cardName);
+  return '<td class="eb"><a class="eb" href="https://www.ebay.com/sch/i.html?_nkw=' +
+    encodeURIComponent(q) + EBAY_FILTER + EBAY_AFFIL +
+    '" target="_blank" rel="sponsored noopener" title="See sold listings on eBay"' +
+    ' aria-label="Search eBay sold listings for ' + esc(q) + '">' +
+    '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false">' +
+    '<circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/>' +
+    '<line x1="15.4" y1="15.4" x2="21" y2="21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>' +
+    '</svg></a></td>';
+}
+
+function cardTable(subs, withOdds, setName) {
   let h = '<table><colgroup><col>' + (withOdds ? '<col class="codds">' : '') +
-    '<col class="cp"><col class="cp"><col class="cp"><col class="cp"></colgroup>' +
+    '<col class="cp"><col class="cp"><col class="cp"><col class="cp"><col class="ceb"></colgroup>' +
     '<thead><tr><th>Card</th>' + (withOdds ? '<th>Odds</th>' : '') +
-    '<th>Raw</th><th>PSA 8</th><th>PSA 9</th><th>PSA 10</th></tr></thead><tbody>';
+    '<th>Raw</th><th>PSA 8</th><th>PSA 9</th><th>PSA 10</th><th class="theb">eBay</th></tr></thead><tbody>';
   for (const sub of subs) {
     h += '<tr><td class="cname">' + esc(sub.name) +
       (sub.tag ? ' <span class="tag">' + esc(sub.tag) + '</span>' : '') + '</td>' +
       (withOdds ? '<td class="odds">' + (sub.odds ? esc(sub.odds) : '') + '</td>' : '') +
-      priceCell(sub, 'raw') + priceCell(sub, 'psa8') + priceCell(sub, 'psa9') + priceCell(sub, 'psa10') + '</tr>';
+      priceCell(sub, 'raw') + priceCell(sub, 'psa8') + priceCell(sub, 'psa9') + priceCell(sub, 'psa10') +
+      ebayCell(setName, sub.name) + '</tr>';
   }
   return h + '</tbody></table>';
 }
@@ -193,7 +228,7 @@ h2 a{color:var(--text);text-decoration:none}h2 a:hover{color:var(--gold)}
 .yearnav .on{color:var(--gold);border-color:var(--gold)}
 .yearnav a:hover{color:var(--text)}
 table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 4px;table-layout:fixed}
-col.codds{width:9%}col.cp{width:15%}
+col.codds{width:9%}col.cp{width:14%}col.ceb{width:7%}
 td{overflow-wrap:break-word}
 th{text-align:left;color:var(--dim);font-weight:500;font-size:11px;letter-spacing:.8px;text-transform:uppercase;padding:5px 7px;border-bottom:1px solid var(--border)}
 td{padding:6px 7px;border-bottom:1px solid rgba(42,58,80,.45)}
@@ -203,6 +238,10 @@ td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.p
 .up{color:#5eeaa0;font-size:10px}.down{color:#ff6b6b;font-size:10px}
 td.raw,td.psa8,td.psa9,td.psa10{position:relative;padding-left:15px}
 .tr{position:absolute;left:2px;top:50%;transform:translateY(-50%);font-size:8px;line-height:1;pointer-events:none}
+th.theb{text-align:center;font-size:10px}
+td.eb{text-align:center;padding-left:0;padding-right:0}
+a.eb{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:var(--dim);border:1px solid var(--border);transition:color .15s ease,border-color .15s ease}
+a.eb:hover{color:var(--gold);border-color:var(--gold)}
 .cardfigs{display:flex;flex-wrap:wrap;gap:16px;margin:14px 0 6px;justify-content:center;align-items:stretch}
 .cardfig{margin:0;width:158px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 12px 10px;display:flex;flex-direction:column;align-items:center;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .cardfig:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 10px 28px rgba(0,0,0,.45)}
@@ -221,7 +260,7 @@ ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
-@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 8px)}td.raw,td.psa8,td.psa9,td.psa10{padding-left:11px}.tr{left:0;font-size:7px}col.cp{width:16.5%}}
+@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 8px)}td.raw,td.psa8,td.psa9,td.psa10{padding-left:11px}.tr{left:0;font-size:7px}col.cp{width:15.5%}col.ceb{width:9%}a.eb{width:24px;height:24px}}
 `;
 
 /* Pages are overwritten in place (no delete/recreate churn — the repo lives in
@@ -289,7 +328,7 @@ for (const y of years) {
     const rel = y + '/' + sl;
     const withOdds = s.subsets.some(x => x.odds);
 
-    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + cardTable(s.subsets, yearOdds);
+    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + cardTable(s.subsets, yearOdds, s.set);
 
     /* set page */
     const top = s.subsets.reduce((m, x) => Math.max(m, x.psa10 || 0, x.psa9 || 0, x.raw || 0, x.psa8 || 0), 0);
@@ -298,7 +337,7 @@ for (const y of years) {
       '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings: ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked' +
       (top ? ', topping out at ' + money(top) : '') + '. Updated daily.</p>' +
-      cardTable(s.subsets, withOdds) +
+      cardTable(s.subsets, withOdds, s.set) +
       imageStrip(y, s.set, s.subsets) +
       '<h2>More ' + y + ' Griffey Sets</h2><ul class="plain">' +
       sets.filter(o => o !== s).map(o => '<li><a href="/' + y + '/' + slug(o.set.replace(/^\d{4}\s+/, '')) + '/">' + esc(o.set) + '</a></li>').join('') +
