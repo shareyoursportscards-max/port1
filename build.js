@@ -228,6 +228,7 @@ h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px;color:va
 h2 a{color:var(--text);text-decoration:none}h2 a:hover{color:var(--gold)}
 h3{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14.5px;color:var(--text);margin:16px 0 4px}
 .sub{color:var(--dim);font-size:13.5px;line-height:1.55;margin:0 0 14px}
+.answer{color:var(--text);font-size:14px;line-height:1.6;margin:0 0 14px}
 .yearnav{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 6px}
 .yearnav a,.yearnav span{padding:4px 9px;border:1px solid var(--border);border-radius:6px;font-size:12.5px;color:var(--dim);text-decoration:none}
 .yearnav .on{color:var(--gold);border-color:var(--gold)}
@@ -343,7 +344,7 @@ for (const y of years) {
     '<p class="sub">Current market values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y +
     ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
   if (topCard) {
-    body += '<p>The most valuable ' + y + ' Ken Griffey Jr. card is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
+    body += '<p class="answer">The most valuable ' + y + ' Ken Griffey Jr. card is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
       (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade) + ', which has sold for ' + money(topCard.price) + '.' +
       (rawLow && rawHigh && rawHigh > rawLow ? ' Raw ' + y + ' Griffeys tracked here have sold anywhere from ' + money(rawLow) + ' to ' + money(rawHigh) + ', depending on the card.' : '') +
       '</p>';
@@ -415,7 +416,7 @@ for (const y of years) {
       faqs.push([q3, a3]);
     }
     body += '<h2>' + y + ' Griffey Card Value FAQ</h2>' +
-      faqs.map(([q, a]) => '<h3>' + esc(q) + '</h3><p>' + esc(a) + '</p>').join('');
+      faqs.map(([q, a]) => '<h3>' + esc(q) + '</h3><p class="answer">' + esc(a) + '</p>').join('');
     faqJsonLd = {
       '@context': 'https://schema.org', '@type': 'FAQPage',
       mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
