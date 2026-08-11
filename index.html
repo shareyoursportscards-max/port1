@@ -436,8 +436,12 @@
   .ebl{position:relative; display:inline-flex; align-items:center; justify-content:center;
        width:18px; height:18px; border-radius:5px; color:var(--dim);
        border:1px solid var(--border); text-decoration:none;
-       transition:color .15s ease, border-color .15s ease;}
-  .ebl::after{content:""; position:absolute; top:-8px; right:-8px; bottom:-8px; left:-8px;}
+       transition:color .15s ease, border-color .15s ease;
+       touch-action:manipulation;}
+  /* Tap cushion kept SMALL on purpose: at -8px these boxes were taller than the
+     row, so they tiled into a continuous link surface down the whole column and
+     the browser hesitated between "tap" and "scroll" on every swipe. */
+  .ebl::after{content:""; position:absolute; top:-4px; right:-5px; bottom:-4px; left:-5px;}
   .ebl:hover{color:var(--gold); border-color:var(--gold);}
   .set-header{
     display:flex; align-items:baseline; gap:10px;
@@ -1527,6 +1531,9 @@
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
       overscroll-behavior-x:contain;
+      /* explicitly allow BOTH axes so a vertical swipe inside this horizontal
+         scroller still scrolls the page instead of getting axis-locked */
+      touch-action:pan-x pan-y;
     }
     .set-header{font-size:11px;}
 
