@@ -322,9 +322,31 @@ for (const y of years) {
   const usedSlugs = {};
   const yearOdds = sets.some(s => s.subsets.some(x => x.odds));
 
-  let body = '<h1>' + y + ' Ken Griffey Jr. Cards — Values &amp; Price Guide</h1>' +
+  /* real numbers for the value-question intro + FAQ, pulled from DATA — not hand-written per year */
+  let topCard = null; // {name, setName, grade, price}
+  const rawVals = [];
+  for (const s of sets) {
+    for (const sub of s.subsets) {
+      const grades = [['PSA 10', sub.psa10], ['PSA 9', sub.psa9], ['PSA 8', sub.psa8], ['raw', sub.raw]];
+      for (const [grade, price] of grades) {
+        if (price && (!topCard || price > topCard.price)) topCard = { name: sub.name, setName: s.set, grade, price };
+      }
+      if (sub.raw) rawVals.push(sub.raw);
+    }
+  }
+  rawVals.sort((a, b) => a - b);
+  const rawLow = rawVals.length ? rawVals[0] : null;
+  const rawHigh = rawVals.length ? rawVals[rawVals.length - 1] : null;
+
+  let body = '<h1>' + y + ' Ken Griffey Jr. Card Values — What&rsquo;s a ' + y + ' Griffey Worth?</h1>' +
     '<p class="sub">Current market values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y +
     ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
+  if (topCard) {
+    body += '<p>The most valuable ' + y + ' Ken Griffey Jr. card is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
+      (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade) + ', which has sold for ' + money(topCard.price) + '.' +
+      (rawLow && rawHigh && rawHigh > rawLow ? ' Raw ' + y + ' Griffeys tracked here have sold anywhere from ' + money(rawLow) + ' to ' + money(rawHigh) + ', depending on the card.' : '') +
+      '</p>';
+  }
 
   for (const s of sets) {
     let sl = slug(s.set.replace(/^\d{4}\s+/, ''));
@@ -376,6 +398,29 @@ for (const y of years) {
     setPages++;
   }
 
+  /* value-question FAQ, placed below the card tables — real Q&A pulled from DATA */
+  let faqJsonLd = null;
+  if (topCard) {
+    const topName = esc(topCard.setName.replace(y + ' ', '') + ' ' + topCard.name) + (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade);
+    const q1 = 'How much is a ' + y + ' Ken Griffey Jr. card worth?';
+    const a1 = 'Prices for ' + y + ' Ken Griffey Jr. cards range from a few dollars for common raw base cards up to ' +
+      money(topCard.price) + ' for the ' + topName + '. Exact value depends on the specific card, insert, and grade.';
+    const q2 = 'What is the most valuable ' + y + ' Ken Griffey Jr. card?';
+    const a2 = 'The most valuable tracked ' + y + ' Griffey card is the ' + topName + ', which has sold for ' + money(topCard.price) + '.';
+    const faqs = [[q1, a1], [q2, a2]];
+    if (rawLow && rawHigh && rawHigh > rawLow) {
+      const q3 = 'What is a raw (ungraded) ' + y + ' Ken Griffey Jr. card worth?';
+      const a3 = 'Raw ' + y + ' Griffey cards tracked here have sold anywhere from ' + money(rawLow) + ' to ' + money(rawHigh) + ', depending on the card and how scarce the insert is.';
+      faqs.push([q3, a3]);
+    }
+    body += '<h2>' + y + ' Griffey Card Value FAQ</h2>' +
+      faqs.map(([q, a]) => '<h3>' + esc(q) + '</h3><p>' + esc(a) + '</p>').join('');
+    faqJsonLd = {
+      '@context': 'https://schema.org', '@type': 'FAQPage',
+      mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+    };
+  }
+
   /* recent market reports for this year */
   const reports = (BLOG[y] || []);
   if (reports.length) {
@@ -396,19 +441,23 @@ for (const y of years) {
   }
   write(String(y), page({
     navYear: y,
-    title: y + ' Ken Griffey Jr. Cards — Values & Price Guide',
-    desc: 'Current values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
-      ' sets — raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sales, updated daily.',
+    title: y + ' Ken Griffey Jr. Card Values — What\'s a ' + y + ' Griffey Worth?',
+    desc: 'How much is a ' + y + ' Ken Griffey Jr. card worth? ' + cardCount + ' cards tracked across ' + sets.length +
+      ' sets' + (topCard ? ', prices up to ' + money(topCard.price) : '') +
+      '. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sales, updated daily.',
     url: SITE + '/' + y + '/',
     cardimg: yearCardImg,
     ogimg: SITE + '/img/og/' + y + '.jpg',
-    jsonld: {
-      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Griffey Card Prices', item: SITE + '/' },
-        { '@type': 'ListItem', position: 2, name: y + ' Cards', item: SITE + '/' + y + '/' }
-      ]
-    },
+    jsonld: [
+      {
+        '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Griffey Card Prices', item: SITE + '/' },
+          { '@type': 'ListItem', position: 2, name: y + ' Cards', item: SITE + '/' + y + '/' }
+        ]
+      },
+      ...(faqJsonLd ? [faqJsonLd] : [])
+    ],
     body
   }));
   sitemapUrls.push(SITE + '/' + y + '/');
