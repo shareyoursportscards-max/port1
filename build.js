@@ -140,7 +140,7 @@ function ebayCell(setName, cardName) {
 }
 
 function cardTable(subs, withOdds, setName) {
-  let h = '<table><colgroup><col>' + (withOdds ? '<col class="codds">' : '') +
+  let h = '<div class="scrollx"><table class="ptable"><colgroup><col>' + (withOdds ? '<col class="codds">' : '') +
     '<col class="cp"><col class="cp"><col class="cp"><col class="cp"><col class="ceb"></colgroup>' +
     '<thead><tr><th>Card</th>' + (withOdds ? '<th>Odds</th>' : '') +
     '<th>Raw</th><th>PSA 8</th><th>PSA 9</th><th>PSA 10</th><th class="theb">eBay</th></tr></thead><tbody>';
@@ -151,7 +151,7 @@ function cardTable(subs, withOdds, setName) {
       priceCell(sub, 'raw') + priceCell(sub, 'psa8') + priceCell(sub, 'psa9') + priceCell(sub, 'psa10') +
       ebayCell(setName, sub.name) + '</tr>';
   }
-  return h + '</tbody></table>';
+  return h + '</tbody></table></div>';
 }
 
 function imageStrip(y, setName, subs) {
@@ -217,6 +217,7 @@ color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:an
 .home:hover{border-color:var(--gold)}
 .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .scrollx .mtable{min-width:644px}
+.scrollx .ptable{min-width:560px}
 .mtable td{white-space:nowrap}
 .mtable td.cname{white-space:normal}
 .mtable th:nth-child(1),.mtable td:nth-child(1){position:sticky;left:0;background:var(--bg);z-index:2}
