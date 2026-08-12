@@ -427,7 +427,7 @@ for (const y of years) {
   /* recent market reports for this year */
   const reports = (BLOG[y] || []);
   if (reports.length) {
-    body += '<h2>Recent ' + y + ' Market Reports</h2>';
+    body += '<h2 id="market-reports">' + y + ' Market Reports</h2>';
     for (const r of reports) {
       body += '<div class="report"><span class="rdate">' + esc(r.date) + '</span>' + r.body + '</div>';
     }
@@ -466,48 +466,19 @@ for (const y of years) {
   sitemapUrls.push(SITE + '/' + y + '/');
 }
 
-/* ---------- blog: one page per report day ---------- */
-const byDate = {}; // iso -> [{y, date, body}]
-for (const y of years) {
-  for (const r of (BLOG[y] || [])) {
-    const iso = new Date(r.date).toISOString().slice(0, 10);
-    (byDate[iso] = byDate[iso] || []).push({ y, date: r.date, body: r.body });
-  }
-}
-const days = Object.keys(byDate).sort().reverse();
-
-for (const iso of days) {
-  const entries = byDate[iso].sort((a, b) => a.y - b.y);
-  const nice = entries[0].date;
-  let body = '<h1>Griffey Card Market Report — ' + esc(nice) + '</h1>' +
-    '<p class="sub">What moved in the Ken Griffey Jr. card market on ' + esc(nice) +
-    ', based on real eBay sold listings across ' + entries.length + (entries.length === 1 ? ' year.' : ' years.') + ' Price moves are sale to sale, not averages.</p>';
-  for (const e of entries) {
-    body += '<h2><a href="/' + e.y + '/">' + e.y + '</a></h2><div class="report">' + e.body + '</div>';
-  }
-  body += '<p class="sub" style="margin-top:20px"><a href="/blog/" style="color:var(--gold)">◂ All market reports</a></p>';
-  write('blog/' + iso, page({
-    title: 'Griffey Card Market Report — ' + nice,
-    desc: 'Ken Griffey Jr. card price movement for ' + nice + ' — real eBay sales across ' + entries.map(e => e.y).join(', ') + '.',
-    url: SITE + '/blog/' + iso + '/',
-    ogimg: SITE + '/img/og/market-reports.jpg',
-    body
-  }));
-  sitemapUrls.push(SITE + '/blog/' + iso + '/');
-}
-
-/* ---------- blog index ---------- */
+/* ---------- blog index — links to each year's own Market Reports section, no per-day pages ---------- */
 let blogBody = '<h1>Griffey Card Market Reports</h1>' +
-  '<p class="sub">Daily notes on what actually moved in the Ken Griffey Jr. card market — every report backed by real eBay sold listings. Price moves are sale to sale, not averages.</p><ul class="plain" style="columns:1">';
-for (const iso of days) {
-  const entries = byDate[iso];
-  blogBody += '<li><a href="/blog/' + iso + '/">' + esc(entries[0].date) + '</a> <span style="color:var(--dim);font-size:12px">— ' +
-    entries.length + (entries.length === 1 ? ' year covered' : ' years covered') + '</span></li>';
+  '<p class="sub">Notes on what actually moved in the Ken Griffey Jr. card market — every report backed by real eBay sold listings, price moves are sale to sale, not averages. Full history lives on each year\'s own page.</p><ul class="plain" style="columns:1">';
+for (const y of years) {
+  const count = (BLOG[y] || []).length;
+  if (!count) continue;
+  blogBody += '<li><a href="/' + y + '/#market-reports">' + y + '</a> <span style="color:var(--dim);font-size:12px">— ' +
+    count + (count === 1 ? ' report' : ' reports') + '</span></li>';
 }
 blogBody += '</ul>';
 write('blog', page({
   title: 'Griffey Card Market Reports | Daily Price Movement',
-  desc: 'Daily Ken Griffey Jr. card market reports — which cards moved, by how much, and why, based on real eBay sold data.',
+  desc: 'Ken Griffey Jr. card market reports by year — which cards moved, by how much, and why, based on real eBay sold data.',
   url: SITE + '/blog/',
   ogimg: SITE + '/img/og/market-reports.jpg',
   body: blogBody
@@ -806,6 +777,6 @@ if (newSrc !== src) {
 }
 
 console.log('Generated: ' + years.length + ' year pages, ' + setPages + ' set pages, ' +
-  days.length + ' market report pages + blog index, sitemap.xml (' + sitemapUrls.length + ' URLs), robots.txt');
+  'blog index, sitemap.xml (' + sitemapUrls.length + ' URLs), robots.txt');
 console.log('Content-dated pages: ' + changedPages + ' changed today, ' +
   (Object.keys(pageDates).length - changedPages) + ' unchanged (kept their real lastmod)');
