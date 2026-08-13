@@ -230,6 +230,10 @@ h2 a{color:var(--text);text-decoration:none}h2 a:hover{color:var(--gold)}
 h3{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14.5px;color:var(--text);margin:16px 0 4px}
 .sub{color:var(--dim);font-size:13.5px;line-height:1.55;margin:0 0 14px}
 .answer{color:var(--text);font-size:14px;line-height:1.6;margin:0 0 14px}
+.faq{margin:8px 0 4px}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:8px;padding:13px 16px;margin:0 0 10px}
+.faq-q{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14.5px;color:var(--text);margin:0 0 6px}
+.faq-a{color:var(--dim);font-size:13.5px;line-height:1.6;margin:0}
 .yearnav{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 6px}
 .yearnav a,.yearnav span{padding:4px 9px;border:1px solid var(--border);border-radius:6px;font-size:12.5px;color:var(--dim);text-decoration:none}
 .yearnav .on{color:var(--gold);border-color:var(--gold)}
@@ -392,8 +396,9 @@ for (const y of years) {
         const a3 = 'Raw ' + esc(s.set) + ' cards tracked here have sold anywhere from ' + money(setRawLow) + ' to ' + money(setRawHigh) + ', depending on condition.';
         setFaqs.push([q3, a3]);
       }
-      setFaqHtml = '<h2>' + esc(s.set) + ' Value FAQ</h2>' +
-        setFaqs.map(([q, a]) => '<h3>' + esc(q) + '</h3><p class="answer">' + esc(a) + '</p>').join('');
+      setFaqHtml = '<h2>' + esc(s.set) + ' Value FAQ</h2><div class="faq">' +
+        setFaqs.map(([q, a]) => '<div class="faq-item"><p class="faq-q">' + esc(q) + '</p><p class="faq-a">' + esc(a) + '</p></div>').join('') +
+        '</div>';
       setFaqJsonLd = {
         '@context': 'https://schema.org', '@type': 'FAQPage',
         mainEntity: setFaqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
@@ -409,8 +414,8 @@ for (const y of years) {
         (setRawLow && setRawHigh && setRawHigh > setRawLow ? ' Raw copies tracked here have sold from ' + money(setRawLow) + ' to ' + money(setRawHigh) + ', depending on condition.' : '') +
         '</p>' : '') +
       cardTable(s.subsets, withOdds, s.set) +
-      setFaqHtml +
       imageStrip(y, s.set, s.subsets) +
+      setFaqHtml +
       '<h2>More ' + y + ' Griffey Sets</h2><ul class="plain">' +
       sets.filter(o => o !== s).map(o => '<li><a href="/' + y + '/' + slug(o.set.replace(/^\d{4}\s+/, '')) + '/">' + esc(o.set) + '</a></li>').join('') +
       '</ul>';
@@ -463,8 +468,9 @@ for (const y of years) {
       const a3 = 'Raw ' + y + ' Griffey cards tracked here have sold anywhere from ' + money(rawLow) + ' to ' + money(rawHigh) + ', depending on condition and how scarce the insert is.';
       faqs.push([q3, a3]);
     }
-    body += '<h2>' + y + ' Griffey Card Value FAQ</h2>' +
-      faqs.map(([q, a]) => '<h3>' + esc(q) + '</h3><p class="answer">' + esc(a) + '</p>').join('');
+    body += '<h2>' + y + ' Griffey Card Value FAQ</h2><div class="faq">' +
+      faqs.map(([q, a]) => '<div class="faq-item"><p class="faq-q">' + esc(q) + '</p><p class="faq-a">' + esc(a) + '</p></div>').join('') +
+      '</div>';
     faqJsonLd = {
       '@context': 'https://schema.org', '@type': 'FAQPage',
       mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
