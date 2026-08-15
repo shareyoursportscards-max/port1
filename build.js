@@ -154,14 +154,23 @@ function cardTable(subs, withOdds, setName) {
   return h + '</tbody></table></div>';
 }
 
+function gradeBadge(sub) {
+  const grades = [['PSA 10', 'psa10'], ['PSA 9', 'psa9'], ['PSA 8', 'psa8'], ['Raw', 'raw']];
+  for (const [label, key] of grades) if (sub[key]) return label + ' · ' + money(sub[key]);
+  return '';
+}
 function imageStrip(y, setName, subs) {
   const figs = [];
   for (const sub of subs) {
     const im = CARDIMG[y + '|' + setName + '|' + sub.name];
-    if (im) figs.push('<figure class="cardfig"><img src="/img/cards/' + im.file + '" alt="' + esc(im.alt) +
-      '" width="' + im.w + '" height="' + im.h + '" loading="lazy"><figcaption>' + esc(sub.name) + '</figcaption></figure>');
+    if (!im) continue;
+    const badge = gradeBadge(sub);
+    figs.push('<figure class="cardfig"><div class="cf-photo"><img src="/img/cards/' + im.file + '" alt="' + esc(im.alt) +
+      '" width="' + im.w + '" height="' + im.h + '" loading="lazy">' +
+      (badge ? '<span class="cf-badge">' + esc(badge) + '</span>' : '') + '</div>' +
+      '<figcaption>' + esc(sub.name) + '</figcaption></figure>');
   }
-  return figs.length ? '<div class="cardfigs">' + figs.join('') + '</div>' : '';
+  return figs.length ? '<h2>The Cards</h2><p class="sub" style="margin-top:-4px">Real photos from the guide — tap any card to zoom in.</p><div class="cardfigs">' + figs.join('') + '</div>' : '';
 }
 
 function yearNav(active) {
@@ -253,13 +262,14 @@ th.theb{text-align:center;font-size:10px}
 td.eb{text-align:center;padding-left:0;padding-right:0}
 a.eb{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;color:var(--dim);border:1px solid var(--border);transition:color .15s ease,border-color .15s ease}
 a.eb:hover{color:var(--gold);border-color:var(--gold)}
-.cardfigs{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0 10px;justify-content:center;align-items:stretch}
-.cardfig{margin:0;width:158px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 12px 10px;display:flex;flex-direction:column;align-items:center;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
-.cardfig:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 10px 28px rgba(0,0,0,.45)}
-.cardfig img{display:block;width:auto;max-width:100%;height:auto;max-height:210px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.5);background:#fff}
-.cardfig figcaption{color:var(--dim);font-size:11.5px;line-height:1.3;margin-top:10px;text-align:center;height:30px;overflow:hidden}
+.cardfigs{display:flex;flex-wrap:wrap;gap:22px;margin:16px 0 26px;justify-content:center;align-items:stretch}
+.cardfig{margin:0;width:236px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 16px 14px;display:flex;flex-direction:column;align-items:center;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.cardfig:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 30px rgba(47,230,199,.12)}
+.cf-photo{position:relative;width:100%;display:flex;justify-content:center}
+.cardfig img{display:block;width:auto;max-width:100%;height:auto;max-height:320px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.55);background:#fff;cursor:zoom-in}
+.cf-badge{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);background:rgba(6,9,15,.82);border:1px solid rgba(233,196,100,.45);color:var(--gold);font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:12px;letter-spacing:.03em;padding:5px 12px;border-radius:999px;white-space:nowrap;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.cardfig figcaption{color:var(--dim);font-size:12.5px;line-height:1.3;margin-top:12px;text-align:center;height:32px;overflow:hidden}
 .mvfigs .cardfig figcaption{height:45px}
-.cardfig img{cursor:zoom-in}
 .lb{position:fixed;inset:0;background:rgba(4,7,12,.92);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;cursor:zoom-out}
 .lb.open{display:flex}
 .lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,.7);border:1px solid var(--border)}
@@ -271,7 +281,7 @@ ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
-@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 9px)}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}a.eb{width:22px;height:22px}td.eb{padding-left:0;padding-right:0}}
+@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 11px)}.cardfig img{max-height:240px}.cf-badge{font-size:10.5px;padding:4px 9px}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}a.eb{width:22px;height:22px}td.eb{padding-left:0;padding-right:0}}
 `;
 
 /* Pages are overwritten in place (no delete/recreate churn — the repo lives in
@@ -564,9 +574,10 @@ top25.forEach((c, i) => {
 mvBody += '</tbody></table>' +
   '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card.</p>';
 const mvFigs = top25.map((c, i) => c.img ?
-  '<figure class="cardfig"><img src="/img/cards/' + c.img.file + '" alt="' + esc(c.img.alt) +
-  '" width="' + c.img.w + '" height="' + c.img.h + '" loading="lazy"><figcaption>#' + (i + 1) + ' — ' + esc(c.set) + ' ' + esc(c.name) + '</figcaption></figure>' : '').join('');
-if (mvFigs) mvBody += '<h2>Card Images</h2><div class="cardfigs mvfigs">' + mvFigs + '</div>';
+  '<figure class="cardfig"><div class="cf-photo"><img src="/img/cards/' + c.img.file + '" alt="' + esc(c.img.alt) +
+  '" width="' + c.img.w + '" height="' + c.img.h + '" loading="lazy"><span class="cf-badge">' + esc(c.grade) + ' · ' + money(c.value) + '</span></div>' +
+  '<figcaption>#' + (i + 1) + ' — ' + esc(c.set) + ' ' + esc(c.name) + '</figcaption></figure>' : '').join('');
+if (mvFigs) mvBody += '<h2>The Cards</h2><div class="cardfigs mvfigs">' + mvFigs + '</div>';
 
 const mvCard = top25.find(c => c.img);
 write('most-valuable', page({
