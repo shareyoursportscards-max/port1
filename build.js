@@ -140,18 +140,28 @@ function ebayCell(setName, cardName) {
 }
 
 function cardTable(subs, withOdds, setName) {
-  let h = '<div class="scrollx"><table class="ptable"><colgroup><col>' + (withOdds ? '<col class="codds">' : '') +
-    '<col class="cp"><col class="cp"><col class="cp"><col class="cp"><col class="ceb"></colgroup>' +
-    '<thead><tr><th>Card</th>' + (withOdds ? '<th>Odds</th>' : '') +
-    '<th>Raw</th><th>PSA 8</th><th>PSA 9</th><th>PSA 10</th><th class="theb">eBay</th></tr></thead><tbody>';
+  const colgroup = '<colgroup><col>' + (withOdds ? '<col class="codds">' : '') +
+    '<col class="cp"><col class="cp"><col class="cp"><col class="cp"><col class="ceb"></colgroup>';
+  const head = '<thead><tr><th>Card</th>' + (withOdds ? '<th>Odds</th>' : '') +
+    '<th>Raw</th><th>PSA 8</th><th>PSA 9</th><th>PSA 10</th><th class="theb">eBay</th></tr></thead>';
+  let body = '<tbody>';
   for (const sub of subs) {
-    h += '<tr><td class="cname">' + esc(sub.name) +
+    body += '<tr><td class="cname">' + esc(sub.name) +
       (sub.tag ? ' <span class="tag">' + esc(sub.tag) + '</span>' : '') + '</td>' +
       (withOdds ? '<td class="odds">' + (sub.odds ? esc(sub.odds) : '') + '</td>' : '') +
       priceCell(sub, 'raw') + priceCell(sub, 'psa8') + priceCell(sub, 'psa9') + priceCell(sub, 'psa10') +
       ebayCell(setName, sub.name) + '</tr>';
   }
-  return h + '</tbody></table></div>';
+  body += '</tbody>';
+  // A sticky <thead> can't survive inside overflow-x:auto (needed here so the
+  // table can scroll sideways on narrow phones) — no browser keeps it pinned
+  // to the page once an ancestor scrolls it horizontally. So the header lives
+  // in its own non-scrolling, page-sticky div, and a scroll listener (see
+  // page()'s inline script) keeps its scrollLeft mirrored to the body's.
+  return '<div class="tblwrap">' +
+    '<div class="theadwrap"><table class="ptable">' + colgroup + head + '</table></div>' +
+    '<div class="scrollx"><table class="ptable">' + colgroup + body + '</table></div>' +
+    '</div>';
 }
 
 function gradeBadge(sub) {
@@ -213,6 +223,7 @@ function page(o) {
     '</div>\n' +
     '<div class="lb" id="cardLb"><img alt=""></div>\n' +
     '<script>(function(){var lb=document.getElementById("cardLb"),li=lb.firstElementChild;document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.closest&&t.closest(".cardfig")){li.src=t.src;li.alt=t.alt;lb.classList.add("open");}else if(lb.classList.contains("open")){lb.classList.remove("open");}});document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.classList.remove("open");});})();</script>\n' +
+    '<script>document.querySelectorAll(".tblwrap").forEach(function(w){var head=w.querySelector(".theadwrap"),body=w.querySelector(".scrollx");if(head&&body)body.addEventListener("scroll",function(){head.scrollLeft=body.scrollLeft;},{passive:true});});</script>\n' +
     '</body></html>';
 }
 
@@ -225,9 +236,12 @@ color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:an
 .wrap{max-width:860px;margin:0 auto;padding:20px 16px 44px}
 .home{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;letter-spacing:.5px;margin-bottom:18px;padding:7px 14px;border:1px solid var(--border);border-radius:10px;transition:border-color .15s ease}
 .home:hover{border-color:var(--gold)}
-.scrollx{overflow-x:auto;overflow-y:clip;-webkit-overflow-scrolling:touch}
+.tblwrap{margin:6px 0 4px}
+.theadwrap{overflow:hidden;position:sticky;top:0;z-index:4;background:var(--bg)}
+.theadwrap .ptable{margin:0;min-width:560px}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scrollx .ptable{margin:0;min-width:560px}
 .scrollx .mtable{min-width:644px}
-.scrollx .ptable{min-width:560px}
 .mtable td{white-space:nowrap}
 .mtable td.cname{white-space:normal}
 .mtable th:nth-child(1),.mtable td:nth-child(1){position:sticky;left:0;background:var(--bg);z-index:2}
@@ -251,7 +265,7 @@ h3{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14.5px;color:
 table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 4px;table-layout:fixed}
 col.codds{width:8%}col.cp{width:10.5%}col.ceb{width:6%}
 td{overflow-wrap:break-word}
-th{text-align:left;color:var(--dim);font-weight:500;font-size:11px;letter-spacing:.8px;text-transform:uppercase;padding:5px 7px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:3}
+th{text-align:left;color:var(--dim);font-weight:500;font-size:11px;letter-spacing:.8px;text-transform:uppercase;padding:5px 7px;border-bottom:1px solid var(--border);background:var(--bg)}
 td{padding:6px 7px;border-bottom:1px solid rgba(42,58,80,.45)}
 td.cname{color:var(--text)}td.odds{color:var(--dim);font-size:12px}
 td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.psa10{color:var(--psa10)}
