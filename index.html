@@ -468,6 +468,9 @@
     text-transform:uppercase;
     color:#63d9c4;
     min-width:0;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
   .set-header span:not(.sh-name){
     font-size:12px; font-weight:700; letter-spacing:.08em;
@@ -1456,7 +1459,7 @@
     .panel-head h2{font-size:22px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
     .col-header, .card-row, .set-header{
-      grid-template-columns:minmax(170px,auto) 56px 62px 62px 62px 62px 62px;
+      grid-template-columns:minmax(220px,auto) 56px 62px 62px 62px 62px 62px;
       padding:5px 0 5px 0;
       font-size:12px;
     }
