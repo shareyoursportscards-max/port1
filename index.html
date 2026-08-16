@@ -420,6 +420,7 @@
     text-align:right;
   }
   .col-header span:first-child{text-align:left;}
+  .col-header span.ebh{opacity:.75; padding-right:9px;}
 
   /* ---------- SET SECTIONS ---------- */
   .set-block{
@@ -427,11 +428,6 @@
   }
   .set-link{color:inherit; text-decoration:none; border-bottom:1px solid transparent;}
   .set-link:hover{color:var(--accent); border-bottom-color:var(--accent);}
-  /* Right-aligned like the price cells, in a same-width column, so the gap from
-     PSA 10 matches the gaps between the price columns. The right padding matches
-     the 4px the price cells already carry (plus a touch), otherwise the header
-     and icon sit flush to the column edge and read as pushed out. */
-  .col-header span.ebh{opacity:.75; padding-right:9px;}
   .cell.ebc{display:flex; align-items:center; justify-content:flex-end; padding-right:9px;}
   /* Sized to sit INSIDE the existing row height — a taller box pushed every row
      down and lost the tight look. The ::after expands the tap target well past
@@ -447,14 +443,13 @@
   .ebl::after{content:""; position:absolute; top:-4px; right:-5px; bottom:-4px; left:-5px;}
   .ebl:hover{color:var(--gold); border-color:var(--gold);}
   .set-header{
-    display:grid;
-    grid-template-columns:1fr 80px 72px 72px 72px 72px 72px;
-    gap:0;
-    align-items:baseline;
+    display:flex; align-items:baseline; gap:10px;
     padding:20px 20px 10px;
     font-family:'Inter Tight', sans-serif;
-    position:relative;
-    background:rgba(0,0,0,.22);
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:#040608;
     border-bottom:1px solid var(--border);
   }
   .set-header::before{
@@ -474,13 +469,12 @@
     overflow:hidden;
     text-overflow:ellipsis;
   }
-  .set-header span:not(.sh-name){
-    font-size:12px; font-weight:700; letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--text-dim);
-    text-align:right;
+  .set-header .meta{
+    font-family:'Newsreader', serif; font-style:italic; font-size:10px;
+    color:var(--text-muted); font-weight:400;
+    text-transform:none;
+    letter-spacing:0;
   }
-  .set-header span.ebh{opacity:.75; padding-right:9px;}
 
   /* ---------- DATA ROWS (grid, no table) ---------- */
   .card-row{
@@ -1460,12 +1454,13 @@
     .hc{height:170px;}
     .panel-head h2{font-size:22px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
-    .col-header, .card-row, .set-header{
+    .set-header{padding:16px 12px 4px; font-size:11px;}
+    .col-header, .card-row{
       grid-template-columns:minmax(220px,auto) 56px 62px 62px 62px 62px 62px;
       padding:5px 0 5px 0;
       font-size:12px;
     }
-    .col-header span, .set-header span:not(.sh-name){font-size:11px; font-weight:700; letter-spacing:.06em;}
+    .col-header span{font-size:11px; font-weight:700; letter-spacing:.06em;}
     .col-header span:first-child,
     .card-row .card-name{
       position:sticky;
@@ -1485,14 +1480,6 @@
     .card-row.high-value .card-name{background:#0b0f16;}
     .card-row.high-value:hover .card-name{background:#0d1219;}
     .set-block{position:relative;}
-    .set-header span:first-child{
-      position:sticky;
-      left:0;
-      z-index:3;
-      background:var(--bg);
-      display:inline-block;
-      padding-right:10px;
-    }
     #colHeader{
       overflow-x:hidden;
     }
@@ -1504,7 +1491,6 @@
          scroller still scrolls the page instead of getting axis-locked */
       touch-action:pan-x pan-y;
     }
-    .set-header{font-size:11px;}
 
     /* Mobile perf: no scroll-triggered reveal animations */
     .set-block, .blog-section, .note{
@@ -3575,7 +3561,7 @@ function renderSets(){
       <div class="set-block">
         <div class="set-header">
           <span class="sh-name"><a class="set-link" href="${shareUrl}">${s.set}</a></span>
-          <span>Odds</span><span>Raw</span><span>PSA 8</span><span>PSA 9</span><span>PSA 10</span><span class="ebh">eBay</span>
+          <span class="meta">${s.subsets.length} card${s.subsets.length>1?'s':''}</span>
         </div>
         ${rows}
       </div>`;
