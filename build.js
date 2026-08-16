@@ -170,7 +170,7 @@ function imageStrip(y, setName, subs) {
       (badge ? '<span class="cf-badge">' + esc(badge) + '</span>' : '') + '</div>' +
       '<figcaption>' + esc(sub.name) + '</figcaption></figure>');
   }
-  return figs.length ? '<h2>The Cards</h2><p class="sub" style="margin-top:-4px">Real photos from the guide — tap any card to zoom in.</p><div class="cardfigs">' + figs.join('') + '</div>' : '';
+  return figs.length ? '<section class="photo-section"><h2 class="ps-h">The Cards</h2><p class="ps-sub">Real photos from the guide — tap any card to zoom in.</p><div class="cardfigs">' + figs.join('') + '</div></section>' : '';
 }
 
 function yearNav(active) {
@@ -203,7 +203,7 @@ function page(o) {
       primaryImageOfPage: { '@type': 'ImageObject', contentUrl: o.cardimg }
     }) + '</script>\n' : '') +
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
-    '<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">\n' +
+    '<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=Newsreader:ital@1&display=swap" rel="stylesheet">\n' +
     '<style>' + CSS + '</style>\n</head>\n<body>\n<div class="wrap">\n' +
     '<a class="home" href="/">◂ Griffey Card Prices — interactive guide</a>\n' +
     o.body +
@@ -218,7 +218,8 @@ function page(o) {
 
 const CSS = `
 :root{--bg:#06090f;--surface:#0f1622;--border:#1d2c40;--gold:#2fe6c7;--text:#edf3f9;--dim:#8fa6bd;
---raw:#9fb0c2;--psa8:#5eeaa0;--psa9:#5cd8f0;--psa10:#f0c75b;}
+--raw:#9fb0c2;--psa8:#5eeaa0;--psa9:#5cd8f0;--psa10:#f0c75b;
+--lbg:#faf7f1;--ltext:#3d362c;--ldim:#8c8172;--lborder:#e8e0d1;}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);background-image:linear-gradient(180deg,#06090f 0%,#0a1019 50%,#06090f 100%);
 color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding:20px 16px 44px}
@@ -262,9 +263,15 @@ th.theb{text-align:center;font-size:10px}
 td.eb{text-align:center;padding-left:0;padding-right:0}
 a.eb{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;color:var(--dim);border:1px solid var(--border);transition:color .15s ease,border-color .15s ease}
 a.eb:hover{color:var(--gold);border-color:var(--gold)}
-.cardfigs{display:flex;flex-wrap:wrap;gap:22px;margin:16px 0 26px;justify-content:center;align-items:stretch}
+.photo-section{background:var(--lbg);border:1px solid var(--lborder);border-radius:22px;padding:30px 28px 26px;margin:34px 0}
+.ps-h{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px;color:var(--ltext);margin:0 0 6px;border-bottom:1px solid var(--lborder);padding-bottom:8px}
+.ps-sub{font-family:'Newsreader',serif;font-style:italic;color:var(--ldim);font-size:14.5px;line-height:1.55;margin:0 0 18px}
+.cardfigs{display:flex;flex-wrap:wrap;gap:22px;margin:0;justify-content:center;align-items:stretch}
 .cardfig{margin:0;width:236px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 16px 14px;display:flex;flex-direction:column;align-items:center;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
 .cardfig:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 30px rgba(47,230,199,.12)}
+.photo-section .cardfig{background:#fff;border-color:var(--lborder);box-shadow:0 4px 16px rgba(61,54,44,.08)}
+.photo-section .cardfig:hover{border-color:#e9c464;box-shadow:0 16px 34px rgba(61,54,44,.16),0 0 24px rgba(233,196,100,.22)}
+.photo-section .cardfig figcaption{color:var(--ldim)}
 .cf-photo{position:relative;width:100%;display:flex;justify-content:center}
 .cardfig img{display:block;width:auto;max-width:100%;height:auto;max-height:320px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.55);background:#fff;cursor:zoom-in}
 .cf-badge{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);background:rgba(6,9,15,.82);border:1px solid rgba(233,196,100,.45);color:var(--gold);font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:12px;letter-spacing:.03em;padding:5px 12px;border-radius:999px;white-space:nowrap;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 4px 14px rgba(0,0,0,.4)}
@@ -281,7 +288,7 @@ ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
-@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 11px)}.cardfig img{max-height:240px}.cf-badge{font-size:10.5px;padding:4px 9px}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}a.eb{width:22px;height:22px}td.eb{padding-left:0;padding-right:0}}
+@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.photo-section{padding:20px 16px 18px;border-radius:16px}.cardfig{width:calc(50% - 11px)}.cardfig img{max-height:240px}.cf-badge{font-size:10.5px;padding:4px 9px}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}a.eb{width:22px;height:22px}td.eb{padding-left:0;padding-right:0}}
 `;
 
 /* Pages are overwritten in place (no delete/recreate churn — the repo lives in
