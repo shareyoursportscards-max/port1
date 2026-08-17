@@ -1543,6 +1543,8 @@
     cursor:grab;
   }
   .t10figs.dragging{cursor:grabbing; scroll-snap-type:none; scroll-behavior:auto; user-select:none; -webkit-user-select:none;}
+  .t10figs:focus{outline:none;}
+  .t10figs:focus-visible{box-shadow:inset 0 0 0 2px var(--teal-dim);}
   .t10figs img{-webkit-user-drag:none; user-drag:none;}
   .t10figs::-webkit-scrollbar{height:8px;}
   .t10figs::-webkit-scrollbar-track{background:rgba(255,255,255,.05); border-radius:999px;}
@@ -3446,7 +3448,7 @@ function renderTop10Gallery(){
     const im = CARDIMG[key];
     return im ? `<figure class="t10fig" data-figkey="${escAttr(key)}"><div class="t10photo"><img src="/img/cards/${im.file}" alt="${escAttr(im.alt)}" width="${im.w}" height="${im.h}" loading="lazy"></div><figcaption><span class="t10capname">#${i+1} — ${escAttr(c.name)}</span><span class="t10capprice">${c.grade} · $${c.val.toLocaleString('en-US')}</span></figcaption></figure>` : '';
   }).filter(Boolean).join('');
-  area.innerHTML = figs ? `<div class="t10gallery"><div class="t10gallery-head"><svg class="t10gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="9" r="1.3"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg><h2>Card Gallery <span class="tg-year">— ${currentYear}</span></h2><span class="tg-divider">·</span><p class="sub">Scroll or drag through every photo we've got for this year, biggest sale first.</p></div><div class="t10figs">${figs}</div></div>` : '';
+  area.innerHTML = figs ? `<div class="t10gallery"><div class="t10gallery-head"><svg class="t10gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="9" r="1.3"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg><h2>Card Gallery <span class="tg-year">— ${currentYear}</span></h2><span class="tg-divider">·</span><p class="sub">Scroll or drag through every photo we've got for this year, biggest sale first.</p></div><div class="t10figs" tabindex="0">${figs}</div></div>` : '';
 }
 
 function renderMovers(){
