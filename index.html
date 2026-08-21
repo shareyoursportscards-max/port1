@@ -1725,7 +1725,7 @@
      { name: "Card detail", raw, psa8, psa9, psa10, tag? }
    ]}, ... ]   prices in USD, null = N/A
 =========================================================== */
-const IMAGE_COUNT = 261; /* auto-updated by build.js from card-images.json — do not hand-edit */
+const IMAGE_COUNT = 263; /* auto-updated by build.js from card-images.json — do not hand-edit */
 const DATA = {
   1990: [
     {set:"1990 Bowman", subsets:[
@@ -2814,7 +2814,7 @@ const DATA = {
       {name:"Mirror Image Refractor #M2 (w/ Mateo)", raw:100, psa8:null, psa9:null, psa10:582, odds:"1:96", prev_raw:40, prev_psa10:200, psa10_date:"2026-08-03", raw_date:"2026-08-16"},
       {name:"Mirror Image Atomic Refractor #M2 (w/ Mateo)", raw:811, psa8:null, psa9:300, psa10:764, odds:"1:192", prev_psa10:757, prev_psa9:250},
       {name:"Franchise Best Mach I #FB2 (/3,000)", raw:65, psa8:63, psa9:350, psa10:510, tag:"die-cut", odds:"1:41", prev_raw:45, prev_psa9:229, raw_date:"2026-08-17", psa9_date:"2026-08-15"},
-      {name:"Franchise Best Mach II (/1,000)", raw:250, psa8:214, psa9:180, psa10:600, tag:"die-cut", odds:"1:124", prev_psa8:250, prev_psa10:590, psa8_date:"2026-08-01", raw_date:"2026-08-04"},
+      {name:"Franchise Best Mach II (/1,000)", raw:250, psa8:214, psa9:525, psa10:600, tag:"die-cut", odds:"1:124", prev_psa8:250, prev_psa10:590, prev_psa9:180, psa8_date:"2026-08-01", raw_date:"2026-08-04", psa9_date:"2026-08-17"},
       {name:"Franchise Best Mach III (/500)", raw:400, psa8:null, psa9:1050, psa10:1862, odds:"1:248", prev_psa9:1000, psa9_date:"2026-08-01"}
     ]},
     {set:"1999 Donruss", subsets:[
@@ -2835,7 +2835,7 @@ const DATA = {
       {name:"Gold Refractor #200 (/100)", raw:3405, psa8:5250, psa9:7100, psa10:20000, prev_raw:2806, prev_psa10:9878, psa9_date:"2026-08-04", psa8_date:"2026-08-14"},
       {name:"Sterling Base #256", raw:8, psa8:null, psa9:null, psa10:200, raw_date:"2026-07-19", prev_psa10:150, psa10_date:"2026-08-18"},
       {name:"Sterling Refractor #256", raw:165, psa8:null, psa9:400, psa10:2750, raw_date:"2026-06-30", psa9_date:"2026-06-30", psa10_date:"2026-08-02"},
-      {name:"Sterling Gold Refractor #256 (/100)", raw:null, psa8:null, psa9:null, psa10:7324},
+      {name:"Sterling Gold Refractor #256 (/100)", raw:null, psa8:5000, psa9:null, psa10:7324, psa8_date:"2026-08-18"},
       {name:"Franchise Records #FR2", raw:null, psa8:null, psa9:46, psa10:null, odds:"1:129"},
       {name:"Franchise Records Refractor", raw:null, psa8:null, psa9:null, psa10:2100, odds:"1:378"},
       {name:"Peel and Reveal Sparkle #PR4", raw:60, psa8:67, psa9:null, psa10:600, odds:"1:30", prev_raw:50, raw_date:"2026-08-04", psa8_date:"2026-06-28"},
@@ -2857,12 +2857,12 @@ const DATA = {
     ]},
     {set:"1999 Metal Universe", subsets:[
       {name:"Base #273", raw:null, psa8:null, psa9:110, psa10:null},
-      {name:"Planet Metal", raw:383, psa8:908, psa9:295, psa10:4888, tag:"die-cut", prev_raw:436, prev_psa8:385, raw_date:"2026-08-17", psa8_date:"2026-08-13"},
+      {name:"Planet Metal", raw:426, psa8:888, psa9:295, psa10:4888, tag:"die-cut", prev_raw:383, prev_psa8:908, raw_date:"2026-08-17", psa8_date:"2026-08-18"},
       {name:"Base #95", raw:9, psa8:90, psa9:null, psa10:null, raw_date:"2026-08-09", prev_psa8:40, psa8_date:"2026-08-11"},
       {name:"Base #233", raw:null, psa8:30, psa9:125, psa10:null, prev_psa9:78},
-      {name:"Diamond Soul #8DS", raw:565, psa8:850, psa9:2700, psa10:4338, prev_raw:800, prev_psa8:98, prev_psa9:1000, raw_date:"2026-08-08", psa9_date:"2026-08-08"},
+      {name:"Diamond Soul #8DS", raw:500, psa8:850, psa9:2700, psa10:4338, prev_raw:565, prev_psa8:98, prev_psa9:1000, raw_date:"2026-08-20", psa9_date:"2026-08-08"},
       {name:"Boyz With the Wood #1BW", raw:33, psa8:103, psa9:null, psa10:null, prev_raw:40, raw_date:"2026-08-12"},
-      {name:"Linchpins #4", raw:2374, psa8:5338, psa9:2500, psa10:null},
+      {name:"Linchpins #4", raw:1500, psa8:5338, psa9:2500, psa10:null, prev_raw:2374, raw_date:"2026-08-16"},
       {name:"Precious Metal Gems #95", raw:null, psa8:null, psa9:null, psa10:null}
     ]},
     {set:"1999 Skybox E-X Century", subsets:[
@@ -2871,14 +2871,14 @@ const DATA = {
     ]},
     {set:"1999 Skybox Molten Metal", subsets:[
       {name:"Fusion Sterling (/500)", raw:4299, psa8:6878, psa9:1515, psa10:13500, prev_raw:2250, prev_psa8:1660, raw_date:"2026-08-02", psa8_date:"2026-08-13"},
-      {name:"Fusion #33F", raw:1400, psa8:2420, psa9:4000, psa10:null, odds:"1:12", prev_psa9:3200},
+      {name:"Fusion #33F", raw:3150, psa8:2825, psa9:4800, psa10:null, odds:"1:12", prev_raw:1400, prev_psa8:2420, prev_psa9:4000, raw_date:"2026-08-17", psa8_date:"2026-08-19", psa9_date:"2026-08-18"},
       {name:"Base #133", raw:null, psa8:19, psa9:90, psa10:165},
       {name:"Xplosion #133", raw:76, psa8:null, psa9:242, psa10:522, tag:"die-cut", odds:"1:2", prev_psa9:51, prev_raw:52, raw_date:"2026-08-08"}
     ]},
     {set:"1999 Skybox Premium", subsets:[
       {name:"Base #137", raw:null, psa8:13, psa9:null, psa10:null},
       {name:"Base #287", raw:null, psa8:null, psa9:null, psa10:70},
-      {name:"Soul of the Game #9SG", raw:588, psa8:1150, psa9:1999, psa10:1900, odds:"1:14", prev_raw:600, prev_psa8:710, prev_psa9:1500, raw_date:"2026-08-15", psa8_date:"2026-08-02"}
+      {name:"Soul of the Game #9SG", raw:613, psa8:1150, psa9:2650, psa10:1900, odds:"1:14", prev_raw:588, prev_psa8:710, prev_psa9:1999, raw_date:"2026-08-20", psa8_date:"2026-08-02", psa9_date:"2026-08-16"}
     ]},
     {set:"1999 Skybox Thunder", subsets:[
       {name:"Base #3", raw:null, psa8:null, psa9:null, psa10:301},
@@ -2913,7 +2913,7 @@ const DATA = {
       {name:"Video Replay #VR3", raw:null, psa8:25, psa9:33, psa10:127, odds:"1:12", prev_psa10:134},
       {name:"Never Compromise #NC3", raw:null, psa8:null, psa9:34, psa10:91, odds:"1:12"},
       {name:"Stadium Club Chrome #SCC20", raw:30, psa8:null, psa9:30, psa10:null, odds:"1:24"},
-      {name:"Chrome Refractor #SCC20", raw:250, psa8:290, psa9:749, psa10:null, odds:"1:96", prev_psa9:398, raw_date:"2026-08-12"}
+      {name:"Chrome Refractor #SCC20", raw:250, psa8:290, psa9:625, psa10:null, odds:"1:96", prev_psa9:749, raw_date:"2026-08-12", psa9_date:"2026-08-20"}
     ]},
     {set:"1999 Topps", subsets:[
       {name:"Base #215", raw:null, psa8:null, psa9:null, psa10:75},
@@ -2932,13 +2932,14 @@ const DATA = {
     {set:"1999 Topps Chrome", subsets:[
       {name:"Base #100", raw:null, psa8:null, psa9:68, psa10:null},
       {name:"Refractor #100", raw:560, psa8:null, psa9:2895, psa10:null},
-      {name:"All-Etch Refractor #AE3", raw:450, psa8:510, psa9:800, psa10:3875, odds:"1:24", prev_raw:545, prev_psa8:500, prev_psa9:475, psa8_date:"2026-08-09"},
+      {name:"All-Etch Refractor #AE3", raw:450, psa8:510, psa9:825, psa10:3875, odds:"1:24", prev_raw:545, prev_psa8:500, prev_psa9:800, psa8_date:"2026-08-09", psa9_date:"2026-08-17"},
       {name:"All-Etch #AE3", raw:47, psa8:32, psa9:120, psa10:500, odds:"1:6", prev_raw:25, prev_psa9:95, prev_psa10:155, psa9_date:"2026-08-05", raw_date:"2026-08-14", psa10_date:"2026-08-14"},
-      {name:"Lords of the Diamond Refractor #LD1", raw:412, psa8:485, psa9:675, psa10:1576, tag:"die-cut", odds:"1:24", prev_raw:300, prev_psa8:450, prev_psa9:658, raw_date:"2026-08-13", psa8_date:"2026-08-16", psa9_date:"2026-08-06"},
+      {name:"Lords of the Diamond Refractor #LD1", raw:500, psa8:513, psa9:1435, psa10:8000, tag:"die-cut", odds:"1:24", prev_raw:412, prev_psa8:485, prev_psa9:675, prev_psa10:1576, raw_date:"2026-08-16", psa8_date:"2026-08-19", psa9_date:"2026-08-17", psa10_date:"2026-08-20"},
       {name:"Lords of the Diamond #LD1", raw:39, psa8:35, psa9:205, psa10:null, tag:"die-cut", odds:"1:8", prev_raw:30, prev_psa9:170, psa9_date:"2026-08-20", raw_date:"2026-08-12"},
       {name:"Base #224", raw:null, psa8:null, psa9:20, psa10:60, prev_psa10:120, psa10_date:"2026-08-14"},
       {name:"League Leaders Refractor #224", raw:null, psa8:255, psa9:310, psa10:700},
       {name:"Fortune 15 #FF5", raw:23, psa8:24, psa9:50, psa10:270, odds:"1:12", prev_raw:25, raw_date:"2026-08-09"},
+      {name:"Fortune 15 Refractor #FF5 (/100)", raw:null, psa8:null, psa9:null, psa10:35000, psa10_date:"2026-08-17"},
       {name:"Early Road to Hall #ER5", raw:17, psa8:6, psa9:50, psa10:270, odds:"1:12", prev_psa10:265, prev_psa9:65, psa9_date:"2026-08-05", raw_date:"2026-08-09"},
       {name:"Early Road to Hall Refractor #ER5 (/100)", raw:70, psa8:null, psa9:3279, psa10:10000, odds:"1:944", raw_date:"2026-08-15"},
       {name:"Record Numbers #RN4", raw:10, psa8:8, psa9:33, psa10:null, odds:"1:36"},
@@ -2971,7 +2972,7 @@ const DATA = {
       {name:"Gold Medallion #219G", raw:null, psa8:43, psa9:86, psa10:550, odds:"1:1"},
       {name:"Platinum Medallion (/99)", raw:null, psa8:null, psa9:999, psa10:null},
       {name:"Thunderclap #10", raw:285, psa8:1710, psa9:2600, psa10:null, odds:"1:36", prev_raw:250, prev_psa8:1700, prev_psa9:1100, raw_date:"2026-08-18", psa8_date:"2026-08-05", psa9_date:"2026-08-07"},
-      {name:"Diamond Producers #1", raw:500, psa8:400, psa9:449, psa10:2066, tag:"die-cut", odds:"1:288", prev_raw:475, raw_date:"2026-08-06"},
+      {name:"Diamond Producers #1", raw:500, psa8:445, psa9:449, psa10:2066, tag:"die-cut", odds:"1:288", prev_raw:475, prev_psa8:400, raw_date:"2026-08-06", psa8_date:"2026-08-19"},
       {name:"Damage Inc. #8", raw:69, psa8:106, psa9:117, psa10:405, odds:"1:72", prev_raw:59, prev_psa10:228, raw_date:"2026-08-18", psa10_date:"2026-08-09"},
       {name:"The Book On #2", raw:null, psa8:14, psa9:null, psa10:750, odds:"1:6"},
       {name:"RBI Kings #23RK", raw:6, psa8:22, psa9:38, psa10:null},
@@ -2992,7 +2993,7 @@ const DATA = {
       {name:"Black Diamond Single #76", raw:58, psa8:null, psa9:null, psa10:202, prev_psa10:204, psa10_date:"2026-08-08"},
       {name:"Black Diamond Double (/1,998)", raw:30, psa8:75, psa9:200, psa10:null, prev_psa9:93, psa9_date:"2026-08-08"},
       {name:"Black Diamond Quadruple (/56)", raw:null, psa8:null, psa9:2975, psa10:null},
-      {name:"Black Diamond Dominance #D24 (/1,500)", raw:60, psa8:null, psa9:80, psa10:null, prev_raw:90, raw_date:"2026-08-08"},
+      {name:"Black Diamond Dominance #D24 (/1,500)", raw:60, psa8:null, psa9:80, psa10:819, prev_raw:90, raw_date:"2026-08-08", psa10_date:"2026-08-19"},
       {name:"Game Jersey #KG-H", raw:461, psa8:268, psa9:886, psa10:2225, odds:"1:144", prev_psa9:760},
       {name:"Arms Race (/100)", raw:230, psa8:null, psa9:null, psa10:null}
     ]},
