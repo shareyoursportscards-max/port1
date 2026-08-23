@@ -183,6 +183,33 @@ function imageStrip(y, setName, subs) {
   return figs.length ? '<section class="photo-section"><h2 class="ps-h">The Cards</h2><p class="ps-sub">Real photos from the guide — tap any card to zoom in.</p><div class="cardfigs">' + figs.join('') + '</div></section>' : '';
 }
 
+// Year-level gallery: every photographed card for the year, biggest sale first, scrollable.
+// Image click still opens the lightbox; the caption is a link down to that card's set section
+// on this same page — same split behavior as the homepage's Card Gallery caption-click.
+function yearImageStrip(y, sets, setSlugs) {
+  const cards = [];
+  for (const s of sets) {
+    for (const sub of s.subsets) {
+      const im = CARDIMG[y + '|' + s.set + '|' + sub.name];
+      if (!im) continue;
+      const value = Math.max(sub.psa10 || 0, sub.psa9 || 0, sub.psa8 || 0, sub.raw || 0);
+      cards.push({ im, sub, slug: setSlugs.get(s.set), value });
+    }
+  }
+  if (!cards.length) return '';
+  cards.sort((a, b) => b.value - a.value);
+  const figs = cards.map(c => {
+    const badge = gradeBadge(c.sub);
+    return '<figure class="cardfig"><div class="cf-photo"><img src="/img/cards/' + c.im.file + '" alt="' + esc(c.im.alt) +
+      '" width="' + c.im.w + '" height="' + c.im.h + '" loading="lazy">' +
+      (badge ? '<span class="cf-badge">' + esc(badge) + '</span>' : '') + '</div>' +
+      '<figcaption><a href="#' + c.slug + '">' + esc(c.sub.name) + '</a></figcaption></figure>';
+  }).join('');
+  return '<section class="photo-section yr-gallery"><h2 class="ps-h">' + y + ' Card Gallery</h2>' +
+    '<p class="ps-sub">Every photo we’ve got for ' + y + ', biggest sale first — tap a name to jump to its set.</p>' +
+    '<div class="cardfigs yearslider">' + figs + '</div></section>';
+}
+
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
@@ -289,6 +316,13 @@ a.eb:hover{color:var(--gold);border-color:var(--gold)}
 .cf-badge{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);background:rgba(6,9,15,.82);border:1px solid rgba(233,196,100,.45);color:var(--gold);font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:12px;letter-spacing:.03em;padding:5px 12px;border-radius:999px;white-space:nowrap;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 4px 14px rgba(0,0,0,.4)}
 .cardfig figcaption{color:var(--dim);font-size:12.5px;line-height:1.3;margin-top:12px;text-align:center;height:32px;overflow:hidden}
 .mvfigs .cardfig figcaption{height:45px}
+.cardfig figcaption a{color:inherit;text-decoration:none}
+.cardfig figcaption a:hover{color:var(--gold);text-decoration:underline}
+.yearslider{flex-wrap:nowrap;overflow-x:auto;padding:4px 4px 14px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--gold) rgba(255,255,255,.06)}
+.yearslider .cardfig{flex:0 0 auto;scroll-snap-align:start}
+.yearslider::-webkit-scrollbar{height:8px}
+.yearslider::-webkit-scrollbar-track{background:rgba(255,255,255,.05);border-radius:999px}
+.yearslider::-webkit-scrollbar-thumb{background:var(--gold);border-radius:999px}
 .lb{position:fixed;inset:0;background:rgba(4,7,12,.92);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;cursor:zoom-out}
 .lb.open{display:flex}
 .lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,.7);border:1px solid var(--border)}
@@ -300,7 +334,7 @@ ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
-@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.photo-section{padding:20px 16px 18px;border-radius:16px}.cardfig{width:calc(50% - 11px)}.cf-photo{height:240px}.cardfig img{max-height:240px}.cf-badge{font-size:10.5px;padding:4px 9px}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}a.eb{width:22px;height:22px}td.eb{padding-left:0;padding-right:0}}
+@media(max-width:600px){ul.plain{columns:1}td,th{padding:5px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 11px)}.yearslider .cardfig{width:170px}.cf-photo{height:240px}.cardfig img{max-height:240px}.cf-badge{font-size:10.5px;padding:4px 9px}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}a.eb{width:22px;height:22px}td.eb{padding-left:0;padding-right:0}}
 `;
 
 /* Pages are overwritten in place (no delete/recreate churn — the repo lives in
@@ -358,6 +392,12 @@ for (const y of years) {
   const sets = DATA[y];
   const cardCount = sets.reduce((n, s) => n + s.subsets.length, 0);
   const usedSlugs = {};
+  const setSlugs = new Map();
+  for (const s of sets) {
+    let sl = slug(s.set.replace(/^\d{4}\s+/, ''));
+    if (usedSlugs[sl]) sl += '-' + (++usedSlugs[sl]); else usedSlugs[sl] = 1;
+    setSlugs.set(s.set, sl);
+  }
   const yearOdds = sets.some(s => s.subsets.some(x => x.odds));
 
   /* real numbers for the value-question intro + FAQ, pulled from DATA — not hand-written per year */
@@ -372,7 +412,7 @@ for (const y of years) {
   }
 
   let body = '<h1>Ken Griffey Jr. Card Prices: ' + y + ' Values</h1>' +
-    '<p class="sub">' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
+    '<div class="intro"><p class="sub">' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
     ' sets — raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
   if (topCard) {
     body += '<p class="answer">The priciest card is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
@@ -380,10 +420,10 @@ for (const y of years) {
       (topCard.date ? ' (sold ' + humanDate(topCard.date) + saleTypeSuffix(topCard.type) + ')' : '') + '.' +
       '</p>';
   }
+  body += '</div>' + yearImageStrip(y, sets, setSlugs);
 
   for (const s of sets) {
-    let sl = slug(s.set.replace(/^\d{4}\s+/, ''));
-    if (usedSlugs[sl]) sl += '-' + (++usedSlugs[sl]); else usedSlugs[sl] = 1;
+    const sl = setSlugs.get(s.set);
     const rel = y + '/' + sl;
     const withOdds = s.subsets.some(x => x.odds);
 
