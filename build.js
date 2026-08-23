@@ -253,7 +253,8 @@ h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px;color:va
 h2 a{color:var(--text);text-decoration:none}h2 a:hover{color:var(--gold)}
 h3{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14.5px;color:var(--text);margin:16px 0 4px}
 .sub{color:var(--dim);font-size:13.5px;line-height:1.55;margin:0 0 14px}
-.answer{color:var(--text);font-size:14px;line-height:1.6;margin:0 0 14px}
+.answer{color:var(--text);font-size:14px;line-height:1.6;margin:0}
+.intro{margin:0 0 28px;padding-bottom:22px;border-bottom:1px solid var(--border)}
 .faq{margin:8px 0 4px}
 .faq-item{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:10px;padding:15px 18px;margin:0 0 12px}
 .faq-q{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14.5px;color:var(--text);margin:0 0 6px}
@@ -427,12 +428,12 @@ for (const y of years) {
     }
 
     const setBody = '<h1>Ken Griffey Jr. Card Prices: ' + esc(s.set) + ' Values</h1>' +
-      '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings — ' +
+      '<div class="intro"><p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings — ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked, updated daily.</p>' +
       (setTopCard ? '<p class="answer">The priciest card is the <b>' + esc(setTopCard.name) + '</b>' +
         (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade) + ' at ' + money(setTopCard.price) +
         (setTopCard.date ? ' (sold ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) + ')' : '') + '.' +
-        '</p>' : '') +
+        '</p>' : '') + '</div>' +
       cardTable(s.subsets, withOdds, s.set) +
       imageStrip(y, s.set, s.subsets) +
       setFaqHtml +
