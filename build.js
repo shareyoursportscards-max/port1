@@ -371,7 +371,7 @@ for (const y of years) {
     }
   }
 
-  let body = '<h1>' + y + ' Ken Griffey Jr. Card Values — What&rsquo;s a ' + y + ' Griffey Worth?</h1>' +
+  let body = '<h1>' + y + ' Ken Griffey Jr. Card Prices &amp; Values</h1>' +
     '<p class="sub">Current market values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y +
     ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
   if (topCard) {
@@ -426,7 +426,7 @@ for (const y of years) {
       };
     }
 
-    const setBody = '<h1>' + esc(s.set) + ' Ken Griffey Jr. Card Values — What&rsquo;s It Worth?</h1>' +
+    const setBody = '<h1>' + esc(s.set) + ' Ken Griffey Jr. Card Prices &amp; Values</h1>' +
       '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings: ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked' +
       (top ? ', topping out at ' + money(top) : '') + '. Updated daily.</p>' +
@@ -451,7 +451,7 @@ for (const y of years) {
     }
     write(rel, page({
       navYear: y,
-      title: esc(s.set) + ' Ken Griffey Jr. Card Values — What\'s It Worth?',
+      title: esc(s.set) + ' Ken Griffey Jr. Card Prices & Values',
       desc: 'How much is a ' + s.set + ' Ken Griffey Jr. card worth? ' + names +
         (top ? ', prices up to ' + money(top) : '') + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
       url: SITE + '/' + rel + '/',
@@ -518,7 +518,7 @@ for (const y of years) {
   }
   write(String(y), page({
     navYear: y,
-    title: y + ' Ken Griffey Jr. Card Values — What\'s a ' + y + ' Griffey Worth?',
+    title: y + ' Ken Griffey Jr. Card Prices & Values',
     desc: 'How much is a ' + y + ' Ken Griffey Jr. card worth? ' + cardCount + ' cards tracked across ' + sets.length +
       ' sets' + (topCard ? ', prices up to ' + money(topCard.price) : '') +
       '. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sales, updated daily.',
