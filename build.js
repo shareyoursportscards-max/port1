@@ -372,12 +372,12 @@ for (const y of years) {
   }
 
   let body = '<h1>Ken Griffey Jr. Card Prices: ' + y + ' Values</h1>' +
-    '<p class="sub">Current market values for ' + cardCount + ' Ken Griffey Jr. cards from ' + y +
-    ' across ' + sets.length + ' sets. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
+    '<p class="sub">' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
+    ' sets — raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
   if (topCard) {
-    body += '<p class="answer">Among the eBay sales tracked here, the highest is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
+    body += '<p class="answer">The priciest card is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
       (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade) + ' at ' + money(topCard.price) + '.' +
-      (topCard.raw && topCard.grade !== 'raw' ? ' A raw copy of that same card has sold for ' + money(topCard.raw) + ', depending on condition.' : '') +
+      (topCard.raw && topCard.grade !== 'raw' ? ' A raw copy has sold for ' + money(topCard.raw) + '.' : '') +
       '</p>';
   }
 
@@ -407,14 +407,13 @@ for (const y of years) {
     if (setTopCard) {
       const topName = esc(setTopCard.name) + (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade);
       const q1 = 'How much is a ' + y + ' ' + s.set.replace(/^\d{4}\s+/, '') + ' Ken Griffey Jr. card worth?';
-      const a1 = 'Based on eBay sales tracked here, ' + esc(s.set) + ' Ken Griffey Jr. cards range up to ' + money(setTopCard.price) +
-        ' for the ' + topName + '. Exact value depends on the specific card and grade.';
+      const a1 = esc(s.set) + ' Ken Griffey Jr. card prices top out at ' + money(setTopCard.price) + ' for the ' + topName + '.';
       const q2 = 'What is the most valuable ' + esc(s.set) + ' Ken Griffey Jr. card?';
-      const a2 = 'Among tracked sales, the highest price for a ' + esc(s.set) + ' Griffey card is the ' + topName + ' at ' + money(setTopCard.price) + '.';
+      const a2 = 'The most valuable ' + esc(s.set) + ' Griffey card is the ' + topName + ', which has sold for ' + money(setTopCard.price) + '.';
       const setFaqs = [[q1, a1], [q2, a2]];
       if (setTopCard.raw && setTopCard.grade !== 'raw') {
         const q3 = 'What is a raw (ungraded) ' + esc(s.set) + ' Ken Griffey Jr. card worth?';
-        const a3 = 'A raw copy of the ' + esc(setTopCard.name) + ', the set\'s top card, has sold for ' + money(setTopCard.raw) + ' — raw prices vary by card and condition.';
+        const a3 = 'A raw copy of the ' + esc(setTopCard.name) + ' has sold for ' + money(setTopCard.raw) + '.';
         setFaqs.push([q3, a3]);
       }
       setFaqHtml = '<h2>' + esc(s.set) + ' Value FAQ</h2><div class="faq">' +
@@ -427,12 +426,11 @@ for (const y of years) {
     }
 
     const setBody = '<h1>Ken Griffey Jr. Card Prices: ' + esc(s.set) + ' Values</h1>' +
-      '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings: ' +
-      s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked' +
-      (top ? ', topping out at ' + money(top) : '') + '. Updated daily.</p>' +
-      (setTopCard ? '<p class="answer">Among the eBay sales tracked here, the highest is the <b>' + esc(setTopCard.name) + '</b>' +
+      '<p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings — ' +
+      s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked, updated daily.</p>' +
+      (setTopCard ? '<p class="answer">The priciest card is the <b>' + esc(setTopCard.name) + '</b>' +
         (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade) + ' at ' + money(setTopCard.price) + '.' +
-        (setTopCard.raw && setTopCard.grade !== 'raw' ? ' A raw copy of that same card has sold for ' + money(setTopCard.raw) + ', depending on condition.' : '') +
+        (setTopCard.raw && setTopCard.grade !== 'raw' ? ' A raw copy has sold for ' + money(setTopCard.raw) + '.' : '') +
         '</p>' : '') +
       cardTable(s.subsets, withOdds, s.set) +
       imageStrip(y, s.set, s.subsets) +
@@ -479,14 +477,14 @@ for (const y of years) {
   if (topCard) {
     const topName = esc(topCard.setName.replace(y + ' ', '') + ' ' + topCard.name) + (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade);
     const q1 = 'How much is a ' + y + ' Ken Griffey Jr. card worth?';
-    const a1 = 'Based on eBay sales tracked here, ' + y + ' Ken Griffey Jr. cards range from a few dollars for common raw base cards up to ' +
-      money(topCard.price) + ' for the ' + topName + '. Exact value depends on the specific card, insert, and grade.';
+    const a1 = y + ' Ken Griffey Jr. card prices range from a few dollars for common raw base cards up to ' +
+      money(topCard.price) + ' for the ' + topName + '.';
     const q2 = 'What is the most valuable ' + y + ' Ken Griffey Jr. card?';
-    const a2 = 'Among tracked sales, the highest price for a ' + y + ' Griffey card is the ' + topName + ' at ' + money(topCard.price) + '.';
+    const a2 = 'The most valuable ' + y + ' Griffey card is the ' + topName + ', which has sold for ' + money(topCard.price) + '.';
     const faqs = [[q1, a1], [q2, a2]];
     if (topCard.raw && topCard.grade !== 'raw') {
       const q3 = 'What is a raw (ungraded) ' + y + ' Ken Griffey Jr. card worth?';
-      const a3 = 'A raw copy of the ' + topName.replace(/ \(raw\)| in PSA \d+/, '') + ', the year\'s top card, has sold for ' + money(topCard.raw) + ' — raw prices vary a lot by card and condition.';
+      const a3 = 'A raw copy of the ' + topName.replace(/ \(raw\)| in PSA \d+/, '') + ' has sold for ' + money(topCard.raw) + '.';
       faqs.push([q3, a3]);
     }
     body += '<h2>' + y + ' Griffey Card Value FAQ</h2><div class="faq">' +
