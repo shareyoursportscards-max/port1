@@ -330,6 +330,8 @@ const humanDate = iso => {
   return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-US',
     { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 };
+// { grade }_type is an optional "auction" | "fixed" field alongside { grade }_date.
+const saleTypeSuffix = type => type === 'auction' ? ' via auction' : type === 'fixed' ? ', Buy It Now' : '';
 
 const written = new Set();
 function write(rel, html) {
@@ -361,12 +363,12 @@ for (const y of years) {
   const yearOdds = sets.some(s => s.subsets.some(x => x.odds));
 
   /* real numbers for the value-question intro + FAQ, pulled from DATA — not hand-written per year */
-  let topCard = null; // {name, setName, grade, price, raw, date, rawDate}
+  let topCard = null; // {name, setName, grade, price, raw, date, type, rawDate, rawType}
   for (const s of sets) {
     for (const sub of s.subsets) {
-      const grades = [['PSA 10', sub.psa10, sub.psa10_date], ['PSA 9', sub.psa9, sub.psa9_date], ['PSA 8', sub.psa8, sub.psa8_date], ['raw', sub.raw, sub.raw_date]];
-      for (const [grade, price, date] of grades) {
-        if (price && (!topCard || price > topCard.price)) topCard = { name: sub.name, setName: s.set, grade, price, raw: sub.raw, date, rawDate: sub.raw_date };
+      const grades = [['PSA 10', sub.psa10, sub.psa10_date, sub.psa10_type], ['PSA 9', sub.psa9, sub.psa9_date, sub.psa9_type], ['PSA 8', sub.psa8, sub.psa8_date, sub.psa8_type], ['raw', sub.raw, sub.raw_date, sub.raw_type]];
+      for (const [grade, price, date, type] of grades) {
+        if (price && (!topCard || price > topCard.price)) topCard = { name: sub.name, setName: s.set, grade, price, raw: sub.raw, date, type, rawDate: sub.raw_date, rawType: sub.raw_type };
       }
     }
   }
@@ -377,9 +379,9 @@ for (const y of years) {
   if (topCard) {
     body += '<p class="answer">The priciest card is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
       (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade) + ' at ' + money(topCard.price) +
-      (topCard.date ? ' (sold ' + humanDate(topCard.date) + ')' : '') + '.' +
+      (topCard.date ? ' (sold ' + humanDate(topCard.date) + saleTypeSuffix(topCard.type) + ')' : '') + '.' +
       (topCard.raw && topCard.grade !== 'raw' ? ' A raw copy has sold for ' + money(topCard.raw) +
-        (topCard.rawDate ? ' (' + humanDate(topCard.rawDate) + ')' : '') + '.' : '') +
+        (topCard.rawDate ? ' (' + humanDate(topCard.rawDate) + saleTypeSuffix(topCard.rawType) + ')' : '') + '.' : '') +
       '</p>';
   }
 
@@ -396,11 +398,11 @@ for (const y of years) {
     const names = s.subsets.slice(0, 3).map(x => x.name).join(', ');
 
     /* real numbers for the value-question intro + FAQ on this set, pulled from DATA */
-    let setTopCard = null; // {name, grade, price, raw, date, rawDate}
+    let setTopCard = null; // {name, grade, price, raw, date, type, rawDate, rawType}
     for (const sub of s.subsets) {
-      const grades = [['PSA 10', sub.psa10, sub.psa10_date], ['PSA 9', sub.psa9, sub.psa9_date], ['PSA 8', sub.psa8, sub.psa8_date], ['raw', sub.raw, sub.raw_date]];
-      for (const [grade, price, date] of grades) {
-        if (price && (!setTopCard || price > setTopCard.price)) setTopCard = { name: sub.name, grade, price, raw: sub.raw, date, rawDate: sub.raw_date };
+      const grades = [['PSA 10', sub.psa10, sub.psa10_date, sub.psa10_type], ['PSA 9', sub.psa9, sub.psa9_date, sub.psa9_type], ['PSA 8', sub.psa8, sub.psa8_date, sub.psa8_type], ['raw', sub.raw, sub.raw_date, sub.raw_type]];
+      for (const [grade, price, date, type] of grades) {
+        if (price && (!setTopCard || price > setTopCard.price)) setTopCard = { name: sub.name, grade, price, raw: sub.raw, date, type, rawDate: sub.raw_date, rawType: sub.raw_type };
       }
     }
 
@@ -412,12 +414,12 @@ for (const y of years) {
       const a1 = esc(s.set) + ' Ken Griffey Jr. card prices top out at ' + money(setTopCard.price) + ' for the ' + topName + '.';
       const q2 = 'What is the most valuable ' + esc(s.set) + ' Ken Griffey Jr. card?';
       const a2 = 'The most valuable ' + esc(s.set) + ' Griffey card is the ' + topName + ', which sold for ' + money(setTopCard.price) +
-        (setTopCard.date ? ' on ' + humanDate(setTopCard.date) : '') + '.';
+        (setTopCard.date ? ' on ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) : '') + '.';
       const setFaqs = [[q1, a1], [q2, a2]];
       if (setTopCard.raw && setTopCard.grade !== 'raw') {
         const q3 = 'What is a raw (ungraded) ' + esc(s.set) + ' Ken Griffey Jr. card worth?';
         const a3 = 'A raw copy of the ' + esc(setTopCard.name) + ' has sold for ' + money(setTopCard.raw) +
-          (setTopCard.rawDate ? ' (' + humanDate(setTopCard.rawDate) + ')' : '') + '.';
+          (setTopCard.rawDate ? ' (' + humanDate(setTopCard.rawDate) + saleTypeSuffix(setTopCard.rawType) + ')' : '') + '.';
         setFaqs.push([q3, a3]);
       }
       setFaqHtml = '<h2>' + esc(s.set) + ' Value FAQ</h2><div class="faq">' +
@@ -434,9 +436,9 @@ for (const y of years) {
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked, updated daily.</p>' +
       (setTopCard ? '<p class="answer">The priciest card is the <b>' + esc(setTopCard.name) + '</b>' +
         (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade) + ' at ' + money(setTopCard.price) +
-        (setTopCard.date ? ' (sold ' + humanDate(setTopCard.date) + ')' : '') + '.' +
+        (setTopCard.date ? ' (sold ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) + ')' : '') + '.' +
         (setTopCard.raw && setTopCard.grade !== 'raw' ? ' A raw copy has sold for ' + money(setTopCard.raw) +
-          (setTopCard.rawDate ? ' (' + humanDate(setTopCard.rawDate) + ')' : '') + '.' : '') +
+          (setTopCard.rawDate ? ' (' + humanDate(setTopCard.rawDate) + saleTypeSuffix(setTopCard.rawType) + ')' : '') + '.' : '') +
         '</p>' : '') +
       cardTable(s.subsets, withOdds, s.set) +
       imageStrip(y, s.set, s.subsets) +
@@ -487,12 +489,12 @@ for (const y of years) {
       money(topCard.price) + ' for the ' + topName + '.';
     const q2 = 'What is the most valuable ' + y + ' Ken Griffey Jr. card?';
     const a2 = 'The most valuable ' + y + ' Griffey card is the ' + topName + ', which sold for ' + money(topCard.price) +
-      (topCard.date ? ' on ' + humanDate(topCard.date) : '') + '.';
+      (topCard.date ? ' on ' + humanDate(topCard.date) + saleTypeSuffix(topCard.type) : '') + '.';
     const faqs = [[q1, a1], [q2, a2]];
     if (topCard.raw && topCard.grade !== 'raw') {
       const q3 = 'What is a raw (ungraded) ' + y + ' Ken Griffey Jr. card worth?';
       const a3 = 'A raw copy of the ' + topName.replace(/ \(raw\)| in PSA \d+/, '') + ' has sold for ' + money(topCard.raw) +
-        (topCard.rawDate ? ' (' + humanDate(topCard.rawDate) + ')' : '') + '.';
+        (topCard.rawDate ? ' (' + humanDate(topCard.rawDate) + saleTypeSuffix(topCard.rawType) + ')' : '') + '.';
       faqs.push([q3, a3]);
     }
     body += '<h2>' + y + ' Griffey Card Value FAQ</h2><div class="faq">' +
