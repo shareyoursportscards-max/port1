@@ -380,8 +380,6 @@ for (const y of years) {
     body += '<p class="answer">The priciest card is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
       (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade) + ' at ' + money(topCard.price) +
       (topCard.date ? ' (sold ' + humanDate(topCard.date) + saleTypeSuffix(topCard.type) + ')' : '') + '.' +
-      (topCard.raw && topCard.grade !== 'raw' ? ' A raw copy has sold for ' + money(topCard.raw) +
-        (topCard.rawDate ? ' (' + humanDate(topCard.rawDate) + saleTypeSuffix(topCard.rawType) + ')' : '') + '.' : '') +
       '</p>';
   }
 
@@ -437,8 +435,6 @@ for (const y of years) {
       (setTopCard ? '<p class="answer">The priciest card is the <b>' + esc(setTopCard.name) + '</b>' +
         (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade) + ' at ' + money(setTopCard.price) +
         (setTopCard.date ? ' (sold ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) + ')' : '') + '.' +
-        (setTopCard.raw && setTopCard.grade !== 'raw' ? ' A raw copy has sold for ' + money(setTopCard.raw) +
-          (setTopCard.rawDate ? ' (' + humanDate(setTopCard.rawDate) + saleTypeSuffix(setTopCard.rawType) + ')' : '') + '.' : '') +
         '</p>' : '') +
       cardTable(s.subsets, withOdds, s.set) +
       imageStrip(y, s.set, s.subsets) +
