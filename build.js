@@ -625,7 +625,7 @@ const top25 = ranked.slice(0, 25);
 
 let mvBody = '<h1>Biggest Sales of 1990s Ken Griffey Jr. Cards</h1>' +
   '<p class="sub">The 25 biggest sales among the Ken Griffey Jr. cards from 1990–1999 this guide tracks, ranked by the highest price paid on eBay since tracking began in April 2026. Out of ' +
-  totalCards.toLocaleString('en-US') + ' Griffey cards tracked here, these are the most expensive sales. Disclaimer: with a market this large, we will miss sales — there are other big sales out there we simply don\'t track, so do your own research too. Updated daily as new sales come in.</p>' +
+  totalCards.toLocaleString('en-US') + ' Griffey cards tracked here, these are the most expensive sales. Updated daily as new sales come in.</p>' +
   '<table><colgroup><col style="width:5%"><col><col style="width:10%"><col style="width:13%"><col style="width:17%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
 top25.forEach((c, i) => {
   mvBody += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
@@ -635,7 +635,7 @@ top25.forEach((c, i) => {
     '<td class="psa10">' + money(c.value) + '</td></tr>';
 });
 mvBody += '</tbody></table>' +
-  '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card.</p>';
+  '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card. Disclaimer: with a market this large, we will miss sales — there are other big sales out there we simply don\'t track, so do your own research too.</p>';
 const mvFigs = top25.map((c, i) => c.img ?
   '<figure class="cardfig"><div class="cf-photo"><img src="/img/cards/' + c.img.file + '" alt="' + esc(c.img.alt) +
   '" width="' + c.img.w + '" height="' + c.img.h + '" loading="lazy"><span class="cf-badge">' + esc(c.grade) + ' · ' + money(c.value) + '</span></div>' +
