@@ -623,9 +623,9 @@ for (const y of years) {
 ranked.sort((a, b) => b.value - a.value);
 const top25 = ranked.slice(0, 25);
 
-let mvBody = '<h1>Most Valuable Ken Griffey Jr. Cards of the 90s</h1>' +
-  '<p class="sub">The 25 most valuable Ken Griffey Jr. cards from 1990–1999, ranked by the highest price actually paid on eBay since this guide began tracking sales in April 2026 — not asking prices, real sold listings. Out of ' +
-  totalCards.toLocaleString('en-US') + ' Griffey cards tracked in this guide, these are the kings. Updated daily as new sales come in.</p>' +
+let mvBody = '<h1>Biggest Sales of 1990s Ken Griffey Jr. Cards</h1>' +
+  '<p class="sub">The 25 biggest sales among the Ken Griffey Jr. cards from 1990–1999 this guide tracks, ranked by the highest price paid on eBay since tracking began in April 2026. Out of ' +
+  totalCards.toLocaleString('en-US') + ' Griffey cards tracked here, these are the kings — though with a market this large, there are certainly other big sales out there we simply haven\'t seen yet. Updated daily as new sales come in.</p>' +
   '<table><colgroup><col style="width:5%"><col><col style="width:10%"><col style="width:13%"><col style="width:17%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
 top25.forEach((c, i) => {
   mvBody += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
@@ -644,15 +644,15 @@ if (mvFigs) mvBody += '<h2>The Cards</h2><div class="cardfigs mvfigs">' + mvFigs
 
 const mvCard = top25.find(c => c.img);
 write('most-valuable', page({
-  title: 'Most Valuable Ken Griffey Jr. Cards of the 90s | Top 25 Ranked',
-  desc: 'The 25 most valuable Ken Griffey Jr. cards from 1990-1999, ranked by real eBay sold prices. Topping the list: ' +
+  title: 'Biggest Sales of 1990s Ken Griffey Jr. Cards | Top 25 Tracked',
+  desc: 'The 25 biggest tracked sales among Ken Griffey Jr. cards from 1990-1999, ranked by real eBay sold prices. Topping the list: ' +
     top25[0].set + ' ' + top25[0].name + ' at ' + money(top25[0].value) + '. Updated daily.',
   url: SITE + '/most-valuable/',
   cardimg: mvCard ? SITE + '/img/cards/' + mvCard.img.file : null,
   ogimg: SITE + '/img/og/most-valuable.jpg',
   jsonld: {
     '@context': 'https://schema.org', '@type': 'ItemList',
-    name: 'Most Valuable Ken Griffey Jr. Cards of the 90s',
+    name: 'Biggest Sales of 1990s Ken Griffey Jr. Cards',
     itemListElement: top25.map((c, i) => Object.assign({
       '@type': 'ListItem', position: i + 1,
       name: c.set + ' ' + c.name + ' ' + c.grade + ' — ' + money(c.value),
@@ -745,7 +745,7 @@ for (const y of years) {
     '</ul>';
 }
 smBody += '<h2>More</h2><ul class="plain">' +
-  '<li><a href="/most-valuable/">Most Valuable Cards (Top 25)</a></li>' +
+  '<li><a href="/most-valuable/">Biggest Sales (Top 25)</a></li>' +
   '<li><a href="/biggest-movers/">Biggest Movers</a></li>' +
   '<li><a href="/how-much-are-griffey-cards-worth/">How Much Is a Griffey Card Worth?</a></li>' +
   '<li><a href="/blog/">Market Reports</a></li>' +
@@ -770,7 +770,7 @@ let worthBody =
   '<h1>How Much Is a Ken Griffey Jr. Card Worth?</h1>' +
   '<p class="sub">Anywhere from a few dollars to ' + money(kingCard.value) + '. Most 1990s Griffey cards sell for under $100, ' +
   'but rare inserts and serial-numbered parallels regularly sell for four and five figures. This guide tracks ' +
-  totalCards.toLocaleString('en-US') + ' Griffey cards from 1990&ndash;1999 using real completed eBay sales &mdash; not asking prices &mdash; updated daily.</p>' +
+  totalCards.toLocaleString('en-US') + ' Griffey cards from 1990&ndash;1999 using completed eBay sales, updated daily.</p>' +
 
   '<h2>The quick answer</h2>' +
   '<p class="sub">Of the ' + totalCards.toLocaleString('en-US') + ' cards in this guide, ' + under100 +
