@@ -418,7 +418,7 @@ for (const y of years) {
     body += '<p class="answer">The most expensive sale is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
       (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade) + ' at ' + money(topCard.price) +
       (topCard.date ? ' (sold ' + humanDate(topCard.date) + saleTypeSuffix(topCard.type) + ')' : '') + '.' +
-      ' Disclaimer: with a market this large, we will miss sales — there may be other sales we simply don\'t track.' +
+      ' Disclaimer: with a market this large, there will be sales we miss or simply don\'t track!' +
       '</p>';
   }
   body += '</div>' + yearImageStrip(y, sets, setSlugs);
@@ -474,7 +474,7 @@ for (const y of years) {
       (setTopCard ? '<p class="answer">The most expensive sale is the <b>' + esc(setTopCard.name) + '</b>' +
         (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade) + ' at ' + money(setTopCard.price) +
         (setTopCard.date ? ' (sold ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) + ')' : '') + '.' +
-        ' Disclaimer: with a market this large, we will miss sales — there may be other sales we simply don\'t track.' +
+        ' Disclaimer: with a market this large, there will be sales we miss or simply don\'t track!' +
         '</p>' : '') + '</div>' +
       cardTable(s.subsets, withOdds, s.set) +
       imageStrip(y, s.set, s.subsets) +
@@ -637,7 +637,7 @@ top25.forEach((c, i) => {
     '<td class="psa10">' + money(c.value) + '</td></tr>';
 });
 mvBody += '</tbody></table>' +
-  '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card. Disclaimer: with a market this large, we will miss sales — there are other big sales out there we simply don\'t track, so do your own research too.</p>';
+  '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card. Disclaimer: with a market this large, there will be sales we miss or simply don\'t track!</p>';
 const mvFigs = top25.map((c, i) => c.img ?
   '<figure class="cardfig"><div class="cf-photo"><img src="/img/cards/' + c.img.file + '" alt="' + esc(c.img.alt) +
   '" width="' + c.img.w + '" height="' + c.img.h + '" loading="lazy"><span class="cf-badge">' + esc(c.grade) + ' · ' + money(c.value) + '</span></div>' +
