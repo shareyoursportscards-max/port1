@@ -547,7 +547,7 @@ for (const y of years) {
   if (reports.length) {
     body += '<h2 id="market-reports">' + y + ' Market Reports</h2>';
     for (const r of reports) {
-      body += '<div class="report"><span class="rdate">' + esc(r.date) + '</span>' + r.body + '</div>';
+      body += '<div class="report"><span class="rdate">' + esc(r.date) + '</span> ' + r.body + '</div>';
     }
   }
 
