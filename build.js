@@ -365,6 +365,29 @@ const humanDate = iso => {
 // { grade }_type is an optional "auction" | "fixed" field alongside { grade }_date.
 const saleTypeSuffix = type => type === 'auction' ? ' via auction' : type === 'fixed' ? ', Buy It Now' : '';
 
+/* biggest recent graded price move (up or down) among a set of cards — used
+   for the "what's moved lately" FAQ on year/set pages. Reads straight off
+   DATA's current/prev pairs (same fields the top-card FAQ already uses),
+   not price-history.json, since we only need the single most recent jump. */
+const MOVER_FRESH_DAYS = 30;
+const moverFreshCutoff = new Date(Date.now() - MOVER_FRESH_DAYS * 864e5).toISOString().slice(0, 10);
+const FAQ_GRADE_LABEL = { psa10: 'PSA 10', psa9: 'PSA 9', psa8: 'PSA 8' };
+function bestRecentMover(items) {
+  let best = null;
+  for (const item of items) {
+    for (const gkey of ['psa10', 'psa9', 'psa8']) {
+      const cur = item[gkey], prev = item['prev_' + gkey], date = item[gkey + '_date'], type = item[gkey + '_type'];
+      if (cur == null || prev == null || cur === prev || !date || date < moverFreshCutoff) continue;
+      if (Math.max(cur, prev) < 25 || Math.abs(cur - prev) < 5) continue;
+      const pct = Math.round((cur - prev) / prev * 100);
+      if (!best || Math.abs(pct) > Math.abs(best.pct)) {
+        best = { name: item.name, setName: item.setName, grade: FAQ_GRADE_LABEL[gkey], from: prev, to: cur, pct, date, type };
+      }
+    }
+  }
+  return best;
+}
+
 const written = new Set();
 function write(rel, html) {
   written.add(rel);
@@ -446,16 +469,21 @@ for (const y of years) {
     let setFaqJsonLd = null;
     let setFaqHtml = '';
     if (setTopCard) {
-      const topName = esc(setTopCard.name) + (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade);
+      const topName = setTopCard.name + (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade);
       const q1 = 'How much is a ' + y + ' ' + s.set.replace(/^\d{4}\s+/, '') + ' Ken Griffey Jr. card worth?';
-      const a1 = esc(s.set) + ' Ken Griffey Jr. card prices top out at ' + money(setTopCard.price) + ' for the ' + topName + '.';
-      const q2 = 'What is the most valuable ' + esc(s.set) + ' Ken Griffey Jr. card?';
-      const a2 = 'The most valuable ' + esc(s.set) + ' Griffey card is the ' + topName + ', which sold for ' + money(setTopCard.price) +
-        (setTopCard.date ? ' on ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) : '') + '.';
-      const setFaqs = [[q1, a1], [q2, a2]];
+      const a1 = s.set + ' Ken Griffey Jr. card prices top out at ' + money(setTopCard.price) + ' for the ' + topName + '.';
+      const setFaqs = [[q1, a1]];
+      const setMover = bestRecentMover(s.subsets);
+      const q2 = 'Has the ' + s.set + ' Ken Griffey Jr. card market moved recently?';
+      const a2 = setMover ?
+        ('Yes — the ' + setMover.name + ' in ' + setMover.grade + ' most recently sold for ' + money(setMover.to) + ' on ' +
+          humanDate(setMover.date) + saleTypeSuffix(setMover.type) + ', ' + (setMover.pct > 0 ? 'up' : 'down') + ' ' +
+          Math.abs(setMover.pct) + '% from ' + money(setMover.from) + ' before that.') :
+        ('Prices have been pretty steady lately — the ' + topName + ' is still valued at ' + money(setTopCard.price) + '.');
+      setFaqs.push([q2, a2]);
       if (setTopCard.raw && setTopCard.grade !== 'raw') {
-        const q3 = 'What is a raw (ungraded) ' + esc(s.set) + ' Ken Griffey Jr. card worth?';
-        const a3 = 'A raw copy of the ' + esc(setTopCard.name) + ' has sold for ' + money(setTopCard.raw) +
+        const q3 = 'What is a raw (ungraded) ' + s.set + ' Ken Griffey Jr. card worth?';
+        const a3 = 'A raw copy of the ' + setTopCard.name + ' has sold for ' + money(setTopCard.raw) +
           (setTopCard.rawDate ? ' (' + humanDate(setTopCard.rawDate) + saleTypeSuffix(setTopCard.rawType) + ')' : '') + '.';
         setFaqs.push([q3, a3]);
       }
@@ -519,14 +547,21 @@ for (const y of years) {
   /* value-question FAQ, placed below the card tables — real Q&A pulled from DATA */
   let faqJsonLd = null;
   if (topCard) {
-    const topName = esc(topCard.setName.replace(y + ' ', '') + ' ' + topCard.name) + (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade);
+    const topName = topCard.setName.replace(y + ' ', '') + ' ' + topCard.name + (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade);
     const q1 = 'How much is a ' + y + ' Ken Griffey Jr. card worth?';
     const a1 = y + ' Ken Griffey Jr. card prices range from a few dollars for common raw base cards up to ' +
       money(topCard.price) + ' for the ' + topName + '.';
-    const q2 = 'What is the most valuable ' + y + ' Ken Griffey Jr. card?';
-    const a2 = 'The most valuable ' + y + ' Griffey card is the ' + topName + ', which sold for ' + money(topCard.price) +
-      (topCard.date ? ' on ' + humanDate(topCard.date) + saleTypeSuffix(topCard.type) : '') + '.';
-    const faqs = [[q1, a1], [q2, a2]];
+    const faqs = [[q1, a1]];
+    const yearItems = [];
+    for (const s2 of sets) for (const sub2 of s2.subsets) yearItems.push(Object.assign({ setName: s2.set }, sub2));
+    const yearMover = bestRecentMover(yearItems);
+    const q2 = 'Has any ' + y + ' Ken Griffey Jr. card price moved recently?';
+    const a2 = yearMover ?
+      ('Yes — the ' + yearMover.setName.replace(y + ' ', '') + ' ' + yearMover.name + ' in ' + yearMover.grade +
+        ' most recently sold for ' + money(yearMover.to) + ' on ' + humanDate(yearMover.date) + saleTypeSuffix(yearMover.type) + ', ' +
+        (yearMover.pct > 0 ? 'up' : 'down') + ' ' + Math.abs(yearMover.pct) + '% from ' + money(yearMover.from) + ' before that.') :
+      ('Prices have been pretty steady lately — the ' + topName + ' is still valued at ' + money(topCard.price) + '.');
+    faqs.push([q2, a2]);
     if (topCard.raw && topCard.grade !== 'raw') {
       const q3 = 'What is a raw (ungraded) ' + y + ' Ken Griffey Jr. card worth?';
       const a3 = 'A raw copy of the ' + topName.replace(/ \(raw\)| in PSA \d+/, '') + ' has sold for ' + money(topCard.raw) +
