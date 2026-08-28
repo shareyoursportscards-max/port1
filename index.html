@@ -1725,7 +1725,7 @@
      { name: "Card detail", raw, psa8, psa9, psa10, tag? }
    ]}, ... ]   prices in USD, null = N/A
 =========================================================== */
-const IMAGE_COUNT = 299; /* auto-updated by build.js from card-images.json — do not hand-edit */
+const IMAGE_COUNT = 300; /* auto-updated by build.js from card-images.json — do not hand-edit */
 const DATA = {
   1990: [
     {set:"1990 Bowman", subsets:[
@@ -1891,7 +1891,7 @@ const DATA = {
     ]},
     {set:"1993 Donruss", subsets:[
       {name:"Base #553", raw:null, psa8:null, psa9:18, psa10:163, prev_psa10:135, psa10_date:"2026-08-19"},
-      {name:"Diamond Kings #DK-1", raw:9, psa8:40, psa9:90, psa10:1394, prev_raw:29, prev_psa8:36, prev_psa9:82, prev_psa10:1176, raw_date:"2026-08-09", psa9_date:"2026-08-17", psa10_date:"2026-07-17"},
+      {name:"Diamond Kings #DK-1", raw:9, psa8:75, psa9:94, psa10:1394, prev_raw:29, prev_psa8:40, prev_psa9:90, prev_psa10:1176, raw_date:"2026-08-09", psa8_date:"2026-08-25", psa8_type:"fixed", psa9_date:"2026-08-26", psa9_type:"fixed", psa10_date:"2026-07-17"},
       {name:"Triple Play #1", raw:null, psa8:null, psa9:27, psa10:null},
       {name:"Elite Dominator #12 (/5,000)", raw:138, psa8:245, psa9:480, psa10:null, prev_raw:249, prev_psa9:351, raw_date:"2026-08-18", psa8_date:"2026-08-08", psa9_date:"2026-08-17"}
     ]},
@@ -1917,11 +1917,11 @@ const DATA = {
       {name:"Base #1", raw:null, psa8:null, psa9:null, psa10:75},
       {name:"#504", raw:85, psa8:15, psa9:null, psa10:130, prev_psa10:100, psa10_date:"2026-08-19"},
       {name:"Dream Team #5", raw:null, psa8:null, psa9:null, psa10:109},
-      {name:"Dream Team #536", raw:null, psa8:null, psa9:21, psa10:90, prev_psa10:95, psa10_date:"2026-08-02"}
+      {name:"Dream Team #536", raw:null, psa8:null, psa9:21, psa10:96, prev_psa10:90, psa10_date:"2026-08-25", psa10_type:"auction"}
     ]},
     {set:"1993 Select", subsets:[
-      {name:"Base #2", raw:null, psa8:null, psa9:null, psa10:90, prev_psa10:75, psa10_date:"2026-08-18"},
-      {name:"Stars #19", raw:20, psa8:28, psa9:125, psa10:null, prev_psa9:85}
+      {name:"Base #2", raw:null, psa8:null, psa9:null, psa10:91, prev_psa10:90, psa10_date:"2026-08-25", psa10_type:"auction"},
+      {name:"Stars #19", raw:45, psa8:28, psa9:125, psa10:null, prev_raw:20, prev_psa9:85, raw_date:"2026-08-25", raw_type:"fixed"}
     ]},
     {set:"1993 SP", subsets:[
       {name:"Base #4", raw:null, psa8:24, psa9:45, psa10:350, tag:"iconic design", prev_psa9:42, psa9_date:"2026-08-20"},
@@ -1934,13 +1934,13 @@ const DATA = {
       {name:"Members Choice #591", raw:3, psa8:20, psa9:70, psa10:148, prev_raw:7, prev_psa9:60, raw_date:"2026-08-09", psa9_date:"2026-08-15"}
     ]},
     {set:"1993 Studio", subsets:[
-      {name:"Base #96", raw:3, psa8:37, psa9:89, psa10:576, prev_psa9:19, raw_date:"2026-07-30", psa8_date:"2026-07-06", psa9_date:"2026-08-03", psa10_date:"2026-07-29"}
+      {name:"Base #96", raw:3, psa8:48, psa9:89, psa10:576, prev_psa8:37, prev_psa9:19, raw_date:"2026-07-30", psa8_date:"2026-08-23", psa8_type:"fixed", psa9_date:"2026-08-03", psa10_date:"2026-07-29"}
     ]},
     {set:"1993 Topps", subsets:[
-      {name:"Base #179", raw:null, psa8:null, psa9:20, psa10:99, prev_psa10:95, psa10_date:"2026-08-15"},
+      {name:"Base #179", raw:null, psa8:null, psa9:20, psa10:91, prev_psa10:99, psa10_date:"2026-08-23", psa10_type:"auction"},
       {name:"Murphy/Toys R Us #56", raw:null, psa8:null, psa9:40, psa10:null},
       {name:"All-Stars #405 (w/ Van Slyke)", raw:null, psa8:null, psa9:null, psa10:70, prev_psa10:33},
-      {name:"Gold #179", raw:5, psa8:null, psa9:27, psa10:350, prev_raw:3, prev_psa10:310, raw_date:"2026-08-09"},
+      {name:"Gold #179", raw:5, psa8:null, psa9:55, psa10:350, prev_raw:3, prev_psa9:27, prev_psa10:310, raw_date:"2026-08-09", psa9_date:"2026-08-22", psa9_type:"fixed"},
       {name:"Black Gold #33", raw:5, psa8:50, psa9:46, psa10:599, prev_raw:3, prev_psa9:35, raw_date:"2026-08-09", psa8_date:"2026-08-16", psa9_date:"2026-08-18"},
           ]},
     {set:"1993 Triple Play", subsets:[
@@ -1949,12 +1949,12 @@ const DATA = {
     {set:"1993 Ultra", subsets:[
       {name:"Base #131", raw:null, psa8:null, psa9:null, psa10:null},
       {name:"#619", raw:100, psa8:null, psa9:null, psa10:125, prev_psa10:115, raw_date:"2026-08-04", psa10_date:"2026-08-02"},
-      {name:"Performers #3", raw:null, psa8:null, psa9:100, psa10:660, prev_psa9:90, psa9_date:"2026-08-04"},
+      {name:"Performers #3", raw:null, psa8:null, psa9:70, psa10:660, prev_psa9:100, psa9_date:"2026-08-23", psa9_type:"fixed"},
       {name:"Award Winners #16", raw:3, psa8:null, psa9:40, psa10:null, prev_psa9:35}
     ]},
     {set:"1993 Upper Deck", subsets:[
       {name:"Base #449", raw:null, psa8:null, psa9:null, psa10:null},
-      {name:"#355", raw:31, psa8:35, psa9:11, psa10:75, prev_psa9:17, prev_psa10:70, psa9_date:"2026-08-09", psa10_date:"2026-08-17"},
+      {name:"#355", raw:31, psa8:35, psa9:11, psa10:61, prev_psa9:17, prev_psa10:75, psa9_date:"2026-08-09", psa10_date:"2026-08-22", psa10_type:"fixed"},
       {name:"Then & Now #TN6", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:27"},
       {name:"Fun Pack #114", raw:null, psa8:null, psa9:null, psa10:250, psa10_date:"2026-08-08"},
       {name:"Homerun Heroes #HR9", raw:null, psa8:null, psa9:null, psa10:560, psa10_date:"2026-08-09"}
