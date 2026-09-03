@@ -106,10 +106,8 @@ function arrow(sub, g) {
 function priceCell(sub, g) {
   const val = sub[g];
   if (val == null) return '<td class="' + g + '">' + money(val) + '</td>';
-  const date = sub[g + '_date'];
-  const stale = isStale(date);
-  const title = date ? 'Last sold ' + humanDate(date) + saleTypeSuffix(sub[g + '_type']) : 'No confirmed sale date on file';
-  return '<td class="' + g + (stale ? ' stale' : '') + '" title="' + esc(title) + '">' + arrow(sub, g) + money(val) + '</td>';
+  const stale = isStale(sub[g + '_date']);
+  return '<td class="' + g + (stale ? ' stale' : '') + '">' + arrow(sub, g) + money(val) + '</td>';
 }
 
 /* ---------- eBay search links ----------
