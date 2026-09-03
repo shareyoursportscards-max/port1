@@ -60,10 +60,6 @@
     --text:#edf3f9;
     --text-dim:#8fa6bd;
     --text-muted:#4e6076;
-    --raw:#9fb0c2;
-    --psa8:#5eeaa0;
-    --psa9:#5cd8f0;
-    --psa10:#f0c75b;
     --card-radius:14px;
     --glass:rgba(15,23,36,.55);
     --glass-border:rgba(120,200,190,.14);
@@ -540,8 +536,8 @@
   .mega{color:var(--gold) !important; text-shadow:0 0 16px rgba(245,200,66,.35);}
 
   .price-big{
-    color:var(--psa10);
-    text-shadow:0 0 16px rgba(245,200,66,.35);
+    color:var(--teal);
+    text-shadow:0 0 16px rgba(47,230,199,.35);
   }
 
   .tag{
@@ -642,8 +638,8 @@
     font-weight:600; font-size:13px;
     letter-spacing:.04em;
     background:var(--glass);
-    color:var(--psa10);
-    border:1px solid rgba(240,199,91,.28);
+    color:var(--teal);
+    border:1px solid rgba(47,230,199,.28);
     padding:10px 18px;
     border-radius:10px;
     -webkit-backdrop-filter:blur(10px);
@@ -654,13 +650,13 @@
     width:100%;
     text-align:left;
   }
-  .top10-toggle:hover{background:var(--surface); border-color:var(--gold-dim); box-shadow:var(--glow-gold);}
+  .top10-toggle:hover{background:var(--surface); border-color:var(--teal-dim); box-shadow:var(--glow-teal);}
   .top10-toggle .arrow{display:inline-block; transition:transform .2s ease; margin-right:6px;}
   .top10-toggle.open .arrow{transform:rotate(90deg);}
   .top10-box{
     display:none;
     background:var(--surface);
-    border-left:3px solid rgba(233,196,100,.4);
+    border-left:3px solid rgba(47,230,199,.4);
     border-radius:0 var(--card-radius) var(--card-radius) 0;
     padding:0;
     margin-bottom:18px;
@@ -678,7 +674,7 @@
     transition:background .1s ease;
     align-items:center;
   }
-  .top10-row:hover{background:rgba(245,200,66,.04);}
+  .top10-row:hover{background:rgba(47,230,199,.04);}
   .top10-row:last-child{border-bottom:none;}
   .top10-rank{
     font-family:'Chakra Petch', sans-serif;
@@ -687,15 +683,15 @@
     color:var(--gold-dim);
     text-align:center;
   }
-  .top10-rank.gold{color:var(--psa10); text-shadow:0 0 12px rgba(245,200,66,.3);}
+  .top10-rank.gold{color:var(--teal); text-shadow:0 0 12px rgba(47,230,199,.3);}
   .top10-card{color:var(--text); font-weight:500;}
   .top10-card .set-label{color:var(--text-dim); font-weight:400; font-size:11px; display:block;}
   .top10-price{
     text-align:right;
     font-weight:700;
-    color:var(--psa10);
+    color:var(--teal);
     font-size:14px;
-    text-shadow:0 0 12px rgba(245,200,66,.2);
+    text-shadow:0 0 12px rgba(47,230,199,.2);
   }
   .top10-grade{
     text-align:right;
@@ -1598,9 +1594,9 @@
     display:block; padding:11px 16px; text-align:center; text-decoration:none;
     font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:12.5px;
     letter-spacing:.05em; text-transform:uppercase;
-    color:var(--psa10); border-top:1px solid var(--border);
+    color:var(--teal); border-top:1px solid var(--border);
   }
-  .top10-all:hover{background:rgba(245,200,66,.05);}
+  .top10-all:hover{background:rgba(47,230,199,.05);}
   .top10-all .chev{display:inline-block; transition:transform .15s ease;}
   .top10-all:hover .chev{transform:translateX(3px);}
 </style>
