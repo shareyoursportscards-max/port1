@@ -36,6 +36,12 @@ const slug = s => s.toLowerCase().replace(/'/g, '').replace(/&/g, 'and').replace
 const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const isoToday = new Date().toISOString().slice(0, 10);
 const years = Object.keys(DATA).map(Number).sort((a, b) => a - b);
+/* A price with no recorded sale date, or one older than this many days, renders
+   dimmed (.stale) so readers can tell a confirmed-recent price from one that's
+   just sitting there from whenever the guide was last touched. */
+const STALE_DAYS = 45;
+const staleCutoff = new Date(Date.now() - STALE_DAYS * 864e5).toISOString().slice(0, 10);
+function isStale(dateStr) { return !dateStr || dateStr < staleCutoff; }
 
 /* ---------- price history logger ----------
    Appends to price-history.json: { "year|set|card": { grade: [[iso-date, value], ...] } }
@@ -98,7 +104,12 @@ function arrow(sub, g) {
 }
 
 function priceCell(sub, g) {
-  return '<td class="' + g + '">' + arrow(sub, g) + money(sub[g]) + '</td>';
+  const val = sub[g];
+  if (val == null) return '<td class="' + g + '">' + money(val) + '</td>';
+  const date = sub[g + '_date'];
+  const stale = isStale(date);
+  const title = date ? 'Last sold ' + humanDate(date) + saleTypeSuffix(sub[g + '_type']) : 'No confirmed sale date on file';
+  return '<td class="' + g + (stale ? ' stale' : '') + '" title="' + esc(title) + '">' + arrow(sub, g) + money(val) + '</td>';
 }
 
 /* ---------- eBay search links ----------
@@ -256,7 +267,7 @@ function page(o) {
 
 const CSS = `
 :root{--bg:#06090f;--surface:#0f1622;--border:#1d2c40;--gold:#2fe6c7;--text:#edf3f9;--dim:#8fa6bd;
---raw:#9fb0c2;--psa8:#5eeaa0;--psa9:#5cd8f0;--psa10:#f0c75b;
+--price:#edf3f9;--price-stale:#5c6b7d;
 --lbg:#faf7f1;--ltext:#3d362c;--ldim:#8c8172;--lborder:#e8e0d1;}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);background-image:linear-gradient(180deg,#06090f 0%,#0a1019 50%,#06090f 100%);
 color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased}
@@ -296,7 +307,8 @@ td{overflow-wrap:break-word}
 th{text-align:left;color:var(--dim);font-weight:500;font-size:11px;letter-spacing:.8px;text-transform:uppercase;padding:4px 7px;border-bottom:1px solid var(--border);background:var(--bg)}
 td{padding:3px 7px;border-bottom:1px solid rgba(42,58,80,.45)}
 td.cname{color:var(--text)}td.odds{color:var(--dim);font-size:12px}
-td.raw{color:var(--raw)}td.psa8{color:var(--psa8)}td.psa9{color:var(--psa9)}td.psa10{color:var(--psa10)}
+td.raw,td.psa8,td.psa9,td.psa10{color:var(--price)}
+td.stale{color:var(--price-stale)}
 .tag{font-size:10px;color:var(--dim);border:1px solid var(--border);border-radius:4px;padding:1px 5px;margin-left:5px;white-space:nowrap}
 .up{color:#5eeaa0;font-size:10px}.down{color:#ff6b6b;font-size:10px}
 td.raw,td.psa8,td.psa9,td.psa10{position:relative;padding-left:15px}
@@ -813,7 +825,7 @@ let worthBody =
   '<p class="sub">Of the ' + totalCards.toLocaleString('en-US') + ' cards in this guide, ' + under100 +
   ' have a top recorded sale under $100, ' + over1k + ' have sold for $1,000 or more, and ' + over10k +
   ' have topped $10,000. The highest price on record here is the <a href="/' + kingCard.y + '/' + kingCard.sl + '/" style="color:var(--gold)">' +
-  esc(kingCard.set) + ' ' + esc(kingCard.name) + '</a> at <b style="color:var(--psa10)">' + money(kingCard.value) + '</b> in ' + kingCard.grade + '.</p>' +
+  esc(kingCard.set) + ' ' + esc(kingCard.name) + '</a> at <b style="color:var(--gold)">' + money(kingCard.value) + '</b> in ' + kingCard.grade + '.</p>' +
   '<ul class="plain" style="columns:1">' +
   '<li>Base cards, raw: <b style="color:var(--text)">$2&ndash;$25</b></li>' +
   '<li>Graded base cards and common inserts: <b style="color:var(--text)">$25&ndash;$100</b></li>' +
