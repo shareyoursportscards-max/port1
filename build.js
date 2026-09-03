@@ -469,21 +469,21 @@ for (const y of years) {
     let setFaqJsonLd = null;
     let setFaqHtml = '';
     if (setTopCard) {
-      const topName = setTopCard.name + (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade);
+      const topName = s.set + ' ' + setTopCard.name + (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade);
       const q1 = 'How much is a ' + y + ' ' + s.set.replace(/^\d{4}\s+/, '') + ' Ken Griffey Jr. card worth?';
       const a1 = s.set + ' Ken Griffey Jr. card prices top out at ' + money(setTopCard.price) + ' for the ' + topName + '.';
       const setFaqs = [[q1, a1]];
       const setMover = bestRecentMover(s.subsets);
       const q2 = 'Has the ' + s.set + ' Ken Griffey Jr. card market moved recently?';
       const a2 = setMover ?
-        ('Yes — the ' + setMover.name + ' in ' + setMover.grade + ' most recently sold for ' + money(setMover.to) + ' on ' +
+        ('Yes — the ' + s.set + ' ' + setMover.name + ' in ' + setMover.grade + ' most recently sold for ' + money(setMover.to) + ' on ' +
           humanDate(setMover.date) + saleTypeSuffix(setMover.type) + ', ' + (setMover.pct > 0 ? 'up' : 'down') + ' ' +
           Math.abs(setMover.pct) + '% from ' + money(setMover.from) + ' before that.') :
         ('Prices have been pretty steady lately — the ' + topName + ' is still valued at ' + money(setTopCard.price) + '.');
       setFaqs.push([q2, a2]);
       if (setTopCard.raw && setTopCard.grade !== 'raw') {
         const q3 = 'What is a raw (ungraded) ' + s.set + ' Ken Griffey Jr. card worth?';
-        const a3 = 'A raw copy of the ' + setTopCard.name + ' has sold for ' + money(setTopCard.raw) +
+        const a3 = 'A raw copy of the ' + s.set + ' ' + setTopCard.name + ' has sold for ' + money(setTopCard.raw) +
           (setTopCard.rawDate ? ' (' + humanDate(setTopCard.rawDate) + saleTypeSuffix(setTopCard.rawType) + ')' : '') + '.';
         setFaqs.push([q3, a3]);
       }
@@ -547,7 +547,7 @@ for (const y of years) {
   /* value-question FAQ, placed below the card tables — real Q&A pulled from DATA */
   let faqJsonLd = null;
   if (topCard) {
-    const topName = topCard.setName.replace(y + ' ', '') + ' ' + topCard.name + (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade);
+    const topName = topCard.setName + ' ' + topCard.name + (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade);
     const q1 = 'How much is a ' + y + ' Ken Griffey Jr. card worth?';
     const a1 = y + ' Ken Griffey Jr. card prices range from a few dollars for common raw base cards up to ' +
       money(topCard.price) + ' for the ' + topName + '.';
@@ -557,7 +557,7 @@ for (const y of years) {
     const yearMover = bestRecentMover(yearItems);
     const q2 = 'Has any ' + y + ' Ken Griffey Jr. card price moved recently?';
     const a2 = yearMover ?
-      ('Yes — the ' + yearMover.setName.replace(y + ' ', '') + ' ' + yearMover.name + ' in ' + yearMover.grade +
+      ('Yes — the ' + yearMover.setName + ' ' + yearMover.name + ' in ' + yearMover.grade +
         ' most recently sold for ' + money(yearMover.to) + ' on ' + humanDate(yearMover.date) + saleTypeSuffix(yearMover.type) + ', ' +
         (yearMover.pct > 0 ? 'up' : 'down') + ' ' + Math.abs(yearMover.pct) + '% from ' + money(yearMover.from) + ' before that.') :
       ('Prices have been pretty steady lately — the ' + topName + ' is still valued at ' + money(topCard.price) + '.');
