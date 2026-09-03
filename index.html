@@ -533,8 +533,6 @@
   .trend.down{color:#f87171;}
   .ticker-up{color:#4ade80 !important;}
   .ticker-down{color:#f87171 !important;}
-  .mega{color:var(--gold) !important; text-shadow:0 0 16px rgba(245,200,66,.35);}
-
   .price-big{
     color:var(--teal);
     text-shadow:0 0 16px rgba(47,230,199,.35);
@@ -3408,13 +3406,12 @@ function fmtCell(grade, val, prev, year, set, name){
 
 function fmt(v, prev){
   if(v===null || v===undefined) return '<span class="price na">N/A</span>';
-  const mega = v >= 1000 ? ' mega' : '';
   if(prev !== undefined && prev !== null && prev !== v){
     const dir = v > prev ? 'up' : 'down';
     const arrow = v > prev ? '▲' : '▼';
-    return '<span class="price-wrap ticker-' + dir + mega + '">$' + v.toLocaleString('en-US') + '<span class="trend ' + dir + '">' + arrow + '</span></span>';
+    return '<span class="price-wrap ticker-' + dir + '">$' + v.toLocaleString('en-US') + '<span class="trend ' + dir + '">' + arrow + '</span></span>';
   }
-  return '<span class="' + (mega ? 'mega' : '') + '">$' + v.toLocaleString('en-US') + '</span>';
+  return '<span>$' + v.toLocaleString('en-US') + '</span>';
 }
 
 function renderYearStrip(){
