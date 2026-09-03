@@ -438,7 +438,7 @@ for (const y of years) {
     '<div class="intro"><p class="sub">' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
     ' sets — raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
   if (topCard) {
-    body += '<p class="answer">The most expensive sale is the <b>' + esc(topCard.setName.replace(y + ' ', '')) + ' ' + esc(topCard.name) + '</b>' +
+    body += '<p class="answer">The most expensive sale is the <b>' + esc(topCard.setName) + ' ' + esc(topCard.name) + '</b>' +
       (topCard.grade === 'raw' ? ' (raw)' : ' in ' + topCard.grade) + ' at ' + money(topCard.price) +
       (topCard.date ? ' (sold ' + humanDate(topCard.date) + saleTypeSuffix(topCard.type) + ')' : '') + '.' +
       ' Disclaimer: with a market this large, there will be sales we miss or simply don\'t track!' +
@@ -499,7 +499,7 @@ for (const y of years) {
     const setBody = '<h1>Ken Griffey Jr. Card Prices: ' + esc(s.set) + ' Values</h1>' +
       '<div class="intro"><p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings — ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked, updated daily.</p>' +
-      (setTopCard ? '<p class="answer">The most expensive sale is the <b>' + esc(setTopCard.name) + '</b>' +
+      (setTopCard ? '<p class="answer">The most expensive sale is the <b>' + esc(s.set) + ' ' + esc(setTopCard.name) + '</b>' +
         (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade) + ' at ' + money(setTopCard.price) +
         (setTopCard.date ? ' (sold ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) + ')' : '') + '.' +
         ' Disclaimer: with a market this large, there will be sales we miss or simply don\'t track!' +
