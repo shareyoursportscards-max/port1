@@ -876,10 +876,10 @@
     "alt": "1990 Leaf Ken Griffey Jr. card #245 in PSA 10 slab"
   },
   "1999|1999 Bowman's Best|Atomic Refractor #80 (/100)": {
-    "file": "1999-bowmans-best-atomic-80-griffey-psa9.jpg",
-    "w": 376,
-    "h": 642,
-    "alt": "1999 Bowman's Best Atomic Refractor /100 Ken Griffey Jr. card #80 in PSA 9 slab"
+    "file": "1999-bowmans-best-atomic-refractor-80-griffey-psa10.jpg",
+    "w": 427,
+    "h": 740,
+    "alt": "1999 Bowman's Best Atomic Refractor /100 Ken Griffey Jr. card #80 in PSA 10 slab"
   },
   "1999|1999 Bowman's Best|Atomic Refractor #86 (/100)": {
     "file": "1999-bowmans-best-atomic-86-griffey-psa8.jpg",
@@ -1182,10 +1182,10 @@
     "alt": "1999 Topps Chrome Refractor Ken Griffey Jr. card #100 in PSA 9 slab"
   },
   "1999|1999 Bowman Chrome|Refractor #52": {
-    "file": "1999-bowman-chrome-refractor-52-griffey-psa9.jpg",
-    "w": 372,
-    "h": 636,
-    "alt": "1999 Bowman Chrome Refractor Ken Griffey Jr. card #52 in PSA 9 slab"
+    "file": "1999-bowman-chrome-refractor-52-griffey-psa10.jpg",
+    "w": 432,
+    "h": 741,
+    "alt": "1999 Bowman Chrome Refractor Ken Griffey Jr. card #52 in PSA 10 slab"
   },
   "1999|1999 Skybox Thunder|Dial 1 #3D": {
     "file": "1999-skybox-thunder-dial-1-3d-griffey-psa8.jpg",
@@ -1852,5 +1852,11 @@
     "w": 427,
     "h": 746,
     "alt": "1999 Fleer Brilliants 24kt Gold 1/24 Ken Griffey Jr. card #24TG in PSA 8 slab"
+  },
+  "1999|1999 Upper Deck Choice|Prime Choice Reserve #142 (/100)": {
+    "file": "1999-ud-choice-prime-choice-reserve-142-griffey-psa9.jpg",
+    "w": 431,
+    "h": 752,
+    "alt": "1999 Upper Deck Choice Prime Choice Reserve /100 Ken Griffey Jr. card #142 in PSA 9 slab"
   }
 }
