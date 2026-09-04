@@ -663,7 +663,7 @@ for (const y of years) {
       for (const [g, label] of GRADES) {
         if (sub[g] != null && (!best || sub[g] > best.value)) best = { value: sub[g], grade: label, gkey: g };
       }
-      if (best) ranked.push({ y, set: s.set, sl, name: sub.name, grade: best.grade, gkey: best.gkey, value: best.value, img: CARDIMG[y + '|' + s.set + '|' + sub.name] });
+      if (best) ranked.push({ y, set: s.set, sl, name: sub.name, grade: best.grade, gkey: best.gkey, value: best.value, date: sub[best.gkey + '_date'], img: CARDIMG[y + '|' + s.set + '|' + sub.name] });
     }
   }
 }
@@ -673,13 +673,14 @@ const top25 = ranked.slice(0, 25);
 let mvBody = '<h1>Biggest Sales of 1990s Ken Griffey Jr. Cards</h1>' +
   '<p class="sub">The 25 biggest sales among the Ken Griffey Jr. cards from 1990–1999 this guide tracks, ranked by the highest price paid on eBay since tracking began in April 2026. Out of ' +
   totalCards.toLocaleString('en-US') + ' Griffey cards tracked here, these are the most expensive sales. Updated daily as new sales come in.</p>' +
-  '<table><colgroup><col style="width:5%"><col><col style="width:10%"><col style="width:13%"><col style="width:17%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th></tr></thead><tbody>';
+  '<table><colgroup><col style="width:5%"><col><col style="width:10%"><col style="width:13%"><col style="width:14%"><col style="width:14%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th><th>Date Sold</th></tr></thead><tbody>';
 top25.forEach((c, i) => {
   mvBody += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
     '<td class="cname"><a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' — ' + esc(c.name) + '</a></td>' +
     '<td class="odds"><a href="/' + c.y + '/" style="color:var(--dim);text-decoration:none">' + c.y + '</a></td>' +
     '<td class="odds">' + c.grade + '</td>' +
-    '<td class="psa10">' + money(c.value) + '</td></tr>';
+    '<td class="psa10">' + money(c.value) + '</td>' +
+    '<td class="odds">' + (c.date ? humanDate(c.date) : '—') + '</td></tr>';
 });
 mvBody += '</tbody></table>' +
   '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card. Disclaimer: with a market this large, there will be sales we miss or simply don\'t track!</p>';
