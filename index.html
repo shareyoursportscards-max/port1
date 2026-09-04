@@ -420,7 +420,7 @@
 
   /* ---------- YEAR STRIP ---------- */
   .year-strip{
-    display:flex;
+    display:none;
     flex-wrap:wrap;
     gap:4px;
     margin-bottom:30px;
@@ -4321,6 +4321,7 @@ document.addEventListener('click', function(e){
 function selectYear(y){
   currentYear = y;
   renderYearStrip();
+  renderFilterPills();
   renderTop10();
   renderBlog();
   renderSets();
@@ -4330,25 +4331,14 @@ function selectYear(y){
 function renderFilterPills(){
   var el = document.getElementById('filterPills');
   if(!el) return;
-  var cats = [
-    {label:'Refractors', term:'refractor'},
-    {label:'Inserts', term:'__inserts__'}
-  ];
-  el.innerHTML = cats.map(function(c){ return '<button class="fpill cat-pill" data-cat="' + c.term + '">' + c.label + '</button>'; }).join('');
-  el.querySelectorAll('.cat-pill').forEach(function(btn){
+  el.innerHTML = years.map(function(y){
+    return '<button class="fpill yr-pill' + (y === currentYear ? ' active' : '') + '" data-year="' + y + '">' + y + '</button>';
+  }).join('');
+  el.querySelectorAll('.yr-pill').forEach(function(btn){
     btn.addEventListener('click', function(){
-      var was = this.classList.contains('active');
-      el.querySelectorAll('.cat-pill').forEach(function(b){ b.classList.remove('active'); });
-      var input = document.getElementById('searchInput');
-      if(was){
-        this.classList.remove('active');
-        input.value = ''; searchTerm = '';
-      } else {
-        this.classList.add('active');
-        input.value = ''; searchTerm = this.dataset.cat;
-      }
-      renderSets();
-      document.querySelector('.controls').scrollIntoView({behavior:'smooth', block:'center'});
+      selectYear(Number(this.dataset.year));
+      var target = document.getElementById('top10Gallery');
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
 }
