@@ -161,12 +161,18 @@
   .hero-stats{
     position:relative; z-index:3;
     display:flex; flex-wrap:wrap;
-    gap:6px 26px;
+    gap:8px;
     font-family:'Inter Tight', sans-serif;
     font-size:13px;
     color:var(--text-dim);
     letter-spacing:.02em;
   }
+  .hstat{
+    background:rgba(47,230,199,.07); border:1px solid rgba(47,230,199,.18);
+    border-radius:999px; padding:4px 12px;
+    transition:background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  .hstat:hover{background:rgba(47,230,199,.13); border-color:var(--teal-dim); transform:translateY(-1px);}
   .hero-stats b{
     color:var(--text);
     font-weight:600;
@@ -176,6 +182,22 @@
     color:rgba(255,255,255,.2);
     margin:0 2px;
   }
+  .hero-ticker{
+    position:relative; z-index:3;
+    margin-top:12px;
+  }
+  .hero-ticker a{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:12.5px;
+    letter-spacing:.02em;
+    color:var(--gold); text-decoration:none;
+    background:rgba(233,196,100,.1); border:1px solid rgba(233,196,100,.3);
+    border-radius:999px; padding:6px 14px;
+    transition:background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  .hero-ticker a:hover{background:rgba(233,196,100,.18); border-color:var(--gold-dim); transform:translateY(-1px);}
+  .hero-ticker .ht-flame{flex:none;}
+  .hero-ticker .ht-price{color:var(--teal);}
 
   /* My Collection view */
   .mycoll-back{
@@ -540,15 +562,17 @@
 
   .tag{
     display:inline-block; font-size:7.5px; letter-spacing:.06em; text-transform:uppercase;
-    padding:2px 5px; border-radius:4px; margin-left:5px;
-    background:rgba(143,166,189,.08); color:var(--text-dim); font-weight:600; vertical-align:1px;
-    border:1px solid rgba(143,166,189,.18);
+    padding:2.5px 7px; border-radius:999px; margin-left:5px;
+    background:rgba(233,196,100,.12); color:var(--gold); font-weight:600; vertical-align:1px;
+    border:1px solid rgba(233,196,100,.32);
+    transition:background .15s ease, transform .15s ease;
   }
+  .tag:hover{background:rgba(233,196,100,.22); transform:translateY(-1px);}
   .top10-badge{
     display:inline-block; font-size:7.5px; letter-spacing:.06em; text-transform:uppercase;
-    padding:2px 5px; border-radius:3px; margin-left:6px;
-    background:rgba(232,168,56,.1); color:var(--gold-dim); font-weight:600;
-    border:1px solid rgba(232,168,56,.2);
+    padding:2.5px 7px; border-radius:999px; margin-left:6px;
+    background:rgba(47,230,199,.12); color:var(--teal); font-weight:600;
+    border:1px solid rgba(47,230,199,.32);
     flex:none;
   }
   .card-row .card-name{display:flex; align-items:center; min-width:0;}
@@ -1440,6 +1464,10 @@
     .hero{padding:16px 16px 14px; border-radius:12px;}
     .hero-sub{font-size:13px;}
     .hero-stats{gap:4px 16px; font-size:12px;}
+    .hero-ticker a{
+      white-space:normal; flex-wrap:wrap; line-height:1.5; padding:8px 12px;
+      max-width:100%; box-sizing:border-box;
+    }
     .hero-btns{
       position:static;
       transform:none;
@@ -1544,6 +1572,29 @@
   .t10figs::-webkit-scrollbar-track{background:rgba(255,255,255,.05); border-radius:999px;}
   .t10figs::-webkit-scrollbar-thumb{background:var(--teal-dim); border-radius:999px;}
   .t10figs::-webkit-scrollbar-thumb:hover{background:var(--teal);}
+  .t10figs-wrap{position:relative;}
+  .t10figs-wrap::after{
+    content:""; position:absolute; right:0; top:0; bottom:8px; width:64px;
+    background:linear-gradient(90deg, transparent, var(--bg) 78%);
+    pointer-events:none;
+  }
+  .t10swipehint{
+    display:none; position:absolute; right:14px; bottom:40px; z-index:5;
+    align-items:center; gap:5px;
+    font-family:'Chakra Petch',sans-serif; font-weight:600; font-size:11px;
+    letter-spacing:.04em; text-transform:uppercase;
+    color:var(--teal); background:rgba(6,9,15,.88);
+    padding:6px 12px; border-radius:999px; border:1px solid var(--teal-dim);
+    box-shadow:0 8px 20px rgba(0,0,0,.45);
+    pointer-events:none;
+    animation:swipeBounce 1.4s ease-in-out infinite;
+  }
+  .t10swipehint.show{display:flex;}
+  .t10sh-arrow{font-size:14px; line-height:1;}
+  @keyframes swipeBounce{
+    0%,100%{transform:translateX(0);}
+    50%{transform:translateX(5px);}
+  }
   .t10fig{
     margin:0; flex:0 0 auto; scroll-snap-align:start;
     width:262px;
@@ -1618,11 +1669,12 @@
     <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999</p>
     <div class="hero-rule"></div>
     <div class="hero-stats">
-      <span><b id="statPrices">—</b> tracked prices</span>
-      <span><b id="statImages">—</b> images</span>
-      <span><b id="statSets">—</b> sets</span>
-      <span>Updated <b id="statUpdated">July 2026</b></span>
+      <span class="hstat"><b id="statPrices">—</b> tracked prices</span>
+      <span class="hstat"><b id="statImages">—</b> images</span>
+      <span class="hstat"><b id="statSets">—</b> sets</span>
+      <span class="hstat">Updated <b id="statUpdated">July 2026</b></span>
     </div>
+    <div class="hero-ticker" id="heroTicker"></div>
     <div class="hero-btns">
       <button class="dc-btn hero-dc" id="dcBtn"><span class="dc-bag">💰</span> Check Comps</button>
     </div>
@@ -3476,7 +3528,28 @@ function renderTop10Gallery(){
     const im = CARDIMG[key];
     return im ? `<figure class="t10fig" data-figkey="${escAttr(key)}"><div class="t10photo"><img src="/img/cards/${im.file}" alt="${escAttr(im.alt)}" width="${im.w}" height="${im.h}" loading="lazy"></div><figcaption><span class="t10capname">#${i+1} — ${escAttr(c.name)}</span><span class="t10capprice">${c.grade} · $${c.val.toLocaleString('en-US')}</span></figcaption></figure>` : '';
   }).filter(Boolean).join('');
-  area.innerHTML = figs ? `<div class="t10gallery"><div class="t10gallery-head"><svg class="t10gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="9" r="1.3"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg><h2>Card Gallery <span class="tg-year">— ${currentYear}</span></h2><span class="tg-divider">·</span><p class="sub">Scroll or drag through every photo we've got for this year, biggest sale first.</p></div><div class="t10figs" tabindex="0">${figs}</div></div>` : '';
+  area.innerHTML = figs ? `<div class="t10gallery"><div class="t10gallery-head"><svg class="t10gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="9" r="1.3"/><path d="M3 15l5-5 4 4 3-3 6 6"/></svg><h2>Card Gallery <span class="tg-year">— ${currentYear}</span></h2><span class="tg-divider">·</span><p class="sub">Scroll or drag through every photo we've got for this year, biggest sale first.</p></div><div class="t10figs-wrap"><div class="t10figs" tabindex="0">${figs}</div><div class="t10swipehint"><span>swipe</span><span class="t10sh-arrow">›</span></div></div></div>` : '';
+  if(figs) initSwipeHint(area);
+}
+
+function initSwipeHint(area){
+  const wrap = area.querySelector('.t10figs-wrap');
+  const scroller = area.querySelector('.t10figs');
+  const hint = area.querySelector('.t10swipehint');
+  if(!wrap || !scroller || !hint) return;
+  let seen = false;
+  try{ seen = localStorage.getItem('griffey_swipe_seen') === '1'; }catch(e){}
+  if(!seen && window.innerWidth <= 600 && scroller.scrollWidth > scroller.clientWidth + 8){
+    hint.classList.add('show');
+  }
+  const dismiss = () => {
+    hint.classList.remove('show');
+    try{ localStorage.setItem('griffey_swipe_seen', '1'); }catch(e){}
+    scroller.removeEventListener('scroll', dismiss);
+    scroller.removeEventListener('pointerdown', dismiss);
+  };
+  scroller.addEventListener('scroll', dismiss, { passive: true });
+  scroller.addEventListener('pointerdown', dismiss, { passive: true });
 }
 
 function renderMovers(){
@@ -4106,11 +4179,25 @@ document.addEventListener('click', function(e){
 
 (function renderHeroStats(){
   var prices = 0, sets = 0;
+  var slugify = function(s){ return s.toLowerCase().replace(/'/g,'').replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); };
+  var cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 21);
+  var bestRecent = null, bestEver = null;
   Object.keys(DATA).forEach(function(y){
     DATA[y].forEach(function(s){
       sets++;
       s.subsets.forEach(function(c){
-        ['raw','psa8','psa9','psa10'].forEach(function(g){ if(c[g] != null) prices++; });
+        ['raw','psa8','psa9','psa10'].forEach(function(g){
+          if(c[g] != null) prices++;
+          var val = c[g], date = c[g + '_date'];
+          if(val == null) return;
+          if(!bestEver || val > bestEver.val) bestEver = { val: val, year: y, set: s.set, name: c.name, grade: g };
+          if(date){
+            var d = new Date(date);
+            if(!isNaN(d) && d >= cutoff && (!bestRecent || val > bestRecent.val)){
+              bestRecent = { val: val, year: y, set: s.set, name: c.name, grade: g };
+            }
+          }
+        });
       });
     });
   });
@@ -4141,6 +4228,17 @@ document.addEventListener('click', function(e){
   if(newest){
     document.getElementById('statUpdated').textContent =
       newest.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+  }
+  var pick = bestRecent || bestEver;
+  var ticker = document.getElementById('heroTicker');
+  if(pick && ticker){
+    var gradeLabel = pick.grade === 'raw' ? 'Raw' : pick.grade.toUpperCase().replace('PSA','PSA ');
+    var flame = bestRecent ? '🔥' : '👑';
+    var lead = bestRecent ? 'Just sold' : 'All-time record';
+    var shortName = pick.name.replace(/\s*\([^)]*\)\s*$/, '').replace(/\s*#\S+$/, '');
+    ticker.innerHTML = '<a href="/' + pick.year + '/' + slugify(pick.set) + '/"><span class="ht-flame">' + flame + '</span> ' +
+      lead + ': ' + pick.year + ' ' + pick.set.replace(pick.year + ' ', '') + ' ' + shortName +
+      ' <span class="ht-price">' + gradeLabel + ' · $' + pick.val.toLocaleString('en-US') + '</span></a>';
   }
 })();
 
