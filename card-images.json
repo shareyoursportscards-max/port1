@@ -611,12 +611,6 @@
     "h": 735,
     "alt": "1998 Skybox E-X2001 Essential Credentials Future /91 Ken Griffey Jr. card #10 in PSA 9 slab"
   },
-  "1998|1998 Ultra|Platinum Medallion (/100)": {
-    "file": "1998-ultra-platinum-medallion-griffey-psa9.jpg",
-    "w": 311,
-    "h": 431,
-    "alt": "1998 Ultra Platinum Medallion /100 Ken Griffey Jr. card"
-  },
   "1993|1993 Finest|Refractor #110": {
     "file": "1993-finest-refractor-110-griffey-psa10.jpg",
     "w": 427,
@@ -1858,5 +1852,11 @@
     "w": 431,
     "h": 752,
     "alt": "1999 Upper Deck Choice Prime Choice Reserve /100 Ken Griffey Jr. card #142 in PSA 9 slab"
+  },
+  "1998|1998 Ultra|Platinum Medallion #1P (/100)": {
+    "file": "1998-ultra-platinum-medallion-1p-griffey-psa9.jpg",
+    "w": 427,
+    "h": 737,
+    "alt": "1998 Ultra Platinum Medallion /100 Ken Griffey Jr. card #1P in PSA 9 slab"
   }
 }
