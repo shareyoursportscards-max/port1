@@ -314,15 +314,13 @@
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
   .disc-bottom{margin-top:auto; padding-top:7px;}
+  .disc-price-row{display:flex; align-items:baseline; gap:6px;}
   .disc-grade{
-    display:block; font-size:9.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
-    color:var(--text-dim); margin-bottom:2px;
+    font-size:9.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    color:var(--text-dim); flex:none;
   }
-  .disc-price-row{display:flex; align-items:center; justify-content:space-between; gap:6px;}
   .disc-price{color:var(--teal); font-weight:700; font-size:12.5px; font-variant-numeric:tabular-nums; font-family:'Inter Tight',sans-serif;}
-  .disc-pct{font-size:11px; font-weight:700; font-variant-numeric:tabular-nums;}
-  .disc-pct.up{color:#5eeaa0;}
-  .disc-pct.down{color:#ff6b6b;}
+  .disc-date{font-size:10px; color:var(--text-dim); margin-top:2px; font-variant-numeric:tabular-nums;}
 
   @media(max-width:680px){
     .nav-links{display:none;}
@@ -3785,10 +3783,12 @@ function ebayUrl(setName, cardName){
 
 function renderSets(){
   const q = searchTerm.toLowerCase().trim();
+  const insertsOnly = q === '__inserts__';
   const top10 = getTop10Keys();
   let sets = DATA[currentYear].map(s => {
     if(!q) return {set:s.set, subsets:[...s.subsets]};
     const filtered = s.subsets.filter(sub =>
+      insertsOnly ? !/^base\b/i.test(sub.name) :
       sub.name.toLowerCase().includes(q) ||
       s.set.toLowerCase().includes(q) ||
       (sub.tag && sub.tag.toLowerCase().includes(q))
@@ -4330,20 +4330,11 @@ function selectYear(y){
 function renderFilterPills(){
   var el = document.getElementById('filterPills');
   if(!el) return;
-  var cats = ['Refractors','Inserts','Autos'];
-  var recentYears = years.slice(-4);
-  el.innerHTML =
-    '<button class="fpill yr-pill active" data-year="all">All Years</button>' +
-    recentYears.map(function(y){ return '<button class="fpill yr-pill" data-year="' + y + '">' + y + '</button>'; }).join('') +
-    cats.map(function(c){ return '<button class="fpill cat-pill" data-cat="' + c.toLowerCase() + '">' + c + '</button>'; }).join('');
-  el.querySelectorAll('.yr-pill').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      el.querySelectorAll('.yr-pill').forEach(function(b){ b.classList.remove('active'); });
-      this.classList.add('active');
-      var y = this.dataset.year;
-      if(y !== 'all') selectYear(Number(y));
-    });
-  });
+  var cats = [
+    {label:'Refractors', term:'refractor'},
+    {label:'Inserts', term:'__inserts__'}
+  ];
+  el.innerHTML = cats.map(function(c){ return '<button class="fpill cat-pill" data-cat="' + c.term + '">' + c.label + '</button>'; }).join('');
   el.querySelectorAll('.cat-pill').forEach(function(btn){
     btn.addEventListener('click', function(){
       var was = this.classList.contains('active');
@@ -4354,7 +4345,7 @@ function renderFilterPills(){
         input.value = ''; searchTerm = '';
       } else {
         this.classList.add('active');
-        input.value = this.dataset.cat; searchTerm = this.dataset.cat;
+        input.value = ''; searchTerm = this.dataset.cat;
       }
       renderSets();
       document.querySelector('.controls').scrollIntoView({behavior:'smooth', block:'center'});
@@ -4371,32 +4362,33 @@ function renderDiscovery(){
     DATA[y].forEach(function(s){
       s.subsets.forEach(function(sub){
         ['raw','psa8','psa9','psa10'].forEach(function(g){
-          if(sub[g] != null){
-            allPrices.push({year:y, set:s.set, name:sub.name, grade:g, val:sub[g], img:CARDIMG[y+'|'+s.set+'|'+sub.name]});
-          }
-          var prev = sub['prev_'+g], cur = sub[g];
-          if(prev != null && cur != null && prev !== cur){
-            var pct = (cur - prev) / prev * 100;
-            allPrices.push({mover:true, year:y, set:s.set, name:sub.name, grade:g, val:cur, pct:pct, img:CARDIMG[y+'|'+s.set+'|'+sub.name]});
-          }
+          var val = sub[g], date = sub[g + '_date'];
+          if(val == null) return;
+          var img = CARDIMG[y+'|'+s.set+'|'+sub.name];
+          allPrices.push({year:y, set:s.set, name:sub.name, grade:g, val:val, date:date, img:img});
         });
       });
     });
   });
-  var sales = allPrices.filter(function(p){ return !p.mover && p.img; }).sort(function(a,b){ return b.val - a.val; }).slice(0,10);
-  var movers = allPrices.filter(function(p){ return p.mover && p.img && p.val >= 150; }).sort(function(a,b){ return Math.abs(b.pct) - Math.abs(a.pct); }).slice(0,10);
+  var sales = allPrices.filter(function(p){ return p.img; }).sort(function(a,b){ return b.val - a.val; }).slice(0,10);
+  var recent = allPrices.filter(function(p){ return p.img && p.date; }).sort(function(a,b){ return b.date < a.date ? -1 : b.date > a.date ? 1 : 0; }).slice(0,10);
 
   function gradeLabel(g){ return g === 'raw' ? 'Raw' : g.toUpperCase().replace('PSA','PSA '); }
   function cardHref(p){ return '/' + p.year + '/' + (SET_SLUG[p.set] || '') + '/'; }
-  function cardsHtml(list, mover){
+  function fmtDate(d){
+    var parts = d.split('-');
+    var dt = new Date(Number(parts[0]), Number(parts[1])-1, Number(parts[2]));
+    return dt.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+  }
+  function cardsHtml(list, showDate){
     return list.map(function(p){
       var thumb = p.img ? '<img src="/img/cards/' + p.img.file + '" alt="' + p.img.alt.replace(/"/g,'&quot;') + '" loading="lazy">' : '';
-      var pctHtml = mover ? '<span class="disc-pct ' + (p.pct>0?'up':'down') + '">' + (p.pct>0?'▲':'▼') + ' ' + Math.abs(Math.round(p.pct)) + '%</span>' : '';
+      var dateHtml = (showDate && p.date) ? '<div class="disc-date">' + fmtDate(p.date) + '</div>' : '';
       return '<a class="disc-card" href="' + cardHref(p) + '">' +
         '<div class="disc-thumb">' + thumb + '</div>' +
         '<div class="disc-body"><div class="disc-name">' + p.year + ' ' + p.set.replace(p.year+' ','') + ' ' + p.name + '</div>' +
-        '<div class="disc-bottom"><span class="disc-grade">' + gradeLabel(p.grade) + '</span>' +
-        '<div class="disc-price-row"><span class="disc-price">$' + p.val.toLocaleString('en-US') + '</span>' + pctHtml + '</div></div></div></a>';
+        '<div class="disc-bottom"><div class="disc-price-row"><span class="disc-grade">' + gradeLabel(p.grade) + '</span>' +
+        '<span class="disc-price">$' + p.val.toLocaleString('en-US') + '</span></div>' + dateHtml + '</div></div></a>';
     }).join('');
   }
   var html = '<div class="discovery">';
@@ -4404,9 +4396,9 @@ function renderDiscovery(){
     html += '<div class="disc-section"><div class="disc-col-head"><span class="dc-icon">👑</span> Biggest Sales <a class="dc-see" href="/most-valuable/">See all ›</a></div>' +
       '<div class="disc-row">' + cardsHtml(sales, false) + '</div></div>';
   }
-  if(movers.length){
-    html += '<div class="disc-section"><div class="disc-col-head"><span class="dc-icon">📈</span> Biggest Movers <a class="dc-see" href="/biggest-movers/">See all ›</a></div>' +
-      '<div class="disc-row">' + cardsHtml(movers, true) + '</div></div>';
+  if(recent.length){
+    html += '<div class="disc-section"><div class="disc-col-head"><span class="dc-icon">🕐</span> Recent Sales</div>' +
+      '<div class="disc-row">' + cardsHtml(recent, true) + '</div></div>';
   }
   html += '</div>';
   area.innerHTML = html;
