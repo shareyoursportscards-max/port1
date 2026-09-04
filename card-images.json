@@ -606,10 +606,10 @@
     "alt": "1997 E-X 2000 A Cut Above Ken Griffey Jr. die-cut insert card #2"
   },
   "1998|1998 E-X2001|Essential Credentials Future (/91)": {
-    "file": "1998-ex2001-essential-credentials-future-griffey-raw.jpg",
-    "w": 345,
-    "h": 472,
-    "alt": "1998 E-X2001 Essential Credentials Future /91 Ken Griffey Jr. card"
+    "file": "1998-ex2001-essential-credentials-future-griffey-psa9.jpg",
+    "w": 432,
+    "h": 735,
+    "alt": "1998 Skybox E-X2001 Essential Credentials Future /91 Ken Griffey Jr. card #10 in PSA 9 slab"
   },
   "1998|1998 Ultra|Platinum Medallion (/100)": {
     "file": "1998-ultra-platinum-medallion-griffey-psa9.jpg",
@@ -618,10 +618,10 @@
     "alt": "1998 Ultra Platinum Medallion /100 Ken Griffey Jr. card"
   },
   "1993|1993 Finest|Refractor #110": {
-    "file": "1993-finest-refractor-110-griffey-psa9.jpg",
-    "w": 472,
-    "h": 647,
-    "alt": "1993 Finest Refractor Ken Griffey Jr. card #110"
+    "file": "1993-finest-refractor-110-griffey-psa10.jpg",
+    "w": 427,
+    "h": 752,
+    "alt": "1993 Finest Refractor Ken Griffey Jr. card #110 in PSA 10 slab"
   },
   "1999|1999 Skybox Molten Metal|Fusion Sterling (/500)": {
     "file": "1999-molten-metal-fusion-sterling-griffey-psa7.jpg",
@@ -804,10 +804,10 @@
     "alt": "1996 Pinnacle Skylines Ken Griffey Jr. card #1 in PSA 8 slab"
   },
   "1996|1996 Topps Chrome|Refractor #70": {
-    "file": "1996-topps-chrome-refractor-70-griffey-psa9.jpg",
-    "w": 382,
-    "h": 666,
-    "alt": "1996 Topps Chrome Refractor Ken Griffey Jr. card #70 in PSA 9 slab"
+    "file": "1996-topps-chrome-refractor-70-griffey-psa10.jpg",
+    "w": 436,
+    "h": 740,
+    "alt": "1996 Topps Chrome Refractor Ken Griffey Jr. card #70 in PSA 10 slab"
   },
   "1997|1997 Bowman's Best|International Atomic Refractor #BBI2": {
     "file": "1997-bowmans-best-international-atomic-bbi2-griffey-psa10.jpg",
@@ -1816,5 +1816,41 @@
     "w": 367,
     "h": 631,
     "alt": "1996 Ultra Stars Gold Medallion Ken Griffey Jr. #579 card, assumed PSA 10"
+  },
+  "1996|1996 Select Certified|Mirror Gold (/30)": {
+    "file": "1996-select-certified-mirror-gold-47-griffey-psa9.jpg",
+    "w": 430,
+    "h": 742,
+    "alt": "1996 Select Certified Mirror Gold /30 Ken Griffey Jr. card #47 in PSA 9 slab"
+  },
+  "1997|1997 Finest|Gold #342 Refractor": {
+    "file": "1997-finest-gold-342-refractor-griffey-psa10.jpg",
+    "w": 425,
+    "h": 732,
+    "alt": "1997 Finest Refractor Ken Griffey Jr. card #342 in PSA 10 slab"
+  },
+  "1997|1997 E-X 2000|Essential Credentials #40 (/99)": {
+    "file": "1997-skybox-ex2000-essential-credentials-40-griffey-psa10.jpg",
+    "w": 437,
+    "h": 760,
+    "alt": "1997 Skybox E-X 2000 Essential Credentials /99 Ken Griffey Jr. card #40 in PSA 10 slab"
+  },
+  "1998|1998 Metal Universe|Precious Metal Gems (/50)": {
+    "file": "1998-metal-universe-precious-metal-gems-griffey-psa8.jpg",
+    "w": 437,
+    "h": 751,
+    "alt": "1998 Metal Universe Precious Metal Gems /50 Ken Griffey Jr. card #161 in PSA 8 slab"
+  },
+  "1998|1998 E-X2001|Essential Credentials Now (/10)": {
+    "file": "1998-ex2001-essential-credentials-now-griffey-psa8.jpg",
+    "w": 430,
+    "h": 742,
+    "alt": "1998 Skybox E-X2001 Essential Credentials Now /10 Ken Griffey Jr. card #10 in PSA 8 slab"
+  },
+  "1999|1999 Fleer Brilliants|24kt Gold #24TG (1/24)": {
+    "file": "1999-fleer-brilliants-24kt-gold-griffey-psa8.jpg",
+    "w": 427,
+    "h": 746,
+    "alt": "1999 Fleer Brilliants 24kt Gold 1/24 Ken Griffey Jr. card #24TG in PSA 8 slab"
   }
 }

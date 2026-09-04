@@ -1719,7 +1719,7 @@
      { name: "Card detail", raw, psa8, psa9, psa10, tag? }
    ]}, ... ]   prices in USD, null = N/A
 =========================================================== */
-const IMAGE_COUNT = 303; /* auto-updated by build.js from card-images.json — do not hand-edit */
+const IMAGE_COUNT = 309; /* auto-updated by build.js from card-images.json — do not hand-edit */
 const DATA = {
   1990: [
     {set:"1990 Bowman", subsets:[
@@ -1891,7 +1891,7 @@ const DATA = {
     ]},
     {set:"1993 Finest", subsets:[
       {name:"Base #110", raw:174, psa8:225, psa9:420, psa10:1827, tag:"key", prev_raw:114, prev_psa9:342, prev_psa10:1925, prev_psa8:108, raw_date:"2026-08-27", raw_type:"fixed", psa8_date:"2026-08-19", psa9_date:"2026-08-27", psa9_type:"fixed", psa10_date:"2026-08-19"},
-      {name:"Refractor #110", raw:null, psa8:null, psa9:13600, psa10:null, odds:"1:15"}
+      {name:"Refractor #110", raw:null, psa8:null, psa9:13600, psa10:42000, odds:"1:15", psa10_date:"2026-08-28", psa10_type:"auction"}
     ]},
     {set:"1993 Flair", subsets:[
       {name:"Base #270", raw:14, psa8:15, psa9:40, psa10:220, prev_psa10:250, psa8_date:"2026-08-09", psa10_date:"2026-08-09"}
@@ -2289,7 +2289,7 @@ const DATA = {
       {name:"Blue #47", raw:null, psa8:null, psa9:1299, psa10:null, prev_psa9:1193, psa9_date:"2026-08-18"},
       {name:"Mirror Red (/90)", raw:null, psa8:1780, psa9:null, psa10:4290, odds:"1:100"},
       {name:"Mirror Blue (/45)", raw:4496, psa8:null, psa9:8000, psa10:null, odds:"1:200"},
-      {name:"Mirror Gold (/30)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:300"}
+      {name:"Mirror Gold (/30)", raw:null, psa8:null, psa9:46800, psa10:null, odds:"1:300", psa9_date:"2026-03-19", psa9_type:"auction"}
     ]},
     {set:"1996 SP", subsets:[
       {name:"Base #155", raw:null, psa8:null, psa9:null, psa10:null},
@@ -2325,7 +2325,7 @@ const DATA = {
     ]},
     {set:"1996 Topps Chrome", subsets:[
       {name:"Base #70", raw:26, psa8:17, psa9:163, psa10:790, prev_psa9:125, psa9_date:"2026-08-24", psa9_type:"fixed"},
-      {name:"Refractor #70", raw:2550, psa8:null, psa9:4300, psa10:null, odds:"1:12", prev_psa9:3905, raw_date:"2026-08-14"},
+      {name:"Refractor #70", raw:2550, psa8:null, psa9:4300, psa10:30000, odds:"1:12", prev_psa9:3905, raw_date:"2026-08-14", psa10_date:"2026-08-16", psa10_type:"auction"},
       {name:"Star Power #90", raw:null, psa8:20, psa9:49, psa10:465},
       {name:"Star Power Refractor #90", raw:718, psa8:800, psa9:2356, psa10:null, prev_raw:800, prev_psa9:2000, psa9_date:"2026-08-10"},
       {name:"Wrecking Crew Refractor #WC9", raw:300, psa8:561, psa9:900, psa10:null, prev_psa8:475, prev_psa9:119, psa8_date:"2026-08-22", psa8_type:"auction", psa9_date:"2026-08-11"}
@@ -2448,6 +2448,7 @@ const DATA = {
     {set:"1997 E-X 2000", subsets:[
       {name:"Base #40", raw:114, psa8:180, psa9:625, psa10:2524, prev_raw:170, prev_psa8:190, prev_psa9:580, raw_date:"2026-09-01", raw_type:"fixed", psa9_date:"2026-08-24", psa9_type:"fixed", psa8_date:"2026-08-20"},
       {name:"Credentials #40 (/299)", raw:1200, psa8:3000, psa9:2966, psa10:null, prev_raw:1050},
+      {name:"Essential Credentials #40 (/99)", raw:null, psa8:null, psa9:null, psa10:132000, psa10_date:"2026-08-28", psa10_type:"auction"},
       {name:"A Cut Above #2", raw:2800, psa8:4600, psa9:null, psa10:19999, odds:"1:288", prev_raw:1800, prev_psa8:3252, raw_date:"2026-08-24", raw_type:"fixed"},
       {name:"Hall or Nothing #2", raw:205, psa8:270, psa9:605, psa10:null, odds:"1:20", prev_raw:225, prev_psa9:375, prev_psa8:325, raw_date:"2026-08-31", psa8_date:"2026-08-20"},
       {name:"Hall or Nothing Gold #2", raw:325, psa8:null, psa9:null, psa10:null, prev_raw:225, raw_date:"2026-07-31"}
@@ -2458,7 +2459,7 @@ const DATA = {
       {name:"Masters #238", raw:null, psa8:null, psa9:30, psa10:259, prev_psa10:225, psa9_date:"2026-08-09", psa10_date:"2026-08-16"},
       {name:"Masters Refractor #238", raw:300, psa8:300, psa9:700, psa10:null, prev_raw:290, prev_psa9:750, psa9_date:"2026-08-08"},
       {name:"Gold Embossed #342", raw:135, psa8:152, psa9:517, psa10:458, prev_raw:100, prev_psa8:130, raw_date:"2026-08-12", psa8_date:"2026-08-31", psa8_type:"auction"},
-      {name:"Gold #342 Refractor", raw:null, psa8:1050, psa9:1800, psa10:null},
+      {name:"Gold #342 Refractor", raw:null, psa8:1050, psa9:1800, psa10:18000, psa10_date:"2026-08-28", psa10_type:"auction"},
       {name:"Warriors Refractor #139", raw:null, psa8:null, psa9:null, psa10:3396}
     ]},
     {set:"1997 Flair Showcase", subsets:[
@@ -2649,7 +2650,8 @@ const DATA = {
     ]},
     {set:"1998 E-X2001", subsets:[
       {name:"Base #10", raw:70, psa8:150, psa9:338, psa10:null, prev_raw:100, prev_psa8:120, psa8_date:"2026-08-18", raw_date:"2026-09-01", raw_type:"fixed"},
-      {name:"Essential Credentials Future (/91)", raw:16000, psa8:null, psa9:null, psa10:null},
+      {name:"Essential Credentials Future (/91)", raw:16000, psa8:null, psa9:69000, psa10:null, psa9_date:"2026-08-28", psa9_type:"auction"},
+      {name:"Essential Credentials Now (/10)", raw:null, psa8:240000, psa9:null, psa10:null, psa8_date:"2026-07-24", psa8_type:"auction"},
       {name:"Destination Cooperstown", raw:1225, psa8:null, psa9:null, psa10:null, odds:"1:720"}
     ]},
     {set:"1998 Flair Showcase", subsets:[
@@ -2685,7 +2687,7 @@ const DATA = {
     ]},
     {set:"1998 Metal Universe", subsets:[
       {name:"Base #161", raw:82, psa8:127, psa9:450, psa10:1880, prev_raw:50, prev_psa9:212, prev_psa8:125, raw_date:"2026-08-31", psa8_date:"2026-08-30", psa8_type:"fixed"},
-      {name:"Precious Metal Gems (/50)", raw:null, psa8:null, psa9:null, psa10:null, odds:"1:3,237"},
+      {name:"Precious Metal Gems (/50)", raw:null, psa8:93000, psa9:null, psa10:null, odds:"1:3,237", psa8_date:"2026-02-19", psa8_type:"auction"},
       {name:"Universal Language", raw:56, psa8:null, psa9:150, psa10:600, odds:"1:6", prev_raw:285, prev_psa10:347, prev_psa9:127, raw_date:"2026-08-23", raw_type:"fixed", psa9_date:"2026-08-06", psa10_date:"2026-09-01", psa10_type:"fixed"},
       {name:"Diamond Heroes #1DH", raw:186, psa8:272, psa9:550, psa10:null, odds:"1:18", prev_raw:134, prev_psa8:215, prev_psa9:465, raw_date:"2026-09-02", psa8_date:"2026-08-20", psa9_date:"2026-07-31"},
       {name:"Platinum Portraits", raw:150, psa8:null, psa9:877, psa10:null, odds:"1:360", prev_raw:279, raw_date:"2026-08-02"},
@@ -2847,7 +2849,8 @@ const DATA = {
     {set:"1999 Fleer Brilliants", subsets:[
       {name:"Base #24", raw:null, psa8:31, psa9:null, psa10:null},
       {name:"Blue #24B", raw:null, psa8:38, psa9:108, psa10:800, odds:"1:3", prev_psa9:66},
-      {name:"Shining Stars #1", raw:80, psa8:null, psa9:65, psa10:755, odds:"1:20", prev_raw:51, raw_date:"2026-09-01", raw_type:"fixed", psa10_date:"2026-08-13"}
+      {name:"Shining Stars #1", raw:80, psa8:null, psa9:65, psa10:755, odds:"1:20", prev_raw:51, raw_date:"2026-09-01", raw_type:"fixed", psa10_date:"2026-08-13"},
+      {name:"24kt Gold #24TG (1/24)", raw:null, psa8:84000, psa9:null, psa10:null, psa8_date:"2026-03-19", psa8_type:"auction"}
     ]},
     {set:"1999 Fleer Mystique", subsets:[
       {name:"Base #151 (/2,500)", raw:55, psa8:36, psa9:70, psa10:null, prev_raw:49, raw_date:"2026-08-12"}
