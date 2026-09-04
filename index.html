@@ -182,6 +182,162 @@
     color:rgba(255,255,255,.2);
     margin:0 2px;
   }
+
+  /* ---------- NAV BAR ---------- */
+  .navbar{
+    position:sticky; top:0; z-index:30;
+    display:flex; align-items:center; gap:22px;
+    height:56px; margin:0 0 18px;
+    padding:0 18px;
+    background:rgba(6,9,15,.92);
+    border:1px solid var(--glass-border); border-radius:14px;
+    -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+  }
+  .nav-brand{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Chakra Petch', sans-serif; font-weight:700; font-size:14px;
+    letter-spacing:.03em; text-transform:uppercase; color:var(--text);
+    text-decoration:none; flex:none; white-space:nowrap;
+  }
+  .nav-brand .nb-mark{
+    width:22px; height:22px; border-radius:6px; flex:none;
+    background:linear-gradient(135deg, var(--teal), var(--teal-dim));
+    color:#04231d; font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:12px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .nav-links{display:flex; align-items:center; gap:2px; flex:none;}
+  .nav-links a{
+    position:relative;
+    font-family:'Inter Tight', sans-serif; font-size:13px; font-weight:500;
+    color:var(--text-dim); text-decoration:none;
+    padding:8px 12px; border-radius:8px; white-space:nowrap;
+    transition:color .15s ease, background .15s ease;
+  }
+  .nav-links a:hover{color:var(--text); background:rgba(255,255,255,.06);}
+  .nav-right{display:flex; align-items:center; gap:10px; flex:none; margin-left:auto;}
+  .nav-cta{
+    display:flex; align-items:center; gap:6px;
+    background:var(--teal); color:#04231d; text-decoration:none;
+    font-family:'Inter Tight',sans-serif; font-weight:700; font-size:12.5px; letter-spacing:.01em;
+    padding:8px 16px; border-radius:9px;
+    transition:filter .15s ease, transform .15s ease;
+  }
+  .nav-cta:hover{filter:brightness(1.08); transform:translateY(-1px);}
+  .nav-cta.active{background:var(--gold); }
+
+  /* ---------- SEARCH STRIP ---------- */
+  .search-strip{max-width:640px; margin:0 auto 26px; padding:6px 4px 0;}
+  .tbadges-inline{
+    display:flex; align-items:center; justify-content:center; gap:7px; flex-wrap:wrap;
+    margin:0 0 14px;
+  }
+  .tbadge{
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(47,230,199,.13); border:1.5px solid rgba(47,230,199,.42);
+    border-radius:999px; padding:4px 12px;
+    font-family:'Inter Tight',sans-serif; font-size:11.5px; font-weight:700; color:var(--teal);
+    font-variant-numeric:tabular-nums;
+  }
+  .tbadge.gold{background:rgba(233,196,100,.14); border-color:rgba(233,196,100,.48); color:var(--gold);}
+  .dc-search-box{
+    display:flex; align-items:center; gap:10px;
+    background:var(--surface,#0f1622); border:1.5px solid var(--glass-border); border-radius:13px;
+    padding:13px 16px;
+    transition:border-color .15s ease;
+  }
+  .dc-search-box:focus-within{border-color:var(--teal-dim);}
+  .dc-search-box svg{flex:none; color:var(--text-dim);}
+  .search-strip .dc-input{
+    flex:1; min-width:0; width:auto;
+    background:none !important; border:none !important; padding:0 !important;
+    box-shadow:none !important;
+    color:var(--text) !important; font-family:'Inter Tight',sans-serif; font-size:14.5px;
+  }
+  .search-strip .dc-input::placeholder{color:var(--text-dim);}
+  .search-strip .dc-results{margin-top:8px;}
+  .search-strip .dc-result{
+    background:var(--surface,#0f1622); border:1px solid var(--glass-border); border-radius:10px;
+    margin-bottom:6px; padding:10px 14px;
+  }
+  .search-strip .dc-result:hover{border-color:var(--teal-dim); background:rgba(47,230,199,.06);}
+  .filter-pills{
+    display:flex; align-items:center; gap:7px; flex-wrap:wrap; justify-content:center;
+    margin:14px 0 0;
+  }
+  .fpill{
+    font-family:'Inter Tight',sans-serif; font-weight:600; font-size:12px;
+    background:var(--surface,#0f1622); border:1.5px solid var(--glass-border); color:var(--text-dim);
+    border-radius:999px; padding:6px 13px; cursor:pointer;
+    transition:background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .fpill:hover{border-color:var(--teal-dim); color:var(--text);}
+  .fpill.active{background:var(--teal); border-color:var(--teal); color:#04231d;}
+
+  /* ---------- DISCOVERY CAROUSELS ---------- */
+  .discovery{margin:0 0 28px;}
+  .disc-section{margin-bottom:22px;}
+  .disc-col-head{
+    display:flex; align-items:center; gap:8px; margin:0 0 12px;
+    font-family:'Chakra Petch',sans-serif; font-weight:600; font-size:15px;
+    letter-spacing:.02em; color:var(--text);
+  }
+  .disc-col-head .dc-icon{font-size:16px;}
+  .disc-col-head .dc-see{
+    margin-left:auto; font-family:'Inter Tight',sans-serif; font-weight:500; font-size:11.5px;
+    color:var(--text-dim); text-decoration:none;
+  }
+  .disc-col-head .dc-see:hover{color:var(--teal);}
+  .disc-row{
+    display:flex; gap:14px; overflow-x:auto; padding:2px 2px 10px;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin; scrollbar-color:var(--teal-dim) rgba(255,255,255,.06);
+  }
+  .disc-card{
+    display:flex; flex-direction:column; flex:0 0 auto; scroll-snap-align:start;
+    width:150px; height:246px; text-decoration:none;
+    background:var(--surface,#0f1622); border:1px solid rgba(255,255,255,.14); border-radius:14px;
+    overflow:hidden;
+    transition:border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .disc-card:hover{border-color:var(--teal-dim); transform:translateY(-4px); box-shadow:0 14px 30px rgba(0,0,0,.4);}
+  .disc-thumb{
+    width:100%; height:142px; flex:none; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--surface-2,#131c2a);
+    border-bottom:1px solid rgba(255,255,255,.14);
+  }
+  .disc-thumb img{max-width:100%; max-height:100%; display:block;}
+  .disc-body{display:flex; flex-direction:column; flex:1; min-height:0; padding:10px 11px 11px;}
+  .disc-name{
+    font-family:'Inter Tight',sans-serif;
+    font-size:12px; font-weight:700; color:var(--text); line-height:1.3;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .disc-bottom{margin-top:auto; padding-top:7px;}
+  .disc-grade{
+    display:block; font-size:9.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    color:var(--text-dim); margin-bottom:2px;
+  }
+  .disc-price-row{display:flex; align-items:center; justify-content:space-between; gap:6px;}
+  .disc-price{color:var(--teal); font-weight:700; font-size:12.5px; font-variant-numeric:tabular-nums; font-family:'Inter Tight',sans-serif;}
+  .disc-pct{font-size:11px; font-weight:700; font-variant-numeric:tabular-nums;}
+  .disc-pct.up{color:#5eeaa0;}
+  .disc-pct.down{color:#ff6b6b;}
+
+  @media(max-width:680px){
+    .nav-links{display:none;}
+    .navbar{gap:8px; padding:0 12px;}
+    .nav-brand{font-size:11.5px; gap:6px; flex:1; min-width:0;}
+    .nav-brand .nb-mark{width:19px; height:19px; font-size:11px;}
+    .nav-brand .nb-text{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+    .nav-right{flex:none;}
+    .nav-cta{padding:7px 12px; font-size:11px; white-space:nowrap;}
+  }
+  @media(max-width:400px){
+    .nav-brand .nb-text{font-size:0;}
+    .nav-brand .nb-text::after{content:"Griffey Prices"; font-size:11px;}
+  }
+
   /* My Collection view */
   .mycoll-back{
     display:block; background:none; border:none; cursor:pointer;
@@ -1643,37 +1799,33 @@
 <div class="share-toast" id="shareToast">Link copied</div>
 <div class="wrap">
 
-  <div class="hero">
-    <h1>Ken Griffey Jr.</h1>
-    <p class="hero-sub">Card Price Guide <span class="hero-divider">·</span> 1990–1999</p>
-    <div class="hero-rule"></div>
-    <div class="hero-stats">
-      <span class="hstat"><b id="statPrices">—</b> tracked prices</span>
-      <span class="hstat"><b id="statImages">—</b> images</span>
-      <span class="hstat"><b id="statSets">—</b> sets</span>
-      <span class="hstat">Updated <b id="statUpdated">July 2026</b></span>
+  <nav class="navbar" id="navbar">
+    <a class="nav-brand" href="/"><span class="nb-mark">24</span> <span class="nb-text">Griffey Card Prices</span></a>
+    <div class="nav-links">
+      <a href="/most-valuable/">Top 25</a>
+      <a href="/biggest-movers/">Movers</a>
+      <a href="/how-much-are-griffey-cards-worth/">Values</a>
+      <a href="/blog/">Reports</a>
     </div>
-    <div class="hero-btns">
-      <button class="dc-btn hero-dc" id="dcBtn"><span class="dc-bag">💰</span> Check Comps</button>
+    <div class="nav-right">
+      <a class="nav-cta" href="#" id="navColl">My Collection</a>
     </div>
-  </div>
+  </nav>
 
-  <div class="dc-panel" id="dealPanel">
-    <div class="dc-title">Check Comps — is that eBay price fair?</div>
-    <input type="text" class="dc-input" id="dcSearch" placeholder="Find the card... e.g. hot gloves" autocomplete="off">
+  <section class="search-strip" id="searchStrip">
+    <div class="tbadges-inline" id="heroBadges"></div>
+    <div class="dc-search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="dc-input" id="dcSearch" placeholder="Search 1,600+ prices by card, set, or number..." autocomplete="off">
+    </div>
     <div class="dc-results" id="dcResults"></div>
     <div id="dcPick"></div>
-  </div>
+    <div class="filter-pills" id="filterPills"></div>
+  </section>
+
+  <div id="discoveryArea"></div>
 
   <div class="year-strip" id="yearStrip"></div>
-
-  <nav class="site-nav" id="siteNav">
-    <a class="site-nav-btn" href="/most-valuable/"><span class="nv-full">Top 25 Sales</span><span class="nv-short">Top 25</span></a>
-    <a class="site-nav-btn" href="/biggest-movers/"><span class="nv-full">Biggest Movers</span><span class="nv-short">Movers</span></a>
-    <a class="site-nav-btn" href="/how-much-are-griffey-cards-worth/"><span class="nv-full">Card Values</span><span class="nv-short">Values</span></a>
-    <a class="site-nav-btn" href="/blog/"><span class="nv-full">Market Reports</span><span class="nv-short">Reports</span></a>
-    <a class="site-nav-btn site-nav-coll" href="#" id="navColl"><span class="nv-full">My Collection</span><span class="nv-short">My Cards</span></a>
-  </nav>
 
   <div class="mycoll-view" id="myCollView"></div>
 
@@ -3405,7 +3557,7 @@ function toggleMyCollView(){
   document.getElementById('navColl').classList.toggle('active', myCollOpen);
   document.getElementById('myCollView').classList.toggle('active', myCollOpen);
   document.getElementById('yearStrip').style.display = myCollOpen ? 'none' : '';
-  ['top10Area','colHeader','collHint','setList','blogArea','top10Gallery','dealPanel'].forEach(id=>{
+  ['top10Area','colHeader','collHint','setList','blogArea','top10Gallery','searchStrip','discoveryArea'].forEach(id=>{
     var el = document.getElementById(id); if(el) el.style.display = myCollOpen ? 'none' : '';
   });
   var ctrl = document.querySelector('.controls'); if(ctrl) ctrl.style.display = myCollOpen ? 'none' : '';
@@ -3714,13 +3866,6 @@ function dcBuildIndex(){
   });
   return dcIndex;
 }
-document.getElementById('dcBtn').addEventListener('click', function(){
-  var p = document.getElementById('dealPanel');
-  var open = !p.classList.contains('open');
-  p.classList.toggle('open', open);
-  this.classList.toggle('active', open);
-  if(open) document.getElementById('dcSearch').focus();
-});
 document.getElementById('dcSearch').addEventListener('input', function(){
   var q = this.value.toLowerCase().trim();
   var box = document.getElementById('dcResults');
@@ -4075,7 +4220,7 @@ renderBlog();
 renderSets();
 updateCollectionBar();
 
-fetch('/card-images.json').then(r=>r.json()).then(m=>{ CARDIMG = m; renderTop10Gallery(); renderSets(); }).catch(()=>{});
+fetch('/card-images.json').then(r=>r.json()).then(m=>{ CARDIMG = m; renderTop10Gallery(); renderSets(); renderDiscovery(); }).catch(()=>{});
 
 document.addEventListener('click', function(e){
   var nm = e.target.closest ? e.target.closest('.card-name.has-photo') : null;
@@ -4155,45 +4300,117 @@ document.addEventListener('click', function(e){
   }, true);
 })();
 
-(function renderHeroStats(){
-  var prices = 0, sets = 0;
+(function renderHeroBadges(){
+  var prices = 0;
   Object.keys(DATA).forEach(function(y){
     DATA[y].forEach(function(s){
-      sets++;
       s.subsets.forEach(function(c){
         ['raw','psa8','psa9','psa10'].forEach(function(g){ if(c[g] != null) prices++; });
       });
     });
   });
-  var newest = null;
-  Object.keys(BLOG).forEach(function(y){
-    (BLOG[y]||[]).forEach(function(e){
-      var d = new Date(e.date);
-      if(!isNaN(d) && (!newest || d > newest)) newest = d;
-    });
-  });
-  function countUp(el, target){
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      el.textContent = target.toLocaleString('en-US');
-      return;
-    }
-    var dur = 1100, t0 = performance.now();
-    function tick(t){
-      var p = Math.min((t - t0) / dur, 1);
-      var e = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * e).toLocaleString('en-US');
-      if(p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-  countUp(document.getElementById('statPrices'), prices);
-  countUp(document.getElementById('statImages'), IMAGE_COUNT);
-  countUp(document.getElementById('statSets'), sets);
-  if(newest){
-    document.getElementById('statUpdated').textContent =
-      newest.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+  var el = document.getElementById('heroBadges');
+  if(el){
+    el.innerHTML =
+      '<span class="tbadge">' + prices.toLocaleString('en-US') + '+ tracked prices</span>' +
+      '<span class="tbadge">' + IMAGE_COUNT.toLocaleString('en-US') + '+ photographed cards</span>' +
+      '<span class="tbadge gold">Real eBay &amp; Fanatics Collect sales</span>';
   }
 })();
+
+function selectYear(y){
+  currentYear = y;
+  renderYearStrip();
+  renderTop10();
+  renderBlog();
+  renderSets();
+  renderTop10Gallery();
+}
+
+function renderFilterPills(){
+  var el = document.getElementById('filterPills');
+  if(!el) return;
+  var cats = ['Refractors','Inserts','Autos'];
+  var recentYears = years.slice(-4);
+  el.innerHTML =
+    '<button class="fpill yr-pill active" data-year="all">All Years</button>' +
+    recentYears.map(function(y){ return '<button class="fpill yr-pill" data-year="' + y + '">' + y + '</button>'; }).join('') +
+    cats.map(function(c){ return '<button class="fpill cat-pill" data-cat="' + c.toLowerCase() + '">' + c + '</button>'; }).join('');
+  el.querySelectorAll('.yr-pill').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      el.querySelectorAll('.yr-pill').forEach(function(b){ b.classList.remove('active'); });
+      this.classList.add('active');
+      var y = this.dataset.year;
+      if(y !== 'all') selectYear(Number(y));
+    });
+  });
+  el.querySelectorAll('.cat-pill').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var was = this.classList.contains('active');
+      el.querySelectorAll('.cat-pill').forEach(function(b){ b.classList.remove('active'); });
+      var input = document.getElementById('searchInput');
+      if(was){
+        this.classList.remove('active');
+        input.value = ''; searchTerm = '';
+      } else {
+        this.classList.add('active');
+        input.value = this.dataset.cat; searchTerm = this.dataset.cat;
+      }
+      renderSets();
+      document.querySelector('.controls').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+}
+renderFilterPills();
+
+function renderDiscovery(){
+  var area = document.getElementById('discoveryArea');
+  if(!area) return;
+  var allPrices = [];
+  years.forEach(function(y){
+    DATA[y].forEach(function(s){
+      s.subsets.forEach(function(sub){
+        ['raw','psa8','psa9','psa10'].forEach(function(g){
+          if(sub[g] != null){
+            allPrices.push({year:y, set:s.set, name:sub.name, grade:g, val:sub[g], img:CARDIMG[y+'|'+s.set+'|'+sub.name]});
+          }
+          var prev = sub['prev_'+g], cur = sub[g];
+          if(prev != null && cur != null && prev !== cur){
+            var pct = (cur - prev) / prev * 100;
+            allPrices.push({mover:true, year:y, set:s.set, name:sub.name, grade:g, val:cur, pct:pct, img:CARDIMG[y+'|'+s.set+'|'+sub.name]});
+          }
+        });
+      });
+    });
+  });
+  var sales = allPrices.filter(function(p){ return !p.mover && p.img; }).sort(function(a,b){ return b.val - a.val; }).slice(0,10);
+  var movers = allPrices.filter(function(p){ return p.mover && p.img && p.val >= 150; }).sort(function(a,b){ return Math.abs(b.pct) - Math.abs(a.pct); }).slice(0,10);
+
+  function gradeLabel(g){ return g === 'raw' ? 'Raw' : g.toUpperCase().replace('PSA','PSA '); }
+  function cardHref(p){ return '/' + p.year + '/' + (SET_SLUG[p.set] || '') + '/'; }
+  function cardsHtml(list, mover){
+    return list.map(function(p){
+      var thumb = p.img ? '<img src="/img/cards/' + p.img.file + '" alt="' + p.img.alt.replace(/"/g,'&quot;') + '" loading="lazy">' : '';
+      var pctHtml = mover ? '<span class="disc-pct ' + (p.pct>0?'up':'down') + '">' + (p.pct>0?'▲':'▼') + ' ' + Math.abs(Math.round(p.pct)) + '%</span>' : '';
+      return '<a class="disc-card" href="' + cardHref(p) + '">' +
+        '<div class="disc-thumb">' + thumb + '</div>' +
+        '<div class="disc-body"><div class="disc-name">' + p.year + ' ' + p.set.replace(p.year+' ','') + ' ' + p.name + '</div>' +
+        '<div class="disc-bottom"><span class="disc-grade">' + gradeLabel(p.grade) + '</span>' +
+        '<div class="disc-price-row"><span class="disc-price">$' + p.val.toLocaleString('en-US') + '</span>' + pctHtml + '</div></div></div></a>';
+    }).join('');
+  }
+  var html = '<div class="discovery">';
+  if(sales.length){
+    html += '<div class="disc-section"><div class="disc-col-head"><span class="dc-icon">👑</span> Biggest Sales <a class="dc-see" href="/most-valuable/">See all ›</a></div>' +
+      '<div class="disc-row">' + cardsHtml(sales, false) + '</div></div>';
+  }
+  if(movers.length){
+    html += '<div class="disc-section"><div class="disc-col-head"><span class="dc-icon">📈</span> Biggest Movers <a class="dc-see" href="/biggest-movers/">See all ›</a></div>' +
+      '<div class="disc-row">' + cardsHtml(movers, true) + '</div></div>';
+  }
+  html += '</div>';
+  area.innerHTML = html;
+}
 
 document.getElementById('setList').addEventListener('scroll', function(){
   document.getElementById('colHeader').scrollLeft = this.scrollLeft;
