@@ -182,23 +182,6 @@
     color:rgba(255,255,255,.2);
     margin:0 2px;
   }
-  .hero-ticker{
-    position:relative; z-index:3;
-    margin-top:12px;
-  }
-  .hero-ticker a{
-    display:inline-flex; align-items:center; gap:7px;
-    font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:12.5px;
-    letter-spacing:.02em;
-    color:var(--gold); text-decoration:none;
-    background:rgba(233,196,100,.1); border:1px solid rgba(233,196,100,.3);
-    border-radius:999px; padding:6px 14px;
-    transition:background .15s ease, border-color .15s ease, transform .15s ease;
-  }
-  .hero-ticker a:hover{background:rgba(233,196,100,.18); border-color:var(--gold-dim); transform:translateY(-1px);}
-  .hero-ticker .ht-flame{flex:none;}
-  .hero-ticker .ht-price{color:var(--teal);}
-
   /* My Collection view */
   .mycoll-back{
     display:block; background:none; border:none; cursor:pointer;
@@ -1464,10 +1447,6 @@
     .hero{padding:16px 16px 14px; border-radius:12px;}
     .hero-sub{font-size:13px;}
     .hero-stats{gap:4px 16px; font-size:12px;}
-    .hero-ticker a{
-      white-space:normal; flex-wrap:wrap; line-height:1.5; padding:8px 12px;
-      max-width:100%; box-sizing:border-box;
-    }
     .hero-btns{
       position:static;
       transform:none;
@@ -1597,15 +1576,15 @@
   }
   .t10fig{
     margin:0; flex:0 0 auto; scroll-snap-align:start;
-    width:262px;
-    background:var(--surface); border:1px solid var(--border); border-radius:16px;
-    padding:16px 16px 14px;
+    width:200px;
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:12px 12px 10px;
     display:flex; flex-direction:column; align-items:center;
     transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
   }
   .t10fig:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 16px 36px rgba(0,0,0,.5), 0 0 26px rgba(47,230,199,.12);}
   .t10photo{position:relative; width:100%; display:flex; justify-content:center;}
-  .t10fig img{display:block;width:auto;max-width:100%;height:auto;max-height:420px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.55);background:#fff;cursor:zoom-in;}
+  .t10fig img{display:block;width:auto;max-width:100%;height:auto;max-height:320px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.55);background:#fff;cursor:zoom-in;}
   .t10fig figcaption{
     display:block; width:100%; box-sizing:border-box;
     margin-top:9px; padding:6px 10px 7px;
@@ -1627,8 +1606,8 @@
     font-size:11.5px; letter-spacing:.02em;
   }
   @media(max-width:600px){
-    .t10fig{width:192px; padding:13px 13px 11px;}
-    .t10fig img{max-height:300px;}
+    .t10fig{width:142px; padding:9px 9px 8px;}
+    .t10fig img{max-height:210px;}
     .t10capname{font-size:10px; height:13px;}
     .t10capprice{font-size:10.5px;}
     .t10gallery-head{gap:8px;}
@@ -1674,7 +1653,6 @@
       <span class="hstat"><b id="statSets">—</b> sets</span>
       <span class="hstat">Updated <b id="statUpdated">July 2026</b></span>
     </div>
-    <div class="hero-ticker" id="heroTicker"></div>
     <div class="hero-btns">
       <button class="dc-btn hero-dc" id="dcBtn"><span class="dc-bag">💰</span> Check Comps</button>
     </div>
@@ -4179,25 +4157,11 @@ document.addEventListener('click', function(e){
 
 (function renderHeroStats(){
   var prices = 0, sets = 0;
-  var slugify = function(s){ return s.toLowerCase().replace(/'/g,'').replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); };
-  var cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 21);
-  var bestRecent = null, bestEver = null;
   Object.keys(DATA).forEach(function(y){
     DATA[y].forEach(function(s){
       sets++;
       s.subsets.forEach(function(c){
-        ['raw','psa8','psa9','psa10'].forEach(function(g){
-          if(c[g] != null) prices++;
-          var val = c[g], date = c[g + '_date'];
-          if(val == null) return;
-          if(!bestEver || val > bestEver.val) bestEver = { val: val, year: y, set: s.set, name: c.name, grade: g };
-          if(date){
-            var d = new Date(date);
-            if(!isNaN(d) && d >= cutoff && (!bestRecent || val > bestRecent.val)){
-              bestRecent = { val: val, year: y, set: s.set, name: c.name, grade: g };
-            }
-          }
-        });
+        ['raw','psa8','psa9','psa10'].forEach(function(g){ if(c[g] != null) prices++; });
       });
     });
   });
@@ -4228,17 +4192,6 @@ document.addEventListener('click', function(e){
   if(newest){
     document.getElementById('statUpdated').textContent =
       newest.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-  }
-  var pick = bestRecent || bestEver;
-  var ticker = document.getElementById('heroTicker');
-  if(pick && ticker){
-    var gradeLabel = pick.grade === 'raw' ? 'Raw' : pick.grade.toUpperCase().replace('PSA','PSA ');
-    var flame = bestRecent ? '🔥' : '👑';
-    var lead = bestRecent ? 'Just sold' : 'All-time record';
-    var shortName = pick.name.replace(/\s*\([^)]*\)\s*$/, '').replace(/\s*#\S+$/, '');
-    ticker.innerHTML = '<a href="/' + pick.year + '/' + slugify(pick.set) + '/"><span class="ht-flame">' + flame + '</span> ' +
-      lead + ': ' + pick.year + ' ' + pick.set.replace(pick.year + ' ', '') + ' ' + shortName +
-      ' <span class="ht-price">' + gradeLabel + ' · $' + pick.val.toLocaleString('en-US') + '</span></a>';
   }
 })();
 
