@@ -265,12 +265,12 @@
     margin:14px 0 0;
   }
   .fpill{
-    font-family:'Inter Tight',sans-serif; font-weight:600; font-size:12px;
-    background:var(--surface,#14191f); border:1.5px solid var(--glass-border); color:var(--text-dim);
-    border-radius:999px; padding:6px 13px; cursor:pointer;
-    transition:background .15s ease, border-color .15s ease, color .15s ease;
+    font-family:'Inter Tight',sans-serif; font-weight:700; font-size:12px;
+    background:var(--surface-3,#1f262e); border:1.5px solid rgba(120,200,190,.4); color:var(--text);
+    border-radius:999px; padding:6px 14px; cursor:pointer;
+    transition:background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
   }
-  .fpill:hover{border-color:var(--teal-dim); color:var(--text);}
+  .fpill:hover{border-color:var(--teal); color:var(--text); transform:translateY(-1px);}
   .fpill.active{background:var(--teal); border-color:var(--teal); color:#04231d;}
 
   /* ---------- DISCOVERY CAROUSELS ---------- */
@@ -326,6 +326,10 @@
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
   .disc-bottom{margin-top:6px;}
+  .disc-condition{
+    font-size:8.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:2px;
+  }
   .disc-price-row{display:flex; align-items:baseline; gap:6px;}
   .disc-grade{
     font-size:9.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
@@ -4381,10 +4385,11 @@ function renderDiscovery(){
     return list.map(function(p){
       var thumb = p.img ? '<img src="/img/cards/' + p.img.file + '" alt="' + p.img.alt.replace(/"/g,'&quot;') + '" loading="lazy">' : '';
       var dateHtml = (showDate && p.date) ? '<div class="disc-date">' + fmtDate(p.date) + '</div>' : '';
+      var conditionHtml = showDate ? '<div class="disc-condition">Condition</div>' : '';
       return '<a class="disc-card" href="' + cardHref(p) + '">' +
         '<div class="disc-thumb">' + thumb + '</div>' +
         '<div class="disc-body"><div class="disc-name">' + p.year + ' ' + p.set.replace(p.year+' ','') + ' ' + p.name + '</div>' +
-        '<div class="disc-bottom"><div class="disc-price-row"><span class="disc-grade">' + gradeLabel(p.grade) + '</span>' +
+        '<div class="disc-bottom">' + conditionHtml + '<div class="disc-price-row"><span class="disc-grade">' + gradeLabel(p.grade) + '</span>' +
         '<span class="disc-price">$' + p.val.toLocaleString('en-US') + '</span></div>' + dateHtml + '</div></div></a>';
     }).join('');
   }
