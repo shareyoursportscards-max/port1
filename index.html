@@ -1828,7 +1828,6 @@
       <input type="text" class="dc-input" id="dcSearch" placeholder="Search 1,600+ prices by card, set, or number..." autocomplete="off">
     </div>
     <div class="dc-results" id="dcResults"></div>
-    <div id="dcPick"></div>
     <div class="filter-pills" id="filterPills"></div>
   </section>
 
@@ -1842,7 +1841,6 @@
   <div id="top10Area"></div>
 
   <div class="controls">
-    <input type="text" id="searchInput" placeholder="Search cards, sets, or tags..." />
     <select id="sortSelect">
       <option value="alpha">A → Z</option>
       <option value="value">$ High → Low</option>
@@ -3861,8 +3859,8 @@ function renderSets(){
   requestAnimationFrame(observeSetBlocks);
 }
 
-/* ---------- DEAL CHECKER ---------- */
-var dcIndex = null, dcCard = null, dcGrade = null;
+/* ---------- SEARCH ---------- */
+var dcIndex = null;
 function dcBuildIndex(){
   if(dcIndex) return dcIndex;
   dcIndex = [];
@@ -3880,8 +3878,6 @@ function dcBuildIndex(){
 document.getElementById('dcSearch').addEventListener('input', function(){
   var q = this.value.toLowerCase().trim();
   var box = document.getElementById('dcResults');
-  document.getElementById('dcPick').innerHTML = '';
-  dcCard = null; dcGrade = null;
   if(q.length < 2){ box.innerHTML = ''; return; }
   var terms = q.split(/\s+/);
   var hits = dcBuildIndex().filter(function(c){
@@ -3895,50 +3891,11 @@ document.getElementById('dcSearch').addEventListener('input', function(){
 document.getElementById('dcResults').addEventListener('click', function(e){
   var el = e.target.closest('.dc-result');
   if(!el || el.dataset.i === undefined || !this._hits) return;
-  dcCard = this._hits[Number(el.dataset.i)];
-  if(!dcCard) return;
-  this.innerHTML = '';
-  document.getElementById('dcSearch').value = dcCard.set + ' — ' + dcCard.sub.name;
-  dcRenderPick();
+  var card = this._hits[Number(el.dataset.i)];
+  if(!card) return;
+  var slug = SET_SLUG[card.y] && SET_SLUG[card.y][card.set];
+  window.location.href = '/' + card.y + '/' + (slug || '') + '/';
 });
-function dcRenderPick(){
-  var grades = [['raw','Raw'],['psa8','PSA 8'],['psa9','PSA 9'],['psa10','PSA 10']].filter(function(g){ return dcCard.sub[g[0]] != null; });
-  dcGrade = grades.length === 1 ? grades[0][0] : null;
-  var pick = document.getElementById('dcPick');
-  pick.innerHTML = '<div class="dc-grades">' + grades.map(function(g){
-      return '<button class="dc-grade' + (dcGrade === g[0] ? ' sel' : '') + '" data-g="' + g[0] + '">' + g[1] + ' · $' + dcCard.sub[g[0]].toLocaleString('en-US') + '</button>';
-    }).join('') + '</div>' +
-    '<input type="number" class="dc-input" id="dcPrice" placeholder="eBay asking price ($)" inputmode="decimal">' +
-    '<div class="dc-verdict" id="dcVerdict"></div>';
-  pick.querySelectorAll('.dc-grade').forEach(function(b){
-    b.addEventListener('click', function(){
-      dcGrade = this.dataset.g;
-      pick.querySelectorAll('.dc-grade').forEach(function(x){ x.classList.remove('sel'); });
-      this.classList.add('sel');
-      dcVerdict();
-    });
-  });
-  document.getElementById('dcPrice').addEventListener('input', dcVerdict);
-}
-function dcVerdict(){
-  var v = document.getElementById('dcVerdict');
-  var ask = parseFloat(document.getElementById('dcPrice').value);
-  if(!dcCard || !dcGrade || !(ask > 0)){ v.className = 'dc-verdict'; return; }
-  var guide = dcCard.sub[dcGrade];
-  var diff = (ask - guide) / guide * 100;
-  var cls, headline;
-  if(diff <= -7){ cls = 'good'; headline = Math.abs(Math.round(diff)) + '% below guide'; }
-  else if(diff < 7){ cls = 'fair'; headline = 'Right at guide price'; }
-  else { cls = 'high'; headline = Math.round(diff) + '% above guide'; }
-  var prev = dcCard.sub['prev_' + dcGrade];
-  var trend = '';
-  if(prev != null && prev !== guide){
-    trend = ' · guide ' + (guide > prev ? '▲ up from' : '▼ down from') + ' $' + prev.toLocaleString('en-US');
-  }
-  v.className = 'dc-verdict show ' + cls;
-  v.innerHTML = '<div class="big">' + headline + '</div>' +
-    '<div class="small">Last real eBay sale: $' + guide.toLocaleString('en-US') + trend + '</div>';
-}
 
 const SET_SLUG = {};
 (function(){
@@ -4155,13 +4112,6 @@ function showShareToast(msg){
   showShareToast._tm = setTimeout(function(){ t.classList.remove('show'); }, 1800);
 }
 
-document.getElementById('searchInput').addEventListener('input', e=>{
-  searchTerm = e.target.value;
-  renderSets();
-});
-document.getElementById('searchInput').addEventListener('keydown', e=>{
-  if(e.key==='Escape'){ e.target.value=''; searchTerm=''; renderSets(); }
-});
 document.getElementById('sortSelect').addEventListener('change', e=>{
   sortMode = e.target.value;
   renderSets();
@@ -4375,7 +4325,7 @@ function renderDiscovery(){
   var recent = allPrices.filter(function(p){ return p.img && p.date; }).sort(function(a,b){ return b.date < a.date ? -1 : b.date > a.date ? 1 : 0; }).slice(0,10);
 
   function gradeLabel(g){ return g === 'raw' ? 'Raw' : g.toUpperCase().replace('PSA','PSA '); }
-  function cardHref(p){ return '/' + p.year + '/' + (SET_SLUG[p.set] || '') + '/'; }
+  function cardHref(p){ return '/' + p.year + '/' + (SET_SLUG[p.year] && SET_SLUG[p.year][p.set] || '') + '/'; }
   function fmtDate(d){
     var parts = d.split('-');
     var dt = new Date(Number(parts[0]), Number(parts[1])-1, Number(parts[2]));
