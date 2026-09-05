@@ -1391,45 +1391,6 @@
   }
   .share-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
-  /* ---------- CONTROLS ---------- */
-  .controls{
-    display:flex;
-    gap:10px;
-    margin-bottom:18px;
-  }
-  #searchInput{
-    flex:1;
-    font-family:'Inter Tight', sans-serif;
-    font-size:14px;
-    padding:11px 18px;
-    background:var(--glass);
-    border:1px solid var(--glass-border);
-    border-radius:12px;
-    color:var(--text);
-    outline:none;
-    -webkit-backdrop-filter:blur(10px);
-    backdrop-filter:blur(10px);
-    transition:border-color .15s ease, box-shadow .15s ease;
-  }
-  #searchInput:focus{
-    border-color:var(--teal);
-    box-shadow:0 0 16px rgba(47,230,199,.18);
-  }
-  #searchInput::placeholder{color:var(--text-muted);}
-  #sortSelect{
-    font-family:'Inter Tight', sans-serif;
-    font-size:13px;
-    padding:10px 14px;
-    background:var(--surface);
-    border:1px solid var(--glass-border);
-    border-radius:12px;
-    color:var(--text);
-    cursor:pointer;
-    outline:none;
-    -webkit-appearance:none;
-  }
-  #sortSelect:focus{border-color:var(--teal);}
-  #sortSelect option{background:var(--surface);}
 
   /* ---------- HIGH VALUE ---------- */
   .card-row.high-value{
@@ -1840,12 +1801,6 @@
   <div id="top10Gallery"></div>
   <div id="top10Area"></div>
 
-  <div class="controls">
-    <select id="sortSelect">
-      <option value="alpha">A → Z</option>
-      <option value="value">$ High → Low</option>
-    </select>
-  </div>
 
   <div class="col-header" id="colHeader">
     <span>Card</span><span>Odds</span><span>Raw</span><span>PSA 8</span><span>PSA 9</span><span>PSA 10</span><span class="ebh">eBay</span>
@@ -4112,10 +4067,6 @@ function showShareToast(msg){
   showShareToast._tm = setTimeout(function(){ t.classList.remove('show'); }, 1800);
 }
 
-document.getElementById('sortSelect').addEventListener('change', e=>{
-  sortMode = e.target.value;
-  renderSets();
-});
 
 var collTouchY = 0, collWasScroll = false;
 document.getElementById('setList').addEventListener('touchstart', function(e){
