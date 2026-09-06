@@ -4302,7 +4302,14 @@ function renderDiscovery(){
     });
   });
   var sales = allPrices.filter(function(p){ return p.img; }).sort(function(a,b){ return b.val - a.val; }).slice(0,10);
-  var recent = allPrices.filter(function(p){ return p.img && p.date; }).sort(function(a,b){ return b.date < a.date ? -1 : b.date > a.date ? 1 : 0; }).slice(0,10);
+  var recent = allPrices.filter(function(p){ return p.img && p.date; })
+    .sort(function(a,b){ return a.date === b.date ? b.val - a.val : (b.date < a.date ? -1 : 1); });
+  var seenTicker = {};
+  recent = recent.filter(function(p){
+    var ck = p.year + '|' + p.set + '|' + p.name;
+    if(seenTicker[ck]) return false;
+    seenTicker[ck] = 1; return true;
+  }).slice(0,30);
 
   function gradeLabel(g){ return g === 'raw' ? 'Raw' : g.toUpperCase().replace('PSA','PSA '); }
   function cardHref(p){ return '/' + p.year + '/' + (SET_SLUG[p.year] && SET_SLUG[p.year][p.set] || '') + '/'; }
@@ -4330,8 +4337,9 @@ function renderDiscovery(){
   }
   if(recent.length){
     var recentHtml = cardsHtml(recent, true);
+    var tickerSecs = (recent.length * 3.8).toFixed(1);
     html += '<div class="disc-section"><div class="disc-col-head"><span class="dc-icon">🕐</span> Recent Sales</div>' +
-      '<div class="disc-row ticker"><div class="disc-track">' + recentHtml + recentHtml + '</div></div></div>';
+      '<div class="disc-row ticker"><div class="disc-track" style="animation-duration:' + tickerSecs + 's">' + recentHtml + recentHtml + '</div></div></div>';
   }
   html += '</div>';
   area.innerHTML = html;
