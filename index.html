@@ -596,15 +596,18 @@
   /* ---------- SET SECTIONS ---------- */
   .set-block{
     margin-bottom:0;
-    /* A sticky child can never hold its pinned offset (top:98px, see .set-header)
-       past the bottom edge of its own containing block - that's what confines the
-       sticky header to ITS OWN section instead of every section fighting over one
-       spot. But a 1-2 card set (e.g. 1999 Bowman, Donruss) is shorter than
-       98px + the header's own ~37px height, so the header can never actually reach
-       top:98 before running out of room - it gets glued to the bottom of the block
-       instead, rendering after its own last row. min-height guarantees every
-       section has enough room for the header to stick properly. */
-    min-height:140px;
+  }
+  /* A sticky header can never hold its pinned offset (top:98px) past the bottom
+     edge of its own block - that clamp is what hands the pinned spot off from one
+     set to the next. But a set shorter than 98px + the header's own height can
+     never reach the pin at all: it stays clamped to the block's bottom edge and
+     renders ON TOP OF its own last rows, which reads as the set name sitting
+     below its cards. Those blocks get tagged .no-stick by tagShortSetBlocks() so
+     the header just scrolls with its rows - they fit on screen together anyway,
+     so there is nothing to freeze, and no reserved dead space either. */
+  .set-block.no-stick .set-header{
+    position:relative;
+    top:auto;
   }
   .set-link{color:inherit; text-decoration:none; border-bottom:1px solid transparent;}
   .set-link:hover{color:var(--accent); border-bottom-color:var(--accent);}
@@ -1600,7 +1603,15 @@
     .hc{height:170px;}
     .panel-head h2{font-size:22px;}
     .year-btn{padding:8px 6px; font-size:13px; flex:1 1 18%;}
-    .set-header{padding:16px 12px 4px; font-size:11px;}
+    /* #setList below gets overflow-x:auto so the wide table can pan sideways,
+       which makes it a scroll container on BOTH axes - and a sticky element
+       resolves its offsets against the nearest scrollport, so on mobile the set
+       header measures top:98px from the TOP OF #setList, not from the viewport.
+       #setList never scrolls vertically itself, so nothing can ever freeze; all
+       the offset does is shove the first set's header 98px down, below its own
+       first card. Drop it back to relative here - position:relative rather than
+       static so .set-header::before still has it as a containing block. */
+    .set-header{padding:16px 12px 4px; font-size:11px; position:relative; top:auto;}
     .col-header, .card-row{
       grid-template-columns:220px 56px 62px 62px 62px 62px 62px;
       padding:5px 0 5px 0;
@@ -4365,7 +4376,39 @@ const revealObserver = new IntersectionObserver(entries=>{
 function observeSetBlocks(){
   document.querySelectorAll('.set-block').forEach(b=>revealObserver.observe(b));
   document.querySelectorAll('.blog-section, .note').forEach(b=>revealObserver.observe(b));
+  tagShortSetBlocks();
 }
+
+/* A set shorter than (sticky offset + header height) can never reach its pinned
+   spot, so its header stays clamped to the block's bottom edge, on top of its own
+   cards. Measure instead of guessing a card count: row heights and the header's
+   own height both move with the breakpoint. Blocks that can't stick are tagged
+   .no-stick and their header just scrolls along with its rows. */
+function tagShortSetBlocks(){
+  var blocks = document.querySelectorAll('.set-block');
+  if(!blocks.length) return;
+  blocks.forEach(function(b){ b.classList.remove('no-stick'); });
+  var probe = blocks[0].querySelector('.set-header');
+  if(!probe) return;
+  // top is 'auto' wherever the header isn't sticky (mobile) - nothing to tag there.
+  var stickyTop = parseFloat(getComputedStyle(probe).top);
+  if(!isFinite(stickyTop) || getComputedStyle(probe).position !== 'sticky') return;
+  var measured = [];
+  blocks.forEach(function(b){
+    var h = b.querySelector('.set-header');
+    if(!h) return;
+    measured.push([b, b.getBoundingClientRect().height, h.getBoundingClientRect().height]);
+  });
+  measured.forEach(function(m){
+    if(m[1] < stickyTop + m[2]) m[0].classList.add('no-stick');
+  });
+}
+
+var shortTagTimer;
+window.addEventListener('resize', function(){
+  clearTimeout(shortTagTimer);
+  shortTagTimer = setTimeout(tagShortSetBlocks, 150);
+});
 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('/sw.js');
