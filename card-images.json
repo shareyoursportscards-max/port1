@@ -821,12 +821,6 @@
     "h": 544,
     "alt": "1997 SPx Grand Finale /50 Ken Griffey Jr. die-cut card #SPX45"
   },
-  "1996|1996 Finest|Refractor #135": {
-    "file": "1996-finest-refractor-135-griffey-psa8.jpg",
-    "w": 382,
-    "h": 657,
-    "alt": "1996 Finest Refractor with coating Ken Griffey Jr. card #135 in PSA 8 slab"
-  },
   "1998|1998 Finest|Non-Protected Refractor": {
     "file": "1998-finest-non-protected-refractor-griffey-psa9.jpg",
     "w": 326,
@@ -1858,5 +1852,11 @@
     "w": 427,
     "h": 737,
     "alt": "1998 Ultra Platinum Medallion /100 Ken Griffey Jr. card #1P in PSA 9 slab"
+  },
+  "1996|1996 Finest|Gold Intimidators Refractor #135": {
+    "file": "1996-finest-gold-intimidators-refractor-135-griffey.jpg",
+    "w": 445,
+    "h": 752,
+    "alt": "1996 Finest Gold Intimidators Refractor with coating Ken Griffey Jr. card #135 in a PSA slab"
   }
 }
