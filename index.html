@@ -596,6 +596,15 @@
   /* ---------- SET SECTIONS ---------- */
   .set-block{
     margin-bottom:0;
+    /* A sticky child can never hold its pinned offset (top:98px, see .set-header)
+       past the bottom edge of its own containing block - that's what confines the
+       sticky header to ITS OWN section instead of every section fighting over one
+       spot. But a 1-2 card set (e.g. 1999 Bowman, Donruss) is shorter than
+       98px + the header's own ~37px height, so the header can never actually reach
+       top:98 before running out of room - it gets glued to the bottom of the block
+       instead, rendering after its own last row. min-height guarantees every
+       section has enough room for the header to stick properly. */
+    min-height:140px;
   }
   .set-link{color:inherit; text-decoration:none; border-bottom:1px solid transparent;}
   .set-link:hover{color:var(--accent); border-bottom-color:var(--accent);}
