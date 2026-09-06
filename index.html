@@ -271,7 +271,13 @@
     transition:background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
   }
   .fpill:hover{border-color:var(--teal); color:var(--text); transform:translateY(-1px);}
-  .fpill.active{background:var(--teal); border-color:var(--teal); color:#04231d;}
+  /* jersey nameplate: gold numerals on deep navy, teal keyline + inner gold hairline (double outline) */
+  .fpill.active{
+    background:#0f2033; border-color:var(--teal); color:var(--gold);
+    box-shadow:inset 0 0 0 1px rgba(233,196,100,.38);
+    letter-spacing:.04em;
+  }
+  .fpill.active:hover{border-color:var(--teal); color:var(--gold);}
 
   /* ---------- DISCOVERY CAROUSELS ---------- */
   .discovery{margin:0 0 28px;}
