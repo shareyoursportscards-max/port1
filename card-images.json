@@ -383,12 +383,6 @@
     "h": 657,
     "alt": "1994 Pinnacle Museum Collection Ken Griffey Jr. card #100 in PSA 10 slab"
   },
-  "1996|1996 Select Certified|Mirror Red (/90)": {
-    "file": "1996-select-certified-mirror-red-griffey-psa10.jpg",
-    "w": 417,
-    "h": 736,
-    "alt": "1996 Select Certified Mirror Red /90 Ken Griffey Jr. card in PSA 10 slab"
-  },
   "1990|1990 Upper Deck|Checklist #24": {
     "file": "1990-upper-deck-checklist-24-griffey-psa10.jpg",
     "w": 325,
@@ -1894,5 +1888,11 @@
     "w": 327,
     "h": 545,
     "alt": "1995 Score #437 Ken Griffey Jr. card in PSA 10 slab"
+  },
+  "1996|1996 Select Certified|Mirror Red #136 (/90)": {
+    "file": "1996-select-certified-mirror-red-griffey-psa10.jpg",
+    "w": 417,
+    "h": 736,
+    "alt": "1996 Select Certified Mirror Red #136 /90 Ken Griffey Jr. card in PSA 10 slab"
   }
 }
