@@ -1602,10 +1602,10 @@
     "alt": "1995 Pinnacle Swing Men Ken Griffey Jr. card #304 in PSA 10 slab"
   },
   "1995|1995 Pinnacle|Swing Men Museum Collection #304": {
-    "file": "1995-pinnacle-swing-men-museum-collection-304-griffey-raw.jpg",
-    "w": 462,
-    "h": 647,
-    "alt": "1995 Pinnacle Swing Men Museum Collection Ken Griffey Jr. card #304"
+    "file": "1995-pinnacle-swing-men-museum-collection-304-griffey.jpg",
+    "w": 322,
+    "h": 550,
+    "alt": "1995 Pinnacle Swing Men Museum Collection #304 Ken Griffey Jr. card in a PSA slab"
   },
   "1996|1996 Select|En Fuego #1": {
     "file": "1996-select-en-fuego-1-griffey-psa9.jpg",
@@ -1894,5 +1894,11 @@
     "w": 417,
     "h": 736,
     "alt": "1996 Select Certified Mirror Red #136 /90 Ken Griffey Jr. card in PSA 10 slab"
+  },
+  "1995|1995 Pinnacle|Swing Men Artist's Proof #304": {
+    "file": "1995-pinnacle-swing-men-artists-proof-304-griffey.jpg",
+    "w": 382,
+    "h": 662,
+    "alt": "1995 Pinnacle Swing Men Artist's Proof #304 Ken Griffey Jr. card in a PSA slab"
   }
 }
