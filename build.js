@@ -714,9 +714,10 @@ sitemapUrls.push(SITE + '/most-valuable/');
 
 /* ---------- biggest movers (last 14 days, from price history) ---------- */
 const MOVER_WINDOW_DAYS = 14;
-// 2026-07-10 is the bulk backfill day that seeded price-history from existing DATA.
-// A "from" price dated then is not a real prior sale, so the % move is meaningless. Skip those.
-const SEED_DATE = '2026-07-10';
+// 2026-07-10 (and its tail on 07-11) is the bulk backfill that seeded price-history from
+// existing DATA. A "from" price dated then is not a real prior sale, so the % move is
+// meaningless — the true previous comp could be arbitrarily old. Skip those.
+const SEED_DATES = new Set(['2026-07-10', '2026-07-11']);
 const moverCutoff = new Date(Date.now() - MOVER_WINDOW_DAYS * 864e5).toISOString().slice(0, 10);
 const slugMap = {};
 const validCards = new Set();
@@ -741,7 +742,7 @@ for (const key of Object.keys(HIST)) {
     const [dLast, vLast] = arr[arr.length - 1];
     const dPrev = arr[arr.length - 2][0];
     const vPrev = arr[arr.length - 2][1];
-    if (dPrev === SEED_DATE) continue;
+    if (SEED_DATES.has(dPrev)) continue;
     if (dLast < moverCutoff || vPrev == null || vLast == null || vLast === vPrev) continue;
     if (Math.max(vPrev, vLast) < 25 || Math.abs(vLast - vPrev) < 5) continue;
     movers.push({
