@@ -1127,12 +1127,6 @@
     "h": 656,
     "alt": "1992 Stadium Club Ken Griffey Jr. card #400 in PSA 10 slab"
   },
-  "1999|1999 Topps Chrome|Early Road to Hall Refractor #ER5 (/100)": {
-    "file": "1999-topps-chrome-early-road-hall-refractor-er5-griffey-psa10.jpg",
-    "w": 381,
-    "h": 666,
-    "alt": "1999 Topps Chrome Early Road to the Hall Refractor /100 Ken Griffey Jr. card #ER5 in PSA 10 slab"
-  },
   "1999|1999 Topps Chrome|All-Etch Refractor #AE3": {
     "file": "1999-topps-chrome-all-etch-refractor-ae3-griffey-psa10.jpg",
     "w": 335,
@@ -1900,5 +1894,11 @@
     "w": 382,
     "h": 662,
     "alt": "1995 Pinnacle Swing Men Artist's Proof #304 Ken Griffey Jr. card in a PSA slab"
+  },
+  "1999|1999 Topps Chrome|Early Road to Hall Ref. #ER5 (/100)": {
+    "file": "1999-topps-chrome-early-road-hall-refractor-er5-griffey-psa10.jpg",
+    "w": 381,
+    "h": 666,
+    "alt": "1999 Topps Chrome Early Road to the Hall Refractor /100 Ken Griffey Jr. card #ER5 in PSA 10 slab"
   }
 }
