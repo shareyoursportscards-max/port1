@@ -788,6 +788,29 @@ write('biggest-movers', page({
   ogimg: SITE + '/img/og/market-reports.jpg',
   body: bmBody
 }));
+
+/* ---------- custom 404 (GitHub Pages serves /404.html for any missing path) ----------
+   Deliberately NOT run through write(): it must sit at the repo root as 404.html, and it
+   must stay out of sitemap.xml and page-dates.json. Old removed URLs (the per-day blog
+   pages, dropped sets) correctly 404 — this just stops them being a dead end for visitors. */
+let nfHtml = page({
+  title: 'Page Not Found | Griffey Card Prices',
+  desc: 'That page could not be found. Browse Ken Griffey Jr. card prices by year, or see the most valuable cards and the biggest movers.',
+  url: SITE + '/404.html',
+  body: '<h1>Page not found</h1>' +
+    '<p class="sub">This URL isn&rsquo;t part of the guide. It may be an older page that has since moved &mdash; ' +
+    'every card price now lives on its year page or its set page.</p>' +
+    '<p class="sub">Pick a year below to jump back in, or head to the ' +
+    '<a href="/most-valuable/" style="color:var(--gold)">Top 25 sales</a>, ' +
+    '<a href="/biggest-movers/" style="color:var(--gold)">biggest movers</a>, or the ' +
+    '<a href="/" style="color:var(--gold)">full interactive guide</a>.</p>'
+});
+nfHtml = nfHtml
+  .replace('<meta name="robots" content="max-image-preview:large">',
+           '<meta name="robots" content="noindex, follow">')
+  .split('__PAGEDATE__').join('regularly');
+fs.writeFileSync(path.join(ROOT, '404.html'), nfHtml);
+console.log('404.html written');
 sitemapUrls.push(SITE + '/biggest-movers/');
 
 /* ---------- HTML site map (real crawlable page linking to every year/set page,
