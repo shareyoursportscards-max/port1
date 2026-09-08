@@ -229,6 +229,7 @@ function page(o) {
   return '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
     '<script async src="https://www.googletagmanager.com/gtag/js?id=' + GA + '"></script>\n' +
     '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'' + GA + '\');</script>\n' +
+    '<script>function trackEvent(n,p){try{gtag("event",n,p||{});}catch(e){}}</script>\n' +
     '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
     '<meta name="robots" content="max-image-preview:large">\n' +
     '<title>' + esc(o.title) + '</title>\n' +
@@ -258,7 +259,7 @@ function page(o) {
     '<a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
     '</div>\n' +
     '<div class="lb" id="cardLb"><img alt=""></div>\n' +
-    '<script>(function(){var lb=document.getElementById("cardLb"),li=lb.firstElementChild;document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.closest&&t.closest(".cardfig")){li.src=t.src;li.alt=t.alt;lb.classList.add("open");}else if(lb.classList.contains("open")){lb.classList.remove("open");}});document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.classList.remove("open");});})();</script>\n' +
+    '<script>(function(){var lb=document.getElementById("cardLb"),li=lb.firstElementChild;document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.closest&&t.closest(".cardfig")){li.src=t.src;li.alt=t.alt;lb.classList.add("open");trackEvent("card_photo_open",{card_name:t.alt||"",page_path:location.pathname});}else if(lb.classList.contains("open")){lb.classList.remove("open");}});document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.classList.remove("open");});})();</script>\n' +
     '<script>document.querySelectorAll(".tblwrap").forEach(function(w){var head=w.querySelector(".theadwrap"),body=w.querySelector(".scrollx");if(head&&body)body.addEventListener("scroll",function(){head.scrollLeft=body.scrollLeft;},{passive:true});});</script>\n' +
     '</body></html>';
 }

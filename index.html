@@ -8,6 +8,8 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-1H6EWY4GJJ');
+  /* Fire a GA4 event. Never let analytics break the page. */
+  function trackEvent(name, params){ try{ gtag('event', name, params || {}); }catch(e){} }
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -3907,9 +3909,11 @@ function dcBuildIndex(){
   });
   return dcIndex;
 }
+var dcSearchTimer = null;
 document.getElementById('dcSearch').addEventListener('input', function(){
   var q = this.value.toLowerCase().trim();
   var box = document.getElementById('dcResults');
+  clearTimeout(dcSearchTimer);
   if(q.length < 2){ box.innerHTML = ''; return; }
   var terms = q.split(/\s+/);
   var hits = dcBuildIndex().filter(function(c){
@@ -3919,6 +3923,9 @@ document.getElementById('dcSearch').addEventListener('input', function(){
     ? hits.map(function(c, i){ return '<div class="dc-result" data-i="' + i + '"><span class="nm">' + c.sub.name + '</span><span class="set">' + c.set + '</span></div>'; }).join('')
     : '<div class="dc-result" style="cursor:default;color:var(--text-muted)">No cards found</div>';
   box._hits = hits;
+  dcSearchTimer = setTimeout(function(){
+    trackEvent('search', {search_term: q, search_results: hits.length});
+  }, 900);
 });
 document.getElementById('dcResults').addEventListener('click', function(e){
   var el = e.target.closest('.dc-result');
@@ -3926,6 +3933,10 @@ document.getElementById('dcResults').addEventListener('click', function(e){
   var card = this._hits[Number(el.dataset.i)];
   if(!card) return;
   var slug = SET_SLUG[card.y] && SET_SLUG[card.y][card.set];
+  trackEvent('search_result_click', {
+    search_term: document.getElementById('dcSearch').value.toLowerCase().trim(),
+    card_year: String(card.y), card_set: card.set, card_name: card.sub.name
+  });
   window.location.href = '/' + card.y + '/' + (slug || '') + '/';
 });
 
@@ -4090,6 +4101,7 @@ function drawCollectionCard(cards, count, total){
 function shareCollection(){
   const vals = getCollectionValue();
   if(!vals.count){ showShareToast('Add cards to your collection first'); return; }
+  trackEvent('collection_share', {card_count: vals.count, collection_value: vals.total});
   const cards = [];
   Object.keys(collection).forEach(function(k){
     const parts = k.split('|');
@@ -4158,13 +4170,17 @@ document.getElementById('setList').addEventListener('click', function(e){
   const cell = e.target.closest('.coll-cell');
   if(!cell) return;
   const key = cell.dataset.ckey;
-  if(collection[key]){
+  const kp = key.split('|');
+  const wasIn = !!collection[key];
+  if(wasIn){
     delete collection[key];
     cell.classList.remove('coll-selected');
   } else {
     collection[key] = true;
     cell.classList.add('coll-selected');
   }
+  trackEvent(wasIn ? 'collection_remove' : 'collection_add',
+    {card_year: kp[0], card_set: kp[1], card_name: kp[2], card_grade: kp[3]});
   saveCollection();
   updateCollectionBar();
   renderYearStrip();
@@ -4325,6 +4341,7 @@ function renderFilterPills(){
   }).join('');
   el.querySelectorAll('.yr-pill').forEach(function(btn){
     btn.addEventListener('click', function(){
+      trackEvent('year_filter', {filter_year: this.dataset.year});
       selectYear(Number(this.dataset.year));
       var target = document.getElementById('top10Gallery');
       if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
