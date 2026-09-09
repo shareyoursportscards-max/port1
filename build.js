@@ -320,6 +320,19 @@ a.eb:hover{color:var(--gold);border-color:var(--gold)}
 .photo-section{margin:34px 0}
 .ps-h{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:19px;color:var(--text);margin:0 0 6px;border-bottom:1px solid var(--border);padding-bottom:10px}
 .ps-sub{font-family:'Newsreader',serif;font-style:italic;color:var(--dim);font-size:14.5px;line-height:1.55;margin:0 0 18px}
+.rptlist{display:flex;flex-direction:column;gap:18px;margin:22px 0 8px}
+.rpt{display:flex;gap:20px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px}
+.rpt-body{flex:1 1 auto;min-width:0}
+.rpt-top{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.rpt-year{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:22px;color:var(--gold);text-decoration:none}
+.rpt-year:hover{text-decoration:underline}
+.rpt-date{color:var(--dim);font-size:12px;letter-spacing:.4px;text-transform:uppercase}
+.rpt-text{margin:0;color:var(--text);font-size:14px;line-height:1.65}
+.rpt-more{display:inline-block;margin-top:12px;color:var(--gold);text-decoration:none;font-size:13px;border:1px solid var(--border);border-radius:8px;padding:5px 11px}
+.rpt-more:hover{border-color:var(--gold)}
+.rpt-fig{flex:0 0 150px;width:150px;margin:0}
+.rpt-fig img{max-height:210px}
+@media(max-width:640px){.rpt{flex-direction:column;align-items:center}.rpt-fig{flex:0 0 auto;order:-1}.rpt-body{width:100%}}
 .cardfigs{display:flex;flex-wrap:wrap;gap:22px;margin:0;justify-content:center;align-items:stretch}
 .cardfig{margin:0;width:180px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 12px 10px;display:flex;flex-direction:column;align-items:center;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
 .cardfig:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 30px rgba(47,230,199,.12)}
@@ -631,16 +644,76 @@ for (const y of years) {
   sitemapUrls.push(SITE + '/' + y + '/');
 }
 
-/* ---------- blog index — links to each year's own Market Reports section, no per-day pages ---------- */
-let blogBody = '<h1>Griffey Card Market Reports</h1>' +
-  '<p class="sub">Notes on what actually moved in the Ken Griffey Jr. card market — every report backed by real eBay sold listings, price moves are sale to sale, not averages. Full history lives on each year\'s own page.</p><ul class="plain" style="columns:1">';
-for (const y of years) {
-  const count = (BLOG[y] || []).length;
-  if (!count) continue;
-  blogBody += '<li><a href="/' + y + '/#market-reports">' + y + '</a> <span style="color:var(--dim);font-size:12px">— ' +
-    count + (count === 1 ? ' report' : ' reports') + '</span></li>';
+/* ---------- blog index — latest report per year, each with a matched card photo ----------
+   Photo pick: pull the card names out of the report's own <b> tags and match them against
+   this year's photographed cards; first hit wins, so the picture always illustrates a card
+   the report actually talks about. Falls back to the year's priciest photographed card. */
+function reportPhoto(year, body) {
+  const keys = Object.keys(CARDIMG).filter(k => k.startsWith(year + '|'));
+  if (!keys.length) return null;
+  const norm = t => String(t).toLowerCase().replace(/&[a-z]+;/g, '').replace(/[^a-z0-9]/g, '');
+  const bolds = (body.match(/<b>[\s\S]*?<\/b>/g) || []).map(x => norm(x.replace(/<[^>]+>/g, '')));
+  // Walk the report's bold mentions in order so the picture shows the card it LEADS with.
+  // Two ways to match, because DATA names ("Base #156") rarely appear verbatim in report
+  // prose ("Upper Deck #156"): (a) the card name itself, minus any (/print run), appears in
+  // the bold text; or (b) the set name AND the card's number both appear in it.
+  const cardKey = k => norm(k.split('|')[2].replace(/\s*\(\/[^)]*\)/g, ''));
+  const setKey = k => norm(k.split('|')[1].replace(/^\d{4}\s+/, ''));
+  const numKey = k => { const m = k.split('|')[2].match(/#([A-Za-z0-9-]+)/); return m ? norm(m[1]) : ''; };
+  let best = null;
+  for (const bt of bolds) {
+    let hit = null, hitLen = -1;
+    for (const k of keys) {
+      const card = cardKey(k), set = setKey(k), num = numKey(k);
+      let score = -1;
+      if (card.length >= 4 && bt.indexOf(card) > -1) score = 2000 + card.length;
+      // set+number fallback: an unqualified mention ("Metal Universe #107") means the plain
+      // card, so prefer the shortest name over parallels that share the number
+      else if (num && set.length >= 4 && bt.indexOf(set) > -1 && bt.endsWith(num)) score = 1000 - card.length;
+      if (score > hitLen) { hit = k; hitLen = score; }
+    }
+    if (hit && hitLen > -1) { best = hit; break; }
+  }
+  if (!best) {
+    let top = -1;
+    for (const k of keys) {
+      const [, setName, cardName] = k.split('|');
+      const st = (DATA[year] || []).find(x => x.set === setName);
+      const cd = st && st.subsets.find(x => x.name === cardName);
+      const v = cd ? Math.max(cd.psa10 || 0, cd.psa9 || 0, cd.psa8 || 0, cd.raw || 0) : 0;
+      if (v > top) { top = v; best = k; }
+    }
+  }
+  return best ? { key: best, img: CARDIMG[best], name: best.split('|')[2], set: best.split('|')[1] } : null;
 }
-blogBody += '</ul>';
+
+const rptYears = years.filter(y => (BLOG[y] || []).length)
+  .sort((a, c) => {
+    const da = Date.parse(BLOG[a][0].date), dc = Date.parse(BLOG[c][0].date);
+    return dc - da || a - c;
+  });
+
+let blogBody = '<h1>Griffey Card Market Reports</h1>' +
+  '<p class="sub">The latest report from every year, newest first — what actually moved in the Ken Griffey Jr. card market, backed by real eBay sold listings. Price moves are sale to sale, not averages. Every year\'s full history is one click away.</p>' +
+  '<div class="rptlist">';
+for (const y of rptYears) {
+  const all = BLOG[y];
+  const latest = all[0];
+  const ph = reportPhoto(y, latest.body);
+  blogBody += '<section class="rpt">' +
+    '<div class="rpt-body">' +
+      '<div class="rpt-top"><a class="rpt-year" href="/' + y + '/#market-reports">' + y + '</a>' +
+      '<span class="rpt-date">' + esc(latest.date) + '</span></div>' +
+      '<p class="rpt-text">' + latest.body + '</p>' +
+      '<a class="rpt-more" href="/' + y + '/#market-reports">' +
+        (all.length > 1 ? 'All ' + all.length + ' ' + y + ' reports' : 'See the ' + y + ' guide') + ' &rsaquo;</a>' +
+    '</div>' +
+    (ph ? '<figure class="rpt-fig cardfig"><img src="/img/cards/' + ph.img.file + '" alt="' + esc(ph.img.alt) +
+      '" width="' + ph.img.w + '" height="' + ph.img.h + '" loading="lazy">' +
+      '<figcaption>' + esc(ph.set.replace(/^\d{4}\s+/, '')) + '<br>' + esc(ph.name) + '</figcaption></figure>' : '') +
+    '</section>';
+}
+blogBody += '</div>';
 write('blog', page({
   title: 'Griffey Card Market Reports | Daily Price Movement',
   desc: 'Ken Griffey Jr. card market reports by year — which cards moved, by how much, and why, based on real eBay sold data.',
