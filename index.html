@@ -4397,7 +4397,7 @@ function renderDiscovery(){
     var ck = p.year + '|' + p.set + '|' + p.name;
     if(seenTicker[ck]) return false;
     seenTicker[ck] = 1; return true;
-  }).slice(0,30);
+  }).slice(0,60);
 
   function gradeLabel(g){ return g === 'raw' ? 'Raw' : g.toUpperCase().replace('PSA','PSA '); }
   function cardHref(p){ return '/' + p.year + '/' + (SET_SLUG[p.year] && SET_SLUG[p.year][p.set] || '') + '/'; }
