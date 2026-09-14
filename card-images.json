@@ -1613,12 +1613,6 @@
   "h": 652,
   "alt": "1997 Leaf Knot-Hole Gang Ken Griffey Jr. card #2 in PSA 10 slab"
  },
- "1997|1997 Fleer|Night and Day": {
-  "file": "1997-fleer-night-and-day-griffey.jpg",
-  "w": 387,
-  "h": 652,
-  "alt": "1997 Fleer Night and Day Ken Griffey Jr. insert card #4"
- },
  "1998|1998 Bowman Chrome|International Refractor #33": {
   "file": "1998-bowman-chrome-international-refractor-33-griffey-psa10.jpg",
   "w": 356,
@@ -1972,5 +1966,17 @@
   "w": 400,
   "h": 697,
   "alt": "1998 Topps Gallery of Heroes Ken Griffey Jr. stained-glass die-cut card #GH1 in a PSA 9 slab"
+ },
+ "1997|1997 Fleer|Night and Day #4": {
+  "file": "1997-fleer-night-and-day-griffey.jpg",
+  "w": 387,
+  "h": 652,
+  "alt": "1997 Fleer Night and Day Ken Griffey Jr. insert card #4"
+ },
+ "1997|1997 Flair Showcase|Row 2 #24": {
+  "file": "1997-flair-showcase-row-2-24-griffey-psa10.jpg",
+  "w": 381,
+  "h": 662,
+  "alt": "1997 Flair Showcase Row 2 Ken Griffey Jr. card #24 in a PSA 10 slab"
  }
 }
