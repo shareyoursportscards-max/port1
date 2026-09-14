@@ -65,12 +65,6 @@
   "h": 632,
   "alt": "1996 Topps Chrome Star Power Refractor Ken Griffey Jr. insert card #90 in PSA 9 slab"
  },
- "1998|1998 Metal Universe|Universal Language": {
-  "file": "1998-metal-universe-universal-language-griffey-psa10.jpg",
-  "w": 346,
-  "h": 610,
-  "alt": "1998 Metal Universe Universal Language Ken Griffey Jr. insert card #1 in PSA 10 slab"
- },
  "1998|1998 Metal Universe|Diamond Heroes #1DH": {
   "file": "1998-metal-universe-diamond-heroes-1dh-griffey-psa9.jpg",
   "w": 396,
@@ -262,12 +256,6 @@
   "w": 351,
   "h": 612,
   "alt": "1998 Ultra Big Shots Ken Griffey Jr. insert card #1 in PSA 10 slab"
- },
- "1998|1998 Ultra|Win Now": {
-  "file": "1998-ultra-win-now-griffey-psa9.jpg",
-  "w": 371,
-  "h": 647,
-  "alt": "1998 Ultra Win Now Ken Griffey Jr. insert card #13 in PSA 9 slab"
  },
  "1998|1998 Ultra|Pizzazz Gold Medallion #476G": {
   "file": "1998-ultra-pizzazz-gold-medallion-476g-griffey-psa9.jpg",
@@ -1966,5 +1954,17 @@
   "w": 406,
   "h": 687,
   "alt": "1999 Upper Deck Black Diamond Triple Ken Griffey Jr. card #76 in a PSA 10 slab"
+ },
+ "1998|1998 Ultra|Win Now #13WN": {
+  "file": "1998-ultra-win-now-griffey-psa9.jpg",
+  "w": 371,
+  "h": 647,
+  "alt": "1998 Ultra Win Now Ken Griffey Jr. insert card #13 in PSA 9 slab"
+ },
+ "1998|1998 Metal Universe|Universal Language #1UL": {
+  "file": "1998-metal-universe-universal-language-griffey-psa10.jpg",
+  "w": 346,
+  "h": 610,
+  "alt": "1998 Metal Universe Universal Language Ken Griffey Jr. insert card #1 in PSA 10 slab"
  }
 }
