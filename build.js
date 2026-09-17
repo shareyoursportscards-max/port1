@@ -459,7 +459,7 @@ for (const y of years) {
     }
   }
 
-  let body = '<h1>Ken Griffey Jr. Card Prices: ' + y + ' Values</h1>' +
+  let body = '<h1>' + y + ' Ken Griffey Jr. Cards: Values & Most Valuable</h1>' +
     '<div class="intro"><p class="sub">' + cardCount + ' Ken Griffey Jr. cards from ' + y + ' across ' + sets.length +
     ' sets — raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sold listings, updated daily.</p>';
   if (topCard) {
@@ -521,9 +521,23 @@ for (const y of years) {
       };
     }
 
-    const setBody = '<h1>Ken Griffey Jr. Card Prices: ' + esc(s.set) + ' Values</h1>' +
+    /* base card = "Base #365" or a bare "#355" — its number goes in the title, its prices in the one-line answer */
+    const baseCard = s.subsets.find(x => /^Base #\S+/.test(x.name) || /^#\S+$/.test(x.name)) || null;
+    const baseNum = baseCard ? baseCard.name.match(/#(\S+)/)[1] : null;
+    const setTitle = esc(s.set) + ' Ken Griffey Jr. ' + (baseNum ? '#' + baseNum + ' Card Value' : 'Card Values');
+    let baseAnswer = '';
+    if (baseCard) {
+      const parts = [];
+      if (baseCard.raw) parts.push('a raw copy sells for about ' + money(baseCard.raw));
+      const graded = baseCard.psa10 ? ['PSA 10', baseCard.psa10] : baseCard.psa9 ? ['PSA 9', baseCard.psa9] : null;
+      if (graded) parts.push('a ' + graded[0] + (parts.length ? ' for about ' : ' sells for about ') + money(graded[1]));
+      if (parts.length) baseAnswer = '<p class="answer">Have the <b>' + esc(s.set) + ' #' + esc(baseNum) + '</b>? Right now ' + parts.join(' and ') + '.</p>';
+    }
+
+    const setBody = '<h1>' + setTitle + '</h1>' +
       '<div class="intro"><p class="sub">' + esc(s.set) + ' Ken Griffey Jr. card prices from real eBay sold listings — ' +
       s.subsets.length + (s.subsets.length === 1 ? ' card' : ' cards') + ' tracked, updated daily.</p>' +
+      baseAnswer +
       (setTopCard ? '<p class="answer">The most expensive sale is the <b>' + esc(s.set) + ' ' + esc(setTopCard.name) + '</b>' +
         (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade) + ' at ' + money(setTopCard.price) +
         (setTopCard.date ? ' (sold ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) + ')' : '') + '.' +
@@ -546,7 +560,7 @@ for (const y of years) {
     }
     write(rel, page({
       navYear: y,
-      title: 'Ken Griffey Jr. Card Prices: ' + esc(s.set) + ' Values',
+      title: setTitle,
       desc: 'How much is a ' + s.set + ' Ken Griffey Jr. card worth? ' + names +
         (top ? ', prices up to ' + money(top) : '') + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
       url: SITE + '/' + rel + '/',
@@ -622,7 +636,7 @@ for (const y of years) {
   }
   write(String(y), page({
     navYear: y,
-    title: 'Ken Griffey Jr. Card Prices: ' + y + ' Values',
+    title: y + ' Ken Griffey Jr. Cards: Values & Most Valuable',
     desc: 'How much is a ' + y + ' Ken Griffey Jr. card worth? ' + cardCount + ' cards tracked across ' + sets.length +
       ' sets' + (topCard ? ', prices up to ' + money(topCard.price) : '') +
       '. Raw, PSA 8, PSA 9 and PSA 10 prices from real eBay sales, updated daily.',
