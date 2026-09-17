@@ -281,6 +281,9 @@ color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:an
 .scrollx .mtable{min-width:644px}
 .mtable td{white-space:nowrap}
 .mtable td.cname{white-space:normal}
+/* card name stays pinned while the price columns scroll sideways on phones */
+.ptable th:first-child,.ptable td.cname{position:sticky;left:0;z-index:2;background:var(--bg)}
+.scrollx .ptable td.cname{box-shadow:1px 0 0 var(--border)}
 .mtable th:nth-child(1),.mtable td:nth-child(1){position:sticky;left:0;background:var(--bg);z-index:2}
 .mtable th:nth-child(2),.mtable td:nth-child(2){position:sticky;left:32px;background:var(--bg);z-index:2;border-right:1px solid var(--border)}
 .bottomnav{margin-top:44px;border-top:1px solid var(--border);padding-top:18px}
