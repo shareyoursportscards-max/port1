@@ -222,7 +222,7 @@ function yearImageStrip(y, sets, setSlugs) {
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
-  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/blog/">Market Reports</a></nav>';
+  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/blog/">Market Reports</a><a class="yn-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
 }
 
 function page(o) {
@@ -250,13 +250,13 @@ function page(o) {
       primaryImageOfPage: { '@type': 'ImageObject', contentUrl: o.cardimg }
     }) + '</script>\n' : '') +
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
-    '<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=Newsreader:ital@1&display=swap" rel="stylesheet">\n' +
+    '<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=Newsreader:ital@1&display=swap" rel="stylesheet">\n' +
     '<style>' + CSS + '</style>\n</head>\n<body>\n<div class="wrap">\n' +
     '<a class="home" href="/">◂ Griffey Card Prices — interactive guide</a>\n' +
     o.body +
     '\n<div class="bottomnav"><div class="bn-label">Browse the guide</div>' + yearNav(o.navYear || null) + '</div>' +
     '\n<div class="foot">Prices updated __PAGEDATE__ from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
-    '<a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
+    'A <a href="https://90swax.com/" style="font-weight:600">90sWax</a> site · <a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
     '</div>\n' +
     '<div class="lb" id="cardLb"><img alt=""></div>\n' +
     '<script>(function(){var lb=document.getElementById("cardLb"),li=lb.firstElementChild;document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.closest&&t.closest(".cardfig")){li.src=t.src;li.alt=t.alt;lb.classList.add("open");trackEvent("card_photo_open",{card_name:t.alt||"",page_path:location.pathname});}else if(lb.classList.contains("open")){lb.classList.remove("open");}});document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.classList.remove("open");});})();</script>\n' +
@@ -361,6 +361,7 @@ td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--bor
 .report .up,.rpt-text .up{font-size:inherit}.report .down,.rpt-text .down{font-size:inherit}
 ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
+.yn-wax{font-family:Anton,Impact,sans-serif;font-size:15px;letter-spacing:.03em;color:#fff !important}.yn-wax span{color:var(--gold)}
 .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
 @media(max-width:600px){ul.plain{columns:1}td,th{padding:3px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 11px)}.yearslider .cardfig{width:130px}.cf-photo{height:170px}.cardfig img{max-height:170px}.cf-badge{font-size:10.5px;padding:4px 9px}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}td.eb{padding-left:0;padding-right:0}}
