@@ -222,7 +222,7 @@ function yearImageStrip(y, sets, setSlugs) {
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
-  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/blog/">Market Reports</a><a class="yn-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
+  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/blog/">Market Reports</a><a class="yn-wax" href="http://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
 }
 
 function page(o) {
@@ -256,7 +256,7 @@ function page(o) {
     o.body +
     '\n<div class="bottomnav"><div class="bn-label">Browse the guide</div>' + yearNav(o.navYear || null) + '</div>' +
     '\n<div class="foot">Prices updated __PAGEDATE__ from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
-    'A <a href="https://90swax.com/" style="font-weight:600">90sWax</a> site · <a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
+    'A <a href="http://90swax.com/" style="font-weight:600">90sWax</a> site · <a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
     '</div>\n' +
     '<div class="lb" id="cardLb"><img alt=""></div>\n' +
     '<script>(function(){var lb=document.getElementById("cardLb"),li=lb.firstElementChild;document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.closest&&t.closest(".cardfig")){li.src=t.src;li.alt=t.alt;lb.classList.add("open");trackEvent("card_photo_open",{card_name:t.alt||"",page_path:location.pathname});}else if(lb.classList.contains("open")){lb.classList.remove("open");}});document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.classList.remove("open");});})();</script>\n' +
