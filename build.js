@@ -252,7 +252,7 @@ function page(o) {
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
     '<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=Newsreader:ital@1&display=swap" rel="stylesheet">\n' +
     '<style>' + CSS + '</style>\n</head>\n<body>\n<div class="wrap">\n' +
-    '<a class="home" href="/">◂ Griffey Card Prices — interactive guide</a>\n' +
+    '<div class="toprow"><a class="home" href="/">◂ Griffey Card Prices — interactive guide</a><a class="yn-wax top" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></div>\n' +
     o.body +
     '\n<div class="bottomnav"><div class="bn-label">Browse the guide</div>' + yearNav(o.navYear || null) + '</div>' +
     '\n<div class="foot">Prices updated __PAGEDATE__ from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
@@ -362,6 +362,7 @@ td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--bor
 ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .yn-wax{font-family:Anton,Impact,sans-serif;font-size:15px;letter-spacing:.03em;color:#fff !important}.yn-wax span{color:var(--gold)}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px;flex-wrap:wrap}.toprow .home{margin-bottom:0}.yn-wax.top{font-size:17px;padding:6px 10px;border:1px solid var(--border);border-radius:10px;text-decoration:none}
 .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
 @media(max-width:600px){ul.plain{columns:1}td,th{padding:3px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 11px)}.yearslider .cardfig{width:130px}.cf-photo{height:170px}.cardfig img{max-height:170px}.cf-badge{font-size:10.5px;padding:4px 9px}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}td.eb{padding-left:0;padding-right:0}}

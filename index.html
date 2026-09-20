@@ -217,7 +217,7 @@
     transition:color .15s ease, background .15s ease;
   }
   .nav-links a:hover{color:var(--text); background:rgba(255,255,255,.06);}
-  .nav-wax{font-family:Anton,Impact,sans-serif !important; font-size:16px !important; font-weight:400 !important; letter-spacing:.03em; color:#fff !important; margin-left:4px;}
+  .nav-wax{font-family:Anton,Impact,sans-serif; font-size:16px; letter-spacing:.03em; color:#fff; text-decoration:none; padding:6px 8px; border-radius:8px; white-space:nowrap;}
   .nav-wax span{color:var(--teal);}
   .nav-wax:hover{background:rgba(47,230,199,.1) !important;}
   .nav-right{display:flex; align-items:center; gap:10px; flex:none; margin-left:auto; position:relative;}
@@ -398,6 +398,7 @@
     .nav-brand .nb-text{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
     .nav-right{flex:none;}
     .nav-cta{padding:7px 12px; font-size:11px; white-space:nowrap;}
+    .nav-wax{font-size:14px; padding:6px 4px;}
   }
   @media(max-width:400px){
     .nav-brand .nb-text{font-size:0;}
@@ -1848,9 +1849,9 @@
       <a href="/biggest-movers/">Movers</a>
       <a href="/how-much-are-griffey-cards-worth/">Values</a>
       <a href="/blog/">Reports</a>
-      <a class="nav-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a>
     </div>
     <div class="nav-right">
+      <a class="nav-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a>
       <a class="nav-cta" href="#" id="navColl">My Collection</a>
       <span class="cta-glare" aria-hidden="true"></span>
     </div>
