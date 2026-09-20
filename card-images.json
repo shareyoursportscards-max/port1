@@ -293,7 +293,7 @@
   "h": 645,
   "alt": "1998 Bowman Chrome International Ken Griffey Jr. card #33 in PSA 10 slab"
  },
- "1998|1998 Studio|Hit Parade (/5,000)": {
+ "1998|1998 Studio|Hit Parade #6 (/5,000)": {
   "file": "1998-studio-hit-parade-griffey-psa10.jpg",
   "w": 287,
   "h": 500,
@@ -2038,5 +2038,11 @@
   "w": 377,
   "h": 665,
   "alt": "1994 Leaf Limited Gold All-Stars Ken Griffey Jr. card #11 in a PSA 8 slab"
+ },
+ "1998|1998 Topps Chrome|Clout Nine Refractor #C8": {
+  "file": "1998-topps-chrome-clout-nine-refractor-c8-griffey-psa9.jpg",
+  "w": 395,
+  "h": 692,
+  "alt": "1998 Topps Chrome Clout Nine Refractor Ken Griffey Jr. card #C8 in PSA 9 slab"
  }
 }
