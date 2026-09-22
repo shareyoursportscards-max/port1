@@ -765,7 +765,7 @@ for (const y of years) {
 ranked.sort((a, b) => b.value - a.value);
 const top25 = ranked.slice(0, 25);
 
-let mvBody = '<h1>Biggest Sales of 1990s Ken Griffey Jr. Cards</h1>' +
+let mvBody = '<h1>Most Expensive Ken Griffey Jr. Cards of the 1990s</h1>' +
   '<p class="sub">The 25 biggest sales among the Ken Griffey Jr. cards from 1990–1999 this guide tracks, ranked by the highest price paid on eBay since tracking began in April 2026. Out of ' +
   totalCards.toLocaleString('en-US') + ' Griffey cards tracked here, these are the most expensive sales. Updated daily as new sales come in.</p>' +
   '<table><colgroup><col style="width:5%"><col><col style="width:10%"><col style="width:13%"><col style="width:14%"><col style="width:14%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th>Value</th><th>Date Sold</th></tr></thead><tbody>';
@@ -787,15 +787,15 @@ if (mvFigs) mvBody += '<h2>The Cards</h2><div class="cardfigs mvfigs">' + mvFigs
 
 const mvCard = top25.find(c => c.img);
 write('most-valuable', page({
-  title: 'Biggest Sales of 1990s Ken Griffey Jr. Cards | Top 25 Tracked',
-  desc: 'The 25 biggest tracked sales among Ken Griffey Jr. cards from 1990-1999, ranked by real eBay sold prices. Topping the list: ' +
+  title: 'Most Expensive Ken Griffey Jr. Cards of the 1990s | Top 25 Sales',
+  desc: 'The 25 most expensive Ken Griffey Jr. cards from 1990-1999, ranked by real eBay sold prices. Topping the list: ' +
     top25[0].set + ' ' + top25[0].name + ' at ' + money(top25[0].value) + '. Updated daily.',
   url: SITE + '/most-valuable/',
   cardimg: mvCard ? SITE + '/img/cards/' + mvCard.img.file : null,
   ogimg: SITE + '/img/og/most-valuable.jpg',
   jsonld: {
     '@context': 'https://schema.org', '@type': 'ItemList',
-    name: 'Biggest Sales of 1990s Ken Griffey Jr. Cards',
+    name: 'Most Expensive Ken Griffey Jr. Cards of the 1990s',
     itemListElement: top25.map((c, i) => Object.assign({
       '@type': 'ListItem', position: i + 1,
       name: c.set + ' ' + c.name + ' ' + c.grade + ' — ' + money(c.value),
