@@ -251,23 +251,11 @@
   "h": 655,
   "alt": "1998 Ultra Gold Medallion Ken Griffey Jr. card #1G in PSA 9 slab"
  },
- "1998|1998 Ultra|Big Shots": {
-  "file": "1998-ultra-big-shots-griffey-psa10.jpg",
-  "w": 351,
-  "h": 612,
-  "alt": "1998 Ultra Big Shots Ken Griffey Jr. insert card #1 in PSA 10 slab"
- },
  "1998|1998 Ultra|Pizzazz Gold Medallion #476G": {
   "file": "1998-ultra-pizzazz-gold-medallion-476g-griffey-psa9.jpg",
   "w": 396,
   "h": 652,
   "alt": "1998 Ultra Pizzazz Gold Medallion Ken Griffey Jr. card #476G in PSA 9 slab"
- },
- "1998|1998 Ultra|Power Plus": {
-  "file": "1998-ultra-power-plus-griffey-psa9.jpg",
-  "w": 367,
-  "h": 627,
-  "alt": "1998 Ultra Power Plus Ken Griffey Jr. insert card #1 in PSA 9 slab"
  },
  "1998|1998 Topps|Etch-A-Sketch #ES3": {
   "file": "1998-topps-etch-a-sketch-es3-griffey-psa10.jpg",
@@ -1150,12 +1138,6 @@
   "w": 372,
   "h": 655,
   "alt": "1998 Topps Chrome Refractor Ken Griffey Jr. card #321"
- },
- "1998|1998 Ultra|Diamond Immortals": {
-  "file": "1998-ultra-diamond-immortals-griffey.jpg",
-  "w": 390,
-  "h": 652,
-  "alt": "1998 Ultra Diamond Immortals Ken Griffey Jr. die-cut card #1"
  },
  "1998|1998 Select|Five Star Bonus (/50)": {
   "file": "1998-select-five-star-bonus-griffey.jpg",
@@ -2068,5 +2050,23 @@
   "w": 390,
   "h": 658,
   "alt": "1999 Skybox Thunder Rave Ken Griffey Jr. card #292 numbered to 150 in PSA 9 slab"
+ },
+ "1998|1998 Ultra|Power Plus #1PP": {
+  "file": "1998-ultra-power-plus-griffey-psa9.jpg",
+  "w": 367,
+  "h": 627,
+  "alt": "1998 Ultra Power Plus Ken Griffey Jr. insert card #1 in PSA 9 slab"
+ },
+ "1998|1998 Ultra|Diamond Immortals #1DI": {
+  "file": "1998-ultra-diamond-immortals-griffey.jpg",
+  "w": 390,
+  "h": 652,
+  "alt": "1998 Ultra Diamond Immortals Ken Griffey Jr. die-cut card #1"
+ },
+ "1998|1998 Ultra|Big Shots #1": {
+  "file": "1998-ultra-big-shots-griffey-psa10.jpg",
+  "w": 351,
+  "h": 612,
+  "alt": "1998 Ultra Big Shots Ken Griffey Jr. insert card #1 in PSA 10 slab"
  }
 }
