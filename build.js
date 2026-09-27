@@ -20,9 +20,12 @@ const GA = 'G-1H6EWY4GJJ';
 const src = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const start = src.indexOf('const DATA');
 const end = src.indexOf('const years = Object.keys');
-if (start < 0 || end < 0) { console.error('Could not locate DATA/BLOG in index.html'); process.exit(1); }
+if (start < 0 || end < 0) { console.error('Could not locate DATA in index.html'); process.exit(1); }
+// BLOG lives in its own file - index.html deliberately does not ship it to the browser
+const blogSrc = fs.readFileSync(path.join(ROOT, 'blog-data.js'), 'utf8');
 const ctx = vm.createContext({});
-vm.runInContext(src.slice(start, end) + ';this.DATA=DATA;this.BLOG=BLOG;', ctx);
+const NL = String.fromCharCode(10);
+vm.runInContext([src.slice(start, end), blogSrc, ';this.DATA=DATA;this.BLOG=BLOG;'].join(NL), ctx);
 const DATA = ctx.DATA, BLOG = ctx.BLOG;
 
 /* ---------- card images (card-images.json: "year|set|card" -> {file,w,h,alt}) ---------- */
