@@ -533,7 +533,10 @@ for (const y of years) {
     /* base card = "Base #365" or a bare "#355" — its number goes in the title, its prices in the one-line answer */
     const baseCard = s.subsets.find(x => /^Base #\S+/.test(x.name) || /^#\S+$/.test(x.name)) || null;
     const baseNum = baseCard ? baseCard.name.match(/#(\S+)/)[1] : null;
-    const setTitle = esc(s.set) + ' Ken Griffey Jr. ' + (baseNum ? '#' + baseNum + ' Card Value' : 'Card Values');
+    /* searched-for inserts that the base-number title hides (GSC: "rifleman" queries at pos 7-10, 0 clicks) */
+    const TITLE_EXTRA = { '1991 Score': 'Rifleman #697' };
+    const extra = TITLE_EXTRA[s.set];
+    const setTitle = esc(s.set) + ' Ken Griffey Jr. ' + (baseNum ? '#' + baseNum + (extra ? ' & ' + esc(extra) : '') + ' Card Value' : 'Card Values');
     let baseAnswer = '';
     if (baseCard) {
       const parts = [];
