@@ -775,13 +775,13 @@ const top25 = ranked.slice(0, 25);
 let mvBody = '<h1>Most Expensive Ken Griffey Jr. Cards of the 1990s</h1>' +
   '<p class="sub">The 25 biggest sales among the Ken Griffey Jr. cards from 1990–1999 this guide tracks, ranked by the highest price paid on eBay since tracking began in April 2026. Out of ' +
   totalCards.toLocaleString('en-US') + ' Griffey cards tracked here, these are the most expensive sales. Updated daily as new sales come in.</p>' +
-  '<table><colgroup><col style="width:5%"><col><col style="width:8%"><col style="width:10%"><col style="width:13%"><col style="width:16%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th style="text-align:right;white-space:nowrap">Sold For</th><th style="padding-left:22px">Date</th></tr></thead><tbody>';
+  '<table><colgroup><col style="width:5%"><col><col style="width:8%"><col style="width:10%"><col style="width:13%"><col style="width:16%"></colgroup><thead><tr><th>#</th><th>Card</th><th>Year</th><th>Grade</th><th style="text-align:left;white-space:nowrap;padding-left:10px">Sold For</th><th style="padding-left:22px">Date</th></tr></thead><tbody>';
 top25.forEach((c, i) => {
   mvBody += '<tr><td style="color:var(--gold);font-weight:600">' + (i + 1) + '</td>' +
     '<td class="cname"><a href="/' + c.y + '/' + c.sl + '/" style="color:var(--text);text-decoration:none">' + esc(c.set) + ' — ' + esc(c.name) + '</a></td>' +
     '<td class="odds"><a href="/' + c.y + '/" style="color:var(--dim);text-decoration:none">' + c.y + '</a></td>' +
     '<td class="odds" style="white-space:nowrap">' + c.grade + '</td>' +
-    '<td class="psa10" style="text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap">' + money(c.value) + '</td>' +
+    '<td class="psa10" style="text-align:left;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:10px">' + money(c.value) + '</td>' +
     '<td class="odds" style="white-space:nowrap;padding-left:22px">' + (c.date ? new Date(c.date + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : '—') + '</td></tr>';
 });
 mvBody += '</tbody></table>' +
