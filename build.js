@@ -781,7 +781,7 @@ top25.forEach((c, i) => {
     '<td class="odds"><a href="/' + c.y + '/" style="color:var(--dim);text-decoration:none">' + c.y + '</a></td>' +
     '<td class="odds">' + c.grade + '</td>' +
     '<td class="psa10">' + money(c.value) + '</td>' +
-    '<td class="odds">' + (c.date ? humanDate(c.date) : '—') + '</td></tr>';
+    '<td class="odds" style="white-space:nowrap">' + (c.date ? new Date(c.date + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : '—') + '</td></tr>';
 });
 mvBody += '</tbody></table>' +
   '<p class="sub" style="margin-top:16px">Every price above comes from a real completed eBay sale. Browse the full guide by year for raw, PSA 8, PSA 9 and PSA 10 values on every card. Disclaimer: with a market this large, there will be sales we miss or simply don\'t track!</p>';
