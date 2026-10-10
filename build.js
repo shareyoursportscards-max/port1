@@ -911,6 +911,33 @@ nfHtml = nfHtml
   .split('__PAGEDATE__').join('regularly');
 fs.writeFileSync(path.join(ROOT, '404.html'), nfHtml);
 console.log('404.html written');
+
+/* ---------- legacy URL forwards (Oct 10, 2026) ----------
+   GitHub Pages can't send 301s, so each removed URL Google still remembers gets a tiny
+   meta-refresh + canonical page pointing at its closest live page. Not in the sitemap. */
+const LEGACY = {
+  '1996/bowman': '/1996/', '1996/circa': '/1996/',
+  '1998/collectors-choice': '/1998/', '1998/skybox-dugout-axcess': '/1998/',
+  '1999/sp-top-prospects': '/1999/'
+};
+// the old per-day blog pages ran Jun 21 - Aug 31, 2026; forward every date in that span
+for (let t = Date.UTC(2026, 5, 21); t <= Date.UTC(2026, 7, 31); t += 864e5) {
+  LEGACY['blog/' + new Date(t).toISOString().slice(0, 10)] = '/blog/';
+}
+let fwd = 0;
+for (const [from, to] of Object.entries(LEGACY)) {
+  const dir = path.join(ROOT, from);
+  const live = path.join(dir, 'index.html');
+  if (fs.existsSync(live) && !fs.readFileSync(live, 'utf8').includes('data-legacy-forward')) continue; // a real page lives here again
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(live, '<!DOCTYPE html><html lang="en" data-legacy-forward><head><meta charset="utf-8">' +
+    '<title>Moved | Griffey Card Prices</title><link rel="canonical" href="' + SITE + to + '">' +
+    '<meta http-equiv="refresh" content="0; url=' + to + '"></head>' +
+    '<body><p>This page moved to <a href="' + to + '">' + SITE + to + '</a>.</p></body></html>');
+  fwd++;
+}
+for (const from of Object.keys(LEGACY)) written.add(from); // keeps the prune step from deleting the forwards
+console.log('Legacy forwards: ' + fwd);
 sitemapUrls.push(SITE + '/biggest-movers/');
 
 /* ---------- HTML site map (real crawlable page linking to every year/set page,
