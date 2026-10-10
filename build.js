@@ -572,7 +572,8 @@ for (const y of years) {
     }
     write(rel, page({
       navYear: y,
-      title: setTitle,
+      /* search-result title only (the on-page H1 stays short): GSC "1990 topps griffey rookie" queries rank 25-37 */
+      title: ({ '1990 Topps': '1990 Topps Ken Griffey Jr. #336 Rookie Cup Card Value' })[s.set] || setTitle,
       desc: 'How much is a ' + s.set + ' Ken Griffey Jr. card worth? ' + names +
         (top ? ', prices up to ' + money(top) : '') + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
       url: SITE + '/' + rel + '/',
