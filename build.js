@@ -534,7 +534,7 @@ for (const y of years) {
     const baseCard = s.subsets.find(x => /^Base #\S+/.test(x.name) || /^#\S+$/.test(x.name)) || null;
     const baseNum = baseCard ? baseCard.name.match(/#(\S+)/)[1] : null;
     /* searched-for inserts that the base-number title hides (GSC: "rifleman" queries at pos 7-10, 0 clicks) */
-    const TITLE_EXTRA = { '1991 Score': 'Rifleman #697', '1991 Topps': 'Desert Shield' };
+    const TITLE_EXTRA = { '1991 Score': 'Rifleman #697' };
     const extra = TITLE_EXTRA[s.set];
     const setTitle = esc(s.set) + ' Ken Griffey Jr. ' + (baseNum ? '#' + baseNum + (extra ? ' & ' + esc(extra) : '') + ' Card Value' : 'Card Values');
     let baseAnswer = '';
@@ -573,7 +573,7 @@ for (const y of years) {
     write(rel, page({
       navYear: y,
       /* search-result title only (the on-page H1 stays short): GSC "1990 topps griffey rookie" queries rank 25-37 */
-      title: ({ '1990 Topps': '1990 Topps Ken Griffey Jr. #336 Rookie Cup Card Value' })[s.set] || setTitle,
+      title: ({ '1990 Topps': '1990 Topps Ken Griffey Jr. #336 Rookie Cup Card Value', '1991 Topps': '1991 Topps Ken Griffey Jr. #790 Card Value (Base & Desert Shield)' })[s.set] || setTitle,
       desc: 'How much is a ' + s.set + ' Ken Griffey Jr. card worth? ' + names +
         (top ? ', prices up to ' + money(top) : '') + '. Raw and PSA 8/9/10 prices from real eBay sold listings, updated daily.',
       url: SITE + '/' + rel + '/',
