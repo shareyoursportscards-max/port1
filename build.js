@@ -534,7 +534,7 @@ for (const y of years) {
     const baseCard = s.subsets.find(x => /^Base #\S+/.test(x.name) || /^#\S+$/.test(x.name)) || null;
     const baseNum = baseCard ? baseCard.name.match(/#(\S+)/)[1] : null;
     /* searched-for inserts that the base-number title hides (GSC: "rifleman" queries at pos 7-10, 0 clicks) */
-    const TITLE_EXTRA = { '1991 Score': 'Rifleman #697' };
+    const TITLE_EXTRA = { '1991 Score': 'Rifleman #697', '1991 Topps': 'Desert Shield' };
     const extra = TITLE_EXTRA[s.set];
     const setTitle = esc(s.set) + ' Ken Griffey Jr. ' + (baseNum ? '#' + baseNum + (extra ? ' & ' + esc(extra) : '') + ' Card Value' : 'Card Values');
     let baseAnswer = '';
