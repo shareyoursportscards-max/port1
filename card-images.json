@@ -780,10 +780,10 @@
   "alt": "1998 Finest Non-Protected Refractor Ken Griffey Jr. card #100 in PSA 9 slab"
  },
  "1997|1997 Ultra|Thunderclap #8": {
-  "file": "1997-ultra-thunderclap-8-griffey-psa8.jpg",
-  "w": 370,
-  "h": 622,
-  "alt": "1997 Ultra Thunderclap Ken Griffey Jr. insert card #8 in PSA 8 slab"
+  "file": "1997-ultra-thunderclap-8-griffey-psa9.jpg",
+  "w": 312,
+  "h": 546,
+  "alt": "1997 Ultra Thunderclap Ken Griffey Jr. card #8 in PSA 9 slab"
  },
  "1999|1999 Ultra|Thunderclap #10": {
   "file": "1999-ultra-thunderclap-10-griffey-psa9.jpg",
@@ -2152,5 +2152,17 @@
   "w": 327,
   "h": 571,
   "alt": "1999 Upper Deck Ionix Ken Griffey Jr. card #52 in PSA 10 slab"
+ },
+ "1997|1997 Flair Showcase|Row 0 #24": {
+  "file": "1997-flair-showcase-row-0-24-griffey-psa10.jpg",
+  "w": 395,
+  "h": 687,
+  "alt": "1997 Flair Showcase Row 0 Ken Griffey Jr. card #24 in PSA 10 slab"
+ },
+ "1999|1999 Topps|All-Topps Mystery Finest Refractor #M14": {
+  "file": "1999-topps-all-topps-mystery-finest-refractor-m14-griffey-psa10.jpg",
+  "w": 376,
+  "h": 665,
+  "alt": "1999 Topps All-Topps Mystery Finest Refractor Ken Griffey Jr. card #M14 in PSA 10 slab"
  }
 }
