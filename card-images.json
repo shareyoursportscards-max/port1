@@ -420,10 +420,10 @@
   "alt": "1995 Select Certified Gold Team Ken Griffey Jr. card #1 in PSA 10 slab"
  },
  "1995|1995 Select Certified|Mirror Gold #70": {
-  "file": "1995-select-certified-mirror-gold-griffey-psa9.jpg",
-  "w": 367,
-  "h": 627,
-  "alt": "1995 Select Certified Mirror Gold Ken Griffey Jr. card #70 in PSA 9 slab"
+  "file": "1995-select-certified-mirror-gold-70-griffey-psa9.jpg",
+  "w": 392,
+  "h": 682,
+  "alt": "1995 Select Certified Mirror Gold Ken Griffey Jr. card #70 in PSA slab"
  },
  "1995|1995 Stadium Club|Members Only 50 #19": {
   "file": "1995-stadium-club-members-only-50-griffey-psa10.jpg",
@@ -2164,5 +2164,11 @@
   "w": 376,
   "h": 665,
   "alt": "1999 Topps All-Topps Mystery Finest Refractor Ken Griffey Jr. card #M14 in PSA 10 slab"
+ },
+ "1997|1997 Pinnacle Certified|Mirror Gold #136": {
+  "file": "1997-pinnacle-certified-mirror-gold-136-griffey-psa9.jpg",
+  "w": 400,
+  "h": 700,
+  "alt": "1997 Pinnacle Certified Mirror Gold Ken Griffey Jr. card #136 in PSA 9 slab"
  }
 }
