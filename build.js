@@ -503,31 +503,29 @@ for (const y of years) {
     let setFaqJsonLd = null;
     let setFaqHtml = '';
     if (setTopCard) {
-      const topName = s.set + ' ' + setTopCard.name + (setTopCard.grade === 'raw' ? ' (raw)' : ' in ' + setTopCard.grade);
-      const q1 = 'How much is a ' + y + ' ' + s.set.replace(/^\d{4}\s+/, '') + ' Ken Griffey Jr. card worth?';
-      const a1 = s.set + ' Ken Griffey Jr. card prices top out at ' + money(setTopCard.price) + ' for the ' + topName + '.';
-      const setFaqs = [[q1, a1]];
-      const setMover = bestRecentMover(s.subsets);
-      const q2 = 'Has the ' + s.set + ' Ken Griffey Jr. card market moved recently?';
-      const a2 = setMover ?
-        ('Yes — the ' + s.set + ' ' + setMover.name + ' in ' + setMover.grade + ' most recently sold for ' + money(setMover.to) + ' on ' +
-          humanDate(setMover.date) + saleTypeSuffix(setMover.type) + ', ' + (setMover.pct > 0 ? 'up' : 'down') + ' ' +
-          Math.abs(setMover.pct) + '% from ' + money(setMover.from) + ' before that.') :
-        ('Prices have been pretty steady lately — the ' + topName + ' is still valued at ' + money(setTopCard.price) + '.');
-      setFaqs.push([q2, a2]);
-      if (setTopCard.raw && setTopCard.grade !== 'raw') {
-        const q3 = 'What is a raw (ungraded) ' + s.set + ' Ken Griffey Jr. card worth?';
-        const a3 = 'A raw copy of the ' + s.set + ' ' + setTopCard.name + ' has sold for ' + money(setTopCard.raw) +
-          (setTopCard.rawDate ? ' (' + humanDate(setTopCard.rawDate) + saleTypeSuffix(setTopCard.rawType) + ')' : '') + '.';
-        setFaqs.push([q3, a3]);
+      /* one question per big card: its PSA 10 and PSA 9 sales, no raw. Top 5 by price; the base card always keeps a spot */
+      const isBase = x => /^Base #\S+/.test(x.name) || /^#\S+$/.test(x.name);
+      const graded = s.subsets.filter(x => x.psa10 || x.psa9).sort((a, b) => Math.max(b.psa10 || 0, b.psa9 || 0) - Math.max(a.psa10 || 0, a.psa9 || 0));
+      const bigCards = graded.slice(0, 5);
+      const gradedBase = graded.find(isBase);
+      if (gradedBase && !bigCards.includes(gradedBase)) bigCards[bigCards.length - 1] = gradedBase;
+      const setFaqs = bigCards.map(x => {
+        const card = s.set + ' ' + x.name.replace(/^Base\s+/, '').replace(/\s*\(.*?\)/g, '') + ' Ken Griffey Jr.';
+        const sale = (label, price, date) => money(price) + ' in a ' + label + (date ? ' on ' + humanDate(date) : '');
+        const sales = [];
+        if (x.psa10) sales.push(sale('PSA 10', x.psa10, x.psa10_date));
+        if (x.psa9) sales.push(sale('PSA 9', x.psa9, x.psa9_date));
+        return ['How much is the ' + card + ' worth?', 'The ' + card + ' sold for ' + sales.join(' and ') + '.'];
+      });
+      if (setFaqs.length) {
+        setFaqHtml = '<h2>' + esc(s.set) + ' Value FAQ</h2><div class="faq">' +
+          setFaqs.map(([q, a]) => '<div class="faq-item"><p class="faq-q">' + esc(q) + '</p><p class="faq-a">' + esc(a) + '</p></div>').join('') +
+          '</div>';
+        setFaqJsonLd = {
+          '@context': 'https://schema.org', '@type': 'FAQPage',
+          mainEntity: setFaqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+        };
       }
-      setFaqHtml = '<h2>' + esc(s.set) + ' Value FAQ</h2><div class="faq">' +
-        setFaqs.map(([q, a]) => '<div class="faq-item"><p class="faq-q">' + esc(q) + '</p><p class="faq-a">' + esc(a) + '</p></div>').join('') +
-        '</div>';
-      setFaqJsonLd = {
-        '@context': 'https://schema.org', '@type': 'FAQPage',
-        mainEntity: setFaqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
-      };
     }
 
     /* base card = "Base #365" or a bare "#355" — its number goes in the title, its prices in the one-line answer */
