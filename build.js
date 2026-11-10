@@ -225,7 +225,7 @@ function yearImageStrip(y, sets, setSlugs) {
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
-  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/blog/">Market Reports</a><a class="yn-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
+  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/articles/">Articles</a><a class="yn-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
 }
 
 function page(o) {
@@ -360,6 +360,30 @@ a.eb:hover{color:var(--gold);border-color:var(--gold)}
 .lb img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 12px 50px rgba(0,0,0,.7);border:1px solid var(--border)}
 td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--border);vertical-align:middle;margin-right:8px;background:#fff}
 .report{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px 17px;margin:12px 0;font-size:13.5px;line-height:1.65;color:var(--dim)}
+.art{max-width:720px}
+.art h1{margin-bottom:6px}
+.art-meta{color:var(--dim);font-size:13px;margin:0 0 18px}
+.art p{font-size:15.5px;line-height:1.7;color:var(--text);margin:0 0 16px}
+.art h2{font-size:19px;margin-top:34px}
+.art h3{font-family:'Chakra Petch',sans-serif;font-size:16px;margin:24px 0 6px}
+.art strong{color:#fff}
+.art a{color:var(--gold)}
+.art-link{font-size:14px!important;margin:-6px 0 22px!important}
+.art-fig{float:right;width:150px;margin:0 0 14px 22px}
+.art-fig img{width:100%;height:auto;border-radius:8px;border:1px solid var(--border);cursor:zoom-in}
+.art-fig figcaption{font-size:11.5px;color:var(--dim);text-align:center;margin-top:5px;line-height:1.35}
+.art blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:4px 0 4px 14px;color:var(--dim)}
+.art ul{margin:0 0 16px 20px;font-size:15px;line-height:1.65}
+.art hr{border:0;border-top:1px solid var(--border);margin:26px 0}
+.art-video a,.art-back a{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14px}
+.artlist{display:grid;gap:14px}
+.art-card{display:grid;grid-template-columns:84px 1fr;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--text)}
+.art-card:hover{border-color:var(--gold)}
+.art-card img{width:84px;height:auto;border-radius:6px}
+.art-card-date{font-size:12px;color:var(--dim);margin-bottom:3px}
+.art-card-title{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:16px;line-height:1.3;margin-bottom:5px}
+.art-card-desc{font-size:13.5px;color:var(--dim);line-height:1.5}
+@media(max-width:520px){.art-fig{float:none;width:120px;margin:0 auto 16px}}
 .report b{color:var(--text)}.report .rdate{color:var(--gold);font-size:12px;letter-spacing:.6px;display:block;margin-bottom:5px}
 .report .up,.rpt-text .up{font-size:inherit}.report .down,.rpt-text .down{font-size:inherit}
 ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
@@ -712,41 +736,126 @@ function reportPhoto(year, body) {
   return best ? { key: best, img: CARDIMG[best], name: best.split('|')[2], set: best.split('|')[1] } : null;
 }
 
-const rptYears = years.filter(y => (BLOG[y] || []).length)
-  .sort((a, c) => {
-    const da = Date.parse(BLOG[a][0].date), dc = Date.parse(BLOG[c][0].date);
-    return dc - da || a - c;
-  });
-
-let blogBody = '<h1>Griffey Card Market Reports</h1>' +
-  '<p class="sub">The latest report from every year, newest first — what actually moved in the Ken Griffey Jr. card market, backed by real eBay sold listings. Price moves are sale to sale, not averages. Every year\'s full history is one click away.</p>' +
-  '<div class="rptlist">';
-for (const y of rptYears) {
-  const all = BLOG[y];
-  const latest = all[0];
-  const ph = reportPhoto(y, latest.body);
-  blogBody += '<section class="rpt">' +
-    '<div class="rpt-body">' +
-      '<div class="rpt-top"><a class="rpt-year" href="/' + y + '/#market-reports">' + y + '</a>' +
-      '<span class="rpt-date">' + esc(latest.date) + '</span></div>' +
-      '<p class="rpt-text">' + latest.body + '</p>' +
-      '<a class="rpt-more" href="/' + y + '/#market-reports">' +
-        (all.length > 1 ? 'All ' + all.length + ' ' + y + ' reports' : 'See the ' + y + ' guide') + ' &rsaquo;</a>' +
-    '</div>' +
-    (ph ? '<figure class="rpt-fig cardfig"><img src="/img/cards/' + ph.img.file + '" alt="' + esc(ph.img.alt) +
-      '" width="' + ph.img.w + '" height="' + ph.img.h + '" loading="lazy">' +
-      '<figcaption>' + esc(ph.set.replace(/^\d{4}\s+/, '')) + '<br>' + esc(ph.name) + '</figcaption></figure>' : '') +
-    '</section>';
+/* ---------- articles (Nov 10, 2026) — replaced the /blog/ index ----------
+   One markdown file per article in articles-src/, written from the video transcripts.
+   Front matter: title, date (ISO), desc, cover ("year|set|card" key into card-images.json,
+   optional — falls back to the first card the body mentions), video (YouTube URL, optional).
+   Body is a small markdown subset: ## headings, paragraphs, **bold**, *italic*, [links](/path/),
+   > quotes, --- rules, - lists. Rendered to /articles/<slug>/ with Article schema, plus
+   /articles/ as the index. The per-year market blurbs in blog-data.js still feed the year pages. */
+const ART_DIR = path.join(ROOT, 'articles-src');
+function mdInline(s) {
+  return esc(s)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*\n]+?)\*/g, '$1<em>$2</em>')
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/ — /g, ' &mdash; ').replace(/ · /g, ' &middot; ');
 }
-blogBody += '</div>';
-write('blog', page({
-  title: 'Griffey Card Market Reports | Daily Price Movement',
-  desc: 'Ken Griffey Jr. card market reports by year — which cards moved, by how much, and why, based on real eBay sold data.',
-  url: SITE + '/blog/',
+function mdBlock(md) {
+  const out = []; let para = [], list = null;
+  const flush = () => {
+    if (para.length) { out.push('<p>' + mdInline(para.join(' ')) + '</p>'); para = []; }
+    if (list) { out.push('<ul>' + list.map(l => '<li>' + mdInline(l) + '</li>').join('') + '</ul>'); list = null; }
+  };
+  for (const raw of md.split(/\r?\n/)) {
+    const line = raw.trimEnd();
+    let m;
+    if (!line.trim()) { flush(); continue; }
+    if ((m = line.match(/^(#{2,3})\s+(.*)$/))) { flush(); out.push('<h' + m[1].length + '>' + mdInline(m[2]) + '</h' + m[1].length + '>'); continue; }
+    if (/^---+$/.test(line)) { flush(); out.push('<hr>'); continue; }
+    if ((m = line.match(/^>\s?(.*)$/))) { flush(); out.push('<blockquote><p>' + mdInline(m[1]) + '</p></blockquote>'); continue; }
+    if ((m = line.match(/^[-*]\s+(.*)$/))) { if (para.length) flush(); (list = list || []).push(m[1]); continue; }
+    if ((m = line.match(/^→\s*(.*)$/))) { flush(); out.push('<p class="art-link">&rarr; ' + mdInline(m[1]) + '</p>'); continue; }
+    if (list) flush();
+    para.push(line.trim());
+  }
+  flush();
+  return out.join('\n');
+}
+const ARTICLES = fs.existsSync(ART_DIR) ? fs.readdirSync(ART_DIR).filter(f => f.endsWith('.md')).map(f => {
+  const txt = fs.readFileSync(path.join(ART_DIR, f), 'utf8');
+  const fm = txt.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!fm) throw new Error('articles-src/' + f + ': missing front matter');
+  const meta = {};
+  for (const l of fm[1].split(/\r?\n/)) { const i = l.indexOf(':'); if (i > 0) meta[l.slice(0, i).trim()] = l.slice(i + 1).trim(); }
+  for (const k of ['title', 'date', 'desc']) if (!meta[k]) throw new Error('articles-src/' + f + ': front matter needs ' + k);
+  const body = fm[2].trim();
+  const words = body.replace(/[#*>\[\]()→-]/g, ' ').split(/\s+/).filter(Boolean).length;
+  return { slug: f.replace(/\.md$/, ''), meta, body, words };
+}).sort((a, c) => Date.parse(c.meta.date) - Date.parse(a.meta.date)) : [];
+
+function articlePhoto(a) {
+  if (a.meta.cover && CARDIMG[a.meta.cover]) {
+    const k = a.meta.cover;
+    return { key: k, img: CARDIMG[k], name: k.split('|')[2], set: k.split('|')[1] };
+  }
+  // first card the body names: reuse the report matcher year by year, newest mention first
+  const bolded = a.body.replace(/^##\s+(.*)$/gm, '<b>$1</b>');
+  for (const y of years) { const ph = reportPhoto(String(y), bolded); if (ph) return ph; }
+  return null;
+}
+
+for (const a of ARTICLES) {
+  const ph = articlePhoto(a);
+  const dateH = humanDate(a.meta.date);
+  const body = '<article class="art">' +
+    '<h1>' + esc(a.meta.title) + '</h1>' +
+    '<p class="art-meta"><time datetime="' + esc(a.meta.date) + '">' + esc(dateH) + '</time> &middot; ' +
+      Math.max(1, Math.round(a.words / 220)) + ' min read &middot; real eBay sold prices</p>' +
+    (ph ? '<figure class="art-fig cardfig"><img src="/img/cards/' + ph.img.file + '" alt="' + esc(ph.img.alt) +
+      '" width="' + ph.img.w + '" height="' + ph.img.h + '" loading="eager">' +
+      '<figcaption>' + esc(ph.set.replace(/^\d{4}\s+/, '')) + ' &middot; ' + esc(ph.name) + '</figcaption></figure>' : '') +
+    mdBlock(a.body) +
+    (a.meta.video ? '<p class="art-video"><a href="' + esc(a.meta.video) + '" rel="noopener">&#9654; Watch the video on YouTube</a></p>' : '') +
+    '<p class="art-back"><a href="/articles/">&larr; All articles</a></p>' +
+    '</article>';
+  write('articles/' + a.slug, page({
+    title: a.meta.title + ' | Griffey Card Prices',
+    desc: a.meta.desc,
+    url: SITE + '/articles/' + a.slug + '/',
+    cardimg: ph ? SITE + '/img/cards/' + ph.img.file : null,
+    ogimg: SITE + '/img/og/market-reports.jpg',
+    jsonld: [{
+      '@context': 'https://schema.org', '@type': 'Article',
+      headline: a.meta.title, description: a.meta.desc,
+      datePublished: a.meta.date, dateModified: a.meta.date,
+      mainEntityOfPage: SITE + '/articles/' + a.slug + '/',
+      ...(ph ? { image: SITE + '/img/cards/' + ph.img.file } : {}),
+      author: { '@type': 'Person', name: 'Griffey Card Prices' },
+      publisher: { '@type': 'Organization', name: 'Griffey Card Prices', url: SITE + '/' }
+    }, {
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Griffey Card Prices', item: SITE + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Articles', item: SITE + '/articles/' },
+        { '@type': 'ListItem', position: 3, name: a.meta.title, item: SITE + '/articles/' + a.slug + '/' }
+      ]
+    }],
+    body
+  }));
+  sitemapUrls.push(SITE + '/articles/' + a.slug + '/');
+}
+
+let artIndex = '<h1>Griffey Card Articles</h1>' +
+  '<p class="sub">What is actually moving in the Ken Griffey Jr. card market and why &mdash; written from the weekly videos, backed by real eBay sold listings. Every card mentioned links to its live price table.</p>' +
+  '<div class="artlist">';
+for (const a of ARTICLES) {
+  const ph = articlePhoto(a);
+  artIndex += '<a class="art-card" href="/articles/' + a.slug + '/">' +
+    (ph ? '<img src="/img/cards/' + ph.img.file + '" alt="' + esc(ph.img.alt) + '" width="' + ph.img.w + '" height="' + ph.img.h + '" loading="lazy">' : '') +
+    '<div><div class="art-card-date">' + esc(humanDate(a.meta.date)) + '</div>' +
+    '<div class="art-card-title">' + esc(a.meta.title) + '</div>' +
+    '<div class="art-card-desc">' + esc(a.meta.desc) + '</div></div></a>';
+}
+artIndex += '</div>';
+write('articles', page({
+  title: 'Griffey Card Articles | What Is Moving and Why',
+  desc: 'Articles on the Ken Griffey Jr. card market — biggest sales, cards going up, cards going down, and what the sales say — from real eBay sold data.',
+  url: SITE + '/articles/',
   ogimg: SITE + '/img/og/market-reports.jpg',
-  body: blogBody
+  body: artIndex
 }));
-sitemapUrls.push(SITE + '/blog/');
+sitemapUrls.push(SITE + '/articles/');
 
 /* ---------- most valuable top 25 ---------- */
 const GRADES = [['psa10', 'PSA 10'], ['psa9', 'PSA 9'], ['psa8', 'PSA 8'], ['raw', 'Raw']];
@@ -919,9 +1028,11 @@ const LEGACY = {
   '1998/collectors-choice': '/1998/', '1998/skybox-dugout-axcess': '/1998/',
   '1999/sp-top-prospects': '/1999/'
 };
-// the old per-day blog pages ran Jun 21 - Aug 31, 2026; forward every date in that span
+// the old per-day blog pages ran Jun 21 - Aug 31, 2026, and the /blog/ index was retired
+// Nov 10, 2026 in favour of /articles/ (the per-year market blurbs still live on the year pages)
+LEGACY['blog'] = '/articles/';
 for (let t = Date.UTC(2026, 5, 21); t <= Date.UTC(2026, 7, 31); t += 864e5) {
-  LEGACY['blog/' + new Date(t).toISOString().slice(0, 10)] = '/blog/';
+  LEGACY['blog/' + new Date(t).toISOString().slice(0, 10)] = '/articles/';
 }
 let fwd = 0;
 for (const [from, to] of Object.entries(LEGACY)) {
@@ -952,7 +1063,8 @@ smBody += '<h2>More</h2><ul class="plain">' +
   '<li><a href="/most-valuable/">Biggest Sales (Top 25)</a></li>' +
   '<li><a href="/biggest-movers/">Biggest Movers</a></li>' +
   '<li><a href="/how-much-are-griffey-cards-worth/">How Much Is a Griffey Card Worth?</a></li>' +
-  '<li><a href="/blog/">Market Reports</a></li>' +
+  '<li><a href="/articles/">Articles</a></li>' +
+  ARTICLES.map(a => '<li><a href="/articles/' + a.slug + '/">' + esc(a.title) + '</a></li>').join('') +
   '</ul>';
 write('site-map', page({
   title: 'Site Map | Griffey Card Prices',
@@ -1019,7 +1131,7 @@ let worthBody =
   '<h2>How this guide works</h2>' +
   '<p class="sub">Every price on this site comes from a real completed eBay sale &mdash; auctions and Buy It Now both count, because someone actually paid that amount. ' +
   'Prices are updated daily as new sales close, tracked since April 2026. Grading columns cover raw, PSA 8, PSA 9 and PSA 10. ' +
-  'Built and maintained by a Griffey collector. Browse any year above for every card’s current value, or check the <a href="/blog/" style="color:var(--gold)">daily market reports</a> to see what moved.</p>';
+  'Built and maintained by a Griffey collector. Browse any year above for every card’s current value, or read the <a href="/articles/" style="color:var(--gold)">articles</a> to see what moved and why.</p>';
 
 write('how-much-are-griffey-cards-worth', page({
   title: 'How Much Is a Ken Griffey Jr. Card Worth? | Real Sold Prices',
@@ -1077,7 +1189,7 @@ fs.writeFileSync(path.join(ROOT, 'robots.txt'),
 
 /* ---------- prune stale pages no longer generated ---------- */
 let pruned = 0;
-for (const top of [...years.map(String), 'blog']) {
+for (const top of [...years.map(String), 'blog', 'articles']) {
   const dir = path.join(ROOT, top);
   if (!fs.existsSync(dir)) continue;
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -1098,6 +1210,6 @@ if (newSrc !== src) {
 }
 
 console.log('Generated: ' + years.length + ' year pages, ' + setPages + ' set pages, ' +
-  'blog index, sitemap.xml (' + sitemapUrls.length + ' URLs), robots.txt');
+  ARTICLES.length + ' articles, sitemap.xml (' + sitemapUrls.length + ' URLs), robots.txt');
 console.log('Content-dated pages: ' + changedPages + ' changed today, ' +
   (Object.keys(pageDates).length - changedPages) + ' unchanged (kept their real lastmod)');
