@@ -1157,7 +1157,7 @@ const CHART_CSS = `
 .ch-photo.cardfig{width:230px;margin:0;padding:12px 12px 8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px}
 .ch-photo.cardfig img{width:100%;max-height:none;border-radius:8px;box-shadow:0 12px 36px rgba(0,0,0,.55)}
 .ch-photo.cardfig figcaption{height:auto;margin-top:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-family:'Chakra Petch',sans-serif}
-@media(max-width:760px){.ch-top{grid-template-columns:1fr}.ch-photo.cardfig{width:170px;margin:0 auto;order:-1}}
+@media(max-width:760px){.ch-top{grid-template-columns:1fr}.ch-photo.cardfig{width:220px;margin:0 auto 4px;order:-1}}
 .ch-sep{width:1px;height:18px;background:var(--border);align-self:center;margin:0 4px}
 @media(max-width:640px){.ch-pick{grid-template-columns:1fr 1fr}.ch-pick div:last-child{grid-column:1/-1}.ch-stat .p{font-size:24px}.ch-title{font-size:17px}}
 `;
