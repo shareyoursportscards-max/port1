@@ -225,7 +225,7 @@ function yearImageStrip(y, sets, setSlugs) {
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
-  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/articles/">Articles</a><a class="yn-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
+  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/articles/">Articles</a><a href="/charts/">Charts</a><a class="yn-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
 }
 
 function page(o) {
@@ -1064,6 +1064,7 @@ smBody += '<h2>More</h2><ul class="plain">' +
   '<li><a href="/biggest-movers/">Biggest Movers</a></li>' +
   '<li><a href="/how-much-are-griffey-cards-worth/">How Much Is a Griffey Card Worth?</a></li>' +
   '<li><a href="/articles/">Articles</a></li>' +
+  '<li><a href="/charts/">Price Charts</a></li>' +
   ARTICLES.map(a => '<li><a href="/articles/' + a.slug + '/">' + esc(a.title) + '</a></li>').join('') +
   '</ul>';
 write('site-map', page({
@@ -1074,6 +1075,182 @@ write('site-map', page({
   body: smBody
 }));
 sitemapUrls.push(SITE + '/site-map/');
+
+/* ---------- /charts/ (Nov 10, 2026) — interactive price history ----------
+   Year -> set -> card, then an SVG line chart of every tracked price point per grade from
+   price-history.json. Data is written to /charts/data.json at build time (live cards only,
+   grouped by year/set with slugs, renamed predecessors merged in) so the page is one fetch.
+   Every chart is deep-linkable: /charts/#1999/skybox-premium/soul-of-the-game-9sg */
+const CH_LIVE = new Set();
+for (const y of years) for (const s of DATA[y]) for (const sub of s.subsets) CH_LIVE.add(y + '|' + s.set + '|' + sub.name);
+const CH_ORPHANS = Object.keys(HIST).filter(k => !CH_LIVE.has(k));
+function chartHistory(key) {
+  const out = {};
+  const base = key.replace(/\s*#\S+$/, '');
+  const srcs = [HIST[key]].concat(CH_ORPHANS.filter(o => o === base || o.replace(/\s*#\S+$/, '') === key).map(o => HIST[o])).filter(Boolean);
+  for (const g of ['raw', 'psa8', 'psa9', 'psa10']) {
+    const byDate = {};
+    for (let i = srcs.length - 1; i >= 0; i--) for (const [d, v] of (srcs[i][g] || [])) if (v > 0) byDate[d] = v; // live source (index 0) wins
+    const pts = Object.keys(byDate).sort().map(d => [d, byDate[d]]);
+    if (pts.length) out[g] = pts;
+  }
+  return out;
+}
+let chartPoints = 0, chartCards = 0;
+const CHART_DATA = { built: isoToday, years: years.map(y => ({
+  y, sets: DATA[y].map(s => ({
+    n: s.set.replace(/^\d{4}\s+/, ''), s: slugMap[y + '|' + s.set],
+    cards: s.subsets.map(sub => {
+      const h = chartHistory(y + '|' + s.set + '|' + sub.name);
+      const im = CARDIMG[y + '|' + s.set + '|' + sub.name];
+      chartCards++; for (const g in h) chartPoints += h[g].length;
+      return { n: sub.name, s: slug(sub.name), img: im ? im.file : null, h };
+    })
+  }))
+})) };
+const CHART_CSS = `
+.ch-wrap{max-width:1040px}
+.ch-pick{display:grid;grid-template-columns:120px 1fr 1.4fr;gap:10px;margin:18px 0 14px}
+.ch-pick label{display:block;font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 5px 2px}
+.ch-pick select{width:100%;appearance:none;-webkit-appearance:none;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232fe6c7' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;border:1px solid var(--border);border-radius:10px;color:var(--text);font:600 14px 'Chakra Petch',sans-serif;padding:11px 34px 11px 12px;cursor:pointer}
+.ch-pick select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(47,230,199,.18)}
+.ch-quick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.ch-quick span{font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);align-self:center;margin-right:4px}
+.ch-quick button{background:transparent;border:1px solid var(--border);color:var(--text);border-radius:999px;padding:6px 12px;font:500 12.5px 'Inter Tight',sans-serif;cursor:pointer}
+.ch-quick button:hover{border-color:var(--gold);color:var(--gold)}
+.ch-card{background:linear-gradient(180deg,#141a21 0%,#0e1318 100%);border:1px solid var(--border);border-radius:16px;padding:18px 18px 10px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.ch-head{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start}
+.ch-title{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:20px;line-height:1.2;margin:0}
+.ch-title small{display:block;font-weight:500;font-size:12.5px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.ch-thumb{width:54px;height:auto;border-radius:6px;border:1px solid var(--border);cursor:zoom-in}
+.ch-stats{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+.ch-stat{flex:1 1 150px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:10px 12px;position:relative;overflow:hidden}
+.ch-stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
+.ch-stat .g{font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.ch-stat .p{font-family:Anton,sans-serif;font-size:30px;line-height:1.05;color:var(--gold);letter-spacing:.01em;margin:3px 0 2px}
+.ch-stat .d{font-size:12px;color:var(--dim)}
+.ch-stat .d b{color:var(--text);font-weight:600}
+.ch-stat.off{opacity:.38}
+.ch-ctl{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.ch-tog,.ch-rng{display:flex;gap:6px;flex-wrap:wrap}
+.ch-tog button,.ch-rng button,.ch-copy{background:transparent;border:1px solid var(--border);color:var(--text);border-radius:999px;padding:6px 12px;font:600 12px 'Chakra Petch',sans-serif;letter-spacing:.06em;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.ch-tog button i{width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);display:inline-block}
+.ch-tog button.off{opacity:.4}.ch-tog button.off i{box-shadow:none}
+.ch-rng button.on,.ch-copy:hover{border-color:var(--gold);color:var(--gold)}
+.ch-svgwrap{position:relative;margin-top:6px}
+.ch-svg{width:100%;height:auto;display:block;aspect-ratio:1000/430}
+.ch-tip{position:absolute;pointer-events:none;background:#0b0f12;border:1px solid var(--gold);border-radius:10px;padding:8px 11px;font-size:12.5px;line-height:1.4;color:var(--text);white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.5);transform:translate(-50%,-115%);opacity:0;transition:opacity .12s}
+.ch-tip b{font-family:Anton,sans-serif;font-size:19px;color:var(--gold);letter-spacing:.02em;display:block}
+.ch-tip .tg{font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.ch-note{font-size:12px;color:var(--dim);margin:8px 2px 4px;line-height:1.5}
+.ch-empty{padding:60px 20px;text-align:center;color:var(--dim)}
+.ch-head .cardfig{width:auto;background:none;border:0;padding:0;border-radius:0;box-shadow:none}
+.ch-head .cardfig:hover{transform:none;box-shadow:none}
+.ch-head .cardfig img{width:58px;max-height:none;border-radius:6px;box-shadow:none;border:1px solid var(--border)}
+.ch-sep{width:1px;height:18px;background:var(--border);align-self:center;margin:0 4px}
+@media(max-width:640px){.ch-pick{grid-template-columns:1fr 1fr}.ch-pick div:last-child{grid-column:1/-1}.ch-stat .p{font-size:24px}.ch-title{font-size:17px}}
+`;
+const CHART_JS = `
+(function(){
+var COL={psa10:'#2fe6c7',psa9:'#ffffff',psa8:'#8fb3c9',raw:'#7c8794'},LBL={psa10:'PSA 10',psa9:'PSA 9',psa8:'PSA 8',raw:'Raw'},ORDER=['psa10','psa9','psa8','raw'];
+var D=null,yearSel=document.getElementById('chY'),setSel=document.getElementById('chS'),cardSel=document.getElementById('chC'),root=document.getElementById('chRoot'),quick=document.getElementById('chQuick');
+var on={psa10:true,psa9:true,psa8:true,raw:true},range='all',scale='auto',cur=null;
+function money(v){return '$'+Math.round(v).toLocaleString('en-US');}
+function fmtD(s){var d=new Date(s+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+function fmtDY(s){var d=new Date(s+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+function opt(sel,items,val){sel.innerHTML='';items.forEach(function(it){var o=document.createElement('option');o.value=it.v;o.textContent=it.t;if(it.v===val)o.selected=true;sel.appendChild(o);});}
+function findYear(y){for(var i=0;i<D.years.length;i++)if(String(D.years[i].y)===String(y))return D.years[i];return D.years[0];}
+function findSet(Y,s){for(var i=0;i<Y.sets.length;i++)if(Y.sets[i].s===s)return Y.sets[i];return Y.sets[0];}
+function findCard(S,c){for(var i=0;i<S.cards.length;i++)if(S.cards[i].s===c)return S.cards[i];return S.cards[0];}
+function points(card){var n=0;for(var g in card.h)n+=card.h[g].length;return n;}
+function pick(y,s,c,push){var Y=findYear(y),S=findSet(Y,s),C=findCard(S,c);cur={Y:Y,S:S,C:C};
+  opt(yearSel,D.years.map(function(x){return{v:String(x.y),t:String(x.y)};}),String(Y.y));
+  opt(setSel,Y.sets.map(function(x){return{v:x.s,t:x.n};}),S.s);
+  opt(cardSel,S.cards.map(function(x){return{v:x.s,t:x.n+'  ('+points(x)+')'};}),C.s);
+  var h='#'+Y.y+'/'+S.s+'/'+C.s;if(location.hash!==h){if(push)history.pushState(null,'',h);else history.replaceState(null,'',h);}
+  document.title=Y.y+' '+S.n+' '+C.n+' Price Chart | Griffey Card Prices';
+  render();}
+function logTicks(lo,hi){var out=[],p=Math.pow(10,Math.floor(Math.log10(lo)));while(p<=hi){[1,2,5].forEach(function(m){var v=m*p;if(v>=lo&&v<=hi)out.push(v);});p*=10;}if(out.length>8)out=out.filter(function(v,i){return i%2===0;});return out;}
+function niceTicks(lo,hi,n){var span=hi-lo||1,raw=span/n,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p,step=(m<1.5?1:m<3?2:m<7?5:10)*p,a=Math.floor(lo/step)*step,out=[];for(var v=a;v<=hi+step*0.5;v+=step)out.push(v);return out;}
+function render(){var C=cur.C,Y=cur.Y,S=cur.S;
+  var series=[],allPts=[],minT=Infinity,maxT=-Infinity,lastT=-Infinity;
+  ORDER.forEach(function(g){var a=C.h[g];if(!a)return;a.forEach(function(p){var t=Date.parse(p[0]);if(t>lastT)lastT=t;});});
+  var cutoff=range==='all'?-Infinity:lastT-(range==='3m'?92:31)*864e5;
+  ORDER.forEach(function(g){var a=C.h[g];if(!a)return;var pts=a.map(function(p){return{t:Date.parse(p[0]),d:p[0],v:p[1],g:g};}).filter(function(p){return p.t>=cutoff;});
+    if(!pts.length&&a.length){var last=a[a.length-1];pts=[{t:Date.parse(last[0]),d:last[0],v:last[1],g:g}];}
+    if(!pts.length)return;series.push({g:g,pts:pts,all:a});if(on[g]){pts.forEach(function(p){allPts.push(p);if(p.t<minT)minT=p.t;if(p.t>maxT)maxT=p.t;});}});
+  var head='<div class="ch-head"><h2 class="ch-title"><small>'+Y.y+' '+esc(S.n)+'</small>'+esc(C.n)+'</h2>'+(C.img?'<figure class="cardfig" style="margin:0"><img class="ch-thumb" src="/img/cards/'+C.img+'" alt="'+esc(Y.y+' '+S.n+' '+C.n+' Ken Griffey Jr.')+'"></figure>':'')+'</div>';
+  var stats='<div class="ch-stats">'+series.map(function(s){var a=s.all,first=a[0][1],last=a[a.length-1][1],ch=first?Math.round((last-first)/first*100):0,arrow=ch>0?'&#9650;':ch<0?'&#9660;':'&#8212;';
+    return '<div class="ch-stat'+(on[s.g]?'':' off')+'" style="--c:'+COL[s.g]+'"><div class="g">'+LBL[s.g]+'</div><div class="p">'+money(last)+'</div><div class="d">'+arrow+' <b>'+Math.abs(ch)+'%</b> since '+fmtD(a[0][0])+' &middot; '+a.length+' point'+(a.length===1?'':'s')+'</div></div>';}).join('')+'</div>';
+  var vv=allPts.map(function(p){return p.v;}).filter(function(v){return v>0;}),vmin=vv.length?Math.min.apply(null,vv):0,vmax=vv.length?Math.max.apply(null,vv):0,useLog=scale==='log'||(scale==='auto'&&vmin>0&&vmax/vmin>10);
+  var ctl='<div class="ch-ctl"><div class="ch-tog">'+series.map(function(s){return '<button data-g="'+s.g+'" class="'+(on[s.g]?'':'off')+'" style="--c:'+COL[s.g]+'"><i></i>'+LBL[s.g]+'</button>';}).join('')+'</div>'+
+    '<div class="ch-rng"><button data-sc="lin" class="'+(useLog?'':'on')+'" title="Linear scale">$</button><button data-sc="log" class="'+(useLog?'on':'')+'" title="Log scale - shows every grade clearly">LOG</button><span class="ch-sep"></span><button data-r="1m" class="'+(range==='1m'?'on':'')+'">1M</button><button data-r="3m" class="'+(range==='3m'?'on':'')+'">3M</button><button data-r="all" class="'+(range==='all'?'on':'')+'">ALL</button><button class="ch-copy" id="chCopy">&#128279; Copy link</button></div></div>';
+  var W=1000,H=430,L=70,R=86,T=22,B=44,iw=W-L-R,ih=H-T-B,svg='';
+  if(!allPts.length){svg='<div class="ch-empty">No tracked prices for the selected grades yet.</div>';}
+  else{var vals=allPts.map(function(p){return p.v;}),lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);if(lo===hi){lo=lo*0.9;hi=hi*1.1;}
+    if(useLog){lo=Math.max(1,lo/1.18);hi=hi*1.18;}else{var pad=(hi-lo)*0.12;lo=Math.max(0,lo-pad);hi=hi+pad;}
+    if(maxT===minT){minT-=864e5*3;maxT+=864e5*3;}
+    var x=function(t){return L+(t-minT)/(maxT-minT)*iw;},y=function(v){return useLog?T+ih-(Math.log(v)-Math.log(lo))/(Math.log(hi)-Math.log(lo))*ih:T+ih-(v-lo)/(hi-lo)*ih;};
+    var yt=useLog?logTicks(lo,hi):niceTicks(lo,hi,5),grid='';yt.forEach(function(v){if(v<lo||v>hi)return;var yy=y(v);grid+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+yy+'" y2="'+yy+'" stroke="rgba(255,255,255,.07)"/><text x="'+(L-10)+'" y="'+(yy+4)+'" text-anchor="end" class="ax">'+money(v)+'</text>';});
+    var span=maxT-minT,d0=new Date(minT),m=new Date(d0.getFullYear(),d0.getMonth()+1,1),xt='';var monthly=span>45*864e5;
+    if(monthly){while(m.getTime()<=maxT){var xx=x(m.getTime());xt+='<line x1="'+xx+'" x2="'+xx+'" y1="'+T+'" y2="'+(T+ih)+'" stroke="rgba(255,255,255,.05)"/><text x="'+xx+'" y="'+(H-14)+'" text-anchor="middle" class="ax">'+m.toLocaleDateString('en-US',{month:'short'})+(m.getMonth()===0?' '+m.getFullYear():'')+'</text>';m=new Date(m.getFullYear(),m.getMonth()+1,1);}}
+    else{var n=6;for(var i=0;i<=n;i++){var tt=minT+span*i/n,xx2=x(tt);xt+='<text x="'+xx2+'" y="'+(H-14)+'" text-anchor="middle" class="ax">'+fmtD(new Date(tt).toISOString().slice(0,10))+'</text>';}}
+    var defs='<defs><filter id="glow" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'+
+      ORDER.map(function(g){return '<linearGradient id="fill-'+g+'" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="'+COL[g]+'" stop-opacity=".28"/><stop offset="1" stop-color="'+COL[g]+'" stop-opacity="0"/></linearGradient>';}).join('')+'</defs>';
+    var lines='',dots='',top=null,labels=[];series.forEach(function(s){if(on[s.g]&&!top)top=s.g;});
+    series.slice().reverse().forEach(function(s){if(!on[s.g])return;var p=s.pts,c=COL[s.g],d=p.map(function(q,i){return (i?'L':'M')+x(q.t).toFixed(1)+' '+y(q.v).toFixed(1);}).join(' ');
+      if(s.g===top&&p.length>1)lines+='<path d="'+d+' L'+x(p[p.length-1].t).toFixed(1)+' '+(T+ih)+' L'+x(p[0].t).toFixed(1)+' '+(T+ih)+' Z" fill="url(#fill-'+s.g+')"/>';
+      if(p.length>1)lines+='<path class="ln" d="'+d+'" fill="none" stroke="'+c+'" stroke-width="'+(s.g===top?3:2.2)+'" stroke-linejoin="round" stroke-linecap="round"'+(s.g==='raw'?' stroke-dasharray="6 6"':'')+' filter="url(#glow)" pathLength="1"/>';
+      p.forEach(function(q){dots+='<circle class="pt" data-g="'+s.g+'" data-d="'+q.d+'" data-v="'+q.v+'" cx="'+x(q.t).toFixed(1)+'" cy="'+y(q.v).toFixed(1)+'" r="'+(s.g===top?4.2:3.4)+'" fill="#0b0f12" stroke="'+c+'" stroke-width="2.2"/>';});
+      var lastp=p[p.length-1];labels.push({y:y(lastp.v),x:x(lastp.t)+9,c:c,t:money(lastp.v)});});
+    labels.sort(function(a,b){return a.y-b.y;});for(var li=1;li<labels.length;li++){if(labels[li].y-labels[li-1].y<15)labels[li].y=labels[li-1].y+15;}
+    labels.forEach(function(l){dots+='<text x="'+l.x.toFixed(1)+'" y="'+(l.y+4).toFixed(1)+'" class="lv" fill="'+l.c+'">'+l.t+'</text>';});
+    svg='<div class="ch-svgwrap"><svg class="ch-svg" viewBox="0 0 '+W+' '+H+'" id="chSvg">'+defs+'<style>.ax{font:500 12px "Inter Tight",sans-serif;fill:#8b94a3}.lv{font:600 12px "Chakra Petch",sans-serif;paint-order:stroke;stroke:#0b0f12;stroke-width:4px}.ln{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s cubic-bezier(.4,0,.2,1) forwards}@keyframes draw{to{stroke-dashoffset:0}}@media(prefers-reduced-motion:reduce){.ln{animation:none;stroke-dasharray:none;stroke-dashoffset:0}}.pt{transition:r .12s}.pt.hi{r:6.5}</style>'+grid+xt+'<line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ih)+'" y2="'+(T+ih)+'" stroke="rgba(255,255,255,.18)"/>'+lines+'<line id="chX" x1="0" x2="0" y1="'+T+'" y2="'+(T+ih)+'" stroke="rgba(47,230,199,.45)" stroke-dasharray="3 4" style="display:none"/>'+dots+'</svg><div class="ch-tip" id="chTip"></div></div>';}
+  root.innerHTML=head+stats+ctl+svg+'<p class="ch-note">Each point is a tracked price change from real eBay sold listings. Tracking began July 10, 2026; dots on that date are the opening value. Click a grade to hide or show it. Hover a point for the exact sale.</p>';
+  root.querySelectorAll('.ch-tog button').forEach(function(b){b.onclick=function(){var g=b.getAttribute('data-g');on[g]=!on[g];if(!ORDER.some(function(k){return on[k]&&C.h[k];}))on[g]=true;render();};});
+  root.querySelectorAll('.ch-rng button[data-r]').forEach(function(b){b.onclick=function(){range=b.getAttribute('data-r');render();};});
+  root.querySelectorAll('.ch-rng button[data-sc]').forEach(function(b){b.onclick=function(){scale=b.getAttribute('data-sc');render();};});
+  var cp=document.getElementById('chCopy');if(cp)cp.onclick=function(){try{navigator.clipboard.writeText(location.href);cp.textContent='Copied';setTimeout(function(){cp.innerHTML='&#128279; Copy link';},1400);}catch(e){}};
+  var sv=document.getElementById('chSvg'),tip=document.getElementById('chTip'),xl=document.getElementById('chX');
+  if(sv){var pts=[].slice.call(sv.querySelectorAll('.pt')),last=null;
+    sv.addEventListener('mousemove',function(e){var r=sv.getBoundingClientRect(),sx=W/r.width,mx=(e.clientX-r.left)*sx,my=(e.clientY-r.top)*(H/r.height),best=null,bd=1e9;
+      pts.forEach(function(p){var dx=p.cx.baseVal.value-mx,dy=p.cy.baseVal.value-my,dd=dx*dx+dy*dy*0.35;if(dd<bd){bd=dd;best=p;}});
+      if(!best||bd>60*60)return hide();if(best!==last){if(last)last.classList.remove('hi');best.classList.add('hi');last=best;}
+      var cx=best.cx.baseVal.value,cy=best.cy.baseVal.value;xl.setAttribute('x1',cx);xl.setAttribute('x2',cx);xl.style.display='';
+      tip.innerHTML='<span class="tg">'+LBL[best.getAttribute('data-g')]+' &middot; '+fmtDY(best.getAttribute('data-d'))+'</span><b>'+money(+best.getAttribute('data-v'))+'</b>';
+      tip.style.left=(cx/sx)+'px';tip.style.top=(cy/(H/r.height))+'px';tip.style.opacity=1;});
+    var hide=function(){tip.style.opacity=0;xl.style.display='none';if(last){last.classList.remove('hi');last=null;}};sv.addEventListener('mouseleave',hide);}
+}
+function fromHash(push){var m=(location.hash||'').replace(/^#/,'').split('/');if(m.length===3&&m[0])return pick(m[0],m[1],m[2],push);
+  var best=null,bn=-1;D.years.forEach(function(Y){Y.sets.forEach(function(S){S.cards.forEach(function(C){var n=points(C);if(n>bn){bn=n;best={y:Y.y,s:S.s,c:C.s};}});});});pick(best.y,best.s,best.c,false);}
+yearSel.onchange=function(){var Y=findYear(yearSel.value);pick(Y.y,Y.sets[0].s,Y.sets[0].cards[0].s,true);};
+setSel.onchange=function(){var Y=findYear(yearSel.value),S=findSet(Y,setSel.value);pick(Y.y,S.s,S.cards[0].s,true);};
+cardSel.onchange=function(){pick(yearSel.value,setSel.value,cardSel.value,true);};
+window.addEventListener('hashchange',function(){fromHash(false);});
+fetch('/charts/data.json').then(function(r){return r.json();}).then(function(j){D=j;
+  var all=[];D.years.forEach(function(Y){Y.sets.forEach(function(S){S.cards.forEach(function(C){all.push({n:points(C),Y:Y,S:S,C:C});});});});
+  all.sort(function(a,b){return b.n-a.n;});quick.innerHTML='<span>Most tracked</span>'+all.slice(0,8).map(function(a){return '<button data-y="'+a.Y.y+'" data-s="'+a.S.s+'" data-c="'+a.C.s+'">'+a.Y.y+' '+esc(a.S.n)+' '+esc(a.C.n)+'</button>';}).join('');
+  quick.querySelectorAll('button').forEach(function(b){b.onclick=function(){pick(b.getAttribute('data-y'),b.getAttribute('data-s'),b.getAttribute('data-c'),true);};});
+  fromHash(false);}).catch(function(){root.innerHTML='<div class="ch-empty">Could not load chart data.</div>';});
+})();
+`;
+const chartSel = '<div class="ch-pick"><div><label for="chY">Year</label><select id="chY"></select></div><div><label for="chS">Set</label><select id="chS"></select></div><div><label for="chC">Card</label><select id="chC"></select></div></div>';
+write('charts', page({
+  title: 'Ken Griffey Jr. Card Price Charts | Sales History by Card',
+  desc: 'Interactive price history charts for ' + chartCards + ' Ken Griffey Jr. cards from 1990-1999. Pick a year, set and card to see every tracked eBay sold price for raw, PSA 8, PSA 9 and PSA 10 over time.',
+  url: SITE + '/charts/',
+  ogimg: SITE + '/img/og/market-reports.jpg',
+  body: '<div class="ch-wrap"><h1>Griffey Card Price Charts</h1>' +
+    '<p class="sub">Pick a year, a set and a card. Every tracked eBay sold price for that card &mdash; raw, PSA 8, PSA 9 and PSA 10 &mdash; drawn over time. ' +
+    chartPoints.toLocaleString('en-US') + ' price points across ' + chartCards + ' cards, updated with every build. Each chart has its own link.</p>' +
+    chartSel + '<div class="ch-quick" id="chQuick"></div>' +
+    '<div class="ch-card" id="chRoot"><div class="ch-empty">Loading price history&hellip;</div></div></div>' +
+    '<style>' + CHART_CSS + '</style><script>' + CHART_JS + '</script>'
+}));
+fs.writeFileSync(path.join(ROOT, 'charts', 'data.json'), JSON.stringify(CHART_DATA));
+sitemapUrls.push(SITE + '/charts/');
+console.log('Charts: ' + chartCards + ' cards, ' + chartPoints + ' points -> charts/data.json');
 
 /* ---------- "how much is a griffey card worth" ---------- */
 const over1k = ranked.filter(c => c.value >= 1000).length;
