@@ -391,14 +391,20 @@
   .disc-date{font-size:10px; color:var(--text-dim); margin-top:2px; font-variant-numeric:tabular-nums;}
 
   .nav-charts{display:none;}
+  .mnav{display:none;}
   @media(max-width:680px){
     .nav-links{display:none;}
     .nav-brand{display:none;}
     .nav-charts{display:inline-flex; align-items:center; gap:6px; font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:12px; letter-spacing:.04em; color:#0b0f12; background:var(--teal,#2fe6c7); border-radius:9px; padding:8px 12px; text-decoration:none; white-space:nowrap; flex:none;}
     .navbar{gap:8px; padding:0 12px;}
     .nav-right{flex:none; gap:8px; margin-left:auto;}
-    .nav-cta{padding:7px 12px; font-size:11px; white-space:nowrap;}
+    .nav-cta{padding:7px 12px; font-size:11px; white-space:nowrap; background:transparent; border:1.5px solid var(--teal,#2fe6c7); color:var(--teal,#2fe6c7); box-shadow:none;}
+    .cta-glare{display:none;}
     .nav-wax{font-size:14px; padding:6px 4px;}
+    .mnav{display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; margin:10px -12px 14px; padding:0 12px 2px; scroll-snap-type:x proximity;}
+    .mnav::-webkit-scrollbar{display:none;}
+    .mnav a{flex:none; scroll-snap-align:start; font-family:'Chakra Petch',sans-serif; font-weight:600; font-size:12px; letter-spacing:.03em; color:var(--text,#e5e7eb); text-decoration:none; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); border-radius:999px; padding:7px 13px; white-space:nowrap;}
+    .mnav a:active{border-color:var(--teal,#2fe6c7); color:var(--teal,#2fe6c7);}
   }
 
   /* My Collection view */
@@ -1854,6 +1860,14 @@
       <span class="cta-glare" aria-hidden="true"></span>
     </div>
   </nav>
+
+  <div class="mnav" aria-label="Sections">
+    <a href="/biggest-movers/">Movers</a>
+    <a href="/most-valuable/">Top 25</a>
+    <a href="/articles/">Articles</a>
+    <a href="/how-much-are-griffey-cards-worth/">Values</a>
+    <a href="/site-map/">All sets</a>
+  </div>
 
   <section class="search-strip" id="searchStrip">
     <div class="tbadges-inline" id="heroBadges"></div>
