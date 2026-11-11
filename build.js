@@ -253,7 +253,7 @@ function page(o) {
       primaryImageOfPage: { '@type': 'ImageObject', contentUrl: o.cardimg }
     }) + '</script>\n' : '') +
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
-    '<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=Newsreader:ital@1&display=swap" rel="stylesheet">\n' +
+    '<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600;700&family=Newsreader:ital@1&display=swap" rel="stylesheet">\n' +
     '<style>' + CSS + '</style>\n</head>\n<body>\n<div class="wrap">\n' +
     '<div class="toprow"><a class="home" href="/">◂ Griffey Card Prices — interactive guide</a><a class="yn-wax top" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></div>\n' +
     o.body +
@@ -292,7 +292,7 @@ color:var(--text);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:an
 .mtable th:nth-child(2),.mtable td:nth-child(2){position:sticky;left:32px;background:var(--bg);z-index:2;border-right:1px solid var(--border)}
 .bottomnav{margin-top:44px;border-top:1px solid var(--border);padding-top:18px}
 .bn-label{color:var(--dim);font-size:11px;letter-spacing:.8px;text-transform:uppercase}
-h1{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(19px,4vw,27px);color:var(--gold);margin:4px 0 6px}
+h1{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(22px,4.2vw,30px);letter-spacing:-.02em;line-height:1.15;color:#e9c464;margin:4px 0 6px}
 h2{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px;color:var(--text);margin:22px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
 h2 a{color:var(--text);text-decoration:none}h2 a:hover{color:var(--gold)}
 h3{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14.5px;color:var(--text);margin:16px 0 4px}
