@@ -151,18 +151,26 @@ function ebayCell(setName, cardName) {
     '</svg></a></td>';
 }
 
-function cardTable(subs, withOdds, setName) {
+// chartBase = "/charts/#<year>/<set-slug>" -> each row links straight to its own price chart
+function chartCell(chartBase, cardName) {
+  return '<td class="chc"><a class="chc" href="' + chartBase + '/' + slug(cardName) + '" title="Price chart" aria-label="Price chart for ' + esc(cardName) + '">' +
+    '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">' +
+    '<polyline points="3,17 9,10 13,14 21,5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<polyline points="15,5 21,5 21,11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '</svg></a></td>';
+}
+function cardTable(subs, withOdds, setName, chartBase) {
   const colgroup = '<colgroup><col>' + (withOdds ? '<col class="codds">' : '') +
-    '<col class="cp"><col class="cp"><col class="cp"><col class="cp"><col class="ceb"></colgroup>';
+    '<col class="cp"><col class="cp"><col class="cp"><col class="cp"><col class="cch"><col class="ceb"></colgroup>';
   const head = '<thead><tr><th>Card</th>' + (withOdds ? '<th>Odds</th>' : '') +
-    '<th>Raw</th><th>PSA 8</th><th>PSA 9</th><th>PSA 10</th><th class="theb">eBay</th></tr></thead>';
+    '<th>Raw</th><th>PSA 8</th><th>PSA 9</th><th>PSA 10</th><th class="thch">Chart</th><th class="theb">eBay</th></tr></thead>';
   let body = '<tbody>';
   for (const sub of subs) {
     body += '<tr><td class="cname">' + esc(sub.name) +
       (sub.tag ? ' <span class="tag">' + esc(sub.tag) + '</span>' : '') + '</td>' +
       (withOdds ? '<td class="odds">' + (sub.odds ? esc(sub.odds) : '') + '</td>' : '') +
       priceCell(sub, 'raw') + priceCell(sub, 'psa8') + priceCell(sub, 'psa9') + priceCell(sub, 'psa10') +
-      ebayCell(setName, sub.name) + '</tr>';
+      chartCell(chartBase, sub.name) + ebayCell(setName, sub.name) + '</tr>';
   }
   body += '</tbody>';
   // A sticky <thead> can't survive inside overflow-x:auto (needed here so the
@@ -255,7 +263,9 @@ function page(o) {
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
     '<link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@500;600;700&family=Inter+Tight:wght@400;500;600;700&family=Newsreader:ital@1&display=swap" rel="stylesheet">\n' +
     '<style>' + CSS + '</style>\n</head>\n<body>\n<div class="wrap">\n' +
-    '<div class="toprow"><a class="home" href="/">◂ Griffey Card Prices — interactive guide</a><a class="yn-wax top" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></div>\n' +
+    '<div class="toprow"><a class="home" href="/">◂ Griffey Card Prices — interactive guide</a><span class="toprow-r"><a class="yn-charts top" href="/charts/" title="Interactive price charts">' +
+    '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><polyline points="3,17 9,10 13,14 21,5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><polyline points="15,5 21,5 21,11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Charts</a>' +
+    '<a class="yn-wax top" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></span></div>\n' +
     o.body +
     '\n<div class="bottomnav"><div class="bn-label">Browse the guide</div>' + yearNav(o.navYear || null) + '</div>' +
     '\n<div class="foot">Prices updated __PAGEDATE__ from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
@@ -389,7 +399,15 @@ td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--bor
 ul.plain{list-style:none;padding:0;margin:8px 0;columns:2;column-gap:24px}
 ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font-size:13px}ul.plain a:hover{color:var(--gold)}
 .yn-wax{font-family:Anton,Impact,sans-serif;font-size:15px;letter-spacing:.03em;color:#fff !important}.yn-wax span{color:var(--gold)}
-.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px;flex-wrap:wrap}.toprow .home{margin-bottom:0}.yn-wax.top{font-size:17px;padding:6px 10px;border:1px solid var(--border);border-radius:10px;text-decoration:none}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px;flex-wrap:wrap}.toprow .home{margin-bottom:0}
+.toprow-r{display:inline-flex;align-items:center;gap:8px}
+.yn-charts.top{display:inline-flex;align-items:center;gap:6px;font:700 13px 'Chakra Petch',sans-serif;letter-spacing:.04em;color:#0b0f12;background:var(--gold);border:1px solid var(--gold);border-radius:10px;padding:7px 11px;text-decoration:none;box-shadow:0 0 18px rgba(47,230,199,.25)}
+.yn-charts.top:hover{filter:brightness(1.08)}
+col.cch{width:6%}
+th.thch{text-align:center;font-size:10px}
+td.chc{text-align:center;padding-left:0;padding-right:0}
+a.chc{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;color:var(--gold);border:1px solid rgba(47,230,199,.45);transition:color .15s ease,border-color .15s ease,background .15s ease}
+a.chc:hover{background:var(--gold);color:#0b0f12;border-color:var(--gold)}.yn-wax.top{font-size:17px;padding:6px 10px;border:1px solid var(--border);border-radius:10px;text-decoration:none}
 .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--border);color:rgba(107,160,150,.6);font-size:11.5px;line-height:1.8;text-align:center}
 .foot a{color:rgba(107,160,150,.8);text-decoration:none}
 @media(max-width:600px){ul.plain{columns:1}td,th{padding:3px 3px;font-size:12px}th{font-size:10px}.cardfig{width:calc(50% - 11px)}.yearslider .cardfig{width:130px}.cf-photo{height:170px}.cardfig img{max-height:170px}.cf-badge{font-size:10.5px;padding:4px 9px}td.raw,td.psa8,td.psa9,td.psa10{padding-left:9px}.tr{left:0;font-size:7px}col.cp{width:12%}col.ceb{width:6%}td.eb{padding-left:0;padding-right:0}}
@@ -509,7 +527,7 @@ for (const y of years) {
     const rel = y + '/' + sl;
     const withOdds = s.subsets.some(x => x.odds);
 
-    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + cardTable(s.subsets, yearOdds, s.set);
+    body += '<h2 id="' + sl + '"><a href="/' + rel + '/">' + esc(s.set) + '</a></h2>' + cardTable(s.subsets, yearOdds, s.set, '/charts/#' + y + '/' + sl);
 
     /* set page */
     const top = s.subsets.reduce((m, x) => Math.max(m, x.psa10 || 0, x.psa9 || 0, x.raw || 0, x.psa8 || 0), 0);
@@ -577,7 +595,7 @@ for (const y of years) {
         (setTopCard.date ? ' (sold ' + humanDate(setTopCard.date) + saleTypeSuffix(setTopCard.type) + ')' : '') + '.' +
         ' Disclaimer: with a market this large, there will be sales we miss or simply don\'t track!' +
         '</p>' : '') + '</div>' +
-      cardTable(s.subsets, withOdds, s.set) +
+      cardTable(s.subsets, withOdds, s.set, '/charts/#' + rel) +
       imageStrip(y, s.set, s.subsets) +
       setFaqHtml +
       '<h2>More ' + y + ' Griffey Sets</h2><ul class="plain">' +
@@ -1149,15 +1167,15 @@ const CHART_CSS = `
 .ch-tip .tg{font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .ch-note{font-size:12px;color:var(--dim);margin:8px 2px 4px;line-height:1.5}
 .ch-empty{padding:60px 20px;text-align:center;color:var(--dim)}
-.ch-top{display:grid;grid-template-columns:1fr 230px;gap:20px;align-items:start}
+.ch-top{display:grid;grid-template-columns:1fr 190px;gap:20px;align-items:start}
 .ch-top.noimg{grid-template-columns:1fr}
 .ch-left{min-width:0}
 .ch-top:not(.noimg) .ch-stats{display:grid;grid-template-columns:1fr 1fr}
 .ch-top:not(.noimg) .ch-stat{flex:none}
-.ch-photo.cardfig{width:230px;margin:0;padding:12px 12px 8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px}
+.ch-photo.cardfig{width:190px;margin:0;padding:10px 10px 7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px}
 .ch-photo.cardfig img{width:100%;max-height:none;border-radius:8px;box-shadow:0 12px 36px rgba(0,0,0,.55)}
 .ch-photo.cardfig figcaption{height:auto;margin-top:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-family:'Chakra Petch',sans-serif}
-@media(max-width:760px){.ch-top{grid-template-columns:1fr}.ch-photo.cardfig{width:220px;margin:0 auto 4px;order:-1}}
+@media(max-width:760px){.ch-top{grid-template-columns:1fr}.ch-photo.cardfig{width:180px;margin:0 auto 4px;order:-1}}
 .ch-sep{width:1px;height:18px;background:var(--border);align-self:center;margin:0 4px}
 @media(max-width:640px){.ch-pick{grid-template-columns:1fr 1fr}.ch-pick div:last-child{grid-column:1/-1}.ch-stat .p{font-size:24px}.ch-title{font-size:17px}}
 `;
