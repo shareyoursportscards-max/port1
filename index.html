@@ -393,22 +393,12 @@
   .nav-charts{display:none;}
   @media(max-width:680px){
     .nav-links{display:none;}
-    .nav-charts{display:inline-flex; align-items:center; gap:5px; font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:11px; letter-spacing:.04em; color:#0b0f12; background:var(--teal,#2fe6c7); border-radius:8px; padding:7px 10px; text-decoration:none; white-space:nowrap;}
+    .nav-brand{display:none;}
+    .nav-charts{display:inline-flex; align-items:center; gap:6px; font-family:'Chakra Petch',sans-serif; font-weight:700; font-size:12px; letter-spacing:.04em; color:#0b0f12; background:var(--teal,#2fe6c7); border-radius:9px; padding:8px 12px; text-decoration:none; white-space:nowrap; flex:none;}
     .navbar{gap:8px; padding:0 12px;}
-    .nav-brand{font-size:11.5px; gap:6px; flex:1; min-width:0;}
-    .nav-brand .nb-mark{width:19px; height:19px; font-size:11px;}
-    .nav-brand .nb-text{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-    .nav-right{flex:none; gap:6px;}
+    .nav-right{flex:none; gap:8px; margin-left:auto;}
     .nav-cta{padding:7px 12px; font-size:11px; white-space:nowrap;}
     .nav-wax{font-size:14px; padding:6px 4px;}
-  }
-  @media(max-width:480px){
-    .nav-brand .nb-text{display:none;}
-    .nav-brand{flex:none;}
-    .nav-right{margin-left:auto;}
-    .nav-charts{padding:7px 8px;}
-    .nav-wax{padding:6px 2px;}
-    .nav-cta{padding:7px 10px;}
   }
 
   /* My Collection view */
@@ -1857,8 +1847,8 @@
       <a href="/articles/">Articles</a>
       <a href="/charts/">Charts</a>
     </div>
+    <a class="nav-charts" href="/charts/" title="Interactive price charts"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><polyline points="3,17 9,10 13,14 21,5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><polyline points="15,5 21,5 21,11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Charts</a>
     <div class="nav-right">
-      <a class="nav-charts" href="/charts/" title="Interactive price charts"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><polyline points="3,17 9,10 13,14 21,5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><polyline points="15,5 21,5 21,11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Charts</a>
       <a class="nav-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a>
       <a class="nav-cta" href="#" id="navColl">My Collection</a>
       <span class="cta-glare" aria-hidden="true"></span>
