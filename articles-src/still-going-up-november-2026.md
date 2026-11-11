@@ -90,6 +90,6 @@ The biggest percentage jump of the month, and it's a PSA 8. Total PSA population
 
 ## What this list says about the market
 
-Three of the ten are 1990 cards from the junk-wax era, and two of them doubled. The expensive inserts (Lords of the Diamond, Diamond Cuts, Finest) are being driven by tiny PSA 10 populations — 45, 126 — where one buyer sets the price. The cheap cards are being driven by collectors realizing a clean second-year Griffey is harder to find than the print run suggests.
+Gains ran from 16% to 100%. Five of the ten sold for under $200 and four sold for over $2,000, so the moves weren't limited to one price range. Three of the ten are 1990 cards — Learning Series, Diamond Kings and Soaring Stars — and the last two of those were the biggest gainers on the list, at 96% and 100%.
 
-Every price on this page comes from a real eBay sold listing. The full table for each set — raw, PSA 8, PSA 9 and PSA 10 — is on the linked set page and updates daily.
+Every price on this page is a single real eBay sale. The full table for each set — raw, PSA 8, PSA 9 and PSA 10 — is on the linked set page and updates daily.

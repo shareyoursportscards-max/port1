@@ -94,6 +94,6 @@ The biggest dollar drop, and I think I know why. I've owned one of these and mad
 
 ## What this list says about the market
 
-Split it in two. Half of these are genuinely overheated cards cooling off — Hobby Masters selling two days apart, Elite Series, GH1 — and most of those bounced back within the month. The other half are listings that cost the seller money: back-of-card lead photos, glare, dark shots, a card slumped in its slab. In a market that had been going straight up, buyers stopped paying full price for cards they couldn't see properly.
+The drops ran from 10% to 33%, or $46 to $2,250. Four of the ten listings had something wrong with the presentation — a back-of-card lead photo, a dark shot, glare, a card slumped in its slab — and those four include the three biggest dollar drops on the list. Three of the ten (Leaf, Elite Series, Lords of the Diamond) had already sold for more again by the end of October.
 
-If you're selling a Griffey over $500: lead with the front, light it, and make sure the corners are visible. It's worth hundreds of dollars.
+That's the data. My opinion on top of it: if you're selling a Griffey over $500, lead with the front, light it, and make sure the corners are visible.

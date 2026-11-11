@@ -90,4 +90,4 @@ The biggest gainer of the week. Total PSA population is 10 — ten cards, five o
 
 ## What this list says about the week
 
-The headline is that cheap cards are moving as fast as expensive ones. Half of this list is under $400, and those cards posted the same 60–114% gains as the $6,400 Soul of the Game. The common thread is low population at the grade that sold — 35 PSA 10s, 51 PSA 8s, 5 PSA 9s — not the price tag. Overall the Griffey market was still soft this week; these ten were the exceptions.
+Gains ran from 23% to 114%. Five of the ten sold for under $400, one sold for $6,400, and the biggest percentage gainer was a $300 card. For the three cards where I have population counts, they were small: 35 PSA 10s for Soul of the Game, 51 PSA 8s for the Bowman's Best Preview, 5 PSA 9s for Crash the Game Gold. Across every Griffey card I track for the same week, 68 graded prices went down and 47 went up — so these ten were running against the market.

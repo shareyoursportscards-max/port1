@@ -90,4 +90,4 @@ The flagship. Second-year Topps with the All-Star Rookie cup. The dark borders a
 
 ## What this list says about 1990
 
-Nothing here is rare in the way a 90s insert is rare. Every card on this list has hundreds of PSA 10s, and most of them have thousands of graded copies. The prices come from two things: condition (dark Topps borders, Donruss red, Diamond Kings borders) and the Tiffany/O-Pee-Chee/Glossy variations that most people didn't know to keep. If you have a stack of 1990 Griffeys, the ones worth sending in are the ones with clean corners and perfect centering — and anything with a glossy back.
+The spread is $295 to $1,450. Five of the ten are Topps cards and a sixth is the O-Pee-Chee version of one, and the top three are all the #336 design in some form — the Toys "R" Us rookie, the O-Pee-Chee and the flagship. Of the PSA 10 populations quoted above, the lowest are Topps Tiffany (36) and Diamond Kings (114) and the highest is Major League Debut (1,405). Since the video, eight of the ten have sold again: six for more, two for less (Toys "R" Us to $800, Glossy Rookies to $675).

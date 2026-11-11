@@ -90,4 +90,4 @@ The base card with the Desert Shield stamp. Pop report: 200 PSA 9s, 28 PSA 10s. 
 
 ## What this list says about 1991
 
-Ninety percent of this list is under $400. Then the Topps variations show up and the price multiplies by four. The regular 1991 Topps #790 PSA 10 is a $200 card; the Tiffany is $1,655; the Desert Shield PSA 9 is $2,551 and the 10 would be more. Same photo, same design — the only difference is a gloss coat or a gold stamp. If you're going through 1991 Topps, check the front for the Desert Shield logo and the back for the glossy finish before you assume it's a common.
+Seven of the ten sold for under $400. The other three are all 1991 Topps variations — Desert Shield All-Star #392 ($1,475), Tiffany #790 ($1,655) and Desert Shield #790 ($2,551) — and nothing else on the list is within $1,000 of them. For scale, the regular 1991 Topps #790 in a PSA 10 last sold for $201. Same photo, same design: the Tiffany gloss is worth about 8 times that, and the Desert Shield stamp about 12 times, in a lower grade. If you're going through 1991 Topps, check the front for the Desert Shield logo and the back for the glossy finish before you assume it's a common.
