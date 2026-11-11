@@ -1111,9 +1111,12 @@ const CHART_DATA = { built: isoToday, years: years.map(y => ({
 const CHART_CSS = `
 .ch-wrap{max-width:1040px}
 .ch-pick{display:grid;grid-template-columns:120px 1fr 1.4fr;gap:10px;margin:18px 0 14px}
-.ch-pick label{display:block;font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 5px 2px}
-.ch-pick select{width:100%;appearance:none;-webkit-appearance:none;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232fe6c7' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;border:1px solid var(--border);border-radius:10px;color:var(--text);font:600 14px 'Chakra Petch',sans-serif;padding:11px 34px 11px 12px;cursor:pointer}
-.ch-pick select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(47,230,199,.18)}
+.ch-pick label{display:block;font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 6px 2px}
+.ch-pick label::before{content:"\\25BE";margin-right:6px;font-size:12px}
+.ch-pick select{width:100%;appearance:none;-webkit-appearance:none;background-color:#161d25;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%232fe6c7' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E"),linear-gradient(180deg,#1c242d,#141a21);background-repeat:no-repeat;background-position:right 14px center,0 0;background-size:14px 9px,100% 100%;border:1.5px solid rgba(47,230,199,.55);border-radius:12px;color:#fff;font:700 15px 'Chakra Petch',sans-serif;padding:13px 40px 13px 14px;cursor:pointer;box-shadow:0 0 0 1px rgba(47,230,199,.08),0 6px 18px rgba(0,0,0,.35);transition:border-color .15s,box-shadow .15s,transform .1s}
+.ch-pick select:hover{border-color:var(--gold);box-shadow:0 0 0 3px rgba(47,230,199,.14),0 0 22px rgba(47,230,199,.18);transform:translateY(-1px)}
+.ch-pick select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(47,230,199,.25),0 0 26px rgba(47,230,199,.25)}
+.ch-pick select option{background:#141a21;color:#fff}
 .ch-quick{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
 .ch-quick span{font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);align-self:center;margin-right:4px}
 .ch-quick button{background:transparent;border:1px solid var(--border);color:var(--text);border-radius:999px;padding:6px 12px;font:500 12.5px 'Inter Tight',sans-serif;cursor:pointer}
@@ -1135,8 +1138,10 @@ const CHART_CSS = `
 .ch-tog,.ch-rng{display:flex;gap:6px;flex-wrap:wrap}
 .ch-tog button,.ch-rng button,.ch-copy{background:transparent;border:1px solid var(--border);color:var(--text);border-radius:999px;padding:6px 12px;font:600 12px 'Chakra Petch',sans-serif;letter-spacing:.06em;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
 .ch-tog button i{width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);display:inline-block}
-.ch-tog button.off{opacity:.4}.ch-tog button.off i{box-shadow:none}
-.ch-rng button.on,.ch-copy:hover{border-color:var(--gold);color:var(--gold)}
+.ch-tog button{border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.ch-tog button.off{opacity:.45;border-color:var(--border);background:transparent}.ch-tog button.off i{box-shadow:none;background:var(--dim)}
+.ch-rng button.on{background:var(--gold);border-color:var(--gold);color:#0b0f12;font-weight:700}
+.ch-copy:hover,.ch-rng button:hover{border-color:var(--gold)}
 .ch-svgwrap{position:relative;margin-top:6px}
 .ch-svg{width:100%;height:auto;display:block;aspect-ratio:1000/430}
 .ch-tip{position:absolute;pointer-events:none;background:#0b0f12;border:1px solid var(--gold);border-radius:10px;padding:8px 11px;font-size:12.5px;line-height:1.4;color:var(--text);white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.5);transform:translate(-50%,-115%);opacity:0;transition:opacity .12s}
@@ -1144,9 +1149,15 @@ const CHART_CSS = `
 .ch-tip .tg{font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .ch-note{font-size:12px;color:var(--dim);margin:8px 2px 4px;line-height:1.5}
 .ch-empty{padding:60px 20px;text-align:center;color:var(--dim)}
-.ch-head .cardfig{width:auto;background:none;border:0;padding:0;border-radius:0;box-shadow:none}
-.ch-head .cardfig:hover{transform:none;box-shadow:none}
-.ch-head .cardfig img{width:58px;max-height:none;border-radius:6px;box-shadow:none;border:1px solid var(--border)}
+.ch-top{display:grid;grid-template-columns:1fr 230px;gap:20px;align-items:start}
+.ch-top.noimg{grid-template-columns:1fr}
+.ch-left{min-width:0}
+.ch-top:not(.noimg) .ch-stats{display:grid;grid-template-columns:1fr 1fr}
+.ch-top:not(.noimg) .ch-stat{flex:none}
+.ch-photo.cardfig{width:230px;margin:0;padding:12px 12px 8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px}
+.ch-photo.cardfig img{width:100%;max-height:none;border-radius:8px;box-shadow:0 12px 36px rgba(0,0,0,.55)}
+.ch-photo.cardfig figcaption{height:auto;margin-top:8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-family:'Chakra Petch',sans-serif}
+@media(max-width:760px){.ch-top{grid-template-columns:1fr}.ch-photo.cardfig{width:170px;margin:0 auto;order:-1}}
 .ch-sep{width:1px;height:18px;background:var(--border);align-self:center;margin:0 4px}
 @media(max-width:640px){.ch-pick{grid-template-columns:1fr 1fr}.ch-pick div:last-child{grid-column:1/-1}.ch-stat .p{font-size:24px}.ch-title{font-size:17px}}
 `;
@@ -1180,7 +1191,8 @@ function render(){var C=cur.C,Y=cur.Y,S=cur.S;
   ORDER.forEach(function(g){var a=C.h[g];if(!a)return;var pts=a.map(function(p){return{t:Date.parse(p[0]),d:p[0],v:p[1],g:g};}).filter(function(p){return p.t>=cutoff;});
     if(!pts.length&&a.length){var last=a[a.length-1];pts=[{t:Date.parse(last[0]),d:last[0],v:last[1],g:g}];}
     if(!pts.length)return;series.push({g:g,pts:pts,all:a});if(on[g]){pts.forEach(function(p){allPts.push(p);if(p.t<minT)minT=p.t;if(p.t>maxT)maxT=p.t;});}});
-  var head='<div class="ch-head"><h2 class="ch-title"><small>'+Y.y+' '+esc(S.n)+'</small>'+esc(C.n)+'</h2>'+(C.img?'<figure class="cardfig" style="margin:0"><img class="ch-thumb" src="/img/cards/'+C.img+'" alt="'+esc(Y.y+' '+S.n+' '+C.n+' Ken Griffey Jr.')+'"></figure>':'')+'</div>';
+  var head='<div class="ch-head"><h2 class="ch-title"><small>'+Y.y+' '+esc(S.n)+'</small>'+esc(C.n)+'</h2></div>';
+  var photo=C.img?'<figure class="ch-photo cardfig"><img src="/img/cards/'+C.img+'" alt="'+esc(Y.y+' '+S.n+' '+C.n+' Ken Griffey Jr.')+'"><figcaption>Tap to zoom</figcaption></figure>':'';
   var stats='<div class="ch-stats">'+series.map(function(s){var a=s.all,first=a[0][1],last=a[a.length-1][1],ch=first?Math.round((last-first)/first*100):0,arrow=ch>0?'&#9650;':ch<0?'&#9660;':'&#8212;';
     return '<div class="ch-stat'+(on[s.g]?'':' off')+'" style="--c:'+COL[s.g]+'"><div class="g">'+LBL[s.g]+'</div><div class="p">'+money(last)+'</div><div class="d">'+arrow+' <b>'+Math.abs(ch)+'%</b> since '+fmtD(a[0][0])+' &middot; '+a.length+' point'+(a.length===1?'':'s')+'</div></div>';}).join('')+'</div>';
   var vv=allPts.map(function(p){return p.v;}).filter(function(v){return v>0;}),vmin=vv.length?Math.min.apply(null,vv):0,vmax=vv.length?Math.max.apply(null,vv):0,useLog=scale==='log'||(scale==='auto'&&vmin>0&&vmax/vmin>10);
@@ -1207,7 +1219,7 @@ function render(){var C=cur.C,Y=cur.Y,S=cur.S;
     labels.sort(function(a,b){return a.y-b.y;});for(var li=1;li<labels.length;li++){if(labels[li].y-labels[li-1].y<15)labels[li].y=labels[li-1].y+15;}
     labels.forEach(function(l){dots+='<text x="'+l.x.toFixed(1)+'" y="'+(l.y+4).toFixed(1)+'" class="lv" fill="'+l.c+'">'+l.t+'</text>';});
     svg='<div class="ch-svgwrap"><svg class="ch-svg" viewBox="0 0 '+W+' '+H+'" id="chSvg">'+defs+'<style>.ax{font:500 12px "Inter Tight",sans-serif;fill:#8b94a3}.lv{font:600 12px "Chakra Petch",sans-serif;paint-order:stroke;stroke:#0b0f12;stroke-width:4px}.ln{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s cubic-bezier(.4,0,.2,1) forwards}@keyframes draw{to{stroke-dashoffset:0}}@media(prefers-reduced-motion:reduce){.ln{animation:none;stroke-dasharray:none;stroke-dashoffset:0}}.pt{transition:r .12s}.pt.hi{r:6.5}</style>'+grid+xt+'<line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ih)+'" y2="'+(T+ih)+'" stroke="rgba(255,255,255,.18)"/>'+lines+'<line id="chX" x1="0" x2="0" y1="'+T+'" y2="'+(T+ih)+'" stroke="rgba(47,230,199,.45)" stroke-dasharray="3 4" style="display:none"/>'+dots+'</svg><div class="ch-tip" id="chTip"></div></div>';}
-  root.innerHTML=head+stats+ctl+svg+'<p class="ch-note">Each point is a tracked price change from real eBay sold listings. Tracking began July 10, 2026; dots on that date are the opening value. Click a grade to hide or show it. Hover a point for the exact sale.</p>';
+  root.innerHTML='<div class="ch-top'+(C.img?'':' noimg')+'"><div class="ch-left">'+head+stats+ctl+'</div>'+photo+'</div>'+svg+'<p class="ch-note">Each dot is an eBay sale that set this card&rsquo;s tracked price, placed on its actual sale date. When several sales close together set one price, one dot stands for that group. Tracking began July 10, 2026; dots on that date are the opening value. Click a grade to hide or show it. Hover a dot for the price and date.</p>';
   root.querySelectorAll('.ch-tog button').forEach(function(b){b.onclick=function(){var g=b.getAttribute('data-g');on[g]=!on[g];if(!ORDER.some(function(k){return on[k]&&C.h[k];}))on[g]=true;render();};});
   root.querySelectorAll('.ch-rng button[data-r]').forEach(function(b){b.onclick=function(){range=b.getAttribute('data-r');render();};});
   root.querySelectorAll('.ch-rng button[data-sc]').forEach(function(b){b.onclick=function(){scale=b.getAttribute('data-sc');render();};});
