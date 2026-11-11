@@ -216,7 +216,7 @@ a.chc:hover{background:var(--gold);color:#0b0f12;border-color:var(--gold)}.yn-wa
 (function(){
 var COL={psa10:'#ff4d4d',psa9:'#4da3ff',psa8:'#ffd23d',raw:'#3ddc84'},LBL={psa10:'PSA 10',psa9:'PSA 9',psa8:'PSA 8',raw:'Raw'},ORDER=['psa10','psa9','psa8','raw'];
 var D=null,yearSel=document.getElementById('chY'),setSel=document.getElementById('chS'),cardSel=document.getElementById('chC'),root=document.getElementById('chRoot'),quick=document.getElementById('chQuick');
-var on={psa10:true,psa9:true,psa8:true,raw:true},range='all',scale='auto',cur=null;
+var on={psa10:true,psa9:true,psa8:true,raw:false},range='all',scale='auto',cur=null;
 function money(v){return '$'+Math.round(v).toLocaleString('en-US');}
 function fmtD(s){var d=new Date(s+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
 function fmtDY(s){var d=new Date(s+'T12:00:00');return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
