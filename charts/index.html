@@ -152,13 +152,13 @@ ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font
 <body>
 <div class="wrap">
 <div class="toprow"><a class="home" href="/">◂ Griffey Card Prices — interactive guide</a><a class="yn-wax top" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></div>
-<div class="ch-wrap"><h1>Griffey Card Price Charts</h1><p class="sub">Pick a year, a set and a card. Every tracked eBay sold price for that card &mdash; raw, PSA 8, PSA 9 and PSA 10 &mdash; drawn over time. 6,802 price points across 905 cards, updated with every build. Each chart has its own link.</p><div class="ch-pick"><div><label for="chY">Year</label><select id="chY"></select></div><div><label for="chS">Set</label><select id="chS"></select></div><div><label for="chC">Card</label><select id="chC"></select></div></div><div class="ch-quick" id="chQuick"></div><div class="ch-card" id="chRoot"><div class="ch-empty">Loading price history&hellip;</div></div></div><style>
+<div class="ch-wrap"><h1>Griffey Card Price Charts</h1><p class="sub">Pick a year, a set and a card. Every tracked eBay sold price for that card &mdash; raw, PSA 8, PSA 9 and PSA 10 &mdash; drawn over time. 6,802 price points across 905 cards, updated with every build. Each chart has its own link.</p><div class="ch-pick"><div><label for="chY">Year</label><select id="chY"></select></div><div><label for="chS">Set</label><select id="chS"></select></div><div><label for="chC">Card</label><select id="chC"></select></div></div><div class="ch-card" id="chRoot"><div class="ch-empty">Loading price history&hellip;</div></div><div class="ch-quick" id="chQuick"></div></div><style>
 .ch-wrap{max-width:1040px}
 .ch-pick{display:grid;grid-template-columns:120px 1fr 1.4fr;gap:10px;margin:18px 0 14px}
 .ch-pick label{display:block;font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:0 0 5px 2px}
 .ch-pick select{width:100%;appearance:none;-webkit-appearance:none;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232fe6c7' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;border:1px solid var(--border);border-radius:10px;color:var(--text);font:600 14px 'Chakra Petch',sans-serif;padding:11px 34px 11px 12px;cursor:pointer}
 .ch-pick select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(47,230,199,.18)}
-.ch-quick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.ch-quick{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
 .ch-quick span{font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);align-self:center;margin-right:4px}
 .ch-quick button{background:transparent;border:1px solid var(--border);color:var(--text);border-radius:999px;padding:6px 12px;font:500 12.5px 'Inter Tight',sans-serif;cursor:pointer}
 .ch-quick button:hover{border-color:var(--gold);color:var(--gold)}
@@ -195,7 +195,7 @@ ul.plain li{margin:0 0 7px}ul.plain a{color:var(--dim);text-decoration:none;font
 @media(max-width:640px){.ch-pick{grid-template-columns:1fr 1fr}.ch-pick div:last-child{grid-column:1/-1}.ch-stat .p{font-size:24px}.ch-title{font-size:17px}}
 </style><script>
 (function(){
-var COL={psa10:'#2fe6c7',psa9:'#ffffff',psa8:'#8fb3c9',raw:'#7c8794'},LBL={psa10:'PSA 10',psa9:'PSA 9',psa8:'PSA 8',raw:'Raw'},ORDER=['psa10','psa9','psa8','raw'];
+var COL={psa10:'#ff4d4d',psa9:'#4da3ff',psa8:'#ffd23d',raw:'#3ddc84'},LBL={psa10:'PSA 10',psa9:'PSA 9',psa8:'PSA 8',raw:'Raw'},ORDER=['psa10','psa9','psa8','raw'];
 var D=null,yearSel=document.getElementById('chY'),setSel=document.getElementById('chS'),cardSel=document.getElementById('chC'),root=document.getElementById('chRoot'),quick=document.getElementById('chQuick');
 var on={psa10:true,psa9:true,psa8:true,raw:true},range='all',scale='auto',cur=null;
 function money(v){return '$'+Math.round(v).toLocaleString('en-US');}
