@@ -1161,11 +1161,12 @@ const CHART_CSS = `
 .ch-rng button.on{background:var(--gold);border-color:var(--gold);color:#0b0f12;font-weight:700}
 .ch-copy:hover,.ch-rng button:hover{border-color:var(--gold)}
 .ch-svgwrap{position:relative;margin-top:6px}
-.ch-svg{width:100%;height:auto;display:block;aspect-ratio:1000/430}
+.ch-svg{width:100%;height:auto;display:block}
 .ch-tip{position:absolute;pointer-events:none;background:#0b0f12;border:1px solid var(--gold);border-radius:10px;padding:8px 11px;font-size:12.5px;line-height:1.4;color:var(--text);white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.5);transform:translate(-50%,-115%);opacity:0;transition:opacity .12s}
 .ch-tip b{font-family:Anton,sans-serif;font-size:19px;color:var(--gold);letter-spacing:.02em;display:block}
 .ch-tip .tg{font-family:'Chakra Petch',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .ch-note{font-size:12px;color:var(--dim);margin:8px 2px 4px;line-height:1.5}
+@media(max-width:640px){.ch-note{font-size:11px}}
 .ch-empty{padding:60px 20px;text-align:center;color:var(--dim)}
 .ch-top{display:grid;grid-template-columns:1fr 190px;gap:20px;align-items:start}
 .ch-top.noimg{grid-template-columns:1fr}
@@ -1216,7 +1217,7 @@ function render(){var C=cur.C,Y=cur.Y,S=cur.S;
   var vv=allPts.map(function(p){return p.v;}).filter(function(v){return v>0;}),vmin=vv.length?Math.min.apply(null,vv):0,vmax=vv.length?Math.max.apply(null,vv):0,useLog=scale==='log'||(scale==='auto'&&vmin>0&&vmax/vmin>10);
   var ctl='<div class="ch-ctl"><div class="ch-tog">'+series.map(function(s){return '<button data-g="'+s.g+'" class="'+(on[s.g]?'':'off')+'" style="--c:'+COL[s.g]+'"><i></i>'+LBL[s.g]+'</button>';}).join('')+'</div>'+
     '<div class="ch-rng"><button data-sc="lin" class="'+(useLog?'':'on')+'" title="Linear scale">$</button><button data-sc="log" class="'+(useLog?'on':'')+'" title="Log scale - shows every grade clearly">LOG</button><span class="ch-sep"></span><button data-r="1m" class="'+(range==='1m'?'on':'')+'">1M</button><button data-r="3m" class="'+(range==='3m'?'on':'')+'">3M</button><button data-r="all" class="'+(range==='all'?'on':'')+'">ALL</button><button class="ch-copy" id="chCopy">&#128279; Copy link</button></div></div>';
-  var W=1000,H=430,L=70,R=86,T=22,B=44,iw=W-L-R,ih=H-T-B,svg='';
+  var narrow=window.innerWidth<640,W=narrow?620:1000,H=narrow?520:430,L=narrow?58:70,R=narrow?62:86,T=22,B=44,iw=W-L-R,ih=H-T-B,svg='';
   if(!allPts.length){svg='<div class="ch-empty">No tracked prices for the selected grades yet.</div>';}
   else{var vals=allPts.map(function(p){return p.v;}),lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);if(lo===hi){lo=lo*0.9;hi=hi*1.1;}
     if(useLog){lo=Math.max(1,lo/1.18);hi=hi*1.18;}else{var pad=(hi-lo)*0.12;lo=Math.max(0,lo-pad);hi=hi+pad;}
@@ -1235,8 +1236,8 @@ function render(){var C=cur.C,Y=cur.Y,S=cur.S;
       var lastp=p[p.length-1];labels.push({y:y(lastp.v),x:x(lastp.t)+9,c:c,t:money(lastp.v)});});
     labels.sort(function(a,b){return a.y-b.y;});for(var li=1;li<labels.length;li++){if(labels[li].y-labels[li-1].y<15)labels[li].y=labels[li-1].y+15;}
     labels.forEach(function(l){dots+='<text x="'+l.x.toFixed(1)+'" y="'+(l.y+4).toFixed(1)+'" class="lv" fill="'+l.c+'">'+l.t+'</text>';});
-    svg='<div class="ch-svgwrap"><svg class="ch-svg" viewBox="0 0 '+W+' '+H+'" id="chSvg">'+defs+'<style>.ax{font:500 12px "Inter Tight",sans-serif;fill:#8b94a3}.lv{font:600 12px "Chakra Petch",sans-serif;paint-order:stroke;stroke:#0b0f12;stroke-width:4px}.ln{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s cubic-bezier(.4,0,.2,1) forwards}@keyframes draw{to{stroke-dashoffset:0}}@media(prefers-reduced-motion:reduce){.ln{animation:none;stroke-dasharray:none;stroke-dashoffset:0}}.pt{transition:r .12s}.pt.hi{r:6.5}</style>'+grid+xt+'<line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ih)+'" y2="'+(T+ih)+'" stroke="rgba(255,255,255,.18)"/>'+lines+'<line id="chX" x1="0" x2="0" y1="'+T+'" y2="'+(T+ih)+'" stroke="rgba(47,230,199,.45)" stroke-dasharray="3 4" style="display:none"/>'+dots+'</svg><div class="ch-tip" id="chTip"></div></div>';}
-  root.innerHTML='<div class="ch-top'+(C.img?'':' noimg')+'"><div class="ch-left">'+head+stats+ctl+'</div>'+photo+'</div>'+svg+'<p class="ch-note">Each dot is an eBay sale that set this card&rsquo;s tracked price, placed on its actual sale date. When several sales close together set one price, one dot stands for that group. Tracking began July 10, 2026; dots on that date are the opening value. Click a grade to hide or show it. Hover a dot for the price and date.</p>';
+    svg='<div class="ch-svgwrap"><svg class="ch-svg" viewBox="0 0 '+W+' '+H+'" style="aspect-ratio:'+W+'/'+H+'" id="chSvg">'+defs+'<style>.ax{font:500 '+(narrow?15:12)+'px "Inter Tight",sans-serif;fill:#8b94a3}.lv{font:600 '+(narrow?14:12)+'px "Chakra Petch",sans-serif;paint-order:stroke;stroke:#0b0f12;stroke-width:4px}.ln{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s cubic-bezier(.4,0,.2,1) forwards}@keyframes draw{to{stroke-dashoffset:0}}@media(prefers-reduced-motion:reduce){.ln{animation:none;stroke-dasharray:none;stroke-dashoffset:0}}.pt{transition:r .12s}.pt.hi{r:6.5}</style>'+grid+xt+'<line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ih)+'" y2="'+(T+ih)+'" stroke="rgba(255,255,255,.18)"/>'+lines+'<line id="chX" x1="0" x2="0" y1="'+T+'" y2="'+(T+ih)+'" stroke="rgba(47,230,199,.45)" stroke-dasharray="3 4" style="display:none"/>'+dots+'</svg><div class="ch-tip" id="chTip"></div></div>';}
+  root.innerHTML='<div class="ch-top'+(C.img?'':' noimg')+'"><div class="ch-left">'+head+stats+ctl+'</div>'+photo+'</div>'+svg+'<p class="ch-note">Historical eBay sales data, collected since July 10, 2026.</p>';
   root.querySelectorAll('.ch-tog button').forEach(function(b){b.onclick=function(){var g=b.getAttribute('data-g');on[g]=!on[g];if(!ORDER.some(function(k){return on[k]&&C.h[k];}))on[g]=true;render();};});
   root.querySelectorAll('.ch-rng button[data-r]').forEach(function(b){b.onclick=function(){range=b.getAttribute('data-r');render();};});
   root.querySelectorAll('.ch-rng button[data-sc]').forEach(function(b){b.onclick=function(){scale=b.getAttribute('data-sc');render();};});
@@ -1257,6 +1258,7 @@ yearSel.onchange=function(){var Y=findYear(yearSel.value);pick(Y.y,Y.sets[0].s,Y
 setSel.onchange=function(){var Y=findYear(yearSel.value),S=findSet(Y,setSel.value);pick(Y.y,S.s,S.cards[0].s,true);};
 cardSel.onchange=function(){pick(yearSel.value,setSel.value,cardSel.value,true);};
 window.addEventListener('hashchange',function(){fromHash(false);});
+var wasNarrow=window.innerWidth<640,rsT;window.addEventListener('resize',function(){clearTimeout(rsT);rsT=setTimeout(function(){var n=window.innerWidth<640;if(n!==wasNarrow){wasNarrow=n;if(cur)render();}},150);});
 fetch('/charts/data.json').then(function(r){return r.json();}).then(function(j){D=j;
   var all=[];D.years.forEach(function(Y){Y.sets.forEach(function(S){S.cards.forEach(function(C){all.push({n:points(C),Y:Y,S:S,C:C});});});});
   all.sort(function(a,b){return b.n-a.n;});quick.innerHTML='<span>Most tracked</span>'+all.slice(0,8).map(function(a){return '<button data-y="'+a.Y.y+'" data-s="'+a.S.s+'" data-c="'+a.C.s+'">'+a.Y.y+' '+esc(a.S.n)+' '+esc(a.C.n)+'</button>';}).join('');
