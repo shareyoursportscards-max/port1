@@ -233,7 +233,7 @@ function yearImageStrip(y, sets, setSlugs) {
 function yearNav(active) {
   return '<nav class="yearnav">' + years.map(y =>
     y === active ? '<span class="on">' + y + '</span>' : '<a href="/' + y + '/">' + y + '</a>'
-  ).join('') + '<a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/articles/">Articles</a><a href="/charts/">Charts</a><a class="yn-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
+  ).join('') + '<a href="/charts/">Charts</a><a href="/most-valuable/">Top 25 Sales</a><a href="/biggest-movers/">Biggest Movers</a><a href="/how-much-are-griffey-cards-worth/">Card Values</a><a href="/articles/">Articles</a><a class="yn-wax" href="https://90swax.com/" title="90sWax — everything 90s baseball cards">90s<span>Wax</span></a></nav>';
 }
 
 function page(o) {
