@@ -522,9 +522,9 @@
   "alt": "1997 Ultra Platinum Medallion #P121 Ken Griffey Jr. parallel"
  },
  "1997|1997 Topps|Hobby Masters #HM1": {
-  "file": "1997-topps-hobby-masters-hm1-griffey.jpg",
-  "w": 386,
-  "h": 657,
+  "file": "1997-topps-hobby-masters-hm1-griffey-psa10.jpg",
+  "w": 401,
+  "h": 682,
   "alt": "1997 Topps Hobby Masters #HM1 Ken Griffey Jr. in PSA 10 slab"
  },
  "1999|1999 Finest|Gold Refractor #200 (/100)": {
@@ -1134,10 +1134,10 @@
   "alt": "1999 Metal Universe Linchpins #4 Ken Griffey Jr. in PSA 10 slab"
  },
  "1998|1998 Topps Chrome|Refractor #321": {
-  "file": "1998-topps-chrome-refractor-321-griffey.jpg",
-  "w": 372,
-  "h": 655,
-  "alt": "1998 Topps Chrome Refractor #321 Ken Griffey Jr."
+  "file": "1998-topps-chrome-refractor-321-griffey-psa10.jpg",
+  "w": 397,
+  "h": 677,
+  "alt": "1998 Topps Chrome Refractor #321 Ken Griffey Jr. in PSA 10 slab"
  },
  "1998|1998 Select|Five Star Bonus (/50)": {
   "file": "1998-select-five-star-bonus-griffey.jpg",
@@ -1944,10 +1944,10 @@
   "alt": "1998 Metal Universe Universal Language #1 Ken Griffey Jr. in PSA 10 slab"
  },
  "1998|1998 Topps|Gallery of Heroes #GH1": {
-  "file": "1998-topps-gallery-of-heroes-gh1-griffey-psa9.jpg",
-  "w": 400,
-  "h": 697,
-  "alt": "1998 Topps Gallery of Heroes #GH1 Ken Griffey Jr. stained-glass die-cut in PSA 9 slab"
+  "file": "1998-topps-gallery-of-heroes-gh1-griffey-psa10.jpg",
+  "w": 372,
+  "h": 641,
+  "alt": "1998 Topps Gallery of Heroes #GH1 Ken Griffey Jr. stained-glass die-cut in PSA 10 slab"
  },
  "1997|1997 Fleer|Night and Day #4": {
   "file": "1997-fleer-night-and-day-griffey.jpg",
@@ -2218,5 +2218,35 @@
   "w": 380,
   "h": 668,
   "alt": "1996 Collector's Choice Crash the Game Gold Ken Griffey Jr. card #CG26 in PSA 9 slab"
+ },
+ "1999|1999 Topps Chrome|All-Etch #AE3": {
+  "file": "1999-topps-chrome-all-etch-ae3-griffey-psa10.jpg",
+  "w": 382,
+  "h": 657,
+  "alt": "1999 Topps Chrome All-Etch #AE3 Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1999|1999 Ultra|Damage Inc. #8": {
+  "file": "1999-ultra-damage-inc-8-griffey-psa10.jpg",
+  "w": 376,
+  "h": 672,
+  "alt": "1999 Ultra Damage Inc. #8 Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1995|1995 Topps|Opening Day #3": {
+  "file": "1995-topps-opening-day-3-griffey-psa10.jpg",
+  "w": 420,
+  "h": 735,
+  "alt": "1995 Topps Opening Day #3 Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1995|1995 Leaf Limited|Bat Patrol": {
+  "file": "1995-leaf-limited-bat-patrol-griffey-psa10.jpg",
+  "w": 386,
+  "h": 667,
+  "alt": "1995 Leaf Limited Bat Patrol Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1992|1992 Upper Deck|Bloodlines #85": {
+  "file": "1992-upper-deck-bloodlines-85-griffey-psa10.jpg",
+  "w": 405,
+  "h": 692,
+  "alt": "1992 Upper Deck Bloodlines #85 Ken Griffey Jr. in PSA 10 slab"
  }
 }
