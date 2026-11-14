@@ -10,7 +10,7 @@ On September 8, a PSA 10 1992 Stadium Club Griffey, the backwards-hat card, sold
 
 !chart 1992|1992 Stadium Club|Members Choice #603|psa10|1992 Stadium Club Members Choice #603, PSA 10: every price I tracked since July 10
 
-That's not a one-off. For most of 2026 Griffey cards only went one direction. Plenty of them doubled or tripled. Now that we're in Q4, prices are leveling off across the hobby, and some Griffey cards are coming down hard. Here are ten of them, ranked by how far the latest sale sits below the card's peak sale this year.
+In the first three quarters of 2026, a lot of Griffey cards went up 100, 200, even 300 percent. Now that we're in Q4, prices across the hobby are leveling off, and some Griffey cards are dropping fast from their peak. Here are ten of them, ranked by how far the latest sale is below that card's peak sale this year.
 
 Something I noticed putting this together: almost everything on the list is a base card. The rarer late-90s inserts are holding up a lot better. It's the early-90s junk wax base cards, the ones that were printed in huge numbers, that are taking the biggest hits.
 
@@ -120,7 +120,7 @@ Another second-year Griffey, and the only card on this list that peaked in Augus
 
 July: $96 · Peak: $243 · Now: $107.50
 
-This one comes with a caveat. The seller's first photo cut off the slab label, and you only see the PSA 10 slab in the second photo. A buyer skimming listings could easily have missed that it was a 10, which may have something to do with the low price.
+On this one, the seller's first photo cut off the slab label, and you only see the PSA 10 slab in the second photo. A buyer skimming listings could easily have missed that it was a 10, which may have something to do with the low price.
 
 → [1990 Score prices](/1990/score/)
 
@@ -140,6 +140,6 @@ The biggest drop on the list, and the other card now selling below its July pric
 
 The drops ran from 40% to 58%. Nine of the ten peaks came in September and one in August, and all ten latest sales came between October 31 and November 12.
 
-Compared to July, the picture is mixed. Two cards, the 1991 Topps and the 1992 Topps, now sell for less than they did when I started tracking. Four more (the 1990 Bowman, the 1995 Donruss Elite, the 1990 Upper Deck and the 1990 Score) are within 12% of their July price. The other four are still 32% to 53% above July, even after the drop.
+Compared to July: two cards, the 1991 Topps and the 1992 Topps, now sell for less than they did when I started tracking. Four more (the 1990 Bowman, the 1995 Donruss Elite, the 1990 Upper Deck and the 1990 Score) are within 12% of their July price. The other four are still 32% to 53% above July, even after the drop.
 
 Eight of the ten are base cards. The two inserts, the Gallery of Heroes and the Donruss Elite, finished at #9 and #7. Eight of the ten latest sales were under $200. The biggest dollar drop was the Gallery of Heroes ($825), and the biggest percentage drop was the 1992 Topps (58%).
