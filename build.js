@@ -382,6 +382,15 @@ td img.thumb{width:38px;height:auto;border-radius:4px;border:1px solid var(--bor
 .art-fig{float:right;width:150px;margin:0 0 14px 22px}
 .art-fig img{width:100%;height:auto;border-radius:8px;border:1px solid var(--border);cursor:zoom-in}
 .art-fig figcaption{font-size:11.5px;color:var(--dim);text-align:center;margin-top:5px;line-height:1.35}
+.art.cards h2{clear:both}
+.art-chart{clear:both;margin:22px 0 26px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 10px 8px}
+.art-chart svg{width:100%;height:auto;display:block}
+.art-chart svg text{fill:var(--dim);font:12px 'Inter',system-ui,sans-serif}
+.art-chart svg text.v{fill:#fff;font-weight:600}
+.art-chart svg path{fill:none;stroke:var(--gold);stroke-width:2.5;stroke-linejoin:round}
+.art-chart svg circle{fill:var(--gold);stroke:var(--surface);stroke-width:2}
+.art-chart figcaption{font-size:12.5px;color:var(--dim);text-align:center;margin-top:6px}
+@media(max-width:560px){.art-fig{width:110px;margin-left:14px}}
 .art blockquote{border-left:3px solid var(--gold);margin:0 0 16px;padding:4px 0 4px 14px;color:var(--dim)}
 .art ul{margin:0 0 16px 20px;font-size:15px;line-height:1.65}
 .art hr{border:0;border-top:1px solid var(--border);margin:26px 0}
@@ -769,6 +778,44 @@ function mdInline(s) {
     .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>')
     .replace(/ — /g, ' &mdash; ').replace(/ · /g, ' &middot; ');
 }
+// "!card year|set|name" -> that card's site photo, floated beside the section text
+function artCardFig(key) {
+  const img = CARDIMG[key]; if (!img) throw new Error('article !card: no photo for ' + key);
+  const [, set, name] = key.split('|');
+  return '<figure class="art-fig cardfig"><img src="/img/cards/' + img.file + '" alt="' + esc(img.alt) +
+    '" width="' + img.w + '" height="' + img.h + '" loading="lazy"><figcaption>' +
+    esc(set.replace(/^\d{4}\s+/, '')) + ' &middot; ' + esc(name) + '</figcaption></figure>';
+}
+// "!chart year|set|name|grade|caption" -> SVG line chart of that card's tracked price history
+function artChart(spec) {
+  const [y, set, name, grade, caption] = spec.split('|');
+  const key = y + '|' + set + '|' + name, pts = ((HIST[key] || {})[grade] || []);
+  if (pts.length < 2) throw new Error('article !chart: no history for ' + key + ' ' + grade);
+  const W = 680, H = 260, L = 56, R = 18, T = 22, B = 34;
+  const t = pts.map(p => Date.parse(p[0])), t0 = t[0], t1 = t[t.length - 1];
+  const max = Math.max(...pts.map(p => p[1]));
+  const step = [10, 20, 25, 50, 100, 200, 250, 500, 1000, 2000].find(s => max * 1.15 / s <= 5) || 5000;
+  const top = Math.ceil(max * 1.15 / step) * step;
+  const X = ms => L + (ms - t0) / (t1 - t0) * (W - L - R), Y = v => T + (top - v) / top * (H - T - B);
+  const money = v => '$' + Math.round(v).toLocaleString('en-US');
+  const mon = ms => new Date(ms).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+  let g = '';
+  for (let v = 0; v <= top; v += step)
+    g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="rgba(255,255,255,.08)"/>' +
+         '<text x="' + (L - 8) + '" y="' + (Y(v) + 4) + '" text-anchor="end">' + money(v) + '</text>';
+  for (let m = new Date(t0); m <= t1; m.setUTCMonth(m.getUTCMonth() + 1, 1)) {
+    const ms = Date.UTC(m.getUTCFullYear(), m.getUTCMonth(), 1); if (ms < t0) continue;
+    g += '<text x="' + X(ms) + '" y="' + (H - 10) + '" text-anchor="middle">' + new Date(ms).toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' }) + '</text>';
+  }
+  const path = pts.map((p, i) => (i ? 'L' : 'M') + X(t[i]).toFixed(1) + ' ' + Y(p[1]).toFixed(1)).join(' ');
+  const pk = pts.reduce((a, p, i) => p[1] > pts[a][1] ? i : a, 0), last = pts.length - 1;
+  const lab = (i, dy, anchor) => '<text class="v" x="' + X(t[i]) + '" y="' + (Y(pts[i][1]) + dy) + '" text-anchor="' + anchor + '">' +
+    money(pts[i][1]) + ' &middot; ' + mon(t[i]) + '</text>';
+  const dots = pts.map((p, i) => '<circle cx="' + X(t[i]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="' + (i === 0 || i === pk || i === last ? 5 : 3) + '"/>').join('');
+  return '<figure class="art-chart"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(caption || name) + ' price history">' +
+    g + '<path d="' + path + '"/>' + dots + lab(0, -12, 'start') + lab(pk, -12, 'middle') + lab(last, -12, 'end') + '</svg>' +
+    (caption ? '<figcaption>' + esc(caption) + '</figcaption>' : '') + '</figure>';
+}
 function mdBlock(md) {
   const out = []; let para = [], list = null;
   const flush = () => {
@@ -784,6 +831,8 @@ function mdBlock(md) {
     if ((m = line.match(/^>\s?(.*)$/))) { flush(); out.push('<blockquote><p>' + mdInline(m[1]) + '</p></blockquote>'); continue; }
     if ((m = line.match(/^[-*]\s+(.*)$/))) { if (para.length) flush(); (list = list || []).push(m[1]); continue; }
     if ((m = line.match(/^→\s*(.*)$/))) { flush(); out.push('<p class="art-link">&rarr; ' + mdInline(m[1]) + '</p>'); continue; }
+    if ((m = line.match(/^!card\s+(.+)$/))) { flush(); out.push(artCardFig(m[1].trim())); continue; }
+    if ((m = line.match(/^!chart\s+(.+)$/))) { flush(); out.push(artChart(m[1].trim())); continue; }
     if (list) flush();
     para.push(line.trim());
   }
@@ -816,11 +865,11 @@ function articlePhoto(a) {
 for (const a of ARTICLES) {
   const ph = articlePhoto(a);
   const dateH = humanDate(a.meta.date);
-  const body = '<article class="art">' +
+  const body = '<article class="art' + (/^!card\s/m.test(a.body) ? ' cards' : '') + '">' +
     '<h1>' + esc(a.meta.title) + '</h1>' +
     '<p class="art-meta"><time datetime="' + esc(a.meta.date) + '">' + esc(dateH) + '</time> &middot; ' +
       Math.max(1, Math.round(a.words / 220)) + ' min read &middot; real eBay sold prices</p>' +
-    (ph ? '<figure class="art-fig cardfig"><img src="/img/cards/' + ph.img.file + '" alt="' + esc(ph.img.alt) +
+    (ph && !/^!card\s/m.test(a.body) ? '<figure class="art-fig cardfig"><img src="/img/cards/' + ph.img.file + '" alt="' + esc(ph.img.alt) +
       '" width="' + ph.img.w + '" height="' + ph.img.h + '" loading="eager">' +
       '<figcaption>' + esc(ph.set.replace(/^\d{4}\s+/, '')) + ' &middot; ' + esc(ph.name) + '</figcaption></figure>' : '') +
     mdBlock(a.body) +

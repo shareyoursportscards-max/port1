@@ -8,6 +8,8 @@ video:
 
 On September 8, a PSA 10 1992 Stadium Club Griffey, the backwards-hat card, sold for $1,229. Two months later, on November 8, one sold for $573.
 
+!chart 1992|1992 Stadium Club|Members Choice #603|psa10|1992 Stadium Club Members Choice #603, PSA 10: every price I tracked since July 10
+
 That's not a one-off. For most of 2026 Griffey cards only went one direction. Plenty of them doubled or tripled. Now that we're in Q4, prices are leveling off across the hobby, and some Griffey cards are coming down hard. Here are ten of them, ranked by how far the latest sale sits below the card's peak sale this year.
 
 Something I noticed putting this together: almost everything on the list is a base card. The rarer late-90s inserts are holding up a lot better. It's the early-90s junk wax base cards, the ones that were printed in huge numbers, that are taking the biggest hits.
@@ -15,6 +17,8 @@ Something I noticed putting this together: almost everything on the list is a ba
 **How I measured this:** I've been tracking every one of these cards since July 10. "Peak" is the highest sale I recorded for that card in that grade since then. "July" is where the card was when I started tracking. Every price is a real eBay sale.
 
 ## 10. 1991 Fleer #450 — PSA 10
+
+!card 1991|1991 Fleer|Base #450
 
 **$114** on eBay auction (Nov 3) · peak **$190** (Sep 4) · **down 40%**
 
@@ -26,6 +30,8 @@ July: $80 · Peak: $190 · Now: $114
 
 ## 9. 1999 Topps Gallery of Heroes #GH3 — PSA 10
 
+!card 1999|1999 Topps Gallery|Gallery of Heroes #GH3
+
 **$1,175** on eBay auction (Nov 10) · peak **$2,000** (Sep 3) · **down 41%**
 
 July: $810 · Peak: $2,000 · Now: $1,175
@@ -35,6 +41,8 @@ One of only two inserts on the list. It's a die-cut with the stained-glass desig
 → [1999 Topps Gallery prices](/1999/topps-gallery/)
 
 ## 8. 1997 Topps #300 — PSA 10
+
+!card 1997|1997 Topps|Base #300
 
 **$132.50** on eBay auction (Nov 12) · peak **$227** (Sep 1) · **down 41%**
 
@@ -46,6 +54,8 @@ Back to the base cards. It peaked on the first day of September and has been sli
 
 ## 7. 1995 Donruss Elite Series #54 — PSA 9
 
+!card 1995|1995 Donruss|Elite Series #54 (/10,000)
+
 **$175** best offer on eBay (Nov 12) · peak **$300** (Sep 30) · **down 42%**
 
 July: $168 · Peak: $300 · Now: $175
@@ -55,6 +65,8 @@ Serial-numbered to 10,000, with the number printed on the back, and PSA has 156 
 → [1995 Donruss prices](/1995/donruss/)
 
 ## 6. 1991 Topps #790 — PSA 10
+
+!card 1991|1991 Topps|Base #790
 
 **$140.50** on eBay auction (Nov 10) · peak **$242** (Sep 16) · **down 42%**
 
@@ -66,6 +78,8 @@ PSA 10 population: 492. This is one of two cards on the list that now sells for 
 
 ## 5. 1990 Bowman #481 — PSA 10
 
+!card 1990|1990 Bowman|Base #481
+
 **$128.50** on eBay auction (Nov 10) · peak **$224** (Sep 15) · **down 42%**
 
 July: $126 · Peak: $224 · Now: $128.50
@@ -75,6 +89,8 @@ A second-year Griffey with a PSA 10 population of 488. It nearly doubled by mid-
 → [1990 Bowman prices](/1990/bowman/)
 
 ## 4. 1992 Stadium Club Members Choice #603 — PSA 10
+
+!card 1992|1992 Stadium Club|Members Choice #603
 
 **$573** on eBay auction (Nov 8) · peak **$1,229** (Sep 8) · **down 53%**
 
@@ -86,6 +102,8 @@ The card from the top of this article. The run-up on this one was the biggest of
 
 ## 3. 1990 Upper Deck #156 — PSA 10
 
+!card 1990|1990 Upper Deck|Base #156
+
 **$137.50** on eBay auction (Nov 11) · peak **$304** (Aug 9) · **down 55%**
 
 July: $131 · Peak: $304 · Now: $137.50
@@ -96,6 +114,8 @@ Another second-year Griffey, and the only card on this list that peaked in Augus
 
 ## 2. 1990 Score #560 — PSA 10
 
+!card 1990|1990 Score|Base #560
+
 **$107.50** on eBay auction (Oct 31) · peak **$243** (Sep 5) · **down 56%**
 
 July: $96 · Peak: $243 · Now: $107.50
@@ -105,6 +125,8 @@ This one comes with a caveat. The seller's first photo cut off the slab label, a
 → [1990 Score prices](/1990/score/)
 
 ## 1. 1992 Topps #50 — PSA 10
+
+!card 1992|1992 Topps|Base #50
 
 **$53** on eBay auction, 13 bids (Nov 12) · peak **$126** (Sep 22) · **down 58%**
 
