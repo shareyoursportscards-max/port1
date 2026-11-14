@@ -813,7 +813,7 @@ function artChart(spec) {
     money(pts[i][1]) + ' &middot; ' + mon(t[i]) + '</text>';
   const dots = pts.map((p, i) => '<circle cx="' + X(t[i]).toFixed(1) + '" cy="' + Y(p[1]).toFixed(1) + '" r="' + (i === 0 || i === pk || i === last ? 5 : 3) + '"/>').join('');
   return '<figure class="art-chart"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(caption || name) + ' price history">' +
-    g + '<path d="' + path + '"/>' + dots + lab(0, -12, 'start') + lab(pk, -12, 'middle') + lab(last, -12, 'end') + '</svg>' +
+    g + '<path d="' + path + '"/>' + dots + lab(0, 22, 'start') + lab(pk, -12, 'middle') + lab(last, 22, 'end') + '</svg>' +
     (caption ? '<figcaption>' + esc(caption) + '</figcaption>' : '') + '</figure>';
 }
 function mdBlock(md) {
