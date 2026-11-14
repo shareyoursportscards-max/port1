@@ -1,20 +1,26 @@
 ---
 title: 10 Ken Griffey Jr. Cards Falling Fastest From Their 2026 Peak
 date: 2026-11-13
-desc: Ten Ken Griffey Jr. cards whose latest sale is 40% to 58% below their 2026 peak — mostly early-90s base cards in PSA 10, from a 1991 Fleer #450 down 40% to a 1992 Topps #50 down 58%. Real eBay sales.
+desc: Ten Ken Griffey Jr. cards now selling 40% to 58% below their 2026 peak. Most are early-90s base cards in PSA 10, and two have already dropped below where they were in July. Real eBay sales.
 cover: 1992|1992 Topps|Base #50
 video:
 ---
 
-In the first three quarters of 2026, Ken Griffey Jr. cards were up 100, 200, even 300 percent. Now that we've reached Q4, prices across the industry are starting to stabilize, and some Griffey cards are coming down fast from their peak. These are ten of them, ranked by how far the latest sale sits below the 2026 peak sale for the same card in the same grade.
+On September 8, a PSA 10 1992 Stadium Club Griffey, the backwards-hat card, sold for $1,229. Two months later, on November 8, one sold for $573.
 
-One observation going in: the rarer late-90s inserts seem to be more insulated from this drop-off. The base cards from the early-90s junk wax era are the ones getting hit hardest, and eight of the ten cards below are base cards.
+That's not a one-off. For most of 2026 Griffey cards only went one direction. Plenty of them doubled or tripled. Now that we're in Q4, prices are leveling off across the hobby, and some Griffey cards are coming down hard. Here are ten of them, ranked by how far the latest sale sits below the card's peak sale this year.
+
+Something I noticed putting this together: almost everything on the list is a base card. The rarer late-90s inserts are holding up a lot better. It's the early-90s junk wax base cards, the ones that were printed in huge numbers, that are taking the biggest hits.
+
+**How I measured this:** I've been tracking every one of these cards since July 10. "Peak" is the highest sale I recorded for that card in that grade since then. "July" is where the card was when I started tracking. Every price is a real eBay sale.
 
 ## 10. 1991 Fleer #450 — PSA 10
 
 **$114** on eBay auction (Nov 3) · peak **$190** (Sep 4) · **down 40%**
 
-1991 Fleer is definitely a junk wax set. From $190 to $114 in about two months.
+July: $80 · Peak: $190 · Now: $114
+
+1991 Fleer is about as junk wax as it gets. This one more than doubled over the summer and has given back about two thirds of that gain in two months.
 
 → [1991 Fleer prices](/1991/fleer/)
 
@@ -22,7 +28,9 @@ One observation going in: the rarer late-90s inserts seem to be more insulated f
 
 **$1,175** on eBay auction (Nov 10) · peak **$2,000** (Sep 3) · **down 41%**
 
-One of only two inserts on the list. A die-cut card with the stained-glass design, and a PSA 10 population of 69.
+July: $810 · Peak: $2,000 · Now: $1,175
+
+One of only two inserts on the list. It's a die-cut with the stained-glass design, and PSA has graded just 69 of them a 10. Even after dropping $825, it's still about $365 above where it was in July.
 
 → [1999 Topps Gallery prices](/1999/topps-gallery/)
 
@@ -30,7 +38,9 @@ One of only two inserts on the list. A die-cut card with the stained-glass desig
 
 **$132.50** on eBay auction (Nov 12) · peak **$227** (Sep 1) · **down 41%**
 
-Back to the base cards. A 41% drop in about two months.
+July: $100 · Peak: $227 · Now: $132.50
+
+Back to the base cards. It peaked on the first day of September and has been sliding since.
 
 → [1997 Topps prices](/1997/topps/)
 
@@ -38,7 +48,9 @@ Back to the base cards. A 41% drop in about two months.
 
 **$175** best offer on eBay (Nov 12) · peak **$300** (Sep 30) · **down 42%**
 
-Serial-numbered to 10,000 — you can see the number on the back. PSA 9 population: 156. The peak sale was only a little over a month earlier.
+July: $168 · Peak: $300 · Now: $175
+
+Serial-numbered to 10,000, with the number printed on the back, and PSA has 156 of them in a 9. It peaked the latest of anything here, at the end of September, and six weeks later it's almost exactly back to its July price.
 
 → [1995 Donruss prices](/1995/donruss/)
 
@@ -46,7 +58,9 @@ Serial-numbered to 10,000 — you can see the number on the back. PSA 9 populati
 
 **$140.50** on eBay auction (Nov 10) · peak **$242** (Sep 16) · **down 42%**
 
-Another base card, with a PSA 10 population of 492. Down 42% in about a month and a half.
+July: $156 · Peak: $242 · Now: $140.50
+
+PSA 10 population: 492. This is one of two cards on the list that now sells for less than it did in July. The whole summer run-up is gone, plus a little more.
 
 → [1991 Topps prices](/1991/topps/)
 
@@ -54,7 +68,9 @@ Another base card, with a PSA 10 population of 492. Down 42% in about a month an
 
 **$128.50** on eBay auction (Nov 10) · peak **$224** (Sep 15) · **down 42%**
 
-A second-year Griffey card. PSA 10 population: 488. From $224 to $128.50 in about a month and a half.
+July: $126 · Peak: $224 · Now: $128.50
+
+A second-year Griffey with a PSA 10 population of 488. It nearly doubled by mid-September, and the latest sale is within $3 of where it started.
 
 → [1990 Bowman prices](/1990/bowman/)
 
@@ -62,7 +78,9 @@ A second-year Griffey card. PSA 10 population: 488. From $224 to $128.50 in abou
 
 **$573** on eBay auction (Nov 8) · peak **$1,229** (Sep 8) · **down 53%**
 
-The iconic backwards-hat Stadium Club card. More than half its value gone in about two months — a $656 drop.
+July: $375 · Peak: $1,229 · Now: $573
+
+The card from the top of this article. The run-up on this one was the biggest of the ten, more than three times its July price at the peak, so even after losing $656 it's still well above where it started.
 
 → [1992 Stadium Club prices](/1992/stadium-club/)
 
@@ -70,7 +88,9 @@ The iconic backwards-hat Stadium Club card. More than half its value gone in abo
 
 **$137.50** on eBay auction (Nov 11) · peak **$304** (Aug 9) · **down 55%**
 
-Another second-year Griffey. Its peak came earliest of anything on this list, back in August.
+July: $131 · Peak: $304 · Now: $137.50
+
+Another second-year Griffey, and the only card on this list that peaked in August instead of September. It's been coming down for three months and is now about $6 above its July price.
 
 → [1990 Upper Deck prices](/1990/upper-deck/)
 
@@ -78,7 +98,9 @@ Another second-year Griffey. Its peak came earliest of anything on this list, ba
 
 **$107.50** on eBay auction (Oct 31) · peak **$243** (Sep 5) · **down 56%**
 
-This one has an interesting listing: the seller's first photo cut off the slab label, and you only see the PSA slab in the second photo. That may have something to do with the low selling price.
+July: $96 · Peak: $243 · Now: $107.50
+
+This one comes with a caveat. The seller's first photo cut off the slab label, and you only see the PSA 10 slab in the second photo. A buyer skimming listings could easily have missed that it was a 10, which may have something to do with the low price.
 
 → [1990 Score prices](/1990/score/)
 
@@ -86,10 +108,16 @@ This one has an interesting listing: the seller's first photo cut off the slab l
 
 **$53** on eBay auction, 13 bids (Nov 12) · peak **$126** (Sep 22) · **down 58%**
 
-The biggest drop from a 2026 peak on the list. These cards were printed to the moon. This copy was in an older, pre-lighthouse PSA 10 slab.
+July: $67 · Peak: $126 · Now: $53
+
+The biggest drop on the list, and the other card now selling below its July price. 1992 Topps was printed to the moon. This copy was also in an older pre-lighthouse PSA slab, and 13 bids got it to $53.
 
 → [1992 Topps prices](/1992/topps/)
 
 ## What this list says about the market
 
-The drops ran from 40% to 58%. All ten peak sales came between August 9 and September 30, and all ten latest sales came between October 31 and November 12. Eight of the ten are base cards; the two inserts, the Gallery of Heroes and the Donruss Elite, finished at #9 and #7. Eight of the ten latest sales were under $200. The biggest dollar drop was the Gallery of Heroes at $825 ($2,000 to $1,175); the biggest percentage drop was the 1992 Topps at 58%.
+The drops ran from 40% to 58%. Nine of the ten peaks came in September and one in August, and all ten latest sales came between October 31 and November 12.
+
+Compared to July, the picture is mixed. Two cards, the 1991 Topps and the 1992 Topps, now sell for less than they did when I started tracking. Four more (the 1990 Bowman, the 1995 Donruss Elite, the 1990 Upper Deck and the 1990 Score) are within 12% of their July price. The other four are still 32% to 53% above July, even after the drop.
+
+Eight of the ten are base cards. The two inserts, the Gallery of Heroes and the Donruss Elite, finished at #9 and #7. Eight of the ten latest sales were under $200. The biggest dollar drop was the Gallery of Heroes ($825), and the biggest percentage drop was the 1992 Topps (58%).
