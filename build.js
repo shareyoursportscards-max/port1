@@ -269,7 +269,7 @@ function page(o) {
     o.body +
     '\n<div class="bottomnav"><div class="bn-label">Browse the guide</div>' + yearNav(o.navYear || null) + '</div>' +
     '\n<div class="foot">Prices updated __PAGEDATE__ from real eBay sold listings · Not affiliated with PSA, eBay, or Topps · Built for collectors, by a collector<br>' +
-    'A <a href="https://90swax.com/" style="font-weight:600">90sWax</a> site · <a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="mailto:shareyoursportscards@gmail.com">shareyoursportscards@gmail.com</a></div>\n' +
+    'A <a href="https://90swax.com/" style="font-weight:600">90sWax</a> site · <a href="/">griffeycardprices.com</a> · <a href="/site-map/">Site Map</a> · <a href="https://www.youtube.com/@90sWax" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/griffeycardprices/" target="_blank" rel="noopener">Instagram</a></div>\n' +
     '</div>\n' +
     '<div class="lb" id="cardLb"><img alt=""></div>\n' +
     '<script>(function(){var lb=document.getElementById("cardLb"),li=lb.firstElementChild;document.addEventListener("click",function(e){var t=e.target;if(t.tagName==="IMG"&&t.closest&&t.closest(".cardfig")){li.src=t.src;li.alt=t.alt;lb.classList.add("open");trackEvent("card_photo_open",{card_name:t.alt||"",page_path:location.pathname});}else if(lb.classList.contains("open")){lb.classList.remove("open");}});document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.classList.remove("open");});})();</script>\n' +
