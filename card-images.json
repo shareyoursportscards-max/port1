@@ -1164,10 +1164,10 @@
   "alt": "1998 Metal Universe Hardball Galaxy #206 Ken Griffey Jr. in PSA 9 slab"
  },
  "1999|1999 Finest|Peel and Reveal Sparkle #PR4": {
-  "file": "1999-finest-peel-and-reveal-sparkle-pr4-griffey-psa8.jpg",
-  "w": 427,
-  "h": 746,
-  "alt": "1999 Finest Peel and Reveal Sparkle #PR4 Ken Griffey Jr. in PSA 8 slab"
+  "file": "1999-finest-peel-and-reveal-sparkle-pr4-griffey-psa10.jpg",
+  "w": 371,
+  "h": 652,
+  "alt": "1999 Finest Peel and Reveal Sparkle #PR4 Ken Griffey Jr. in PSA 10 slab"
  },
  "1999|1999 Ultra|Season Crowns #219": {
   "file": "1999-fleer-ultra-season-crowns-219-griffey-psa10.jpg",
@@ -1266,10 +1266,10 @@
   "alt": "1991 Topps All-Star #392 Ken Griffey Jr. in PSA 10 slab"
  },
  "1991|1991 Ultra|Base #336": {
-  "file": "1991-ultra-base-griffey-psa9.jpg",
+  "file": "1991-ultra-base-336-griffey-psa10.jpg",
   "w": 382,
-  "h": 655,
-  "alt": "1991 Ultra Base #336 Ken Griffey Jr. in PSA 9 slab"
+  "h": 656,
+  "alt": "1991 Ultra Base #336 Ken Griffey Jr. in PSA 10 slab"
  },
  "1991|1991 Topps|Tiffany All-Star #392": {
   "file": "1991-topps-tiffany-all-star-griffey-psa10.jpg",
@@ -2028,10 +2028,10 @@
   "alt": "1994 Leaf Limited Gold All-Stars #11 Ken Griffey Jr. in PSA 8 slab"
  },
  "1998|1998 Topps Chrome|Clout Nine Refractor #C8": {
-  "file": "1998-topps-chrome-clout-nine-refractor-c8-griffey-psa9.jpg",
-  "w": 395,
-  "h": 692,
-  "alt": "1998 Topps Chrome Clout Nine Refractor #C8 Ken Griffey Jr. in PSA 9 slab"
+  "file": "1998-topps-chrome-clout-nine-refractor-c8-griffey-psa10.jpg",
+  "w": 372,
+  "h": 645,
+  "alt": "1998 Topps Chrome Clout Nine Refractor #C8 Ken Griffey Jr. in PSA 10 slab"
  },
  "1995|1995 Leaf Limited|Lumberjacks #4 (/5,000)": {
   "file": "1995-leaf-limited-lumberjacks-4-griffey-psa10.jpg",
@@ -2290,5 +2290,35 @@
   "w": 356,
   "h": 617,
   "alt": "1999 Topps #100 Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1996|1996 Fleer|Base #238": {
+  "file": "1996-fleer-base-238-griffey-psa10.jpg",
+  "w": 397,
+  "h": 682,
+  "alt": "1996 Fleer Base #238 Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1999|1999 Topps Gallery|Awards Gallery #AG7": {
+  "file": "1999-topps-gallery-awards-gallery-ag7-griffey-psa10.jpg",
+  "w": 372,
+  "h": 650,
+  "alt": "1999 Topps Gallery Awards Gallery #AG7 Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1995|1995 Flair|Hot Numbers #4": {
+  "file": "1995-flair-hot-numbers-4-griffey-psa10.jpg",
+  "w": 357,
+  "h": 640,
+  "alt": "1995 Flair Hot Numbers #4 Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1997|1997 Collector's Choice|Stick'Ums #24": {
+  "file": "1997-collectors-choice-stickums-24-griffey-psa10.jpg",
+  "w": 407,
+  "h": 675,
+  "alt": "1997 Collector's Choice Stick'Ums #24 Ken Griffey Jr. in PSA 10 slab"
+ },
+ "1996|1996 SPx|Commemorative #KG1": {
+  "file": "1996-spx-commemorative-kg1-griffey-psa10.jpg",
+  "w": 382,
+  "h": 667,
+  "alt": "1996 SPx Commemorative #KG1 Ken Griffey Jr. in PSA 10 slab"
  }
 }
