@@ -869,11 +869,11 @@ for (const a of ARTICLES) {
     '<h1>' + esc(a.meta.title) + '</h1>' +
     '<p class="art-meta"><time datetime="' + esc(a.meta.date) + '">' + esc(dateH) + '</time> &middot; ' +
       Math.max(1, Math.round(a.words / 220)) + ' min read &middot; real eBay sold prices</p>' +
+    (a.meta.video ? '<p class="art-video"><a href="' + esc(a.meta.video) + '" rel="noopener">&#9654; Watch the video on YouTube</a></p>' : '') +
     (ph && !/^!card\s/m.test(a.body) ? '<figure class="art-fig cardfig"><img src="/img/cards/' + ph.img.file + '" alt="' + esc(ph.img.alt) +
       '" width="' + ph.img.w + '" height="' + ph.img.h + '" loading="eager">' +
       '<figcaption>' + esc(ph.set.replace(/^\d{4}\s+/, '')) + ' &middot; ' + esc(ph.name) + '</figcaption></figure>' : '') +
     mdBlock(a.body) +
-    (a.meta.video ? '<p class="art-video"><a href="' + esc(a.meta.video) + '" rel="noopener">&#9654; Watch the video on YouTube</a></p>' : '') +
     '<p class="art-back"><a href="/articles/">&larr; All articles</a></p>' +
     '</article>';
   write('articles/' + a.slug, page({
