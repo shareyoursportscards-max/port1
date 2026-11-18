@@ -3,7 +3,7 @@ title: The 50 Biggest Ken Griffey Jr. Card Sales of 2026
 date: 2026-11-17
 desc: The 50 biggest 1990s Ken Griffey Jr. card sales of 2026, from $3,875 up to a $240,000 E-X2001 Essential Credentials Now. Real eBay sales, with a handful of the standouts broken down.
 cover: 1998|1998 E-X2001|Essential Credentials Now (/10)
-video:
+video: https://youtu.be/amR0l953_bg
 ---
 
 I put together the 50 biggest Ken Griffey Jr. card sales from the 1990s this year. Number 50 sold for $3,875. Number 1 sold for $240,000. I've been tracking every Griffey sale since the summer, and a few of the biggest ones come from earlier in the year. The really big cards just don't sell that often.
